@@ -1,0 +1,17 @@
+GET_POINT
+http://localhost:8280/GamificationAPI/sella/api/GET_POINT?custId=1
+
+PUT_POINT
+http://localhost:8280/GamificationAPI/sella/api/PUT_POINT?custId=1&point=100&activity=TEST
+
+REDUCE_POINT
+http://localhost:8280/GamificationAPI/sella/api/REDUCE_POINT?custId=1&point=20&activity=TEST_REDUCE
+
+GET_BADGE
+http://localhost:8280/GamificationAPI/sella/api/GET_BADGE?custId=1
+
+AWARD_BADGE
+http://localhost:8280/GamificationAPI/sella/api/AWARD_BADGE?custId=1&badgeId=1&activity=TEST_BADGE
+
+REMOVE_BADGE
+http://localhost:8280/GamificationAPI/sella/api/REMOVE_BADGE?custId=1&badgeId=1&activity=TEST_BADGE

@@ -6,6 +6,7 @@
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -24,6 +25,7 @@
         </configuration>
       </plugin>
     </plugins>
+    </pluginManagement>
   </build>
   <dependencies>
 		<dependency>

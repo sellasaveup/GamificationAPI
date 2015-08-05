@@ -160,7 +160,6 @@
 			title : 'Badge List',
 			actions : {
 				listAction : 'BadgeMasterController?action=list',
-				//createAction:'BadgeMasterController?action=create',
 				createAction:function () {
                 	return $.Deferred(function($dfd) {
                    		var formData = new FormData(document.forms[0]);

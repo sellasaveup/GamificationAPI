@@ -14,6 +14,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public final class RequestTransformer {
 	
 	public static Map<String, String> getInputsAndUploadFile(final HttpServletRequest request, final String uploadPath) throws Exception  {
+		
     	final Map<String,String> inputs = new HashMap<String,String>();
     	if(ServletFileUpload.isMultipartContent(request)) {
     		final List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);

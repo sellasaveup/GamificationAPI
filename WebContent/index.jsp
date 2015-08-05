@@ -155,7 +155,7 @@
 				}
 			}
 		});
-		
+
 		$('#BadgeTableContainer').jtable({
 			title : 'Badge List',
 			actions : {
@@ -237,7 +237,6 @@
 		$('#ChallengeTableContainer').jtable('load');
 		$('#CustomerTableContainer').jtable('load');
 		$('#BadgeTableContainer').jtable('load');
-		
 	});
 </script>
 

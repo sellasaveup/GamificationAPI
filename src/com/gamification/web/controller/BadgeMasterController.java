@@ -63,7 +63,6 @@ public class BadgeMasterController extends HttpServlet {
                     badgeMaster.setImageUrl(inputs.get("imageUrl"));
                     badgeMaster.setSubjectType(inputs.get("subjectType"));
                     badgeMaster.setGoal(inputs.get("goal"));
-                    
                     String status = null;
                     if (action.equals("create")) {
                     	status = webManager.addBadge(badgeMaster);

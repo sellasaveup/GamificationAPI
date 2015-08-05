@@ -237,6 +237,7 @@
 		$('#ChallengeTableContainer').jtable('load');
 		$('#CustomerTableContainer').jtable('load');
 		$('#BadgeTableContainer').jtable('load');
+		
 	});
 </script>
 

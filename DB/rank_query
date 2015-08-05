@@ -1,0 +1,13 @@
+
+--This month Rank
+select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from 
+(SELECT sum(point) as points, month(date), cust_id FROM ss_tr_customer_point where extract(year_month from date)= 201507  group by cust_id, month(date)  order by points desc limit 10) as inQuery, (SELECT @curRank := 0) r ) outerQry where CUST_ID=1;
+--All Time Rank 
+select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from 
+(SELECT sum(point) as points,  cust_id FROM ss_tr_customer_point   group by cust_id order by points desc limit 10) as inQuery, (SELECT @curRank := 0) r ) outerQry where CUST_ID=1;
+--this month leaderboard
+select @curRank := @curRank + 1 AS rank, inQuery.*  from 
+(SELECT sum(point) as points, month(date), cust_id FROM ss_tr_customer_point where extract(year_month from date)= 201507  group by cust_id, month(date)  order by points desc limit 10) as inQuery, (SELECT @curRank := 0) r
+--All Time leaderboard
+select @curRank := @curRank + 1 AS rank, inQuery.*  from 
+(SELECT sum(point) as points, cust_id FROM ss_tr_customer_point group by cust_id order by points desc limit 10) as inQuery, (SELECT @curRank := 0) r

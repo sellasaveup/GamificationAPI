@@ -1,17 +1,51 @@
 GET_POINT
-http://localhost:8280/GamificationAPI/sella/api/GET_POINT?custId=1
+http://localhost:8180/GamificationAPI/sella/api/GET_POINT?custId=1&requestType=A
 
 PUT_POINT
-http://localhost:8280/GamificationAPI/sella/api/PUT_POINT?custId=1&point=100&activity=TEST
+http://localhost:8180/GamificationAPI/sella/api/PUT_POINT?custId=1&point=100&activity=TEST
 
 REDUCE_POINT
-http://localhost:8280/GamificationAPI/sella/api/REDUCE_POINT?custId=1&point=20&activity=TEST_REDUCE
+http://localhost:8180/GamificationAPI/sella/api/REDUCE_POINT?custId=1&point=20&activity=TEST_REDUCE
 
 GET_BADGE
-http://localhost:8280/GamificationAPI/sella/api/GET_BADGE?custId=1
+http://localhost:8180/GamificationAPI/sella/api/GET_BADGE?custId=1
 
 AWARD_BADGE
-http://localhost:8280/GamificationAPI/sella/api/AWARD_BADGE?custId=1&badgeId=1&activity=TEST_BADGE
+http://localhost:8180/GamificationAPI/sella/api/AWARD_BADGE?custId=1&badgeId=1&activity=TEST_BADGE
 
 REMOVE_BADGE
-http://localhost:8280/GamificationAPI/sella/api/REMOVE_BADGE?custId=1&badgeId=1&activity=TEST_BADGE
+http://localhost:8180/GamificationAPI/sella/api/REMOVE_BADGE?custId=1&badgeId=1&activity=TEST_BADGE
+
+POST_ACTIONE
+http://localhost:8180/GamificationAPI/sella/api/POST_ACTIONE?custId=1&action=MOB_RE
+
+
+
+GET_PROFILE - Done
+http://localhost:8180/GamificationAPI/sella/api/GET_PROFILE?custId=1
+
+GET_POINT - response must have This Month and All Time data Done
+http://localhost:8180/GamificationAPI/sella/api/GET_POINT?custId=1&requestType=A or M
+
+GET_RANK - must be done based on subject_type Done
+http://localhost:8180/GamificationAPI/sella/api/GET_RANK?custId=1&requestType=A or M 
+
+GET_LEADERBOARD - Done
+http://localhost:8180/GamificationAPI/sella/api/GET_LEADERBOARD?custId=1&requestType=A or M 
+
+GET_ALL_BADGE - Done
+http://localhost:8180/GamificationAPI/sella/api/GET_ALL_BADGE?custId=1
+
+
+GET_CHALLENGES - send customer id - API must return the list of challenges that are not expired - Done
+http://localhost:8180/GamificationAPI/sella/api/GET_CHALLENGES?custId=1
+
+GET_REWARD - send customer id - API returns list of customers enabled rewards - Done
+http://localhost:8180/GamificationAPI/sella/api/GET_REWARD?custId=1
+
+GET_ALL_REWARD - send customer id - API returns list of all rewards based on SUBJECT TYPE - Done
+http://localhost:8180/GamificationAPI/sella/api/GET_ALL_REWARD?custId=1
+
+PUSH_NOTIFICATION - Pushing Notification
+http://localhost:8180/GamificationAPI/sella/api/PUSH_NOTIFICATION?notificationType=msg&target=ALL or SUBJECT or CUST&message=offer for all&imageUrl=http://&custId=1&subjectType=CUST
+

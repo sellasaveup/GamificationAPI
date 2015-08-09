@@ -13,8 +13,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public final class RequestTransformer {
 	
+<<<<<<< HEAD
 	public static Map<String, String> getInputsAndUploadFile(final HttpServletRequest request, final String uploadPath)throws Exception {
 		
+=======
+	public static Map<String, String> getInputsAndUploadFile(final HttpServletRequest request, final String uploadPath) throws Exception  {
+>>>>>>> parent of a6a1aeb... Uploading file on badge CRUD operation
     	final Map<String,String> inputs = new HashMap<String,String>();
     	if(ServletFileUpload.isMultipartContent(request)) {
     		final List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);

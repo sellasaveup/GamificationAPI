@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gamification.RequestTransformer;
+
 import com.gamification.web.manager.WebManager;
 import com.gamification.web.view.BadgeMaster;
 import com.google.gson.Gson;
@@ -54,7 +54,8 @@ public class BadgeMasterController extends HttpServlet {
             } else if (action.equals("create") || action.equals("update")) {
             	try {
             		final BadgeMaster badgeMaster = new BadgeMaster();
-                    final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request,getServletContext().getRealPath("/") + "/uploads/badges");
+                    final Map<String,String> inputs = null;
+                    		//RequestTransformer.getInputsAndUploadFile(request,getServletContext().getRealPath("/") + "/uploads/badges");
                     if(inputs.get("badgeId") != null) {
                     	badgeMaster.setBadgeId(Integer.parseInt(inputs.get("badgeId")));
                     }

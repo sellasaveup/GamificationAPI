@@ -8,10 +8,6 @@
   <servlet>
     <servlet-name>GAMIFICATION WEB API</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-    <init-param>
-			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>com.gamification.api.controller</param-value>
-	</init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>

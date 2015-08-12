@@ -182,6 +182,7 @@ br {
     <div class="col-sm-4">
      <img src="./img/badges/Point3.JPG" width="180" height="180"/>
     </div>
+    </div>
           <div class="row">
     <div class="col-sm-4">
       
@@ -192,7 +193,6 @@ br {
      <img src="./img/badges/Point5.JPG" width="180" height="180" />
     </div>
     
-</div>
 </div>
 
 

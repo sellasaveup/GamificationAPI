@@ -9,106 +9,11 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
-
+<link href="./css/masterpage.css" rel="stylesheet">
+  <link href="./css/profilepage.css" rel="stylesheet">
 
 <style>
-header {
-	color: #666;
-	background-color: blue;
-	padding: 7px 0 10px 0;
-	border-top: 1px solid #000;
-	border-radius: 10px;
-	opacity: 0.9;
-}
 
-footer {
-	color: #666;
-	background: rgba(0, 0, 0, 0.8);
-	padding: 4px 0 10px 0;
-	border-radius: 10px;
-	position: sticky;
-}
-
-.myBody {
-	padding: 30px 100px 50px 100px;
-}
-
-.profilepadding {
-	padding: 0 10px 0 10px;
-}
-
-.points {
-	background-color: #6FDE00;
-}
-
-.paddme {
-	padding: 10px 0px 0px 0px;
-}
-
-.panel-default>.panel-heading {
-	background-color: red;
-	opacity: 0.7;
-}
-
-.panel-green>.panel-heading {
-	background-color: #0F6105;
-	opacity: 0.7;
-}
-
-.panel-orange>.panel-heading {
-	background-color: #FA8E00;
-	opacity: 0.7;
-}
-
-.panel-violet>.panel-heading {
-	background-color: #770BE3;
-	opacity: 0.7;
-}
-
-.panel-red>.panel-heading {
-	background-color: rgb(255, 0, 0);
-	opacity: 0.7;
-}
-
-.badges_scroller {
-	max-height: 250px;
-	overflow-y: auto;
-}
-
-.challenges_scroller {
-	max-height: 450px;
-	overflow-y: auto;
-}
-
-.ourbackground {
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-	background-color: #FFFFFF;
-}
-
-.mywell {
-	opacity: 0.8;
-	color: black;
-}
-
-.tabwell {
-	opacity: 0.5;
-	background-color: #003399;
-}
-
-.shineLB {
-	text-shadow: 0px 0px 24px #fff;
-	color: #fff;
-	speed    : 50;
-	shineClass   : "shine";     
-}
-
-header, .header, #header {
-	background: #47A4D6;
-	color: white;
-	font-size: 15px;
-}
 </style>
 </head>
 <body>

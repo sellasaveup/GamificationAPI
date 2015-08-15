@@ -96,4 +96,5 @@ public class WebManager {
 	public String deleteLevel(Long levelId) {
 		return new LevelDAO().deleteLevel(levelId);
 	}
+	
 }

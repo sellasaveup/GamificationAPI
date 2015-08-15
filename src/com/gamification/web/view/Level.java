@@ -38,4 +38,5 @@ public class Level {
 	public void setRewardId(Long rewardId) {
 		this.rewardId = rewardId;
 	}
+	
 }

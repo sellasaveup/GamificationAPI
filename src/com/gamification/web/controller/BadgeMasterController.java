@@ -51,7 +51,8 @@ public class BadgeMasterController extends HttpServlet {
                             JSONROOT.put("Message", ex.getMessage());
                             String error = gson.toJson(JSONROOT);
                             response.getWriter().print(error);
-                    }                               
+                    }  
+                    
             } else if (action.equals("create") || action.equals("update")) {
             	try {
                     final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request,getServletContext().getRealPath("/") + "/uploads/badge");

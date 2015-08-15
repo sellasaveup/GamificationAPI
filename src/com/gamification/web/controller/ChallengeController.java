@@ -54,7 +54,8 @@ public class ChallengeController extends HttpServlet {
                             JSONROOT.put("Message", ex.getMessage());
                             String error = gson.toJson(JSONROOT);
                             response.getWriter().print(error);
-                    }                               
+                    }
+                    
             } else if (action.equals("create") || action.equals("update")) {
             	try {
             		

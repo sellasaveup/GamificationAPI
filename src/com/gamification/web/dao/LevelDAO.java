@@ -60,6 +60,7 @@ public class LevelDAO {
 			preparedStatement.executeUpdate();
 			level.setLevelId(getLevelId());
 			returnValue = "SUCCESS";
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

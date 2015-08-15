@@ -6,9 +6,11 @@ import com.gamification.api.view.CustomerMaster;
 import com.gamification.web.dao.BadgeMasterDAO;
 import com.gamification.web.dao.ChallengeDAO;
 import com.gamification.web.dao.CustomerMasterDAO;
+import com.gamification.web.dao.LevelDAO;
 import com.gamification.web.dao.RewardDAO;
 import com.gamification.web.view.BadgeMaster;
 import com.gamification.web.view.Challenge;
+import com.gamification.web.view.Level;
 import com.gamification.web.view.Reward;
 
 public class WebManager {
@@ -76,5 +78,22 @@ public class WebManager {
 	
 	public String deleteBadge(int badgeId) {
 		return new BadgeMasterDAO().deleteBadge(badgeId);
+	}
+	
+	public List<Level>  getLevelList() {
+		//logger.debug("Inside Manager");
+		return new LevelDAO().getLevelList();
+	}
+	
+	public String addLevel(Level level) {
+		return new LevelDAO().addLevel(level);
+	}
+	
+	public String updateLevel(Level level) {
+		return new LevelDAO().updateLevel(level);
+	}
+	
+	public String deleteLevel(Long levelId) {
+		return new LevelDAO().deleteLevel(levelId);
 	}
 }

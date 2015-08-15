@@ -12,38 +12,33 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gamification.web.RequestTransformer;
 import com.gamification.web.manager.WebManager;
-import com.gamification.web.view.Challenge;
+import com.gamification.web.view.Level;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-/**
- * Servlet implementation class ChallengeController
- */
 @SuppressWarnings("serial")
-public class ChallengeController extends HttpServlet {
+public class LevelController extends HttpServlet {
 	
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
-    public void doPost(HttpServletRequest request,
-                    HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
     String action = request.getParameter("action");
     WebManager webManager = new WebManager();
-    List<Challenge> challengeList = null;
+    List<Level> levelList = null;
     if ( action != null) 
     {
-            
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             response.setContentType("application/json");
 
             if (action.equals("list"))  {
-            	challengeList = webManager.getChallengeList();
+            	levelList = webManager.getLevelList();
             
                     try {                                                                       
                     
                     JSONROOT.put("Result", "OK");
-                    JSONROOT.put("Records", challengeList);
+                    JSONROOT.put("Records", levelList);
                     
                     String jsonArray = gson.toJson(JSONROOT);
                     System.out.println(jsonArray);
@@ -57,30 +52,26 @@ public class ChallengeController extends HttpServlet {
                     }                               
             } else if (action.equals("create") || action.equals("update")) {
             	try {
-            		
-            		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request,getServletContext().getRealPath("/") + "/uploads/challenge");
-            		final Challenge challenge = new Challenge();
-                    if(inputs.get("id") != null) {
-                    	challenge.setId(Integer.parseInt(inputs.get("id")));
+            		System.out.println(getServletContext().getRealPath("/"));
+            		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request,getServletContext().getRealPath("/") + "/uploads/level");
+            		final Level level = new Level();
+                    if(inputs.get("levelId") != null) {
+                    	level.setLevelId(Long.parseLong(inputs.get("levelId")));
                     }
-                    challenge.setDescription(inputs.get("description"));
-                    challenge.setUserAction(inputs.get("userAction"));
-                    challenge.setPoint(Integer.parseInt(inputs.get("point")));
-                    challenge.setSubjectType(inputs.get("subjectType"));
-                    challenge.setImageUrl(inputs.get("imageUrl"));
-                    challenge.setOccurrence(Integer.parseInt(inputs.get("occurrence")));
-                    challenge.setExpiryDate(inputs.get("expiryDate"));
-                    challenge.setGoal(inputs.get("goal"));
+                    level.setLevelDesc(inputs.get("levelDesc"));
+                    level.setImageUrl(inputs.get("imageUrl"));
+                    level.setBadgeId(Long.valueOf(inputs.get("badgeId")));
+                    level.setRewardId(Long.valueOf(inputs.get("rewardId")));
                     
                     String status = null;
                     if (action.equals("create")) {
-                    	status = webManager.addChallenge(challenge);
+                    	status = webManager.addLevel(level);
                     } else if (action.equals("update")) {
-                    	status = webManager.updateChallenge(challenge);
+                    	status = webManager.updateLevel(level);
                     }
                     if(status != null && status.equals("SUCCESS")) {
                     	JSONROOT.put("Result", "OK");
-                        JSONROOT.put("Record", challenge);
+                        JSONROOT.put("Record", level);
                     } else {
                     	JSONROOT.put("Result", "ERROR");
                         JSONROOT.put("Message", "DB Problem");
@@ -95,11 +86,9 @@ public class ChallengeController extends HttpServlet {
             }
             
           } else if(action.equals("delete")) {
-        	  int rewardId = Integer.parseInt(request.getParameter("id"));
-        	  System.out.println("rewardId-->"+rewardId);
-        	  webManager.deleteChallenge(rewardId);
+        	  Long levelId = Long.parseLong(request.getParameter("levelId"));
+        	  webManager.deleteLevel(levelId);
               JSONROOT.put("Result", "OK");
-
               String jsonArray = gson.toJson(JSONROOT);
               response.getWriter().print(jsonArray);
           }

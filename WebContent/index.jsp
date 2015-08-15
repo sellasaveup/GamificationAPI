@@ -16,9 +16,39 @@
 			title : 'Reward List',
 			actions : {
 				listAction : 'RewardController?action=list',
-				createAction:'RewardController?action=create',
-		          updateAction: 'RewardController?action=update',
-		          deleteAction: 'RewardController?action=delete'
+				createAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'RewardController?action=create',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+		        updateAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'RewardController?action=update',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+            	deleteAction: 'RewardController?action=delete'
 			},
 			fields : {
 				rewardId : {
@@ -43,9 +73,21 @@
 					width : '40%',
 					edit : true
 				},
-				
 				imageUrl : {
 					title : 'Image URL',
+					width : '40%',
+					edit : true,
+					input: function (data) {
+						return '<input type="file" name="imageUrl" id="imageUrl" />';
+					}
+				},
+				subjectType : {
+					title : 'Subject Type',
+					width : '40%',
+					edit : true
+				},
+				goal : {
+					title : 'Goal',
 					width : '40%',
 					edit : true
 				}
@@ -57,9 +99,39 @@
 			title : 'Challenge List',
 			actions : {
 				listAction : 'ChallengeController?action=list',
-				createAction:'ChallengeController?action=create',
-		          updateAction: 'ChallengeController?action=update',
-		          deleteAction: 'ChallengeController?action=delete'
+				createAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'ChallengeController?action=create',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+		        updateAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'ChallengeController?action=update',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},		
+		       deleteAction: 'ChallengeController?action=delete'
 			},
 			fields : {
 				id : {
@@ -93,7 +165,10 @@
 				imageUrl : {
 					title : 'Image URL',
 					width : '40%',
-					edit : true
+					edit : true,
+					input: function (data) {
+						return '<input type="file" name="imageUrl" id="imageUrl" />';
+					},
 				},
 				occurrence : {
 					title : 'Occurrence',
@@ -120,9 +195,39 @@
 			title : 'Customer List',
 			actions : {
 				listAction : 'CustomerMasterController?action=list',
-				createAction:'CustomerMasterController?action=create',
-		          updateAction: 'CustomerMasterController?action=update',
-		          deleteAction: 'CustomerMasterController?action=delete'
+				createAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'CustomerMasterController?action=create',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+		        updateAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'CustomerMasterController?action=update',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+		        deleteAction: 'CustomerMasterController?action=delete'
 			},
 			fields : {
 				custId : {
@@ -137,11 +242,16 @@
 					width : '40%',
 					edit : true
 				},
+				
 				customerAvatar : {
 					title : 'Customer Image URL',
 					width : '10%',
-					edit : true
+					edit : true,
+					input: function (data) {
+						return '<input type="file" name="imageUrl" id="imageUrl" />';
+					},
 				},
+	
 				points : {
 					title : 'Earned Points',
 					width : '40%',
@@ -233,11 +343,83 @@
 			}
 		});
 		
+		$('#LevelTableContainer').jtable({
+			title : 'Level List',
+			actions : {
+				listAction : 'LevelController?action=list',
+				createAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'LevelController?action=create',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+		        updateAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'LevelController?action=update',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+            	deleteAction: 'LevelController?action=delete'
+			},
+			fields : {
+				levelId : {
+					title : 'Level Id',
+					width : '10%',
+					key : true,
+					list : true,
+					create : false
+				},
+				levelDesc : {
+					title : 'Level',
+					width : '40%',
+					edit : true
+				},
+				imageUrl : {
+					title : 'Image URL',
+					width : '40%',
+					edit : true,
+					input: function (data) {
+						return '<input type="file" name="imageUrl" id="imageUrl" />';
+					},
+				},
+				badgeId : {
+					title : 'Badge Id',
+					width : '40%',
+					edit : true
+				},
+				rewardId : {
+					title : 'Reward Id',
+					width : '40%',
+					edit : true
+				}
+			}
+		});
+		
 		$('#RewardTableContainer').jtable('load');
 		$('#ChallengeTableContainer').jtable('load');
 		$('#CustomerTableContainer').jtable('load');
 		$('#BadgeTableContainer').jtable('load');
-		
+		$('#LevelTableContainer').jtable('load');
 	});
 </script>
 
@@ -266,6 +448,12 @@
 		style="width: 80%; margin-right: 10%; margin-left: 10%; text-align: center;">
 		<h4>Badge List</h4>
 		<div id="BadgeTableContainer"></div>
+	</div>
+	
+	<div
+		style="width: 80%; margin-right: 10%; margin-left: 10%; text-align: center;">
+		<h4>Level List</h4>
+		<div id="LevelTableContainer"></div>
 	</div>
 </body>
 </html>

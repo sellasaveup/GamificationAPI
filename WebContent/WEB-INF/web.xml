@@ -54,4 +54,15 @@
     <servlet-name>BadgeMasterController</servlet-name>
     <url-pattern>/BadgeMasterController</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>LevelController</display-name>
+    <servlet-name>LevelController</servlet-name>
+    <servlet-class>com.gamification.web.controller.LevelController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LevelController</servlet-name>
+    <url-pattern>/LevelController</url-pattern>
+  </servlet-mapping>
 </web-app>

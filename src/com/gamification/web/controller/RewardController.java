@@ -1,20 +1,22 @@
 package com.gamification.web.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.gamification.web.RequestTransformer;
 import com.gamification.web.manager.WebManager;
 import com.gamification.web.view.Reward;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+@SuppressWarnings("serial")
 public class RewardController extends HttpServlet {
         private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
@@ -26,7 +28,6 @@ public class RewardController extends HttpServlet {
         List<Reward> rewardList = null;
         if ( action != null) 
         {
-                
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 response.setContentType("application/json");
@@ -51,33 +52,19 @@ public class RewardController extends HttpServlet {
                         }                               
                 } else if (action.equals("create") || action.equals("update")) {
                 	try {
-                        Reward reward = new Reward();
-                        String status = null;
-                        if (request.getParameter("rewardId") != null) {
-                                int rewardId = Integer.parseInt(request.getParameter("rewardId"));
-                                reward.setRewardId(rewardId);
+                		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request,getServletContext().getRealPath("/") + "/uploads/reward");
+                		final Reward reward = new Reward();
+                        if(inputs.get("rewardId") != null) {
+                        	reward.setRewardId(Integer.parseInt(inputs.get("rewardId")));
                         }
-
-                        if (request.getParameter("rewardDesc") != null) {
-                                String rewardDesc = request.getParameter("rewardDesc");
-                                reward.setRewardDesc(rewardDesc);
-                        }
-
-                        if (request.getParameter("rewardPoint") != null) {
-                                int rewardPoint = Integer.parseInt(request.getParameter("rewardPoint"));
-                                reward.setRewardPoint(rewardPoint);
-                        }
-
-                        if (request.getParameter("rewardCode") != null) {
-                                String rewardCode = request.getParameter("rewardCode");
-                                reward.setRewardCode(rewardCode);
-                        }
+                        reward.setRewardDesc(inputs.get("rewardDesc"));
+                        reward.setRewardPoint(Integer.parseInt(inputs.get("rewardPoint")));
+                        reward.setRewardCode(inputs.get("rewardCode"));
+                        reward.setImageUrl(inputs.get("imageUrl"));
+                        reward.setSubjectType(inputs.get("subjectType"));
+                        reward.setGoal(inputs.get("goal"));
                         
-                        if (request.getParameter("imageUrl") != null) {
-                            String imageUrl = request.getParameter("imageUrl");
-                            reward.setImageUrl(imageUrl);
-                    }
-
+                        String status = null;
                         if (action.equals("create")) {
                         	status = webManager.addReward(reward);
                         } else if (action.equals("update")) {

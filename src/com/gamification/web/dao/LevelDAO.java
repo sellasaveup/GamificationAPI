@@ -8,15 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gamification.common.ConnectionUtility;
-import com.gamification.web.view.BadgeMaster;
+import com.gamification.web.view.Level;
 
+public class LevelDAO {
 
-public class BadgeMasterDAO {
-	
-	public List<BadgeMaster> getBadgeList() {
-		List<BadgeMaster> badgeMasterList = null; 
-		System.out.println("BadgeMasterDAO getBadgeList()");
-		String query = "SELECT * FROM ss_ma_badge";
+	public List<Level> getLevelList() {
+		List<Level> levelList = null; 
+		String query = "SELECT * FROM SS_MA_LEVEL";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
@@ -25,34 +23,29 @@ public class BadgeMasterDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			badgeMasterList = new ArrayList<BadgeMaster>();
+			levelList = new ArrayList<Level>();
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				BadgeMaster badgeMaster = new BadgeMaster();
-				badgeMaster.setBadgeId(rs.getInt("BADGE_ID"));
-				badgeMaster.setBadgeName(rs.getString("BADGE_NAME"));
-				badgeMaster.setImageUrl(rs.getString("BADGE_IMG_URL"));
-				badgeMaster.setBadgeCode(rs.getString("BADGE_CODE"));
-				badgeMaster.setSubjectType(rs.getString("SUBJECT_TYPE"));
-				badgeMaster.setGoal(rs.getString("GOAL"));
-				badgeMasterList.add(badgeMaster);
-				System.out.println("Got Record");
+				Level level = new Level();
+				level.setLevelId(rs.getLong("LEVEL_ID"));
+				level.setLevelDesc(rs.getString("LEVEL_DESC"));
+				level.setImageUrl(rs.getString("LEVEL_IMG_URL"));
+				level.setBadgeId(rs.getLong("BADGE_ID"));
+				level.setRewardId(rs.getLong("REWARD_ID"));
+				levelList.add(level);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			connectionUtility.closeConnection(connection, preparedStatement, rs);
 		}
-		
-		return badgeMasterList;
-	
+		return levelList;
+
 	}
-	
-	public String addBadge(BadgeMaster badgeMaster) {
-		
-		System.out.println("BadgeMasterDAO addBadge()");
-		String query = "INSERT INTO ss_ma_badge ( BADGE_NAME, BADGE_IMG_URL, BADGE_CODE, SUBJECT_TYPE, GOAL) VALUES (?, ?, ?, ?, ?)";
+
+	public String addLevel(Level level) {
+
+		String query = "INSERT INTO SS_MA_LEVEL ( LEVEL_DESC, LEVEL_IMG_URL, BADGE_ID, REWARD_ID) VALUES ( ?, ?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		String returnValue = null;
@@ -60,13 +53,12 @@ public class BadgeMasterDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, badgeMaster.getBadgeName());
-			preparedStatement.setString(2, badgeMaster.getImageUrl());
-			preparedStatement.setString(3, badgeMaster.getBadgeCode());
-			preparedStatement.setString(4, badgeMaster.getSubjectType());
-			preparedStatement.setString(5, badgeMaster.getGoal());
+			preparedStatement.setString(1, level.getLevelDesc());
+			preparedStatement.setString(2, level.getImageUrl());
+			preparedStatement.setLong(3, level.getBadgeId());
+			preparedStatement.setLong(4, level.getRewardId());
 			preparedStatement.executeUpdate();
-			badgeMaster.setBadgeId(getBadgeId());
+			level.setLevelId(getLevelId());
 			returnValue = "SUCCESS";
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -75,14 +67,13 @@ public class BadgeMasterDAO {
 		}
 		return returnValue;
 	}
-	
-	private int getBadgeId() {
-		 
-		System.out.println("BadgeMasterDAO getBadgeId()");
-		String query = "SELECT MAX(BADGE_ID) FROM ss_ma_badge";
+
+	private Long getLevelId() {
+
+		String query = "SELECT MAX(LEVEL_ID) FROM SS_MA_LEVEL";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		int badgeId = 0;
+		Long levelId = 0l;
 		Connection connection = null;
 		ConnectionUtility connectionUtility = getConnectionUtility();
 		try {
@@ -90,22 +81,20 @@ public class BadgeMasterDAO {
 			preparedStatement = connection.prepareStatement(query);
 			rs = preparedStatement.executeQuery();
 			if(rs.next()) {
-				badgeId = rs.getInt(1);
+				levelId = rs.getLong(1);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			connectionUtility.closeConnection(connection, preparedStatement, rs);
 		}
-		System.out.println("badgeId-->"+badgeId);
-		return badgeId;
-	
+		return levelId;
+
 	}
-	public String updateBadge(BadgeMaster badgeMaster) {
-		
-		System.out.println("BadgeMasterDAO updateBadge()");
-		String query = "UPDATE ss_ma_badge SET  BADGE_NAME = ?, BADGE_IMG_URL = ?, BADGE_CODE = ?, SUBJECT_TYPE=?, GOAL=? WHERE BADGE_ID = ?";
+	public String updateLevel(Level level) {
+
+		String query = "UPDATE SS_MA_LEVEL SET  LEVEL_DESC = ?, LEVEL_IMG_URL = ?, BADGE_ID = ?, REWARD_ID = ? WHERE LEVEL_ID = ?";
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		String returnValue = null;
@@ -113,13 +102,11 @@ public class BadgeMasterDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, badgeMaster.getBadgeName());
-			preparedStatement.setString(2, badgeMaster.getImageUrl());
-			preparedStatement.setString(3, badgeMaster.getBadgeCode());
-			preparedStatement.setString(4, badgeMaster.getSubjectType());
-			preparedStatement.setString(5, badgeMaster.getGoal());
-			preparedStatement.setInt(6, badgeMaster.getBadgeId());
-			
+			preparedStatement.setString(1, level.getLevelDesc());
+			preparedStatement.setString(2, level.getImageUrl());
+			preparedStatement.setLong(3, level.getBadgeId());
+			preparedStatement.setLong(4, level.getRewardId());
+			preparedStatement.setLong(5, level.getLevelId());
 			preparedStatement.executeUpdate();
 			returnValue = "SUCCESS";
 		} catch (SQLException e) {
@@ -133,11 +120,10 @@ public class BadgeMasterDAO {
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();
 	}
-	
-	public String deleteBadge(int badgeId) {
-		
-		System.out.println("BadgeMasterDAO deleteBadge()");
-		String query = "DELETE FROM ss_ma_badge WHERE BADGE_ID = ?";
+
+	public String deleteLevel(Long levelId) {
+
+		String query = "DELETE FROM SS_MA_LEVEL WHERE LEVEL_ID = ?";
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		String returnValue = null;
@@ -145,7 +131,7 @@ public class BadgeMasterDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, badgeId);
+			preparedStatement.setLong(1, levelId);
 			preparedStatement.executeUpdate();
 			returnValue = "SUCCESS";
 		} catch (SQLException e) {
@@ -154,6 +140,7 @@ public class BadgeMasterDAO {
 			connectionUtility.closeConnection(connection, preparedStatement, null);
 		}
 		return returnValue;
-	
+
 	}
+
 }

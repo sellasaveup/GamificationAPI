@@ -3,6 +3,7 @@ package com.gamification.web.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gamification.api.view.CustomerMaster;
+import com.gamification.web.RequestTransformer;
 import com.gamification.web.manager.WebManager;
-import com.gamification.web.view.Reward;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
  * Servlet implementation class CustomerMasterController
  */
+@SuppressWarnings("serial")
 public class CustomerMasterController extends HttpServlet {
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
@@ -54,33 +56,17 @@ public class CustomerMasterController extends HttpServlet {
                     }                               
             } else if (action.equals("create") || action.equals("update")) {
             	try {
-            		CustomerMaster customerMaster = new CustomerMaster();
+            		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request,getServletContext().getRealPath("/") + "/uploads/customer");
+            		final CustomerMaster customerMaster = new CustomerMaster();
+                    if(inputs.get("custId") != null) {
+                    	customerMaster.setCustId(Integer.parseInt(inputs.get("custId")));
+                    }
+                    customerMaster.setCustomerName(inputs.get("customerName"));
+                    customerMaster.setCustomerAvatar(inputs.get("customerAvatar"));
+                    customerMaster.setPoints(Integer.parseInt(inputs.get("points")));
+                    customerMaster.setSubjectType(inputs.get("subjectType"));
+            		
                     String status = null;
-                    if (request.getParameter("custId") != null) {
-                            int custId = Integer.parseInt(request.getParameter("custId"));
-                            customerMaster.setCustId(custId);
-                    }
-
-                    if (request.getParameter("customerName") != null) {
-                            String customerName = request.getParameter("customerName");
-                            customerMaster.setCustomerName(customerName);
-                    }
-
-                    if (request.getParameter("customerAvatar") != null) {
-                            String customerAvatar = request.getParameter("customerAvatar");
-                            customerMaster.setCustomerAvatar(customerAvatar);
-                    }
-
-                    if (request.getParameter("points") != null) {
-                            int points = Integer.parseInt(request.getParameter("points"));
-                            customerMaster.setPoints(points);
-                    }
-                    
-                    if (request.getParameter("subjectType") != null) {
-                        String subjectType = request.getParameter("subjectType");
-                        customerMaster.setSubjectType(subjectType);
-                }
-
                     if (action.equals("create")) {
                     	status = webManager.addCustomer(customerMaster);
                     } else if (action.equals("update")) {

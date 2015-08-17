@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<script type="text/javascript" src="./js/jquery.canvasjs.min.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+
+		var columnChart = new CanvasJS.Chart("columnChart", {
+			animationEnabled : true,
+			title : {
+				text : "Challenges Trend"
+			},
+			data : [ {
+				type : "splineArea", //change type to bar, line, area, pie, etc
+				dataPoints : [ {
+					label : "JAN",
+					y : 18
+				}, {
+					label : "FEB",
+					y : 29
+				}, {
+					label : "MAR",
+					y : 40
+				}, {
+					label : "APR",
+					y : 34
+				}, {
+					label : "MAY",
+					y : 24
+				} ]
+			} ]
+		});
+
+		var barChart = new CanvasJS.Chart("barChart", {
+			animationEnabled : true,
+			title : {
+				text : "User Engagement Trend"
+			},
+			data : [ {
+				type : "bar", //change type to bar, line, area, pie, etc
+				dataPoints : [ {
+					label : "JAN",
+					y : 18
+				}, {
+					label : "FEB",
+					y : 29
+				}, {
+					label : "MAR",
+					y : 40
+				}, {
+					label : "APR",
+					y : 34
+				}, {
+					label : "MAY",
+					y : 24
+				} ]
+			} ]
+		});
+
+		var pieChart = new CanvasJS.Chart("pieChart", {
+			animationEnabled : true,
+			title : {
+				text : "Badges/Reward Trend"
+			},
+			data : [ {
+				type : "pie", //change type to bar, line, area, pie, etc
+				dataPoints : [ {
+					label : "JAN",
+					y : 18
+				}, {
+					label : "FEB",
+					y : 29
+				}, {
+					label : "MAR",
+					y : 40
+				}, {
+					label : "APR",
+					y : 34
+				}, {
+					label : "MAY",
+					y : 24
+				} ]
+			} ]
+		});
+
+		var doughnutChart = new CanvasJS.Chart("doughnutChart", {
+			animationEnabled : true,
+			title : {
+				text : "Level Trend"
+			},
+			data : [ {
+				type : "doughnut", //change type to bar, line, area, pie, etc
+				dataPoints : [ {
+					label : "JAN",
+					y : 18
+				}, {
+					label : "FEB",
+					y : 29
+				}, {
+					label : "MAR",
+					y : 40
+				}, {
+					label : "APR",
+					y : 34
+				}, {
+					label : "MAY",
+					y : 24
+				} ]
+			} ]
+		});
+
+		columnChart.render();
+		barChart.render();
+		pieChart.render();
+		doughnutChart.render();
+	}
+</script>
+</head>
+<body>
+	<table width="100%">
+		<tr>
+			<td width="50%"><div id="columnChart"></div></td>
+			<td width="50%"><div id="pieChart"></div></td>
+		</tr>
+	</table>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<table width="100%">
+		<tr>
+			<td width="50%"><div id="barChart"></div></td>
+			<td width="50%"><div id="doughnutChart"></div></td>
+		</tr>
+	</table>
+</body>
+
+</html>

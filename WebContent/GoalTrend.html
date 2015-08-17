@@ -41,19 +41,19 @@
 				type : "bar", //change type to bar, line, area, pie, etc
 				dataPoints : [ {
 					label : "JAN",
-					y : 18
+					y : 1800
 				}, {
 					label : "FEB",
-					y : 29
+					y : 2900
 				}, {
 					label : "MAR",
-					y : 40
+					y : 4000
 				}, {
 					label : "APR",
-					y : 34
+					y : 3400
 				}, {
 					label : "MAY",
-					y : 24
+					y : 2400
 				} ]
 			} ]
 		});
@@ -61,25 +61,25 @@
 		var pieChart = new CanvasJS.Chart("pieChart", {
 			animationEnabled : true,
 			title : {
-				text : "Badges/Reward Trend"
+				text : "No. of Users in each Level on Hype Goal" 
 			},
 			data : [ {
-				type : "pie", //change type to bar, line, area, pie, etc
+				type : "line", //change type to bar, line, area, pie, etc
 				dataPoints : [ {
-					label : "JAN",
-					y : 18
+					label : "LEVEL 1",
+					y : 180
 				}, {
-					label : "FEB",
-					y : 29
+					label : "LEVEL 2",
+					y : 290
 				}, {
-					label : "MAR",
-					y : 40
+					label : "LEVEL 3",
+					y : 400
 				}, {
-					label : "APR",
-					y : 34
+					label : "LEVEL 4",
+					y : 340
 				}, {
-					label : "MAY",
-					y : 24
+					label : "LEVEL 5",
+					y : 240
 				} ]
 			} ]
 		});
@@ -87,25 +87,25 @@
 		var doughnutChart = new CanvasJS.Chart("doughnutChart", {
 			animationEnabled : true,
 			title : {
-				text : "Level Trend"
+				text : "Badges/Reward Trend"
 			},
 			data : [ {
 				type : "doughnut", //change type to bar, line, area, pie, etc
 				dataPoints : [ {
-					label : "JAN",
-					y : 18
+					label : "Hype New Bie",
+					y : 50
 				}, {
-					label : "FEB",
-					y : 29
+					label : "Hype Saver",
+					y : 10
 				}, {
-					label : "MAR",
-					y : 40
+					label : "Hype Smart Saver",
+					y : 20
 				}, {
-					label : "APR",
-					y : 34
-				}, {
-					label : "MAY",
+					label : "Hype Super Smart Saver",
 					y : 24
+				}, {
+					label : "Hype Guru",
+					y : 5
 				} ]
 			} ]
 		});

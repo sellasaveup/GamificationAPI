@@ -198,13 +198,7 @@ String customerId = (String) request.getParameter("customerId");
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<footer>
-				<p>
-				<Center>Banca sella, 2015.</Center>
-				</p>
-			</footer>
-		</div>
+		
 	</div>
 
 

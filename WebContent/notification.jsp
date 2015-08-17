@@ -200,9 +200,9 @@
 					<label for="notificationCustomerId">Customer Id</label>
 					<select class="form-control" name="notificationCustomerId" id="notificationCustomerId">
 						<option value="">Choose Customer</option>
-						<option value="4">Boobathi</option>
-						<option value="5">Ajay</option>
-						<option value="6">Kumar</option>
+						<option value="4">AbdhulKalam</option>
+						<option value="5">Fernandous</option>
+						<option value="6">Mussauri</option>
 					</select>
 					</div>
 					<div class="form-group">

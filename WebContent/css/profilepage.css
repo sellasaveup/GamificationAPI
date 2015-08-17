@@ -7,14 +7,6 @@ header {
 	opacity: 0.9;
 }
 
-footer {
-	color: #666;
-	background: rgba(0, 0, 0, 0.8);
-	padding: 4px 0 10px 0;
-	border-radius: 10px;
-	position: sticky;
-}
-
 .myBody {
 	padding: 30px 100px 50px 100px;
 }

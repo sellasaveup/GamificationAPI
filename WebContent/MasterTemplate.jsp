@@ -84,7 +84,7 @@
 
 </div>
     <div class="row">
-        <div class="col-sm-3 profile-sidebar">
+        <div class="profile-sidebar" style="width:280px">
         
         		<div class="well">
 				<div class="profile-userpic">

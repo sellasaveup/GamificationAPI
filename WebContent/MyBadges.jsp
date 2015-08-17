@@ -11,6 +11,9 @@
 br {
   padding-top: 88px;
 }
+body {
+        margin-bottom:80px;
+      }
 </style>
 
 </head>
@@ -25,7 +28,7 @@ br {
     </div>
      <div class="row">
          <div class="col-sm-12">
-         <h3 class="element">Community Ranks</h3>
+         <h3 class="element">Badges you bagged..</h3>
          <hr>
         </div>
     </div>
@@ -71,7 +74,34 @@ br {
 			</div>
 			</div>
     </div>
-    <div class="col-sm-4">
+    
+    
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+   <div class="row">
+   
+    
+    
+  </div>
+  <div class="clearfix"></div>
+  
+  <div class="clearfix"></div>
+  
+  
+  
+     <div class="row">
+     <br><br>
+         <div class="col-sm-12">
+                  <h3 class="element">Yet to unlock..</h3>
+                  <hr>
+           </div>
+    </div>
+     <div class="row">
+   <div class="col-sm-4">
      <div class="flip-container vertical" >
      <div class="flipper">
 		
@@ -90,15 +120,7 @@ br {
 			</div>
 			</div>
     </div>
-    
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  
-   <div class="row">
-    <div class="col-sm-4">
+     <div class="col-sm-4">
        <div class="flip-container vertical" >
       <div class="flipper">
 		
@@ -137,6 +159,17 @@ br {
 			</div>
 			</div>
     </div>
+    </div>
+          <div class="row">
+            <div class="clearfix"></div>
+          
+            <div class="clearfix"></div>
+          <br>
+          <br>
+            <br>
+            <br>
+
+  
     <div class="col-sm-4">
      <div class="flip-container vertical" >
     <div class="flipper">
@@ -155,77 +188,42 @@ br {
 			</div>
 			</div>
     </div>
-    
-  </div>
-  <div class="clearfix"></div>
-  
-  <div class="clearfix"></div>
-  
-  
-  
-     <div class="row">
-     <br><br>
-         <div class="col-sm-12">
-                  <h3 class="element">Points Earned</h3>
-                  <hr>
-           </div>
-    </div>
-     <div class="row">
-    <div class="col-sm-4">
-      
-      <img src="./img/badges/Point1.JPG" width="180" height="180"/>
-      
-    </div>
-    <div class="col-sm-4">
-      <img src="./img/badges/Point2.JPG" width="180" height="180"/>
-    </div>
-    <div class="col-sm-4">
-     <img src="./img/badges/Point3.JPG" width="180" height="180"/>
-    </div>
-    </div>
-          <div class="row">
-    <div class="col-sm-4">
-      
-      <img src="./img/badges/Point4.JPG" width="180" height="180" />
-      
-    </div>
-    <div class="col-sm-4">
-     <img src="./img/badges/Point5.JPG" width="180" height="180" />
-    </div>
+   
     
 </div>
 
 
-<div class="row">
-         <div class="col-sm-12">
-                  <h3 class="element">Badges</h3>
-                  <hr>
-        </div>
-    </div>
-     <div class="row">
-    <div class="col-sm-4">
-      
-      <img src="./img/badges/Goalstart.png" width="180" height="180"/>
-      
-    </div>
-    <div class="col-sm-4">
-      <img src="./img/badges/Champ.png" width="180" height="180"/>
-    </div>
-    <div class="col-sm-4">
-     <img src="./img/badges/Awesome.png" width="180" height="180"/>
-    </div>
-    </div>
-          <div class="row">
-    <div class="col-sm-4">
-      
-      <img src="./img/badges/Topsaver.png" width="180" height="180" />
-      
-    </div>
-    <div class="col-sm-4">
-     <img src="./img/badges/Goal_Completion.png" width="180" height="180" />
-    </div>
-    
+<br>
+<br>
+<br><br>
+	<div class="row">
+	<table class="table">
+    <thead>
+      <tr>
+        <th>You've Conquered badges..</th>
+        <th>On!</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="success">
+        <td>Newbie</td>
+        <td>12/07/2015</td>
+       
+      </tr>
+      <tr class="danger">
+        <td>Super Saver</td>
+        <td>17/08/2015</td>
+        
+      </tr>
+     
+    </tbody>
+  </table>
 </div>
+<br>
+<br>
+<br>
+
 
 
  

@@ -163,7 +163,7 @@ window.onload = function() {
 			<br>
 			<br>
 			<br>
-			<br>
+			<br>  
 			
 	<table height="30%" width ="30%">
 <tr>

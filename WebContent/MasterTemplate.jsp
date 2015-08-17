@@ -114,7 +114,7 @@
           </div>
 <!--           Loading page dynamically -->
 	     <br>
-        <div class="col-sm-2" id="content">
+        <div class="col-sm-8" id="content">
 
             <hr>
 

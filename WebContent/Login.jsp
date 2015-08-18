@@ -35,8 +35,40 @@ body {background: #336699;}
   content: "Gamification";
   color: black;
 }
-  
+.transUpdate{
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  background: #fff; /* fallback for browsers that don't understand rgba */
+  border: #solid 10px #000; /* fallback for browsers that don't understand rgba */
+  background-color: rgba(255,255,255,0.8)/* slighly transparent white */
+  border-color: rgba(0,0,0,0.2) /*Very transparent black*/
+}
+  .divspace{
+   margin-right:30px;
+}
+
+        
+    .roundedbox{
+    border-radius: 25px;
+    border: 2px solid yellow;
+    width: 380px;
+    height: 80px;
+}
+
+.textinbox{
+    text-align: right;
+    margin-top: -10px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 15px;
+}
+
+.divbackground{
+    background-color: white;
+}
     </style>
+    
 </head>
 <body>
 
@@ -48,9 +80,11 @@ body {background: #336699;}
         
 			<p class="headstyle"> Framework<img src="img/logo/logo.gif" width="250"></p>
 	</div>
-
-    <div>
-			<form id="myForm"  action="MasterTemplate.jsp" method="post" >
+<div>
+<form id="myForm"  action="MasterTemplate.jsp" method="post" >
+    <div class="row">
+    <div class="col-sm-6 pull-left">
+			
 				<div class="form-group" >
 				<div class="row">
 						<div class="col-sm-12 border"><center><h3 class="signstyle">Sign In</h3></center></div>
@@ -85,16 +119,28 @@ body {background: #336699;}
 
         <span class="lineheight">
             
-            <a class="initialism registerform_open" href="#registerform" style="color:white;font-size: 15px;">Register in GF</a>
+            <a class="initialism registerform_open" href="#registerform" style="color:white;font-size: 15px;"><b>Register in GF</b></a>
             
         </span>
 
      
     </section>
     </div>
+    </div>&nbsp;&nbsp;
+    <div class="col-sm-6 pull-right"><img src="./img/banners/activitylog.png">
+    
+    <div class="row"></div>
+
+    
+   
+    
+
+<span><b></b></span></div>
+		</div>
 
 			</form>
 			
+		
 		</div>
     <ul class="bg-bubbles">
 		<li></li>
@@ -111,14 +157,14 @@ body {background: #336699;}
 	</ul>
 	   
 	
-	</div>
+	
 </div>
 <div id="registerform" class="well">
     <h4 style="color:black">Register in GF</h4>
    
     <table>
     <tr>
-    <td style="color:black">Enter GBSCode</td>
+    <td style="color:black">Enter GBSCode&nbsp;</td>
      <td><input type="text" name = "userCode" id ="userCode" ><br><br></td>
      
     </tr>
@@ -126,7 +172,7 @@ body {background: #336699;}
     <tr>
     <td style="color:black">Who am I ? </td>
      <td><select>
-  <option value="select">--Select User type--</option>
+  <option value="select" class="selectpicker show-menu-arrow">--Select User type--</option>
   <option value="employee">Employee</option>
   <option value="customer">Customer</option>
   <option value="trainee">Trainee</option>
@@ -141,11 +187,11 @@ body {background: #336699;}
     <td style="color:black">Avatar</td>
      <td><button type="submit" class="btn btn-primary start">
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start upload</span>
+                    <span>Upload Avatar</span>
                 </button><br><br></td>
     </tr>
     <tr>
-    <td style="color:black">Status Message  </td>
+    <td style="color:black">Status Message  &nbsp;</td>
      <td><input type="text" name = "statusMsg" id ="statusMsg" ><br><br></td>
     </tr>
 
@@ -157,7 +203,7 @@ body {background: #336699;}
     <button class="registerform_close btn btn-default">Close</button>
 </div>
  
-
+</div>
 <script>
 $(document).ready(function () {
 

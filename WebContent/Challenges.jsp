@@ -153,7 +153,7 @@
         <td>Amazon gift voucher worth 120 &euro;</td>
         <td>Diamond</td>
       </tr>
-    </tbody>
+    </tbody>  
   </table>
 </div>
 </body>

@@ -16,7 +16,7 @@ public class ActionProcessor {
 		Result result = new Result();
 		ActionProcessorDAO actionProcessorDAO = getActionProcessorDAO();
 		GamificationApiDAO gamificationApiDAO = getGamificationApiDAO();
-		CustomerMaster customerMaster = actionProcessorDAO.getCustomer(custId);
+		CustomerMaster customerMaster = new CustomerMaster();
 		if(customerMaster == null) {
 			result.setCustomerId(custId);
 			result.setStatus(0);
@@ -80,11 +80,6 @@ public class ActionProcessor {
 			}
 		}
 		return result;
-	}
-	
-	public CustomerMaster getProfile(int custId) {
-		CustomerMaster customerMaster = getActionProcessorDAO().getCustomer(custId);
-		return customerMaster;
 	}
 	
 	private GamificationApiDAO getGamificationApiDAO() {

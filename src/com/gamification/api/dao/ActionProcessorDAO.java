@@ -7,44 +7,51 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.gamification.api.view.ChallengeMaster;
 import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.CustomerTransaction;
+import com.gamification.api.view.UserGoalPoints;
 import com.gamification.common.ConnectionUtility;
 import com.gamification.web.view.Challenge;
 
 public class ActionProcessorDAO {
-	
-	public CustomerMaster getCustomer(int custId) {  
-		System.out.println("ActionProcessorDAO getCustomer()");
-		String query = "SELECT * FROM ss_ma_customer where CUST_ID = ?";
+	final static Logger logger = Logger.getLogger(ActionProcessorDAO.class);
+	public String putUserGoalPoints(UserGoalPoints userGoalPoints) {
+		logger.debug("putUserGoalPoints()");
+		String query = "INSERT INTO SS_TR_USER_GOAL_POINTS (USER_CODE, GOAL_CODE, TOTAL_POINTS, REEDEMED_POINTS, GLOBAL_BADGE_CODE) VALUES (?, ?, ?, ?, ?)";
+		String postStatus = "0";
 		PreparedStatement preparedStatement = null;
-		ResultSet rs = null;
-		CustomerMaster customerMaster = null;
 		Connection connection = null;
 		ConnectionUtility connectionUtility = getConnectionUtility();
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1,custId);
-			rs = preparedStatement.executeQuery();
-			if(rs.next()) {
-				customerMaster = new CustomerMaster();
-				customerMaster.setCustId(rs.getInt("CUST_ID"));
-				customerMaster.setCustomerName(rs.getString("CUST_NAME"));
-				customerMaster.setCustomerAvatar(rs.getString("CUST_AVATAR"));
-				customerMaster.setPoints(rs.getInt("TOTAL_POINTS"));
-				customerMaster.setSubjectType(rs.getString("SUBJECT_TYPE"));
-			}
-			
+			preparedStatement.setString(1, userGoalPoints.getUserCode());
+			preparedStatement.setString(2, userGoalPoints.getGoalCode());
+			preparedStatement.setString(3, userGoalPoints.getTotalpoints());
+			preparedStatement.setString(4, userGoalPoints.getReedemedPoints());
+			preparedStatement.setString(5, userGoalPoints.getGlobalBadgeCode());
+			preparedStatement.executeUpdate();
+			logger.debug("USER Goal Points Inserted Succesfully");
+			postStatus = "1";
 		} catch (SQLException e) {
 			e.printStackTrace();
+			logger.error(e);
 		} finally {
-			getConnectionUtility().closeConnection(connection, preparedStatement, rs);
+			connectionUtility.closeConnection(connection, preparedStatement, null);
 		}
-		return customerMaster;
+		return postStatus;
 	
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	public ChallengeMaster getChallenge(String action, String subjectType) {
 

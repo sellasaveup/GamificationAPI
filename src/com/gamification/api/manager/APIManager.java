@@ -2,18 +2,76 @@ package com.gamification.api.manager;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.gamification.api.dao.ActionProcessorDAO;
 import com.gamification.api.dao.GamificationApiDAO;
-import com.gamification.api.view.ChallengeMaster;
+import com.gamification.api.dao.LevelDAO;
+import com.gamification.api.dao.RequestValidatorDAO;
 import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.CustomerTransaction;
+import com.gamification.api.view.Level;
+import com.gamification.api.view.User;
+import com.gamification.api.view.UserGoalPoints;
+import com.gamification.api.view.UserProfile;
+import com.gamification.common.RequestStatus;
 import com.gamification.common.Result;
 import com.gamification.web.view.BadgeMaster;
 import com.gamification.web.view.Challenge;
 import com.gamification.web.view.Reward;
 
 public class APIManager {
+	final static Logger logger = Logger.getLogger(APIManager.class);
 	
+	public RequestStatus onboardUser( User user) {
+		logger.debug("Inside APIManager.onboardUser()");
+		RequestStatus requestStatus = null;
+		user.setStatus("ACTIVE");
+		logger.debug("user--->"+user);
+		
+		requestStatus = new APIRequestValidator().doValidateOnboardUser(user);
+		
+		if(requestStatus == null) {
+			logger.debug("Validation Success Going to presist in DB");
+			requestStatus = new RequestStatus();
+			String onBoardStatus = getGamificationDAO().putUser(user);
+			Level level = new LevelDAO().getMinimumLevel();
+			if(level != null) {
+				UserGoalPoints userGoalPoints = new UserGoalPoints();
+				userGoalPoints.setUserCode(user.getUserCode());
+				userGoalPoints.setGoalCode(getGamificationDAO().getGoalCodeForUserCode(user.getUserCode()));
+				userGoalPoints.setTotalpoints("0");
+				userGoalPoints.setReedemedPoints("0");
+				userGoalPoints.setGlobalBadgeCode(level.getBadgeCode());
+				String userGoalPointsInsertionStatus = new ActionProcessorDAO().putUserGoalPoints(userGoalPoints);
+				logger.debug("userGoalPointsInsertionStatus--->"+userGoalPointsInsertionStatus);
+			}
+			if(onBoardStatus.equals("1")) {
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(user.getUserCode());
+				requestStatus.setMessage("Onboarded Successfully");
+			} else {
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(user.getUserCode());
+				requestStatus.setMessage("Techinical Error");
+			}
+		}
+		logger.debug("requestStatus--->"+requestStatus);
+		return requestStatus;
+	}
+	
+	public UserProfile getProfile( String userCode) {
+		
+		UserProfile userProfile = null;
+		if(new RequestValidatorDAO().getUserCode(userCode) != null) {
+			logger.debug("userCode available in DB Going to Fetch Profile");
+			userProfile = getGamificationDAO().getUserProfile(userCode);
+		}
+		return userProfile;
+	}
+
 	public String getPoint( String custId, String requestType) { 
+		logger.debug("-------------**********************************");
 		System.out.println("custId-->"+custId);
 		System.out.println("requestType-->"+requestType);
 		GamificationApiDAO gamificationDAO = getGamificationDAO();
@@ -101,10 +159,7 @@ public class APIManager {
 		return new ActionProcessor().performAction(custId, action);
 	}
 	
-	public CustomerMaster getProfile( int custId) {
-		
-		return new ActionProcessor().getProfile(custId);
-	}
+	
 	
 	public String getRank(String custId, String requestType) {
 		GamificationApiDAO gamificationApiDAO = getGamificationDAO();

@@ -2,6 +2,7 @@ package com.gamification.api.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,11 +11,17 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
+
 import com.gamification.api.manager.APIManager;
+import com.gamification.api.manager.APIRequestValidator;
 import com.gamification.api.manager.NotificationManager;
 import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.Notification;
+import com.gamification.api.view.User;
+import com.gamification.api.view.UserProfile;
 import com.gamification.common.JsonGenerator;
+import com.gamification.common.RequestStatus;
 import com.gamification.common.Result;
 import com.gamification.web.view.BadgeMaster;
 import com.gamification.web.view.Challenge;
@@ -24,6 +31,52 @@ import com.google.gson.GsonBuilder;
 
 @Path("/api")
 public class APIController {
+	final static Logger logger = Logger.getLogger(APIController.class);
+	
+	@GET
+	@Path("/ONBOARD_USER")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response onboardUser(@QueryParam("userCode") String userCode, @QueryParam("name") String name, @QueryParam("nickName") String nickName,
+							    @QueryParam("image") String image, @QueryParam("userType") String userType) {
+		logger.debug("Inside ONBOARD_USER Service");
+		User user = new User();
+		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		user.setUserCode(userCode);
+		user.setName(name);
+		user.setNickName(nickName);
+		user.setImage(image);
+		user.setUserType(userType);
+		RequestStatus requestStatus = getAPIManager().onboardUser(user);
+		jsonRoot.put("Response", requestStatus);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+		
+
+	}
+	
+	
+	@GET
+	@Path("/GET_PROFILE")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getProfile(@QueryParam("userCode") String userCode) {
+		logger.debug("Inside GET_PROFILE Service");
+		
+		    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		    UserProfile userProfile = getAPIManager().getProfile(userCode);
+			if(userProfile != null) {
+				jsonRoot.put("Response", userProfile);
+			}
+			else {
+				RequestStatus requestStatus = new RequestStatus();
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Profile Not Available");
+				jsonRoot.put("Response", requestStatus);
+			}
+			
+			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	
 	@GET
 	@Path("/GET_POINT")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -162,23 +215,7 @@ public class APIController {
 	}
 	
 	
-	@GET
-	@Path("/GET_PROFILE")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProfile(@QueryParam("custId") String custId) {
-		System.out.println("Inside getProfile");
-		    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-			CustomerMaster customerMaster = getAPIManager().getProfile(Integer.parseInt(custId));
-			if(customerMaster != null) {
-				jsonRoot.put("Result", customerMaster);
-			}
-			else {
-				
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(custId), "Customer Not Available"));
-			}
-			
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-	}
+	
 	
 	@GET
 	@Path("/GET_RANK")

@@ -126,31 +126,31 @@
       <tr class="success">
         <td>Level 1</td>
         <td>reached 250 points</td>
-        <td>Amazon gift voucher worth 50 Euro</td>
+        <td>Amazon gift voucher worth 50 &euro;</td>
         <td>Bronze</td>
       </tr>
       <tr class="danger">
         <td>Level 2</td>
         <td>reached 500 points</td>
-        <td>Amazon gift voucher worth 70Euro</td>
+        <td>Amazon gift voucher worth 70 &euro;</td>
         <td>Silver</td>
       </tr>
       <tr class="info">
         <td>Level 3</td>
         <td>reached 1000 points</td>
-        <td>Amazon gift voucher worth 80Euro</td>
+        <td>Amazon gift voucher worth 80 &euro;</td>
         <td>Gold</td>
       </tr>
       <tr class="success">
         <td>Level 4</td>
         <td>reached 2500 points</td>
-        <td>Amazon gift voucher worth 100Euro</td>
+        <td>Amazon gift voucher worth 100 &euro;</td>
         <td>Platinum</td>
       </tr>
       <tr class="danger">
         <td>Level 5</td>
         <td>reached 5000 points</td>
-        <td>Amazon gift voucher worth 120Euro</td>
+        <td>Amazon gift voucher worth 120 &euro;</td>
         <td>Diamond</td>
       </tr>
     </tbody>

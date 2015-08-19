@@ -42,6 +42,34 @@ public class APIRequestValidator {
 		return requestStatus;
 	}
 	
+	public RequestStatus dovalidatePostAction(String userCode, String actionCode) {
+RequestValidatorDAO requestValidatorDAO = getRequestValidatorDAO();
+		
+		RequestStatus requestStatus = null;
+		if(userCode == null || userCode.equals("")) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setMessage("User Code cannot be Empty");
+		} else if(actionCode == null || actionCode.equals("")) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Action Code cannot be Empty");
+		} else if(requestValidatorDAO.getUserCode(userCode) == null) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("User Not Onboarded");
+		} else if(requestValidatorDAO.getActionCode(actionCode) == null) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Action Code does not Exists");
+		}
+		return requestStatus;
+	}
+	
+	
 	private RequestStatus getRequestStatus() {
 		return new RequestStatus();
 	}

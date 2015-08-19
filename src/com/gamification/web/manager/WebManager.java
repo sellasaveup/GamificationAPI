@@ -8,12 +8,9 @@ import com.gamification.web.dao.ChallengeDAO;
 import com.gamification.web.dao.CustomerMasterDAO;
 import com.gamification.web.dao.LevelDAO;
 import com.gamification.web.dao.RewardDAO;
-import com.gamification.web.view.BadgeMaster;
-import com.gamification.web.view.Challenge;
-import com.gamification.web.view.Level;
-import com.gamification.web.view.Reward;
 
-public class WebManager {
+
+public class WebManager {/*
 	//final static Logger logger = Logger.getLogger(WebManager.class);
 	public List<Reward>  getRewardList() {
 		//logger.debug("Inside Manager");
@@ -96,5 +93,5 @@ public class WebManager {
 	public String deleteLevel(Long levelId) {
 		return new LevelDAO().deleteLevel(levelId);
 	}
-	
+	*/
 }

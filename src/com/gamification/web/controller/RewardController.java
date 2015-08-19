@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gamification.web.RequestTransformer;
 import com.gamification.web.manager.WebManager;
-import com.gamification.web.view.Reward;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @SuppressWarnings("serial")
-public class RewardController extends HttpServlet {
+public class RewardController extends HttpServlet {/*
         private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
         public void doPost(HttpServletRequest request,
@@ -97,5 +96,5 @@ public class RewardController extends HttpServlet {
                   response.getWriter().print(jsonArray);
               }
         }
-     }
+     }*/
 }

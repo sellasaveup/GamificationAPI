@@ -9,14 +9,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.gamification.api.manager.APIManager;
+import com.gamification.api.view.Challenge;
 import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.CustomerTransaction;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserProfile;
 import com.gamification.common.ConnectionUtility;
-import com.gamification.web.view.BadgeMaster;
-import com.gamification.web.view.Challenge;
-import com.gamification.web.view.Reward;
 
 import java.sql.ResultSet;
 
@@ -53,12 +51,13 @@ public class GamificationApiDAO {
 		return postStatus;
 	}
     
-	public UserProfile getUserProfile(String userCode) {
-
-
-		logger.debug("getUserProfile()");
-		String query = "SELECT USER.USER_CODE, USER.NAME, USER.NICK_NAME, USER.IMAGE, USER.USER_TYPE, USER.STATUS,GOAL_POINT.TOTAL_POINTS,GOAL_POINT.REEDEMED_POINTS,(GOAL_POINT.TOTAL_POINTS -GOAL_POINT.REEDEMED_POINTS) REDEEMABLE_POINT,GOAL_POINT.GLOBAL_BADGE_CODE FROM SS_MA_USER USER,SS_TR_USER_GOAL_POINTS GOAL_POINT WHERE USER.USER_CODE = GOAL_POINT.USER_CODE AND USER.USER_CODE=?";
+	public UserProfile getUserProfile(String userCode, String goalCode) {
 		
+		logger.debug("getUserProfile()");
+		logger.debug("userCode-->"+userCode);
+		logger.debug("goalCode-->"+goalCode);
+		
+		String query = "SELECT USER.USER_CODE, USER.NAME, USER.NICK_NAME, USER.IMAGE, USER.USER_TYPE, USER.STATUS,GOAL_POINT.TOTAL_POINTS,GOAL_POINT.REEDEMED_POINTS,(GOAL_POINT.TOTAL_POINTS -GOAL_POINT.REEDEMED_POINTS) REDEEMABLE_POINT,GOAL_POINT.GLOBAL_BADGE_CODE FROM SS_MA_USER USER,SS_TR_USER_GOAL_POINTS GOAL_POINT WHERE USER.USER_CODE = GOAL_POINT.USER_CODE AND USER.USER_CODE=? AND GOAL_POINT.GOAL_CODE=?";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -68,6 +67,8 @@ public class GamificationApiDAO {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
+			
 			rs = preparedStatement.executeQuery();
 			if (rs.next()) {
 				logger.debug("Profile Available");
@@ -95,12 +96,12 @@ public class GamificationApiDAO {
 	
 	}
 	
-	public String getGoalCodeForUserCode(String userCode) {
+	public List<String> getGoalCodeForUserCode(String userCode) {
 		logger.debug("getGoalCodeForUserCode()");
-		String query = "SELECT GOAL_CODE FROM SS_MA_GOAL WHERE USER_TYPE=(SELECT USER_TYPE FROM SS_MA_USER WHERE USER_CODE=?)";
+		String query = "SELECT GOAL_CODE FROM SS_MA_GOAL WHERE USER_TYPE=(SELECT USER_TYPE FROM SS_MA_USER WHERE USER_CODE=?) AND STATUS='ACTIVE'";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String goalCode = null;
+		List<String> goalCodeList = new ArrayList<String>();
 		Connection connection = null;
 		ConnectionUtility connectionUtility = getConnectionUtility();
 		try {
@@ -108,8 +109,8 @@ public class GamificationApiDAO {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userCode);
 			rs = preparedStatement.executeQuery();
-			if (rs.next()) {
-				goalCode = rs.getString("GOAL_CODE");
+			while (rs.next()) {
+				goalCodeList.add(rs.getString("GOAL_CODE"));
 			}
 
 		} catch (SQLException e) {
@@ -117,12 +118,52 @@ public class GamificationApiDAO {
 		} finally {
 			connectionUtility.closeConnection(connection, preparedStatement, rs);
 		}
-		logger.debug("goalCode-->"+goalCode);
-		return goalCode;
+		logger.debug("goalCodeList-->"+goalCodeList);
+		return goalCodeList;
 
 	
 		
 	}
+	
+	public Challenge getChallenge(String actionCode) {
+		Challenge challenge = null;
+		logger.debug("getChallenge()");
+		String query = "SELECT * FROM SS_MA_CHALLENGE WHERE ACTION_CODE=? AND STATUS='ACTIVE' AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, actionCode);
+			rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				logger.debug("Got Challenge");
+				challenge = new Challenge();
+				challenge.setActionCode(rs.getString("ACTION_CODE"));
+				challenge.setGoalCode(rs.getString("GOAL_CODE"));
+				challenge.setStory(rs.getString("STORY"));
+				challenge.setImage(rs.getString("IMAGE"));
+				challenge.setPoints(rs.getInt("POINTS"));
+				challenge.setOccurrence(rs.getInt("OCCURRENCE"));
+				challenge.setExpiryDate(rs.getString("EXPIRY_DATE"));
+				challenge.setBadgeCode(rs.getString("BADGE_CODE"));
+				challenge.setRewardCode(rs.getString("REWARD_CODE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug(challenge);
+		return challenge;
+
+	}
+	
+	/*
 	public String getMasterPoint(int custId) {
 		System.out.println("GamificationDAO getPoint()");
 		String query = "SELECT TOTAL_POINTS FROM ss_ma_customer where CUST_ID = ?";
@@ -450,44 +491,7 @@ public class GamificationApiDAO {
 
 	}
 
-	public List<Challenge> getChallenges(int custId) {
-		List<Challenge> challengeList = null;
-		System.out.println("GamificationDAO getChallenges()");
-		String query = "SELECT * FROM ss_ma_challenge where SUBJECT_TYPE = (select SUBJECT_TYPE from ss_ma_customer where CUST_ID = ?) and expiry_date >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
-		PreparedStatement preparedStatement = null;
-		ResultSet rs = null;
-
-		Connection connection = null;
-		ConnectionUtility connectionUtility = getConnectionUtility();
-		try {
-			challengeList = new ArrayList<Challenge>();
-			connection = connectionUtility.getConnection();
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, custId);
-			rs = preparedStatement.executeQuery();
-			while (rs.next()) {
-				Challenge challenge = new Challenge();
-				challenge.setId(rs.getInt("challenge_id"));
-				challenge.setDescription(rs.getString("challenge_desc"));
-				challenge.setUserAction(rs.getString("CUSTOMER_ACTION"));
-				challenge.setPoint(rs.getInt("challenge_point"));
-				challenge.setSubjectType(rs.getString("subject_type"));
-				challenge.setImageUrl(rs.getString("challenge_img_url"));
-				challenge.setOccurrence(rs.getInt("challenge_occurrence"));
-				challenge.setExpiryDate(rs.getString("expiry_date"));
-				challengeList.add(challenge);
-				System.out.println("Got Record");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			connectionUtility.closeConnection(connection, preparedStatement, rs);
-		}
-
-		return challengeList;
-
-	}
+	
 
 	public List<Reward> getAllReward(int custId) {
 		List<Reward> rewardList = null;
@@ -617,6 +621,7 @@ public class GamificationApiDAO {
 
 	}
 
+	*/
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();
 	}

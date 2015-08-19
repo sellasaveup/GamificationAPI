@@ -69,6 +69,34 @@ public class RequestValidatorDAO {
 	
 	}
 	
+	public String getActionCode(String actionCode) {
+
+		logger.debug("getActionCode()");
+		String query = "SELECT ACTION_CODE FROM SS_MA_CHALLENGE WHERE ACTION_CODE = ? AND STATUS='ACTIVE' AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String dbActionCode = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, actionCode);
+			rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				dbActionCode = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("dbActionCode-->"+dbActionCode);
+		return dbActionCode;
+	
+	}
+	
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();
 	}

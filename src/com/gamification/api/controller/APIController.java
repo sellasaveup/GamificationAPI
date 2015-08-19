@@ -23,11 +23,7 @@ import com.gamification.api.view.UserProfile;
 import com.gamification.common.JsonGenerator;
 import com.gamification.common.RequestStatus;
 import com.gamification.common.Result;
-import com.gamification.web.view.BadgeMaster;
-import com.gamification.web.view.Challenge;
-import com.gamification.web.view.Reward;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 @Path("/api")
 public class APIController {
@@ -57,11 +53,11 @@ public class APIController {
 	@GET
 	@Path("/GET_PROFILE")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProfile(@QueryParam("userCode") String userCode) {
-		logger.debug("Inside GET_PROFILE Service");
+	public Response getProfile(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("*Inside GET_PROFILE Service");
 		
 		    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		    UserProfile userProfile = getAPIManager().getProfile(userCode);
+		    UserProfile userProfile = getAPIManager().getProfile(userCode, goalCode);
 			if(userProfile != null) {
 				jsonRoot.put("Response", userProfile);
 			}
@@ -76,13 +72,25 @@ public class APIController {
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 	
+	@GET
+	@Path("/POST_ACTION")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response postAction(@QueryParam("userCode") String userCode, @QueryParam("actionCode") String actionCode) {
+		logger.debug("Inside POST_ACTION Service");
+		
+		    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		    RequestStatus requestStatus = getAPIManager().postAction(userCode, actionCode);
+		    jsonRoot.put("Response", requestStatus);
+			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 	
 	@GET
 	@Path("/GET_POINT")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPoint(@QueryParam("custId") String custId, @QueryParam("requestType") String requestType) {
 		if (custId != null && !custId.equals("") && requestType != null) {
-			String point = getAPIManager().getPoint(custId,requestType);
+			String point = null;//getAPIManager().getPoint(custId,requestType);
 			 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 			if(point != null) {
 				jsonRoot.put("status", "1");
@@ -106,7 +114,7 @@ public class APIController {
 			@QueryParam("activity") String activity) {
 		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("") && point != null && !point.equals("")) {
-			String status = getAPIManager().putPoint(custId, point, activity);
+			String status = null;//getAPIManager().putPoint(custId, point, activity);
 			jsonRoot.put("status", status);
 			jsonRoot.put("custId", custId);
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
@@ -122,7 +130,7 @@ public class APIController {
 			@QueryParam("activity") String activity) {
 		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("") && point != null && !point.equals("")) {
-			String status = getAPIManager().reducePoint(custId, point);
+			String status = null;//getAPIManager().reducePoint(custId, point);
 			jsonRoot.put("status", status);
 			jsonRoot.put("custId", custId);
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
@@ -137,7 +145,7 @@ public class APIController {
 	public Response redeemPoint(@QueryParam("custId") String custId, @QueryParam("rewardId") String rewardId) {
 		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("") && rewardId != null && !rewardId.equals("")) {
-			String status = getAPIManager().redeemPoint(custId, rewardId);
+			String status = null;//getAPIManager().redeemPoint(custId, rewardId);
 			jsonRoot.put("status", status);
 			jsonRoot.put("custId", custId);
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
@@ -152,10 +160,10 @@ public class APIController {
 	public Response getBadge(@QueryParam("custId") String custId) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("")) {
-			List<BadgeMaster> badgeMasterList = getAPIManager().getBadge(custId);
+			//List<BadgeMaster> badgeMasterList = getAPIManager().getBadge(custId);
 			
-			if(badgeMasterList != null) {
-				jsonRoot.put("Result", badgeMasterList);
+			if(null != null) {
+				jsonRoot.put("Result", null);
 			}
 			else {
 				
@@ -175,7 +183,7 @@ public class APIController {
 			@QueryParam("activity") String activity) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("") && badgeId != null && !badgeId.equals("")) {
-			String status = getAPIManager().awardBadge(custId, badgeId, activity);
+			String status = null;//getAPIManager().awardBadge(custId, badgeId, activity);
 			jsonRoot.put("status", status);
 			jsonRoot.put("custId", custId);
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
@@ -191,7 +199,7 @@ public class APIController {
 	public Response removeBadge(@QueryParam("custId") String custId, @QueryParam("badgeId") String badgeId) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("") && badgeId != null && !badgeId.equals("")) {
-			String status = getAPIManager().removeBadge(custId, badgeId);
+			String status = null;//getAPIManager().removeBadge(custId, badgeId);
 			jsonRoot.put("status", status);
 			jsonRoot.put("custId", custId);
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
@@ -201,30 +209,13 @@ public class APIController {
 	}
 	
 	@GET
-	@Path("/POST_ACTIONE")
-	@Produces(MediaType.APPLICATION_JSON)
-
-	public Response postAction(@QueryParam("custId") String custId, @QueryParam("action") String action) {
-		System.out.println("Inside POST_ACTIONE");
-		    HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
-		    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			Result result = getAPIManager().postAction(Integer.parseInt(custId), action);
-			JSONROOT.put("Result", result);
-			String jsonArray = gson.toJson(JSONROOT);
-			return Response.status(200).entity(jsonArray).build();
-	}
-	
-	
-	
-	
-	@GET
 	@Path("/GET_RANK")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRank(@QueryParam("custId") String custId, @QueryParam("requestType") String requestType) {
 		System.out.println("Inside getRank");
 		    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		    if(custId != null && !custId.equals("") && requestType != null) {
-		    	String rank = getAPIManager().getRank(custId, requestType);
+		    	String rank = null;//getAPIManager().getRank(custId, requestType);
 				if(rank != null) {
 					jsonRoot.put("status", "1");
 					jsonRoot.put("rank", rank);
@@ -247,7 +238,7 @@ public class APIController {
 	public Response getLeaderBoard(@QueryParam("custId") String custId, @QueryParam("requestType") String requestType) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("") && requestType != null) {
-			List<CustomerMaster> customerMasterList = getAPIManager().getLeaderBoard(custId, requestType);
+			List<CustomerMaster> customerMasterList = null;// getAPIManager().getLeaderBoard(custId, requestType);
 			
 			if(!customerMasterList.isEmpty()) {
 				jsonRoot.put("Result", customerMasterList);
@@ -269,15 +260,9 @@ public class APIController {
 	public Response getAllBadge(@QueryParam("custId") String custId) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("")) {
-			 List<BadgeMaster> badgeMasterList = getAPIManager().getAllBadge(custId);
+			 //List<BadgeMaster> badgeMasterList = getAPIManager().getAllBadge(custId);
 
-			if(!badgeMasterList.isEmpty()) {
-				jsonRoot.put("Result", badgeMasterList);
-			}
-			else {
-				
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(custId), "Badges Not Available"));
-			}
+			
 			
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 		} else {
@@ -291,15 +276,7 @@ public class APIController {
 	public Response getChallenges(@QueryParam("custId") String custId) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("")) {
-			 List<Challenge> badgeMasterList = getAPIManager().getChallenges(custId);
-
-			if(!badgeMasterList.isEmpty()) {
-				jsonRoot.put("Result", badgeMasterList);
-			}
-			else {
-				
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(custId), "Challenges Not Available"));
-			}
+			 
 			
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 		} else {
@@ -313,15 +290,7 @@ public class APIController {
 	public Response getAllReward(@QueryParam("custId") String custId) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("")) {
-			List<Reward> rewardList = getAPIManager().getAllReward(custId);
-
-			if(!rewardList.isEmpty()) {
-				jsonRoot.put("Result", rewardList);
-			}
-			else {
-				
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(custId), "Rewards Not Available"));
-			}
+			
 			
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 		} else {
@@ -335,15 +304,7 @@ public class APIController {
 	public Response getReward(@QueryParam("custId") String custId) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		if (custId != null && !custId.equals("")) {
-			List<Reward> rewardList = getAPIManager().getReward(custId);
-
-			if(!rewardList.isEmpty()) {
-				jsonRoot.put("Result", rewardList);
-			}
-			else {
-				
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(custId), "Rewards Not Available"));
-			}
+			
 			
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 		} else {

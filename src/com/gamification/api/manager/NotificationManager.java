@@ -22,7 +22,7 @@ public class NotificationManager {
 		if ("1".equals(status)) {
 			if (notification.getTarget().equals("ALL")) {
 				System.out.println("Notification is Targetting ALL the customers");
-				customerMasterList = new CustomerMasterDAO().getCustomerList();
+				//customerMasterList = new CustomerMasterDAO().getCustomerList();
 				if (customerMasterList != null) {
 					for (CustomerMaster customerMaster : customerMasterList) {
 						System.out.println("Putting ALL CUSTOMER based Notification for " + customerMaster.getCustId());

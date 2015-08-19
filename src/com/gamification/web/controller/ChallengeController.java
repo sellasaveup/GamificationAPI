@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gamification.web.RequestTransformer;
 import com.gamification.web.manager.WebManager;
-import com.gamification.web.view.Challenge;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,7 +19,7 @@ import com.google.gson.GsonBuilder;
  * Servlet implementation class ChallengeController
  */
 @SuppressWarnings("serial")
-public class ChallengeController extends HttpServlet {
+public class ChallengeController extends HttpServlet {/*
 	
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
@@ -105,5 +104,5 @@ public class ChallengeController extends HttpServlet {
               response.getWriter().print(jsonArray);
           }
     }
- }
+ }*/
 }

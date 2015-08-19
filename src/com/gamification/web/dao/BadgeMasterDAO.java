@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gamification.common.ConnectionUtility;
-import com.gamification.web.view.BadgeMaster;
 
 
 public class BadgeMasterDAO {
 	
-	public List<BadgeMaster> getBadgeList() {
+	/*public List<BadgeMaster> getBadgeList() {
 		List<BadgeMaster> badgeMasterList = null; 
 		System.out.println("BadgeMasterDAO getBadgeList()");
 		String query = "SELECT * FROM ss_ma_badge";
@@ -155,5 +154,5 @@ public class BadgeMasterDAO {
 		}
 		return returnValue;
 	
-	}
+	}*/
 }

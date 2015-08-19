@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gamification.web.RequestTransformer;
 import com.gamification.web.manager.WebManager;
-import com.gamification.web.view.Level;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @SuppressWarnings("serial")
 public class LevelController extends HttpServlet {
+	
+	/*
 	
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
@@ -94,5 +95,5 @@ public class LevelController extends HttpServlet {
               response.getWriter().print(jsonArray);
           }
     }
- }
+ }*/
 }

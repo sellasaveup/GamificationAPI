@@ -8,17 +8,13 @@ import com.gamification.api.dao.ActionProcessorDAO;
 import com.gamification.api.dao.GamificationApiDAO;
 import com.gamification.api.dao.LevelDAO;
 import com.gamification.api.dao.RequestValidatorDAO;
-import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.CustomerTransaction;
 import com.gamification.api.view.Level;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserGoalPoints;
 import com.gamification.api.view.UserProfile;
 import com.gamification.common.RequestStatus;
-import com.gamification.common.Result;
-import com.gamification.web.view.BadgeMaster;
-import com.gamification.web.view.Challenge;
-import com.gamification.web.view.Reward;
+
 
 public class APIManager {
 	final static Logger logger = Logger.getLogger(APIManager.class);
@@ -37,14 +33,18 @@ public class APIManager {
 			String onBoardStatus = getGamificationDAO().putUser(user);
 			Level level = new LevelDAO().getMinimumLevel();
 			if(level != null) {
-				UserGoalPoints userGoalPoints = new UserGoalPoints();
-				userGoalPoints.setUserCode(user.getUserCode());
-				userGoalPoints.setGoalCode(getGamificationDAO().getGoalCodeForUserCode(user.getUserCode()));
-				userGoalPoints.setTotalpoints("0");
-				userGoalPoints.setReedemedPoints("0");
-				userGoalPoints.setGlobalBadgeCode(level.getBadgeCode());
-				String userGoalPointsInsertionStatus = new ActionProcessorDAO().putUserGoalPoints(userGoalPoints);
-				logger.debug("userGoalPointsInsertionStatus--->"+userGoalPointsInsertionStatus);
+				List<String> goalCodeList = getGamificationDAO().getGoalCodeForUserCode(user.getUserCode());
+				for(String goalCode : goalCodeList) {
+					UserGoalPoints userGoalPoints = new UserGoalPoints();
+					userGoalPoints.setUserCode(user.getUserCode());
+					userGoalPoints.setGoalCode(goalCode);
+					userGoalPoints.setTotalpoints("0");
+					userGoalPoints.setReedemedPoints("0");
+					userGoalPoints.setGlobalBadgeCode(level.getBadgeCode());
+					String userGoalPointsInsertionStatus = new ActionProcessorDAO().putUserGoalPoints(userGoalPoints);
+					logger.debug(goalCode+" insertion of userGoalPointsInsertionStatus--->"+userGoalPointsInsertionStatus);
+				}
+				
 			}
 			if(onBoardStatus.equals("1")) {
 				requestStatus.setIsSuccess("1");
@@ -60,146 +60,25 @@ public class APIManager {
 		return requestStatus;
 	}
 	
-	public UserProfile getProfile( String userCode) {
+	public UserProfile getProfile( String userCode, String goalCode) {
 		
 		UserProfile userProfile = null;
 		if(new RequestValidatorDAO().getUserCode(userCode) != null) {
 			logger.debug("userCode available in DB Going to Fetch Profile");
-			userProfile = getGamificationDAO().getUserProfile(userCode);
+			userProfile = getGamificationDAO().getUserProfile(userCode, goalCode);
 		}
 		return userProfile;
 	}
-
-	public String getPoint( String custId, String requestType) { 
-		logger.debug("-------------**********************************");
-		System.out.println("custId-->"+custId);
-		System.out.println("requestType-->"+requestType);
-		GamificationApiDAO gamificationDAO = getGamificationDAO();
-		String totalPoint = null;
-		if("A".equals(requestType)) {
-			totalPoint = gamificationDAO.getMasterPoint(Integer.parseInt(custId));
-		} else if("M".equals(requestType)) {
-			totalPoint = gamificationDAO.getCurrentMonthMasterPoint(Integer.parseInt(custId));
+	
+	public RequestStatus postAction( String userCode, String actionCode) {
+		logger.debug("userCode--->"+userCode);
+		logger.debug("actionCode--->"+actionCode);
+		RequestStatus requestStatus = new APIRequestValidator().dovalidatePostAction(userCode, actionCode);
+		if(requestStatus == null) {
+			requestStatus = new ActionProcessor().performAction(userCode, actionCode);
 		}
-		return totalPoint;
-	}
-	
-	
-	public String putPoint(String custId, String point, String action) {
 		
-		System.out.println("custId-->"+custId);
-		System.out.println("point-->"+point);
-		System.out.println("action-->"+action);
-		GamificationApiDAO gamificationApiDAO = getGamificationDAO();
-		CustomerTransaction customerTransaction = getCustomerTransaction();
-		customerTransaction.setCustId(Integer.parseInt(custId));
-		customerTransaction.setPoint(Integer.parseInt(point));
-		customerTransaction.setAction(action);
-		String transactionStatus = gamificationApiDAO.putTransactionPoint(customerTransaction);
-		System.out.println("transactionStatus-->"+transactionStatus);
-		String returnStatus = "0";
-		if(transactionStatus.equals("1")) {
-			String currentTotalPoint = getPoint(custId, "A");
-			System.out.println("currentTotalPoint-->"+currentTotalPoint);
-			if(currentTotalPoint != null) {
-				int totalPoint = customerTransaction.getPoint() + Integer.parseInt(currentTotalPoint);
-				System.out.println("totalPoint-->"+totalPoint);
-				returnStatus = gamificationApiDAO.updateMasterPoint(customerTransaction.getCustId(), totalPoint);
-			}
-		}
-		return returnStatus;
-	}
-	
-	public String reducePoint( String custId, String point) {
-		
-		System.out.println("custId-->"+custId);
-		System.out.println("point-->"+point);
-		String returnStatus = "0";
-		String currentTotalPointStr = getPoint(custId, "A");
-		System.out.println("currentTotalPoint-->"+currentTotalPointStr);
-		int currentPoint = Integer.parseInt(currentTotalPointStr);
-		int reducePoint = Integer.parseInt(point);
-		int finalPoint = 0;
-		if(reducePoint<currentPoint) {
-			finalPoint = currentPoint - reducePoint;
-		}
-		System.out.println("finalPoint-->"+finalPoint);
-		returnStatus = getGamificationDAO().updateMasterPoint(Integer.parseInt(custId), finalPoint);
-		return returnStatus;
-	}
-	
-	
-	public List<BadgeMaster> getBadge(String custId) { 
-		System.out.println("custId-->"+custId);
-		return getGamificationDAO().getBadge(Integer.parseInt(custId));
-	}
-	
-	
-	public String awardBadge(String custId, String badgeId, String activity) {
-		
-		System.out.println("custId-->"+custId);
-		System.out.println("badgeId-->"+badgeId);
-		System.out.println("activity-->"+activity);
-		return getGamificationDAO().awardBadge(custId, badgeId, activity);
-	}
-	
-	
-	public String removeBadge( String custId, String badgeId) {
-		
-		System.out.println("custId-->"+custId);
-		System.out.println("badgeId-->"+badgeId);
-
-		return getGamificationDAO().removeBadge(Integer.parseInt(custId), Integer.parseInt(badgeId));
-	}
-	
-	public Result postAction( int custId, String action) {
-		System.out.println("custId-->"+custId);
-		System.out.println("action-->"+action);
-		
-		return new ActionProcessor().performAction(custId, action);
-	}
-	
-	
-	
-	public String getRank(String custId, String requestType) {
-		GamificationApiDAO gamificationApiDAO = getGamificationDAO();
-		int customerId = Integer.parseInt(custId);
-		String rank = null;
-		if(requestType.equals("A")) {
-			rank = gamificationApiDAO.getOverAllRank(customerId);
-		} else if(requestType.equals("M")) {
-			rank = gamificationApiDAO.getCurrentMonthRank(customerId);
-		}
-		System.out.println("rank-->"+rank);
-		return rank;
-	}
-	
-	public List<CustomerMaster> getLeaderBoard(String custId, String requestType) {
-		List<CustomerMaster> customerMasterList = null;
-		GamificationApiDAO gamificationApiDAO = getGamificationDAO();
-		if(requestType.equals("A")) {
-			customerMasterList = gamificationApiDAO.getOverAllLeaderBoard(Integer.parseInt(custId));
-		} else if(requestType.equals("M")) {
-			customerMasterList = gamificationApiDAO.getCurrentMonthLeaderBoard(Integer.parseInt(custId));
-		}
-		System.out.println("customerMasterList-->"+customerMasterList);
-		return customerMasterList;
-	}
-	
-	public List<BadgeMaster> getAllBadge(String custId) {
-		return getGamificationDAO().getAllBadge(Integer.parseInt(custId));
-	}
-	
-	public List<Challenge> getChallenges(String custId) {
-		return getGamificationDAO().getChallenges(Integer.parseInt(custId));
-	}
-	
-	public List<Reward> getAllReward(String custId) {
-		return getGamificationDAO().getAllReward(Integer.parseInt(custId));
-	}
-	
-	public List<Reward> getReward(String custId) {
-		return getGamificationDAO().getReward(Integer.parseInt(custId));
+		return requestStatus;
 	}
 	
 	private CustomerTransaction getCustomerTransaction() {
@@ -209,10 +88,6 @@ public class APIManager {
 		return new GamificationApiDAO();
 	}
 	
-	public String redeemPoint(String custId, String rewardId) {
-		
-		Integer point = getGamificationDAO().getPointForReward(Integer.parseInt(custId), Integer.parseInt(rewardId));
-		return reducePoint(custId, point.toString());
-	}
+	
 
 }

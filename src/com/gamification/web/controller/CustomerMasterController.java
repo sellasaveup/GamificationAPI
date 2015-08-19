@@ -20,7 +20,7 @@ import com.google.gson.GsonBuilder;
  * Servlet implementation class CustomerMasterController
  */
 @SuppressWarnings("serial")
-public class CustomerMasterController extends HttpServlet {
+public class CustomerMasterController extends HttpServlet {/*
     private HashMap<String, Object> JSONROOT = new HashMap<String, Object>();
 
     public void doPost(HttpServletRequest request,
@@ -99,5 +99,5 @@ public class CustomerMasterController extends HttpServlet {
               response.getWriter().print(jsonArray);
           }
     }
- }
+ }*/
 }

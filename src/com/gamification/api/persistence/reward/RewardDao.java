@@ -7,7 +7,7 @@ import com.gamification.api.persistence.config.ClassInstantiator;
 
 public class RewardDao  extends AdminPersistence<Reward> implements IRewardDao {
 
-	private static final String ENTITY_PATH = "com.gamification.api.persistence.admin.reward.Reward";
+	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.reward.Reward";
 	
 	@SuppressWarnings("unchecked")
 	@Override

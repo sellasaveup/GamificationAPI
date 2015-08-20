@@ -7,7 +7,7 @@ import com.gamification.api.persistence.config.ClassInstantiator;
 
 public class ChallengeDao extends AdminPersistence<Challenge> implements IChallengeDao {
 
-	private static final String ENTITY_PATH = "com.gamification.api.persistence.admin.challenge.Challenge";
+	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.challenge.Challenge";
 	
 	@SuppressWarnings("unchecked")
 	@Override

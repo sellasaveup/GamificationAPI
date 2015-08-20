@@ -7,7 +7,7 @@ import com.gamification.api.persistence.config.ClassInstantiator;
 
 public class GoalDao  extends AdminPersistence<Goal> implements IGoalDao{
 
-	private static final String ENTITY_PATH = "com.gamification.api.persistence.admin.goal.Goal";
+	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.goal.Goal";
 	
 	@SuppressWarnings("unchecked")
 	@Override

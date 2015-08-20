@@ -7,7 +7,7 @@ import com.gamification.api.persistence.config.ClassInstantiator;
 
 public class BadgeDao extends AdminPersistence<Badge> implements IBadgeDao {
 
-	private static final String ENTITY_PATH = "com.gamification.api.persistence.admin.badge.Badge";
+	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.badge.Badge";
 	
 	@SuppressWarnings("unchecked")
 	@Override

@@ -7,7 +7,7 @@ import com.gamification.api.persistence.config.ClassInstantiator;
 
 public class UserChannelDao extends AdminPersistence<UserChannel> implements IUserChannelDao {
 
-	private static final String ENTITY_PATH = "com.gamification.api.persistence.admin.user.UserChannel";
+	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.user.UserChannel";
 	
 	@SuppressWarnings("unchecked")
 	@Override

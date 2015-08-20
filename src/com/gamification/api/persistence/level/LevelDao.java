@@ -7,7 +7,7 @@ import com.gamification.api.persistence.config.ClassInstantiator;
 
 public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 
-	private static final String ENTITY_PATH = "com.gamification.api.persistence.admin.level.Level";
+	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.level.Level";
 	
 	@SuppressWarnings("unchecked")
 	@Override

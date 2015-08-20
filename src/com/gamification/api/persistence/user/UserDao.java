@@ -7,7 +7,7 @@ import com.gamification.api.persistence.config.ClassInstantiator;
 
 public class UserDao extends AdminPersistence<User> implements IUserDao { 
 
-	private static final String ENTITY_PATH = "com.gamification.api.persistence.admin.user.User";
+	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.user.User";
 	
 	@SuppressWarnings("unchecked")
 	@Override

@@ -7,7 +7,7 @@ INSERT INTO `ss_ma_user_type` (`USER_TYPE_ID`, `USER_TYPE_CODE`, `STORY`, `IMAGE
 
 
 INSERT INTO `ss_ma_goal` (`GOAL_ID`, `GOAL_CODE`, `NAME`, `STORY`, `EXPIRY_DATE`, `IMAGE`, `USER_TYPE`, `STATUS`, `DATE`) VALUES
-(1, 'HYPE_GOAL', 'Hype Goal', 'Create Hype Goals, Share Goal with your Buddy, accomplish your Goal', '2016-01-01', 'hype.jpg', 'EMPLOYEE', 'ACTIVE', '2015-08-16 13:05:41');
+(1, 'HYPE_GOAL', 'Hype Goal', 'Create Hype Goals, Share Goal with your Buddy, accomplish your Goal', '2016-01-01', 'hype.jpg', 'ÇUSTOMER', 'ACTIVE', '2015-08-16 13:05:41');
 
 
 INSERT INTO `ss_ma_badge` (`BADGE_ID`, `BADGE_CODE`, `GOAL_CODE`, `NAME`, `IMAGE`, `STORY`, `EXPIRY_DATE`, `DATE`) VALUES

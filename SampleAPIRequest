@@ -1,7 +1,7 @@
 New Version 2 Services
 
 ONBOARD_USER
-http://localhost:8080/GamificationAPI/sella/api/ONBOARD_USER?userCode=GBS03630&name=Boobathi&nickName=Bathi&image=http&userType=EMP
+http://192.168.0.8:8080/GamificationAPI/sella/api/ONBOARD_USER?userCode=GBS03630&name=Boobathi&nickName=Bathi&image=http&userType=EMP
 
 GET_PROFILE
 http://localhost:8080/GamificationAPI/sella/api/GET_PROFILE?userCode=GBS13630&goalCode=HYPE

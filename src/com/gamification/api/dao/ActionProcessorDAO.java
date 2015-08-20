@@ -29,8 +29,8 @@ public class ActionProcessorDAO {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userGoalPoints.getUserCode());
 			preparedStatement.setString(2, userGoalPoints.getGoalCode());
-			preparedStatement.setString(3, userGoalPoints.getTotalpoints());
-			preparedStatement.setString(4, userGoalPoints.getReedemedPoints());
+			preparedStatement.setInt(3, userGoalPoints.getTotalpoints());
+			preparedStatement.setInt(4, userGoalPoints.getReedemedPoints());
 			preparedStatement.setString(5, userGoalPoints.getGlobalBadgeCode());
 			preparedStatement.executeUpdate();
 			logger.debug("USER Goal Points Inserted Succesfully");
@@ -43,6 +43,41 @@ public class ActionProcessorDAO {
 		}
 		return postStatus;
 	
+	}
+	
+	public UserGoalPoints getUserGoalpoints(String userCode, String goalCode) {
+		logger.debug("getUserGoalpoints()");
+		String query = "SELECT * FROM SS_TR_USER_GOAL_POINTS WHERE USER_CODE =? AND GOAL_CODE=?";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		UserGoalPoints userGoalPoints = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			userGoalPoints =new UserGoalPoints();
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				userGoalPoints.setUserCode(rs.getString("USER_CODE"));
+				userGoalPoints.setUserCode(rs.getString("GOAL_CODE"));
+				userGoalPoints.setTotalpoints(rs.getInt("TOTAL_POINTS"));
+				userGoalPoints.setReedemedPoints(rs.getInt("REEDEMED_POINTS"));
+				userGoalPoints.setGlobalBadgeCode(rs.getString("GLOBAL_BADGE_CODE"));
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("userGoalPoints-->"+userGoalPoints);
+		return userGoalPoints;
+
+	
+		
 	}
 	
 	

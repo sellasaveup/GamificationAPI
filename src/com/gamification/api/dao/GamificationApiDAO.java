@@ -13,7 +13,11 @@ import com.gamification.api.view.Challenge;
 import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.CustomerTransaction;
 import com.gamification.api.view.User;
+import com.gamification.api.view.UserAction;
+import com.gamification.api.view.UserBadge;
+import com.gamification.api.view.UserGoalPoints;
 import com.gamification.api.view.UserProfile;
+import com.gamification.api.view.UserReward;
 import com.gamification.common.ConnectionUtility;
 
 import java.sql.ResultSet;
@@ -161,6 +165,158 @@ public class GamificationApiDAO {
 		logger.debug(challenge);
 		return challenge;
 
+	}
+	
+	public List<UserAction> getUserAction(String userCode, String actionCode) {
+		List<UserAction> userActionList = new ArrayList<UserAction>();
+		UserAction userAction = null;
+		logger.debug("getUserAction()");
+		String query = "select* from SS_TR_USER_ACTION WHERE USER_CODE=? AND ACTION_CODE=?";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, actionCode);
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				logger.debug("Got UserAction");
+				userAction = new UserAction();
+				userAction = new UserAction();
+				userAction.setGoalCode(rs.getString("GOAL_CODE"));
+				userAction.setUserCode(rs.getString("USER_CODE"));
+				userAction.setActionCode(rs.getString("ACTION_CODE"));
+				userAction.setPoints(rs.getInt("POINTS"));
+				userAction.setStatus(rs.getString("STATUS"));
+				userAction.setDate(rs.getString("DATE"));
+				userActionList.add(userAction);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug(userActionList);
+		return userActionList;
+
+	}
+	
+	public String postUserAction(UserAction userAction) {
+
+		logger.debug("postUserAction()");
+		String query = "INSERT INTO SS_TR_USER_ACTION (GOAL_CODE,USER_CODE,ACTION_CODE,POINTS,STATUS) VALUES (?, ?, ?, ?, ?)";
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		String postActionStatus = "0";
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userAction.getGoalCode());
+			preparedStatement.setString(2, userAction.getUserCode());
+			preparedStatement.setString(3, userAction.getActionCode());
+			preparedStatement.setInt(4, userAction.getPoints());
+			preparedStatement.setString(5, userAction.getStatus());
+			preparedStatement.executeUpdate();
+			logger.debug("postUserAction Insertion Success");
+			postActionStatus = "1";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, null);
+		}
+		logger.debug("postActionStatus-->"+postActionStatus);
+		return postActionStatus;
+	}
+	
+	public String postUserBadge(UserBadge userBadge) {
+
+		logger.debug("postUserBadge()");
+		
+		String query = "INSERT INTO SS_TR_USER_BADGE (TR_ID, BADGE_CODE, GOAL_CODE, USER_CODE, STATUS, DATE) VALUES (?, ?, ?,?)";
+		String postStatus = "0";
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userBadge.getBadgeCode());
+			preparedStatement.setString(2, userBadge.getGoalCode());
+			preparedStatement.setString(3, userBadge.getUserCode());
+			preparedStatement.setString(4, userBadge.getStatus());
+			preparedStatement.executeUpdate();
+			logger.debug(userBadge.getBadgeCode()+" Succesfully Allocated");
+			postStatus = "1";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(e);
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, null);
+		}
+		return postStatus;
+	}
+	
+	public String postUserReward(UserReward userReward) {
+
+		logger.debug("postUserReward()");
+		String query = "INSERT INTO SS_TR_USER_REWARD (REWARD_CODE, GOAL_CODE, USER_CODE, REDEEM_STATUS, REDEEM_POINTS) VALUES (?, ?, ?, ?,?)";
+		String postStatus = "0";
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userReward.getRewardCode());
+			preparedStatement.setString(2, userReward.getGoalCode());
+			preparedStatement.setString(3, userReward.getUserCode());
+			preparedStatement.setString(4, userReward.getRedeemStatus());
+			preparedStatement.setInt(4, userReward.getRedeemPoints());
+			preparedStatement.executeUpdate();
+			logger.debug(userReward.getRewardCode()+" Succesfully Allocated");
+			postStatus = "1";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(e);
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, null);
+		}
+		return postStatus;
+	}
+	
+			
+	public String updateUserGoalPoints(UserGoalPoints userGoalPoints) {
+
+		logger.debug("updateUserGoalPoints()");
+		String query = "UPDATE SS_TR_USER_GOAL_POINTS SET USER_CODE=?, GOAL_CODE=?, TOTAL_POINTS=?, REEDEMED_POINTS = ? WHERE USER_CODE=? AND GOAL_CODE=?";
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		String updateUserGoalPointsStatus = "0";
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userGoalPoints.getUserCode());
+			preparedStatement.setString(2, userGoalPoints.getGoalCode());
+			preparedStatement.setInt(3, userGoalPoints.getTotalpoints());
+			preparedStatement.setInt(4, userGoalPoints.getReedemedPoints());
+			preparedStatement.setString(5, userGoalPoints.getUserCode());
+			preparedStatement.setString(6, userGoalPoints.getGoalCode());
+			preparedStatement.executeUpdate();
+			updateUserGoalPointsStatus = "1";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, null);
+		}
+		logger.debug("updateUserGoalPointsStatus-->"+updateUserGoalPointsStatus);
+		return updateUserGoalPointsStatus;
 	}
 	
 	/*

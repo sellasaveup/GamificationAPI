@@ -4,8 +4,8 @@ public class UserGoalPoints {
  
 	 private String userCode;
 	 private String goalCode;
-	 private String totalpoints;
-	 private String reedemedPoints;
+	 private int totalpoints;
+	 private int reedemedPoints;
 	 private String globalBadgeCode;
 	 private String priority;
 	 
@@ -21,16 +21,16 @@ public class UserGoalPoints {
 	public void setGoalCode(String goalCode) {
 		this.goalCode = goalCode;
 	}
-	public String getTotalpoints() {
+	public int getTotalpoints() {
 		return totalpoints;
 	}
-	public void setTotalpoints(String totalpoints) {
+	public void setTotalpoints(int totalpoints) {
 		this.totalpoints = totalpoints;
 	}
-	public String getReedemedPoints() {
+	public int getReedemedPoints() {
 		return reedemedPoints;
 	}
-	public void setReedemedPoints(String reedemedPoints) {
+	public void setReedemedPoints(int reedemedPoints) {
 		this.reedemedPoints = reedemedPoints;
 	}
 	public String getGlobalBadgeCode() {

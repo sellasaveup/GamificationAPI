@@ -25,7 +25,7 @@ INSERT INTO `ss_ma_reward` (`REWARD_ID`, `REWARD_CODE`, `GOAL_CODE`, `NAME`, `ST
 (1, 'AMAZON_GIFT_VOUCHER', 'HYPE_GOAL', 'Amazon gift voucher', 'Amazon gift voucher worth 10Euro', 'AMAZON_GIFT_VOUCHER.jpg', '2015-12-31', '2015-08-16 14:15:45');
 
 INSERT INTO `ss_ma_challenge` (`CHALLENGE_ID`, `ACTION_CODE`, `GOAL_CODE`, `STORY`, `IMAGE`, `POINTS`, `OCCURANCE`, `EXPIRY_DATE`, `BADGE_CODE`, `REWARD_CODE`, `DATE`) VALUES
-(1, 'HYPE_APP_DOWLD', 'HYPE_GOAL', 'Download Hype App', 'hype_icon.png', 10, NULL, '2015-12-31', 'HYPE_NEW_BIE', NULL, '2015-08-20 10:53:00'),
+(1, 'HYPE_APP_DOWLD', 'HYPE_GOAL', 'Download Hype App', 'hype_icon.png', 10, 1, '2015-12-31', 'HYPE_NEW_BIE', NULL, '2015-08-20 10:53:00'),
 (2, 'HYPE_CREATE_GOAL', 'HYPE_GOAL', 'You have created a Goal in Hype app', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_NEW_BIE', NULL, '2015-08-20 11:35:11'),
 (3, 'HYPE_CREATE_GOAL_MILESTONE', 'HYPE_GOAL', 'You have created Milestone for a Goal', 'challenge.jpg', 5, NULL, '2015-12-31', 'HYPE_CREATE_GOAL_MILESTONE', NULL, '2015-08-20 11:36:45'),
 (4, 'HYPE_GOAL_SAVE_MONEY_25', 'HYPE_GOAL', 'You have saved 25% money for your Hype Goal', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_SAVER', NULL, '2015-08-20 11:43:00'),

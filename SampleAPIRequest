@@ -3,11 +3,15 @@ New Version 2 Services
 ONBOARD_USER
 http://192.168.0.8:8080/GamificationAPI/sella/api/ONBOARD_USER?userCode=GBS03630&name=Boobathi&nickName=Bathi&image=http&userType=EMP
 
+
+
+http://localhost:8080/GamificationAPI/sella/api/ONBOARD_USER?userCode=GBS03146&name=Sujatha Balaji&nickName=Sujatha&image=sujatha.jpg&userType=EMPLOYEE
+
 GET_PROFILE
 http://localhost:8080/GamificationAPI/sella/api/GET_PROFILE?userCode=GBS13630&goalCode=HYPE
 
 POST_ACTIONE - Not Yet Done
-http://localhost:8080/GamificationAPI/sella/api/POST_ACTION?userCode=GBS13630&actionCode=HYPE
+http://localhost:8080/GamificationAPI/sella/api/POST_ACTION?userCode=GBS03146&actionCode=HYPE_APP_DOWLD
 
 
 Old Version Services

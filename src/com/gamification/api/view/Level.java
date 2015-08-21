@@ -8,8 +8,8 @@ public class Level {
 	private String name;
 	private String image;
 	private String story;
-	private String points;
-	private String priority;
+	private int points;
+	private int priority;
 	private String expiryDate;
 	
 	public String getLevelCode() {
@@ -54,16 +54,16 @@ public class Level {
 	public void setStory(String story) {
 		this.story = story;
 	}
-	public String getPoints() {
+	public int getPoints() {
 		return points;
 	}
-	public void setPoints(String points) {
+	public void setPoints(int points) {
 		this.points = points;
 	}
-	public String getPriority() {
+	public int getPriority() {
 		return priority;
 	}
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 	public String getExpiryDate() {
@@ -73,6 +73,12 @@ public class Level {
 		this.expiryDate = expiryDate;
 	}
 	
-	
+	public String toString() {
+		return new StringBuilder("Level-->[").append("levelCode=").append(levelCode).append(",goalCode=").append(goalCode)
+				.append(",rewardCode=").append(rewardCode).append(",badgeCode=").append(badgeCode).append(",name").append(name)
+				.append(",image=").append(image).append(",story=").append(story).append(",points=").append(points)
+				.append(",priority=").append(priority).append(",expiryDate=").append(expiryDate).append("]").toString();
+			
+	}
 	
 }

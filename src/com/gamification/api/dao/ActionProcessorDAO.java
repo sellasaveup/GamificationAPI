@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import com.gamification.api.view.Challenge;
 import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.CustomerTransaction;
+import com.gamification.api.view.Level;
 import com.gamification.api.view.UserGoalPoints;
 import com.gamification.common.ConnectionUtility;
 
@@ -54,18 +55,19 @@ public class ActionProcessorDAO {
 		Connection connection = null;
 		ConnectionUtility connectionUtility = getConnectionUtility();
 		try {
-			userGoalPoints =new UserGoalPoints();
+			
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
 			rs = preparedStatement.executeQuery();
 			if (rs.next()) {
+				userGoalPoints =new UserGoalPoints();
 				userGoalPoints.setUserCode(rs.getString("USER_CODE"));
-				userGoalPoints.setUserCode(rs.getString("GOAL_CODE"));
+				userGoalPoints.setGoalCode(rs.getString("GOAL_CODE"));
 				userGoalPoints.setTotalpoints(rs.getInt("TOTAL_POINTS"));
 				userGoalPoints.setReedemedPoints(rs.getInt("REEDEMED_POINTS"));
 				userGoalPoints.setGlobalBadgeCode(rs.getString("GLOBAL_BADGE_CODE"));
-				
 			}
 
 		} catch (SQLException e) {
@@ -73,19 +75,21 @@ public class ActionProcessorDAO {
 		} finally {
 			connectionUtility.closeConnection(connection, preparedStatement, rs);
 		}
-		logger.debug("userGoalPoints-->"+userGoalPoints);
+		logger.debug(userGoalPoints);
 		return userGoalPoints;
 
 	
 		
 	}
 	
-	
-	public List<CustomerTransaction> getCustomerTransaction(int custId, String action) {
-		List<CustomerTransaction> customerTransactionList = new ArrayList<CustomerTransaction>();
+	public List<Level> getLevelList(String goalCode, int points) {
 		
-		System.out.println("ActionProcessorDAO getCustomerTransaction()");
-		String query = "SELECT * FROM ss_tr_customer_point where CUST_ID = ? and ACTION = ?";
+		logger.debug("getLevelList()");
+		logger.debug("goalCode-->"+goalCode);
+		logger.debug("points-->"+points);
+		
+		List<Level> levelList = new ArrayList<Level>();
+		String query = "SELECT * FROM SS_MA_LEVEL WHERE GOAL_CODE=? AND POINTS <= ? AND LEVEL_CODE NOT IN (SELECT LEVEL_CODE FROM SS_TR_USER_LEVEL) AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
@@ -94,17 +98,22 @@ public class ActionProcessorDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, custId);
-			preparedStatement.setString(2, action);
+			preparedStatement.setString(1, goalCode);
+			preparedStatement.setInt(2, points);
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				CustomerTransaction customerTransaction = new CustomerTransaction();
-				customerTransaction.setTransactionId(rs.getInt("TR_ID"));
-				customerTransaction.setCustId(rs.getInt("CUST_ID"));
-				customerTransaction.setPoint(rs.getInt("POINT"));
-				customerTransaction.setAction(rs.getString("ACTION"));
-				customerTransactionList.add(customerTransaction);
-				System.out.println("Got Record");
+				Level level = new Level();
+				level.setLevelCode(rs.getString("LEVEL_CODE"));
+				level.setGoalCode(rs.getString("GOAL_CODE"));
+				level.setRewardCode(rs.getString("REWARD_CODE"));
+				level.setBadgeCode(rs.getString("BADGE_CODE"));
+				level.setName(rs.getString("NAME"));
+				level.setImage(rs.getString("IMAGE"));
+				level.setStory(rs.getString("STORY"));
+				level.setPoints(rs.getInt("POINTS"));
+				level.setPriority(rs.getInt("PRIORITY"));
+				logger.debug("level.getLevelCode()-->"+level.getLevelCode());
+				levelList.add(level);
 			}
 			
 		} catch (SQLException e) {
@@ -112,10 +121,9 @@ public class ActionProcessorDAO {
 		} finally {
 			connectionUtility.closeConnection(connection, preparedStatement, rs);
 		}
-		System.out.println("customerTransactionList.size()-->"+customerTransactionList.size());
-		return customerTransactionList;
+		logger.debug(levelList);
+		return levelList;
 	}
-	
 	
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();

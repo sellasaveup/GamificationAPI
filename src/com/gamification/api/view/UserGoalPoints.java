@@ -46,6 +46,10 @@ public class UserGoalPoints {
 		this.priority = priority;
 	}
 	 
-	 
- 
+	public String toString() {
+		return new StringBuilder("UserGoalPoints-->[").append("userCode=").append(userCode).append(",goalCode=").append(goalCode)
+				.append(",totalpoints=").append(totalpoints).append(",reedemedPoints=").append(reedemedPoints).append(",globalBadgeCode=")
+				.append(globalBadgeCode).append(",priority=").append(priority).append("]").toString();
+	}
+	
 }

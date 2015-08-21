@@ -16,6 +16,7 @@ import com.gamification.api.view.User;
 import com.gamification.api.view.UserAction;
 import com.gamification.api.view.UserBadge;
 import com.gamification.api.view.UserGoalPoints;
+import com.gamification.api.view.UserLevel;
 import com.gamification.api.view.UserProfile;
 import com.gamification.api.view.UserReward;
 import com.gamification.common.ConnectionUtility;
@@ -186,7 +187,6 @@ public class GamificationApiDAO {
 			while (rs.next()) {
 				logger.debug("Got UserAction");
 				userAction = new UserAction();
-				userAction = new UserAction();
 				userAction.setGoalCode(rs.getString("GOAL_CODE"));
 				userAction.setUserCode(rs.getString("USER_CODE"));
 				userAction.setActionCode(rs.getString("ACTION_CODE"));
@@ -238,7 +238,7 @@ public class GamificationApiDAO {
 
 		logger.debug("postUserBadge()");
 		
-		String query = "INSERT INTO SS_TR_USER_BADGE (TR_ID, BADGE_CODE, GOAL_CODE, USER_CODE, STATUS, DATE) VALUES (?, ?, ?,?)";
+		String query = "INSERT INTO SS_TR_USER_BADGE (BADGE_CODE, GOAL_CODE, USER_CODE, STATUS) VALUES (?, ?, ?,?)";
 		String postStatus = "0";
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -277,7 +277,7 @@ public class GamificationApiDAO {
 			preparedStatement.setString(2, userReward.getGoalCode());
 			preparedStatement.setString(3, userReward.getUserCode());
 			preparedStatement.setString(4, userReward.getRedeemStatus());
-			preparedStatement.setInt(4, userReward.getRedeemPoints());
+			preparedStatement.setInt(5, userReward.getRedeemPoints());
 			preparedStatement.executeUpdate();
 			logger.debug(userReward.getRewardCode()+" Succesfully Allocated");
 			postStatus = "1";
@@ -294,6 +294,7 @@ public class GamificationApiDAO {
 	public String updateUserGoalPoints(UserGoalPoints userGoalPoints) {
 
 		logger.debug("updateUserGoalPoints()");
+		logger.debug(userGoalPoints);
 		String query = "UPDATE SS_TR_USER_GOAL_POINTS SET USER_CODE=?, GOAL_CODE=?, TOTAL_POINTS=?, REEDEMED_POINTS = ? WHERE USER_CODE=? AND GOAL_CODE=?";
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -302,6 +303,8 @@ public class GamificationApiDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
+			logger.debug("userGoalPoints.getUserCode()--->"+userGoalPoints.getUserCode());
+			logger.debug("userGoalPoints.getTotalpoints()--->"+userGoalPoints.getTotalpoints());
 			preparedStatement.setString(1, userGoalPoints.getUserCode());
 			preparedStatement.setString(2, userGoalPoints.getGoalCode());
 			preparedStatement.setInt(3, userGoalPoints.getTotalpoints());
@@ -317,6 +320,33 @@ public class GamificationApiDAO {
 		}
 		logger.debug("updateUserGoalPointsStatus-->"+updateUserGoalPointsStatus);
 		return updateUserGoalPointsStatus;
+	}
+	
+	public String postUserLevel(UserLevel userLevel) {
+		logger.debug("postUserLevel()");
+		String query = "INSERT INTO SS_TR_USER_LEVEL (LEVEL_CODE, USER_CODE, GOAL_CODE, BADGE_CODE, PRIORITY) VALUES (?, ?, ?, ?, ?);";
+		String postStatus = "0";
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userLevel.getLevelCode());
+			preparedStatement.setString(2, userLevel.getUserCode());
+			preparedStatement.setString(3, userLevel.getGoalCode());
+			preparedStatement.setString(4, userLevel.getBadgeCode());
+			preparedStatement.setInt(5, userLevel.getPriority());
+			preparedStatement.executeUpdate();
+			logger.debug(userLevel.getLevelCode()+" Succesfully Allocated");
+			postStatus = "1";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(e);
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, null);
+		}
+		return postStatus;
 	}
 	
 	/*

@@ -36,8 +36,8 @@ public class LevelDAO {
 				level.setName(rs.getString("NAME"));
 				level.setImage(rs.getString("IMAGE"));
 				level.setStory(rs.getString("STORY"));
-				level.setPoints(rs.getString("POINTS"));
-				level.setPriority(rs.getString("PRIORITY"));
+				level.setPoints(rs.getInt("POINTS"));
+				level.setPriority(rs.getInt("PRIORITY"));
 			}
 
 		} catch (SQLException e) {

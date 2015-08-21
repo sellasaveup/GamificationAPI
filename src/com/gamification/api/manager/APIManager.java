@@ -31,22 +31,10 @@ public class APIManager {
 			logger.debug("Validation Success Going to presist in DB");
 			requestStatus = new RequestStatus();
 			String onBoardStatus = getGamificationDAO().putUser(user);
-			Level level = new LevelDAO().getMinimumLevel();
-			if(level != null) {
-				List<String> goalCodeList = getGamificationDAO().getGoalCodeForUserCode(user.getUserCode());
-				for(String goalCode : goalCodeList) {
-					UserGoalPoints userGoalPoints = new UserGoalPoints();
-					userGoalPoints.setUserCode(user.getUserCode());
-					userGoalPoints.setGoalCode(goalCode);
-					userGoalPoints.setTotalpoints("0");
-					userGoalPoints.setReedemedPoints("0");
-					userGoalPoints.setGlobalBadgeCode(level.getBadgeCode());
-					String userGoalPointsInsertionStatus = new ActionProcessorDAO().putUserGoalPoints(userGoalPoints);
-					logger.debug(goalCode+" insertion of userGoalPointsInsertionStatus--->"+userGoalPointsInsertionStatus);
-				}
-				
-			}
+			
 			if(onBoardStatus.equals("1")) {
+				String putUserGoalPointsSTatus = new ActionProcessor().putUserGoalPoints(user.getUserCode(),0);
+				logger.debug("*************putUserGoalPointsSTatus-->"+putUserGoalPointsSTatus);
 				requestStatus.setIsSuccess("1");
 				requestStatus.setCode(user.getUserCode());
 				requestStatus.setMessage("Onboarded Successfully");
@@ -59,6 +47,7 @@ public class APIManager {
 		logger.debug("requestStatus--->"+requestStatus);
 		return requestStatus;
 	}
+	
 	
 	public UserProfile getProfile( String userCode, String goalCode) {
 		
@@ -75,6 +64,7 @@ public class APIManager {
 		logger.debug("actionCode--->"+actionCode);
 		RequestStatus requestStatus = new APIRequestValidator().dovalidatePostAction(userCode, actionCode);
 		if(requestStatus == null) {
+			
 			requestStatus = new ActionProcessor().performAction(userCode, actionCode);
 		}
 		

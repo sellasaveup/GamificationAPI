@@ -24,6 +24,7 @@ public class RequestValidatorDAO {
 		ConnectionUtility connectionUtility = getConnectionUtility();
 		try {
 			connection = connectionUtility.getConnection();
+			logger.debug("connection-->"+connection);
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userCode);
 			rs = preparedStatement.executeQuery();

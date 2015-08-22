@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2015 at 10:27 AM
+-- Generation Time: Aug 22, 2015 at 11:09 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -36,12 +36,6 @@ CREATE TABLE IF NOT EXISTS `ss_ma_badge` (
   `EXPIRY_DATE` date NOT NULL,
   `DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `ss_ma_badge`:
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---
 
 --
 -- Dumping data for table `ss_ma_badge`
@@ -83,28 +77,22 @@ CREATE TABLE IF NOT EXISTS `ss_ma_challenge` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
--- RELATIONS FOR TABLE `ss_ma_challenge`:
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---
-
---
 -- Dumping data for table `ss_ma_challenge`
 --
 
 INSERT INTO `ss_ma_challenge` (`CHALLENGE_ID`, `ACTION_CODE`, `GOAL_CODE`, `STORY`, `IMAGE`, `POINTS`, `OCCURRENCE`, `EXPIRY_DATE`, `BADGE_CODE`, `REWARD_CODE`, `DATE`) VALUES
 (1, 'HYPE_APP_DOWLD', 'HYPE_GOAL', 'Download Hype App', 'hype_icon.png', 10, NULL, '2015-12-31', 'HYPE_NEW_BIE', NULL, '2015-08-20 10:53:00'),
-(2, 'HYPE_CREATE_GOAL', 'HYPE_GOAL', 'You have created a Goal in Hype app\r\n', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_NEW_BIE', NULL, '2015-08-20 11:35:11'),
-(3, 'HYPE_CREATE_GOAL_MILESTONE', 'HYPE_GOAL', 'You have created Milestone for a Goal\r\n', 'challenge.jpg', 5, NULL, '2015-12-31', 'HYPE_CREATE_GOAL_MILESTONE', NULL, '2015-08-20 11:36:45'),
+(2, 'HYPE_CREATE_GOAL', 'HYPE_GOAL', 'You have created a Goal in Hype app', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_NEW_BIE', NULL, '2015-08-20 11:35:11'),
+(3, 'HYPE_CREATE_GOAL_MILESTONE', 'HYPE_GOAL', 'You have created Milestone for a Goal', 'challenge.jpg', 5, NULL, '2015-12-31', 'HYPE_CREATE_GOAL_MILESTONE', NULL, '2015-08-20 11:36:45'),
 (4, 'HYPE_GOAL_SAVE_MONEY_25', 'HYPE_GOAL', 'You have saved 25% money for your Hype Goal', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_SAVER', NULL, '2015-08-20 11:43:00'),
 (5, 'HYPE_GOAL_SAVE_MONEY_50', 'HYPE_GOAL', 'you have saved 50% money towards your Hype Goal', 'challenge', 10, NULL, '2015-12-31', 'HYPE_SUPER_SAVER', NULL, '2015-08-20 11:45:32'),
-(6, 'HYPE_GOAL_SAVE_MONEY_75', 'HYPE_GOAL', 'You have saved 75% money for your Hype Goal\r\n', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_SUPER_SMART_SAVER', NULL, '2015-08-20 11:48:21'),
+(6, 'HYPE_GOAL_SAVE_MONEY_75', 'HYPE_GOAL', 'You have saved 75% money for your Hype Goal', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_SUPER_SMART_SAVER', NULL, '2015-08-20 11:48:21'),
 (7, 'HYPE_GOAL_SHARE_BUDDY', 'HYPE_GOAL', 'You have Shared you Goal with your buddy', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_GOAL_SHARE_BUDDY', NULL, '2015-08-20 11:50:24'),
 (8, 'HYPE_GOAL_LOCK', 'HYPE_GOAL', 'You have locked your Hype Goal', 'challenge.jpg', -30, NULL, '2015-12-31', NULL, NULL, '2015-08-20 11:54:01'),
 (9, 'HYPE_GOAL_UNLOCK', 'HYPE_GOAL', 'You have unlocked your Hype Goal', 'challenge.jpg', 30, NULL, '2015-12-31', NULL, NULL, '2015-08-20 11:54:42'),
-(10, 'HYPE_RECEIVE_COMMENTS', 'HYPE_GOAL', 'You have received Comments on your Hype goal\r\n', NULL, 3, NULL, '2015-12-31', 'HYPE_FELLOW_INFLUENCER', NULL, '2015-08-20 11:55:48'),
-(11, 'HYPE_RECEIVE_LIKE', 'HYPE_GOAL', 'You have received like for your Hype Goal ', 'challenge.jpg', 1, NULL, '2015-12-31', 'HYPE_FELLOW_INFLUENCER\r\n', NULL, '2015-08-20 11:56:59'),
-(12, 'HYPE_CONTRIBUTE_BUDDY', 'HYPE_GOAL', 'You have contributed for your friends Hype Goal', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_STAR_CONTRIBUTOR\r\n', NULL, '2015-08-20 11:58:09'),
+(10, 'HYPE_RECEIVE_COMMENTS', 'HYPE_GOAL', 'You have received Comments on your Hype goal', NULL, 3, NULL, '2015-12-31', 'HYPE_FELLOW_INFLUENCER', NULL, '2015-08-20 11:55:48'),
+(11, 'HYPE_RECEIVE_LIKE', 'HYPE_GOAL', 'You have received like for your Hype Goal ', 'challenge.jpg', 1, NULL, '2015-12-31', 'HYPE_FELLOW_INFLUENCER', NULL, '2015-08-20 11:56:59'),
+(12, 'HYPE_CONTRIBUTE_BUDDY', 'HYPE_GOAL', 'You have contributed for your friends Hype Goal', 'challenge.jpg', 10, NULL, '2015-12-31', 'HYPE_STAR_CONTRIBUTOR', NULL, '2015-08-20 11:58:09'),
 (13, 'HYPE_COMPLETE_GOAL', 'HYPE_GOAL', 'You have completed your Hype Goal', 'challenge.jpg', 10, NULL, '2016-01-31', 'HYPE_GURU', NULL, '2015-08-20 12:00:08'),
 (14, 'HYPE_CANCEL_GOAL', 'HYPE_GOAL', 'You have cancelled your Hype Goal ', 'Challenge.jpg', -20, NULL, '2015-12-31', NULL, NULL, '2015-08-20 12:01:37');
 
@@ -125,12 +113,6 @@ CREATE TABLE IF NOT EXISTS `ss_ma_goal` (
   `STATUS` varchar(250) NOT NULL,
   `DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `ss_ma_goal`:
---   `USER_TYPE`
---       `ss_ma_user_type` -> `USER_TYPE_CODE`
---
 
 --
 -- Dumping data for table `ss_ma_goal`
@@ -154,27 +136,22 @@ CREATE TABLE IF NOT EXISTS `ss_ma_level` (
   `NAME` varchar(2000) NOT NULL,
   `IMAGE` varchar(2000) DEFAULT NULL,
   `STORY` varchar(5000) DEFAULT NULL,
-  `POINTS` int(250) NOT NULL,
+  `START_POINT` int(250) NOT NULL,
+  `END_POINT` int(250) NOT NULL,
   `PRIORITY` int(250) NOT NULL,
   `DATE` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- RELATIONS FOR TABLE `ss_ma_level`:
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---
-
---
 -- Dumping data for table `ss_ma_level`
 --
 
-INSERT INTO `ss_ma_level` (`LEVEL_ID`, `LEVEL_CODE`, `GOAL_CODE`, `REWARD_CODE`, `BADGE_CODE`, `NAME`, `IMAGE`, `STORY`, `POINTS`, `PRIORITY`, `DATE`) VALUES
-(1, 'LEVEL1', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_BRONZE', 'reached 250 points', 'level.jpg', 'Congrats, you have reached 250 Points in achieving your financial goal using Hype Goal Program', 250, 1, '2015-08-20 00:00:00'),
-(2, 'LEVEL2', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_SILVER', 'reached 500 points ', 'level.jpg', 'Congrats, you have reached 500 points in achieving your financial goal using Hype Goal Program', 500, 2, '2015-08-20 00:00:00'),
-(3, 'LEVEL3', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_GOLD', 'reached 1000 points ', 'level.jpg', 'Congrats, you have reached 1000 points in achieving your financial goal using Hype Goal Program', 1000, 3, '2015-08-20 00:00:00'),
-(4, 'LEVEL4', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_PLATINUM', 'reached 2500 points ', 'level.jpg', 'Congrats, you have reached 2500 points in achieving your financial goal using Hype Goal Program', 2500, 4, '2015-08-20 00:00:00'),
-(5, 'LEVEL5', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_DIAMOND', 'reached >greater than 5000 points', 'level.jpg', 'Congrats, for reaching more than 5000 points in achieving your financial goals using Hype Goal Program', 5000, 5, '2015-08-20 00:00:00');
+INSERT INTO `ss_ma_level` (`LEVEL_ID`, `LEVEL_CODE`, `GOAL_CODE`, `REWARD_CODE`, `BADGE_CODE`, `NAME`, `IMAGE`, `STORY`, `START_POINT`, `END_POINT`, `PRIORITY`, `DATE`) VALUES
+(1, 'LEVEL1', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_BRONZE', 'reached 250 points', 'level.jpg', 'Congrats, you have reached 250 Points in achieving your financial goal using Hype Goal Program', 0, 250, 1, '2015-08-20 00:00:00'),
+(2, 'LEVEL2', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_SILVER', 'reached 500 points ', 'level.jpg', 'Congrats, you have reached 500 points in achieving your financial goal using Hype Goal Program', 251, 500, 2, '2015-08-20 00:00:00'),
+(3, 'LEVEL3', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_GOLD', 'reached 1000 points ', 'level.jpg', 'Congrats, you have reached 1000 points in achieving your financial goal using Hype Goal Program', 501, 1000, 3, '2015-08-20 00:00:00'),
+(4, 'LEVEL4', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_PLATINUM', 'reached 2500 points ', 'level.jpg', 'Congrats, you have reached 2500 points in achieving your financial goal using Hype Goal Program', 1001, 2500, 4, '2015-08-20 00:00:00'),
+(5, 'LEVEL5', 'HYPE_GOAL', 'AMAZON_GIFT_VOUCHER', 'HYPE_DIAMOND', 'reached >greater than 5000 points', 'level.jpg', 'Congrats, for reaching more than 5000 points in achieving your financial goals using Hype Goal Program', 2501, 5000, 5, '2015-08-20 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -192,12 +169,6 @@ CREATE TABLE IF NOT EXISTS `ss_ma_reward` (
   `EXPIRY_DATE` date NOT NULL,
   `DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `ss_ma_reward`:
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---
 
 --
 -- Dumping data for table `ss_ma_reward`
@@ -224,12 +195,6 @@ CREATE TABLE IF NOT EXISTS `ss_ma_user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- RELATIONS FOR TABLE `ss_ma_user`:
---   `USER_TYPE`
---       `ss_ma_user_type` -> `USER_TYPE_CODE`
---
-
---
 -- Dumping data for table `ss_ma_user`
 --
 
@@ -252,16 +217,40 @@ CREATE TABLE IF NOT EXISTS `ss_ma_user_type` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- RELATIONS FOR TABLE `ss_ma_user_type`:
---
-
---
 -- Dumping data for table `ss_ma_user_type`
 --
 
 INSERT INTO `ss_ma_user_type` (`USER_TYPE_ID`, `USER_TYPE_CODE`, `STORY`, `IMAGE`, `STATUS`, `DATE`) VALUES
 (1, 'CUSTOMER', 'CUSTOMER OF GBS', 'CUSTOMER.JPG', 'ACTIVE', '2015-08-16 13:02:56'),
 (2, 'EMPLOYEE', 'EMPLOYEE OF GBS', 'EMPLOYEE.JPG', 'ACTIVE', '2015-08-16 13:02:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ss_tr_notification`
+--
+
+CREATE TABLE IF NOT EXISTS `ss_tr_notification` (
+  `notify_tr_id` int(255) NOT NULL,
+  `notify_header_id` int(249) NOT NULL,
+  `USER_CODE` varchar(250) NOT NULL,
+  `status` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ss_tr_notification_header`
+--
+
+CREATE TABLE IF NOT EXISTS `ss_tr_notification_header` (
+  `notify_id` int(255) NOT NULL,
+  `notify_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notify_type` varchar(1000) NOT NULL,
+  `target` varchar(1000) NOT NULL,
+  `message` varchar(10000) NOT NULL,
+  `image` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -278,16 +267,6 @@ CREATE TABLE IF NOT EXISTS `ss_tr_user_action` (
   `STATUS` varchar(250) NOT NULL,
   `DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `ss_tr_user_action`:
---   `ACTION_CODE`
---       `ss_ma_challenge` -> `ACTION_CODE`
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---   `USER_CODE`
---       `ss_ma_user` -> `USER_CODE`
---
 
 --
 -- Dumping data for table `ss_tr_user_action`
@@ -313,16 +292,6 @@ CREATE TABLE IF NOT EXISTS `ss_tr_user_badge` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- RELATIONS FOR TABLE `ss_tr_user_badge`:
---   `BADGE_CODE`
---       `ss_ma_badge` -> `BADGE_CODE`
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---   `USER_CODE`
---       `ss_ma_user` -> `USER_CODE`
---
-
---
 -- Dumping data for table `ss_tr_user_badge`
 --
 
@@ -344,16 +313,6 @@ CREATE TABLE IF NOT EXISTS `ss_tr_user_goal_points` (
   `GLOBAL_BADGE_CODE` varchar(250) DEFAULT NULL,
   `DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `ss_tr_user_goal_points`:
---   `GLOBAL_BADGE_CODE`
---       `ss_ma_badge` -> `BADGE_CODE`
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---   `USER_CODE`
---       `ss_ma_user` -> `USER_CODE`
---
 
 --
 -- Dumping data for table `ss_tr_user_goal_points`
@@ -379,18 +338,6 @@ CREATE TABLE IF NOT EXISTS `ss_tr_user_level` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- RELATIONS FOR TABLE `ss_tr_user_level`:
---   `BADGE_CODE`
---       `ss_ma_badge` -> `BADGE_CODE`
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---   `LEVEL_CODE`
---       `ss_ma_level` -> `LEVEL_CODE`
---   `USER_CODE`
---       `ss_ma_user` -> `USER_CODE`
---
-
---
 -- Dumping data for table `ss_tr_user_level`
 --
 
@@ -412,16 +359,6 @@ CREATE TABLE IF NOT EXISTS `ss_tr_user_reward` (
   `REDEEM_POINTS` int(250) NOT NULL,
   `DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `ss_tr_user_reward`:
---   `GOAL_CODE`
---       `ss_ma_goal` -> `GOAL_CODE`
---   `REWARD_CODE`
---       `ss_ma_reward` -> `REWARD_CODE`
---   `USER_CODE`
---       `ss_ma_user` -> `USER_CODE`
---
 
 --
 -- Dumping data for table `ss_tr_user_reward`
@@ -475,6 +412,18 @@ ALTER TABLE `ss_ma_user`
 --
 ALTER TABLE `ss_ma_user_type`
   ADD PRIMARY KEY (`USER_TYPE_ID`), ADD UNIQUE KEY `USER_TYPE_CODE` (`USER_TYPE_CODE`);
+
+--
+-- Indexes for table `ss_tr_notification`
+--
+ALTER TABLE `ss_tr_notification`
+  ADD PRIMARY KEY (`notify_tr_id`), ADD KEY `USER_CODE` (`USER_CODE`);
+
+--
+-- Indexes for table `ss_tr_notification_header`
+--
+ALTER TABLE `ss_tr_notification_header`
+  ADD PRIMARY KEY (`notify_id`);
 
 --
 -- Indexes for table `ss_tr_user_action`
@@ -546,6 +495,16 @@ ALTER TABLE `ss_ma_user`
 ALTER TABLE `ss_ma_user_type`
   MODIFY `USER_TYPE_ID` int(250) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `ss_tr_notification`
+--
+ALTER TABLE `ss_tr_notification`
+  MODIFY `notify_tr_id` int(255) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ss_tr_notification_header`
+--
+ALTER TABLE `ss_tr_notification_header`
+  MODIFY `notify_id` int(255) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `ss_tr_user_action`
 --
 ALTER TABLE `ss_tr_user_action`
@@ -609,6 +568,12 @@ ADD CONSTRAINT `FK_REWARD_GOAL_CODE` FOREIGN KEY (`GOAL_CODE`) REFERENCES `ss_ma
 --
 ALTER TABLE `ss_ma_user`
 ADD CONSTRAINT `FK_USER_TYPE` FOREIGN KEY (`USER_TYPE`) REFERENCES `ss_ma_user_type` (`USER_TYPE_CODE`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ss_tr_notification`
+--
+ALTER TABLE `ss_tr_notification`
+ADD CONSTRAINT `FK_NOTIFY_USER_CODE` FOREIGN KEY (`USER_CODE`) REFERENCES `ss_ma_user` (`USER_CODE`);
 
 --
 -- Constraints for table `ss_tr_user_action`

@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.gamification.api.dao.GamificationApiDAO;
 import com.gamification.api.dao.RequestValidatorDAO;
+import com.gamification.api.view.BadgeView;
 import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.LevelView;
 import com.gamification.api.view.User;
@@ -53,7 +54,20 @@ public class APIManager {
 		UserProfile userProfile = null;
 		if(new RequestValidatorDAO().getUserCode(userCode) != null) {
 			logger.debug("userCode available in DB Going to Fetch Profile");
-			userProfile = getGamificationDAO().getUserProfile(userCode, goalCode);
+			GamificationApiDAO gamificationDAO = getGamificationDAO();
+			userProfile = gamificationDAO.getUserProfile(userCode, goalCode);
+			if(userProfile != null) {
+				String badgeCode = userProfile.getGlobalBadgeCode();
+				if(badgeCode != null) {
+					logger.debug("badgeCode-->"+badgeCode);
+					BadgeView badgeView = gamificationDAO.getBadge(badgeCode);
+					if(badgeView != null) {
+						userProfile.setBadgeView(badgeView);
+					}
+				}
+			}
+			logger.debug(userProfile);
+			
 		}
 		return userProfile;
 	}

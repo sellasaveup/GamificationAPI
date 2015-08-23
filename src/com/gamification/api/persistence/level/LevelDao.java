@@ -54,7 +54,7 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 			view.setBadgeCode(entity.getBadge().getBadgeCode());
 			view.setGoalCode(entity.getGoal().getGoalCode());
 			view.setLevelCode(entity.getLevelCode());
-			view.setPoints(entity.getPoints().intValue());
+			//view.setPoints(entity.getPoints().intValue());
 			view.setRewardCode(entity.getReward().getRewardCode());
 			view.setStory(entity.getStory());
 			view.setImage(entity.getImage());

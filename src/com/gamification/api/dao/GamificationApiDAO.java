@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.gamification.api.persistence.challenge.ChallengeDao;
 import com.gamification.api.persistence.level.LevelDao;
+import com.gamification.api.view.BadgeView;
 import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.LevelView;
 import com.gamification.api.view.User;
@@ -99,6 +100,37 @@ public class GamificationApiDAO {
 		logger.debug(userProfile);
 		return userProfile;
 	
+	}
+	
+	public BadgeView getBadge(String badgeCode) {
+		logger.debug("getBadge()");
+		String query = "SELECT * FROM SS_MA_BADGE WHERE BADGE_CODE = ?";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		BadgeView badgeView = null;
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, badgeCode);
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				badgeView = new BadgeView();
+				badgeView.setBadgeCode(rs.getString("BADGE_CODE"));
+				badgeView.setGoalCode(rs.getString("GOAL_CODE"));
+				badgeView.setName(rs.getString("NAME"));
+				badgeView.setImage(rs.getString("IMAGE"));
+				badgeView.setStory(rs.getString("STORY"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+
+		return badgeView;		
 	}
 	
 	public List<String> getGoalCodeForUserCode(String userCode) {

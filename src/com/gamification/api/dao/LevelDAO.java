@@ -15,7 +15,7 @@ public class LevelDAO {
 	
 	public LevelView getMinimumLevel() {
 		logger.debug("getMinimumLevel()");
-		String query = "SELECT MIN(PRIORITY),LEVEL_CODE,GOAL_CODE, REWARD_CODE, BADGE_CODE, NAME, IMAGE, STORY, POINTS,PRIORITY FROM SS_MA_LEVEL";
+		String query = "SELECT MIN(PRIORITY),LEVEL_CODE,GOAL_CODE, REWARD_CODE, BADGE_CODE, NAME, IMAGE, STORY, START_POINT, END_POINT, PRIORITY FROM SS_MA_LEVEL";
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -36,7 +36,8 @@ public class LevelDAO {
 				level.setName(rs.getString("NAME"));
 				level.setImage(rs.getString("IMAGE"));
 				level.setStory(rs.getString("STORY"));
-				level.setPoints(rs.getInt("POINTS"));
+				level.setStartPoint(rs.getInt("START_POINT"));
+				level.setEndPoint(rs.getInt("END_POINT"));
 				level.setPriority(rs.getInt("PRIORITY"));
 			}
 

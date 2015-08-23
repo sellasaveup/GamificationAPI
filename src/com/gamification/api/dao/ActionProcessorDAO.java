@@ -107,7 +107,8 @@ public class ActionProcessorDAO {
 				level.setName(rs.getString("NAME"));
 				level.setImage(rs.getString("IMAGE"));
 				level.setStory(rs.getString("STORY"));
-				level.setPoints(rs.getInt("POINTS"));
+				level.setStartPoint(rs.getInt("START_POINT"));
+				level.setEndPoint(rs.getInt("END_POINT"));
 				level.setPriority(rs.getInt("PRIORITY"));
 				logger.debug("level.getLevelCode()-->"+level.getLevelCode());
 				levelList.add(level);

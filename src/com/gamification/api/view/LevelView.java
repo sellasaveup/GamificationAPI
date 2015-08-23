@@ -8,7 +8,8 @@ public class LevelView {
 	private String name;
 	private String image;
 	private String story;
-	private int points;
+	private int startPoint;
+	private int endPoint;
 	private int priority;
 	private String expiryDate;
 	
@@ -54,11 +55,18 @@ public class LevelView {
 	public void setStory(String story) {
 		this.story = story;
 	}
-	public int getPoints() {
-		return points;
+	
+	public int getStartPoint() {
+		return startPoint;
 	}
-	public void setPoints(int points) {
-		this.points = points;
+	public void setStartPoint(int startPoint) {
+		this.startPoint = startPoint;
+	}
+	public int getEndPoint() {
+		return endPoint;
+	}
+	public void setEndPoint(int endPoint) {
+		this.endPoint = endPoint;
 	}
 	public int getPriority() {
 		return priority;
@@ -76,7 +84,7 @@ public class LevelView {
 	public String toString() {
 		return new StringBuilder("Level-->[").append("levelCode=").append(levelCode).append(",goalCode=").append(goalCode)
 				.append(",rewardCode=").append(rewardCode).append(",badgeCode=").append(badgeCode).append(",name").append(name)
-				.append(",image=").append(image).append(",story=").append(story).append(",points=").append(points)
+				.append(",image=").append(image).append(",story=").append(story).append(",startpoint=").append(startPoint).append(",endPoint=").append(endPoint)
 				.append(",priority=").append(priority).append(",expiryDate=").append(expiryDate).append("]").toString();
 			
 	}

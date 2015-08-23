@@ -14,6 +14,7 @@ public class UserProfile {
     private String redeemablePoints;
     private String globalBadgeCode;
     private String isSuccess;
+    private BadgeView badgeView;
     
     
 	public String getUserCode() {
@@ -83,6 +84,14 @@ public class UserProfile {
 	}
 	public void setIsSuccess(String isSuccess) {
 		this.isSuccess = isSuccess;
+	}
+	
+	
+	public BadgeView getBadgeView() {
+		return badgeView;
+	}
+	public void setBadgeView(BadgeView badgeView) {
+		this.badgeView = badgeView;
 	}
 	
 	

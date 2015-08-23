@@ -3,8 +3,10 @@ package com.gamification.api.interfaces.persistence.challenge;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +33,7 @@ public class Challenge implements Serializable {
 	@Column(name="ACTION_CODE")
 	private String actionCode;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
 	private Goal goal;
 	
@@ -50,11 +52,11 @@ public class Challenge implements Serializable {
 	@Column(name="EXPIRY_DATE")
 	private Date expiryDate;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="BADGE_CODE", referencedColumnName="BADGE_CODE")
 	private Badge badge;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="REWARD_CODE", referencedColumnName="REWARD_CODE")
 	private Reward reward;
 	
@@ -149,4 +151,13 @@ public class Challenge implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	@Override
+	public String toString() {
+		return "Challenge [challengeId=" + challengeId + ", actionCode=" + actionCode + ", goal=" + goal + ", story="
+				+ story + ", image=" + image + ", points=" + points + ", occurance=" + occurance + ", expiryDate="
+				+ expiryDate + ", badge=" + badge + ", reward=" + reward + ", date=" + date + "]";
+	}
+	
+	
 }

@@ -1,6 +1,6 @@
 package com.gamification.api.view;
 
-public class Challenge {
+public class ChallengeView {
 	private String actionCode;
 	private String goalCode;
 	private String story;

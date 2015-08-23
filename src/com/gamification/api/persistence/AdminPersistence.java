@@ -70,7 +70,7 @@ public abstract class AdminPersistence<ENTITY>  implements IPersistence<ENTITY>{
 	protected abstract Class<ENTITY> getEntityClass();
 	protected abstract String getRetrieveAllEntitiesQuery();
 	
-	private void close(final EntityManager entityManager) {
+	protected void close(final EntityManager entityManager) {
 		AdminPersistenceFactory.close(entityManager);
 	}
 }

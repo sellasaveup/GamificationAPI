@@ -3,6 +3,7 @@ package com.gamification.api.interfaces.persistence.level;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Level implements Serializable {
 	@Column(name="LEVEL_CODE")
 	private String levelCode;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
 	private Goal goal;
 	
@@ -57,6 +58,9 @@ public class Level implements Serializable {
 	@Column(name="DATE")
 	private Date date;
 
+	@Column(name="IMAGE")
+	private String image;
+	
 	public Long getLevelId() {
 		return levelId;
 	}
@@ -135,6 +139,14 @@ public class Level implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 

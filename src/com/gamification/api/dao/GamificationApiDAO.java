@@ -2,16 +2,18 @@ package com.gamification.api.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.gamification.api.manager.APIManager;
-import com.gamification.api.view.Challenge;
-import com.gamification.api.view.CustomerMaster;
-import com.gamification.api.view.CustomerTransaction;
+import com.gamification.api.persistence.challenge.ChallengeDao;
+import com.gamification.api.persistence.level.LevelDao;
+import com.gamification.api.view.ChallengeView;
+import com.gamification.api.view.LevelView;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserAction;
 import com.gamification.api.view.UserBadge;
@@ -20,8 +22,6 @@ import com.gamification.api.view.UserLevel;
 import com.gamification.api.view.UserProfile;
 import com.gamification.api.view.UserReward;
 import com.gamification.common.ConnectionUtility;
-
-import java.sql.ResultSet;
 
 public class GamificationApiDAO {
 	
@@ -130,8 +130,8 @@ public class GamificationApiDAO {
 		
 	}
 	
-	public Challenge getChallenge(String actionCode) {
-		Challenge challenge = null;
+	public ChallengeView getChallenge(String actionCode) {
+		ChallengeView challenge = null;
 		logger.debug("getChallenge()");
 		String query = "SELECT * FROM SS_MA_CHALLENGE WHERE ACTION_CODE=? AND STATUS='ACTIVE' AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
 		PreparedStatement preparedStatement = null;
@@ -146,7 +146,7 @@ public class GamificationApiDAO {
 			rs = preparedStatement.executeQuery();
 			if (rs.next()) {
 				logger.debug("Got Challenge");
-				challenge = new Challenge();
+				challenge = new ChallengeView();
 				challenge.setActionCode(rs.getString("ACTION_CODE"));
 				challenge.setGoalCode(rs.getString("GOAL_CODE"));
 				challenge.setStory(rs.getString("STORY"));
@@ -811,4 +811,15 @@ public class GamificationApiDAO {
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();
 	}
+	
+	
+	public Collection<ChallengeView> getChalByGoal(ChallengeView challengeView) {
+		return new ChallengeDao().getChallengesByGoal(challengeView);
+	}
+	
+	public Collection<LevelView> getLevelsByGoal(LevelView levelView) {
+		return new LevelDao().getLevelsByGoal(levelView);
+	}
+	
+	
 }

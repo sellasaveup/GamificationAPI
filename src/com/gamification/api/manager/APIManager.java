@@ -1,17 +1,15 @@
 package com.gamification.api.manager;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.apache.log4j.Logger;
 
-import com.gamification.api.dao.ActionProcessorDAO;
 import com.gamification.api.dao.GamificationApiDAO;
-import com.gamification.api.dao.LevelDAO;
 import com.gamification.api.dao.RequestValidatorDAO;
+import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.CustomerTransaction;
-import com.gamification.api.view.Level;
+import com.gamification.api.view.LevelView;
 import com.gamification.api.view.User;
-import com.gamification.api.view.UserGoalPoints;
 import com.gamification.api.view.UserProfile;
 import com.gamification.common.RequestStatus;
 
@@ -78,6 +76,13 @@ public class APIManager {
 		return new GamificationApiDAO();
 	}
 	
-	
+	public Collection<ChallengeView> retrieveChallengesByGoalCode(ChallengeView challengeView) {
+		logger.debug("retrieveChallengesByGoalCode challenge"+ challengeView);
+		return getGamificationDAO().getChalByGoal(challengeView);
+	}
+	public Collection<LevelView> retrieveLevelsByGoalCode(LevelView levelView) {
+		logger.debug("retrieveLevelsByGoalCode level"+ levelView);
+		return getGamificationDAO().getLevelsByGoal(levelView);
+	}
 
 }

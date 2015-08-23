@@ -2,6 +2,7 @@ package com.gamification.api.interfaces.persistence.goal;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,7 +27,7 @@ import com.gamification.api.interfaces.persistence.user.UserChannel;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="SM_MA_GOAL")
+@Table(name="SS_MA_GOAL")
 public class Goal implements Serializable {
 	
 	@Id
@@ -63,7 +64,7 @@ public class Goal implements Serializable {
 	private Set<Challenge> challenges;
 	
 	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<Level> levels;
+	private List<Level> levels;
 	
 	@OneToOne(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Badge badge;
@@ -151,11 +152,11 @@ public class Goal implements Serializable {
 		this.challenges = challenges;
 	}
 
-	public Set<Level> getLevels() {
+	public List<Level> getLevels() {
 		return levels;
 	}
 
-	public void setLevels(Set<Level> levels) {
+	public void setLevels(List<Level> levels) {
 		this.levels = levels;
 	}
 

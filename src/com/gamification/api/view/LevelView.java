@@ -1,6 +1,6 @@
 package com.gamification.api.view;
 
-public class Level {
+public class LevelView {
 	private String levelCode;
 	private String goalCode;
 	private String rewardCode;

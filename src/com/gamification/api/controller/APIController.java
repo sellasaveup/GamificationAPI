@@ -1,8 +1,8 @@
 package com.gamification.api.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,9 +14,10 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 
 import com.gamification.api.manager.APIManager;
-import com.gamification.api.manager.APIRequestValidator;
 import com.gamification.api.manager.NotificationManager;
+import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.CustomerMaster;
+import com.gamification.api.view.LevelView;
 import com.gamification.api.view.Notification;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserProfile;
@@ -349,4 +350,51 @@ public class APIController {
 	private JsonGenerator getJsonGenerator() {
 		return new JsonGenerator();
 	}
+	
+	@GET
+	@Path("/GETCHALLENGESBYGOAL")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getChallengesByGoal(@QueryParam("goalCode") String goalCode) {
+		logger.debug("Inside getChallenges by Goal Code");
+		
+	    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+	    ChallengeView challengeView = new ChallengeView();
+	    challengeView.setGoalCode(goalCode);
+	    Collection<ChallengeView> challengeViewColl = getAPIManager().retrieveChallengesByGoalCode(challengeView);
+		if(challengeViewColl != null) {
+			jsonRoot.put("Response", challengeViewColl);
+		} else {
+			RequestStatus requestStatus = new RequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(goalCode);
+			requestStatus.setMessage("No Challenges Found");
+			jsonRoot.put("Response", requestStatus);
+		}
+		
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GETLEVELBYGOAL")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLevelByGoal(@QueryParam("goalCode") String goalCode) {
+		logger.debug("Inside getLevel by Goal Code");
+		
+	    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+	    LevelView levelView = new LevelView();
+	    levelView.setGoalCode(goalCode);
+	    Collection<LevelView> levelViewColl = getAPIManager().retrieveLevelsByGoalCode(levelView);
+		if(levelViewColl != null) {
+			jsonRoot.put("Response", levelViewColl);
+		} else {
+			RequestStatus requestStatus = new RequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(goalCode);
+			requestStatus.setMessage("No Levels found");
+			jsonRoot.put("Response", requestStatus);
+		}
+		
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 }

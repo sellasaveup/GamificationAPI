@@ -9,10 +9,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.gamification.api.view.Challenge;
-import com.gamification.api.view.CustomerMaster;
-import com.gamification.api.view.CustomerTransaction;
-import com.gamification.api.view.Level;
+import com.gamification.api.view.LevelView;
 import com.gamification.api.view.UserGoalPoints;
 import com.gamification.common.ConnectionUtility;
 
@@ -82,13 +79,13 @@ public class ActionProcessorDAO {
 		
 	}
 	
-	public List<Level> getLevelList(String goalCode, int points) {
+	public List<LevelView> getLevelList(String goalCode, int points) {
 		
 		logger.debug("getLevelList()");
 		logger.debug("goalCode-->"+goalCode);
 		logger.debug("points-->"+points);
 		
-		List<Level> levelList = new ArrayList<Level>();
+		List<LevelView> levelList = new ArrayList<LevelView>();
 		String query = "SELECT * FROM SS_MA_LEVEL WHERE GOAL_CODE=? AND POINTS <= ? AND LEVEL_CODE NOT IN (SELECT LEVEL_CODE FROM SS_TR_USER_LEVEL) AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -102,7 +99,7 @@ public class ActionProcessorDAO {
 			preparedStatement.setInt(2, points);
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				Level level = new Level();
+				LevelView level = new LevelView();
 				level.setLevelCode(rs.getString("LEVEL_CODE"));
 				level.setGoalCode(rs.getString("GOAL_CODE"));
 				level.setRewardCode(rs.getString("REWARD_CODE"));

@@ -15,6 +15,16 @@ http://localhost:8080/GamificationAPI/sella/api/GET_ALL_POINTS?userCode=GBS03146
 GET_MONTH_POINTS
 http://localhost:8080/GamificationAPI/sella/api/GET_MONTH_POINTS?userCode=GBS03146&goalCode=HYPE_GOAL
 
+GET_PERFORMED_ACTIVITIES_COUNT
+http://localhost:8080/GamificationAPI/sella/api/GET_PERFORMED_ACTIVITIES_COUNT
+
+GET_UNLOCKED_BADGE_COUNT
+http://localhost:8080/GamificationAPI/sella/api/GET_UNLOCKED_BADGE_COUNT
+
+GET_ENGAGED_USER_COUNT
+http://localhost:8080/GamificationAPI/sella/api/GET_ENGAGED_USER_COUNT
+
+
 Old Version Services
 
 GET_POINT

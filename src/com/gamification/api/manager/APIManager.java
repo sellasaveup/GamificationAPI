@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.gamification.api.dao.GamificationApiDAO;
 import com.gamification.api.dao.RequestValidatorDAO;
+import com.gamification.api.dao.ServiceApiDAO;
 import com.gamification.api.view.BadgeView;
 import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.LevelView;
@@ -125,11 +126,61 @@ public class APIManager {
 			return pointsRequestMap;
 		}
 		
+	public String getPerformedActivities() {
+		logger.debug("getPerformedActivities()");
+			return getServiceApiDAO().getPerformedActivities();
+	}
+	
+	public String getUnlockedBadgeCount() {
+		logger.debug("getUnlockedBadgeCount()");
+			return getServiceApiDAO().getUnlockedBadgeCount();
+	}
+	
+	public String getEngagedUserCount() {
+		logger.debug("getEngagedUserCount()");
+			return getServiceApiDAO().getEngagedUserCount();
+	}
+	
+	public String getLatestAction() {
+		logger.debug("getLatestAction()");
+			return getServiceApiDAO().getLatestAction();
+	}
+	
+	public String getLatestBadgeActivity() {
+		logger.debug("getLatestBadgeActivity()");
+			return getServiceApiDAO().getLatestBadgeActivity();
+	}
+	
+	public String getLatestReedemActivity() {
+		logger.debug("getLatestReedemActivity()");
+			return getServiceApiDAO().getLatestReedemActivity();
+	}
+	
+	public String getLatestRewardActivity() {
+		logger.debug("getLatestRewardActivity()");
+			return getServiceApiDAO().getLatestRewardActivity();
+	}
+	
+	public String getLatestLevelActivity() {
+		logger.debug("getLatestLevelActivity()");
+			return getServiceApiDAO().getLatestLevelActivity();
+	}
+	
+	public String getLatestUserActivity() {
+		logger.debug("getLatestUserActivity()");
+			return getServiceApiDAO().getLatestUserActivity();
+	}
+	
+	
+	
 	
 	private GamificationApiDAO getGamificationDAO() {
 		return new GamificationApiDAO();
 	}
 	
+	private ServiceApiDAO getServiceApiDAO() {
+		return new ServiceApiDAO();
+	}
 	public Collection<ChallengeView> retrieveChallengesByGoalCode(ChallengeView challengeView) {
 		logger.debug("retrieveChallengesByGoalCode challenge"+ challengeView);
 		return getGamificationDAO().getChalByGoal(challengeView);

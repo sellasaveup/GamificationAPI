@@ -103,11 +103,140 @@ public class APIController {
 	public Response getCurrentMonthPoints(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
 		logger.debug("Inside GET_MONTH_POINTS Service");
 		Map<String, Object> jsonRoot = getAPIManager().getAllTimePoints(userCode, goalCode);
-		logger.debug("jsonRoot2-->"+jsonRoot);
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
-
-
+	
+	
+	@GET
+	@Path("/GET_PERFORMED_ACTIVITIES_COUNT")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPerformedActivities() {
+		logger.debug("GET_PERFORMED_ACTIVITIES_COUNT");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String performedActivitiesCount = getAPIManager().getPerformedActivities();
+		if(performedActivitiesCount == null) {
+			performedActivitiesCount = "0";
+		}
+		performedActivitiesCount = "500";
+		jsonRoot.put("performedActivitiesCount", performedActivitiesCount);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_UNLOCKED_BADGE_COUNT")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUnlockedBadgeCount() {
+		logger.debug("GET_UNLOCKED_BADGE_COUNT");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String unlockedBadgeCount = getAPIManager().getUnlockedBadgeCount();
+		if(unlockedBadgeCount == null) {
+			unlockedBadgeCount = "0";
+		}
+		unlockedBadgeCount = "50";
+		jsonRoot.put("unlockedBadgeCount", unlockedBadgeCount);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_ENGAGED_USER_COUNT")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getEngagedUserCount() {
+		logger.debug("GET_ENGAGED_USER_COUNT");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String engagedUserCount = getAPIManager().getEngagedUserCount();
+		if(engagedUserCount == null) {
+			engagedUserCount = "0";
+		}
+		engagedUserCount = "200";
+		jsonRoot.put("engagedUserCount", engagedUserCount);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_LATEST_ACTION")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLatestAction() {
+		logger.debug("GET_LATEST_ACTION");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String latestAction = getAPIManager().getLatestAction();
+		if(latestAction == null) {
+			latestAction = "#";
+		}
+		jsonRoot.put("latestAction", latestAction);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	  } 
+	
+	@GET
+	@Path("/GET_LATEST_BADGE")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLatestBadgeActivity() {
+		logger.debug("GET_LATEST_BADGE");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String latestBadgeAction = getAPIManager().getLatestBadgeActivity();
+		if(latestBadgeAction == null) {
+			latestBadgeAction = "#";
+		}
+		jsonRoot.put("latestBadgeAction", latestBadgeAction);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	  } 
+	
+	@GET
+	@Path("/GET_LATEST_REDEEM")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLatestReedemActivity() {
+		logger.debug("GET_LATEST_REDEEM");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String latestRedeemAction = getAPIManager().getLatestReedemActivity();
+		if(latestRedeemAction == null) {
+			latestRedeemAction = "#";
+		}
+		jsonRoot.put("latestRedeemAction", latestRedeemAction);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	  } 
+	
+	@GET
+	@Path("/GET_LATEST_REWARD")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLatestRewardActivity() {
+		logger.debug("GET_LATEST_REWARD");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String latestRewardAction = getAPIManager().getLatestRewardActivity();
+		if(latestRewardAction == null) {
+			latestRewardAction = "#";
+		}
+		jsonRoot.put("latestRewardAction", latestRewardAction);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	  } 
+	
+	@GET
+	@Path("/GET_LATEST_LEVEL")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLatestLevelActivity() {
+		logger.debug("GET_LATEST_LEVEL");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String latestlevelAction = getAPIManager().getLatestLevelActivity();
+		if(latestlevelAction == null) {
+			latestlevelAction = "#";
+		}
+		jsonRoot.put("latestlevelAction", latestlevelAction);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	  } 
+	
+	@GET
+	@Path("/GET_LATEST_USER")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLatestUserActivity() {
+		logger.debug("GET_LATEST_USER");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		String latestUserAction = getAPIManager().getLatestUserActivity();
+		if(latestUserAction == null) {
+			latestUserAction = "#";
+		}
+		jsonRoot.put("latestUserAction", latestUserAction);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	  } 
+	
+	
 	@GET
 	@Path("/REDUCE_USER_POINT")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -122,6 +251,8 @@ public class APIController {
 			return Response.status(503).entity("Invalid Request").build();
 		}
 	}
+	
+	
 	
 	@GET
 	@Path("/GET_BADGE")

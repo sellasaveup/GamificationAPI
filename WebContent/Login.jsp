@@ -68,7 +68,226 @@ body {background: #336699;}
     background-color: white;
 }
     </style>
-    
+ <script type="text/javascript">
+ 
+ var commonUrl = "http://localhost:8080/GamificationAPI/sella/api/";
+ 
+ $( document ).ready(function() {
+		    $('#registerform').popup({
+		        pagecontainer: '.container',
+		        transition: 'all 0.3s'
+		    });		
+	 
+	 var performedActivitiesUrl = commonUrl+"GET_PERFORMED_ACTIVITIES_COUNT";
+	 var unlockedBadgeUrl = commonUrl+"GET_UNLOCKED_BADGE_COUNT";
+	 var engagedUserCountUrl = commonUrl+"GET_ENGAGED_USER_COUNT";
+	 
+	 getPerformedActivitiesCount(performedActivitiesUrl);
+	 getUnlockedBadgeCount(unlockedBadgeUrl);
+	 getEngagedUserCount(engagedUserCountUrl);
+	 
+	 setInterval(function () {updateLatestActivity()}, getRandomRange(3000,5000));
+	 setInterval(function () {updateLatestBadgeActivity()}, getRandomRange(3000,5000));
+	 setInterval(function () {updateLatestRedeemActivity()}, getRandomRange(3000,5000));
+	 setInterval(function () {updateLatestRewardActivity()}, getRandomRange(3000,5000));
+	 setInterval(function () {updateLatestLevelActivity()}, getRandomRange(3000,5000));
+	 setInterval(function () {updateLatestUserActivity()}, getRandomRange(3000,5000));
+	 
+ });
+ 
+ 
+ function getPerformedActivitiesCount(requestUrl) {
+	 
+			$.ajax({
+				type : "GET",
+				url : requestUrl,
+				dataType : "json",
+				contentType : "application/json; charset=UTF-8",
+				success : function(data) {
+					getDelayedIncrement(data.performedActivitiesCount,"performedActivitiesCount",30);
+				},
+				error : function(e) {
+					console.log('getPerformedActivitiesCount failure : ' + e);
+				}
+			});
+ }
+ 
+ function getUnlockedBadgeCount(requestUrl) {
+	 
+			$.ajax({
+				type : "GET",
+				url : requestUrl,
+				dataType : "json",
+				contentType : "application/json; charset=UTF-8",
+				success : function(data) {
+					getDelayedIncrement(data.unlockedBadgeCount,"unlockedBadgeCount",100);
+				},
+				error : function(e) {
+					console.log('getUnlockedBadgeCount failure : ' + e);
+				}
+			});
+  }
+ 
+ function getEngagedUserCount(requestUrl) {
+	 
+			 $.ajax({
+				type : "GET",
+				url : requestUrl,
+				dataType : "json",
+				contentType : "application/json; charset=UTF-8",
+				success : function(data) {
+					getDelayedIncrement(data.engagedUserCount,"engagedUserCount", 40);
+				},
+				error : function(e) {
+					console.log('getEngagedUserCount failure : ' + e);
+				}
+			});
+ }
+ 
+ function getDelayedIncrement(maxValue, applyingPeoperty, delayTime) {
+	 for(i = 1; i <= maxValue; i++){
+		    (function(i){
+		        setTimeout(function(){
+		        	document.getElementById(applyingPeoperty).innerHTML = i;
+		        }, delayTime * i);
+		    }(i));
+		}
+ }
+ 
+ function updateLatestActivity() {
+	 var latestActivityUrl = commonUrl+"GET_LATEST_ACTION";
+	 $.ajax({
+			type : "GET",
+			url : latestActivityUrl,
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				var finaDate = data.latestAction.split("#");
+				var text = finaDate[0];
+				var image = getProfileImagePath()+finaDate[1];
+				var randomPosition = getRandomRange(1,6);
+				$('#textPanel'+randomPosition).html(text);
+				$('#imagePanel'+randomPosition).attr('src', image);
+			},
+			error : function(e) {
+				console.log('updateLatestActivity failure : ' + e);
+			}
+		});
+ }
+ 
+ function updateLatestBadgeActivity() {
+	 var latestBadgeActivityUrl = commonUrl+"GET_LATEST_BADGE";
+	 $.ajax({
+			type : "GET",
+			url : latestBadgeActivityUrl,
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				var finaData = data.latestBadgeAction.split("#");
+				var text = finaData[0];
+				var image = getProfileImagePath()+finaData[1];
+				var randomPosition = getRandomRange(1,6);
+				$('#textPanel'+randomPosition).html(text);
+				$('#imagePanel'+randomPosition).attr('src', image);
+			},
+			error : function(e) {
+				console.log('latestBadgeAction failure : ' + e);
+			}
+		});
+ }
+ 
+ function updateLatestRedeemActivity() {
+	 var latestRedeemActivityUrl = commonUrl+"GET_LATEST_REDEEM";
+	 $.ajax({
+			type : "GET",
+			url : latestRedeemActivityUrl,
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				var finaData = data.latestRedeemAction.split("#");
+				var text = finaData[0];
+				var image = getProfileImagePath()+finaData[1];
+				var randomPosition = getRandomRange(1,6);
+				$('#textPanel'+randomPosition).html(text);
+				$('#imagePanel'+randomPosition).attr('src', image);
+			},
+			error : function(e) {
+				console.log('updateLatestRedeemActivity failure : ' + e);
+			}
+		});
+ }
+ 
+ function updateLatestRewardActivity() {
+	 var latestRewardActivityUrl = commonUrl+"GET_LATEST_REWARD";
+	 $.ajax({
+			type : "GET",
+			url : latestRewardActivityUrl,
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				var finaData = data.latestRewardAction.split("#");
+				var text = finaData[0];
+				var image = getProfileImagePath()+finaData[1];
+				var randomPosition = getRandomRange(1,6);
+				$('#textPanel'+randomPosition).html(text);
+				$('#imagePanel'+randomPosition).attr('src', image);
+			},
+			error : function(e) {
+				console.log('latestRewardAction failure : ' + e);
+			}
+		});
+ }
+ 
+ function updateLatestLevelActivity() {
+	 var latestLevelActivityUrl = commonUrl+"GET_LATEST_LEVEL";
+	 $.ajax({
+			type : "GET",
+			url : latestLevelActivityUrl,
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				var finaData = data.latestlevelAction.split("#");
+				var text = finaData[0];
+				var image = getProfileImagePath()+finaData[1];
+				var randomPosition = getRandomRange(1,6);
+				$('#textPanel'+randomPosition).html(text);
+				$('#imagePanel'+randomPosition).attr('src', image);
+			},
+			error : function(e) {
+				console.log('latestRewardAction failure : ' + e);
+			}
+		});
+ }
+ 
+ function updateLatestUserActivity() {
+	 var latestUserActivityUrl = commonUrl+"GET_LATEST_USER";
+	 $.ajax({
+			type : "GET",
+			url : latestUserActivityUrl,
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				var finaData = data.latestUserAction.split("#");
+				var text = finaData[0];
+				var image = getProfileImagePath()+finaData[1];
+				var randomPosition = getRandomRange(1,6);
+				$('#textPanel'+randomPosition).html(text);
+				$('#imagePanel'+randomPosition).attr('src', image);
+			},
+			error : function(e) {
+				console.log('latestRewardAction failure : ' + e);
+			}
+		});
+ }
+ 
+ function getRandomRange(min, max) {
+	    return Math.floor(Math.random() * (max - min + 1)) + min;
+ }
+ 
+ function getProfileImagePath() {
+	 return "./img/profile/";
+ }
+ </script>  
 </head>
 <body>
 
@@ -128,32 +347,54 @@ body {background: #336699;}
     </div>
     </div>&nbsp;&nbsp;
     <div class="col-sm-6 pull-right">
-    <div class="col-sm-6 pull-right"><table width="400px">
-   <tr > <td><font size="3"><b>410,230,680</b></font></td><td><font size="3"><b>210,230,680</b></font></td><td><font size="3"><b>510,230,680</b></font></td></tr>
-   <tr><td><b>Activities Performed</b></td><td><b>Badges Unlocked</b></td><td><b>Users Engaged</b></td></tr>
-    <tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td>Steffy unlocked a badge SUPER SAVER on Hype Goal</td><td></td></tr>
-    <tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td>Steffy redeemed on Hype Goal..250 points for Amazon Gift Voucher</td><td></td></tr>
-	<tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td>Steffy rewarded on Hype goal with 200 points..</td><td></td></tr>
-	<tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td>Steffy reached BRONZE level	</td><td></td></tr>
-	<tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td>Steffy joined customer community to score on a goal</td><td></td></tr>
+    <div class="col-sm-6 pull-right">
+    
+    <table width="400px">
+   <tr > <td><font size="5"><b><span id="performedActivitiesCount"></span></b></font></td><td><font size="5"><b><span id="unlockedBadgeCount"></span></b></font></td><td><font size="5"><b><span id="engagedUserCount"></span></b></font></td></font></tr>
+   <tr><td><font size="3"><b>Activities Performed</b></font></td><td><font size="3"><b>Badges Unlocked</b></font></td><td><font size="3"><b>Users Engaged</b></font></td></tr>
+  
     
     
-   
+     <tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img id="imagePanel1" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td><div id="textPanel1">Boobathi unlocked a badge SUPER SAVER on Hype Goal</div></td><td>
+	</td></tr>
+	
+    <tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img id="imagePanel2" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td><div id="textPanel2">Steffy redeemed on Hype Goal..250 points for Amazon Gift Voucher</div></td><td>
+	
+	</td></tr>
+	
+	
+	<tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img id="imagePanel3" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td><div id="textPanel3">Steffy rewarded on Hype goal with 200 points..</div></td><td>
+	</td></tr>
+	
+	<tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img id="imagePanel4" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td><div id="textPanel4">Steffy reached BRONZE level	</div></td><td>
+	</td></tr>
+	
+	<tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img id="imagePanel5" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td><div id="textPanel5">Steffy joined customer community to score on a goal</div></td><td>
+	</td></tr>
+	
+	<tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img id="imagePanel6" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td><div id="textPanel6">Steffy joined customer community to score on a goal</div></td><td>
+	</td></tr>
+	
+	
+    
     </table>
     
 
@@ -227,16 +468,6 @@ body {background: #336699;}
 </div>
  
 </div>
-<script>
-$(document).ready(function () {
-
-    $('#registerform').popup({
-        pagecontainer: '.container',
-        transition: 'all 0.3s'
-    });
-
-});
-</script>
 
 <style>
 #registerform {

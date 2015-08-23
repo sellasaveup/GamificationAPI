@@ -6,16 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/leaderboard.css">
+<link rel="stylesheet" href="./css/leaderboardalltime.css">
+
 <link rel="stylesheet" href="./css/style.css"></link>
 
-	<script type="text/javascript" src="./js/termometer.js"></script>
+<script type="text/javascript" src="./js/termometer.js"></script>
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="./js/jquery.canvasjs.min.js"></script>
 <script type="text/javascript" src="./js/leaderboard.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<link href="./css/masterpage.css" rel="stylesheet">
+<script type="text/javascript" src="./js/leaderboardalltime.js"></script>
 
+<link href="./css/masterpage.css" rel="stylesheet">
 
 <style type="text/css">
 
@@ -55,7 +57,7 @@ termometer(1000,500,function(){
 </div>
 	</div>
 	<div class="col-sm-7">
-	<div class="pull-right" style="margin-right:300px;">
+	<div class="pull-right" style="margin-right:350px;">
 				<ul id="myTab" class="nav nav-tabs">
 					<li class="active"><a href="#pointsmonth" data-toggle="tab">This Month </a></li>
 					<li><a href="#pointswhole" data-toggle="tab">All Time</a></li>
@@ -76,13 +78,24 @@ termometer(1000,500,function(){
 				<br>
 				<br>
 				<div>
-			<div class='leaderboard'>
+<div class='leaderboardthisMonth'>
     <h1><span>Leader Board</span></h1>
-    <div class="content"></div>
+    
+    <ul id="myTab" class="nav nav-tabs">
+    
+		<li class="active"><a href="#thismonthleader" data-toggle="tab">This Month </a></li>
+		<li><a href="#alltimeleader" data-toggle="tab">All Time</a></li>
+		
+	</ul>
+	<br>
+	<div id="myTabContentleader" class="tab-content">
+	
+    <div   id="thismonthleader" class="contentthistime tab-pane fade in active"></div>
+    <div  id="alltimeleader"  class="contentalltime tab-pane fade"></div>
+    
+    </div>
 </div>
-				
-				
-	      </div>
+ </div>
 	   
 		
 				<div>

@@ -7,31 +7,34 @@
 		this.callback = callback;
 		this.config = $.extend(defaults, options);
 		this.list = [
-			'Albert',
+			'Caterina',
+			'Rickx',
+			'Tony',
+			'Domnic',
+			'Gladia',
 			'Steffy',
-			'Maria Williams',
-			'Sara',
-			'Federer',
+			'Stephen Richard',
+			'Paul Anderson',
+			'Nadal',
 			'Kaka Johnes',
-			'Ronaldio',
-			'Sharapova',
+			'Sherlock',
+			'Fitchter',
 			'Saina Nehwal',
 			'Dixier',
+			'Ericsson'
 		];
 		this.listPoints = [
-		 			'2133',
-		 			'2000',
-		 			'2000',
-		 			'2000',
-		 			'2000',
-		 			'2000',
-		 			'2000',
-		 			'1500',
-		 			'689',
-		 			'239',
-
+		                   	'2133',
+		                   	'2000',
+		                   	'2000',
+		                   	'2000',
+		                   	'2000',
+		                   	'2000',
+		                   	'2000',
+		                   	'1500',
+		                   	'689',
+		                   	'239',
 		 		];
-	
 		this.ranklist = [
 				 			'1#',
 				 			'2#',
@@ -53,7 +56,6 @@
 				rank: this.ranklist[i],
 				name: this.list[i],
 				count: this.listPoints[i]
-			    
 			});
 		}
 		return results;
@@ -81,7 +83,7 @@
 	};
 	window.FakePoller = FakePoller;
 
-	var leaderboardthisMonth = function (elemId, options) {
+	var Leaderboard = function (elemId, options) {
 		var _this = this;
 		var defaults = {
 			limit:10,
@@ -96,13 +98,13 @@
 			this.$elem = $('<div>').appendTo($('body'));
 
 		this.list = [];
-		this.$contentthistime = $('<ul>');
-		this.$elem.append(this.$contentthistime);
+		this.$contentalltime = $('<ul>');
+		this.$elem.append(this.$contentalltime);
 
 		this.poller = new FakePoller({frequency: this.config.frequency, limit: this.config.limit}, function (data) {
 			if (data) {
 				if(_this.currentCount != data.length){
-					_this.buildElements(_this.$contentthistime,data.length);
+					_this.buildElements(_this.$contentalltime,data.length);
 				}
 				_this.currentCount = data.length;
 				_this.data = data;
@@ -113,7 +115,7 @@
 		this.poller.start();
 	};
 
-	leaderboardthisMonth.prototype.buildElements = function($ul,elemSize){
+	Leaderboard.prototype.buildElements = function($ul,elemSize){
 		var _this = this;
 		$ul.empty();
 		this.list = [];
@@ -150,7 +152,7 @@
 		};
 	};
 
-	window.leaderboardthisMonth = leaderboardthisMonth;
+	window.Leaderboard = Leaderboard;
 	//Helper
 	function rnd (min,max){
 		min = min || 100;
@@ -167,5 +169,5 @@
 })(jQuery);
 
 $(document).ready(function ($) {
-	var myLeaderboard = new leaderboardthisMonth(".contentthistime", {limit:10,frequency:10});
+	var myLeaderboard = new Leaderboard(".contentalltime", {limit:10,frequency:10});
 });

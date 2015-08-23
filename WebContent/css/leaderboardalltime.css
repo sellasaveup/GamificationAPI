@@ -10,7 +10,7 @@ body,html {
 
 
 
-.leaderboardthisMonth {
+.leaderboard {
     position:relative;
     width:70%;
     height:70%;
@@ -21,7 +21,7 @@ body,html {
     padding:3%;
 }
 
-.leaderboardthisMonth h1{
+.leaderboard h1{
     text-align: center;
     text-transform: uppercase;
     margin:30px;
@@ -29,7 +29,7 @@ body,html {
     color: #cc7713;
 }
 
-.contentthistime {
+.contentalltime {
     position:relative;
     width:70%;
     margin:3px auto 0 auto;
@@ -37,14 +37,14 @@ body,html {
 
 }
 
-.contentthistime ul{
+.contentalltime ul{
     margin:0;
     padding:0;
     list-style: none;
     border:5px solid #CCC;
     background: rgba(40,40,40,0.75);
 }
-.contentthistime ul li{
+.contentalltime ul li{
     position: relative;
     color:#FFF;
     font-family: helvetica;
@@ -52,7 +52,7 @@ body,html {
     border-bottom: 1px solid #555;
 }
 
-.contentthistime ul li:last-child{
+.contentalltime ul li:last-child{
     border-bottom:none;
 }
 
@@ -74,7 +74,7 @@ body,html {
 
 
 /********* BLING **********/
-.contentthistime ul{
+.contentalltime ul{
     border-radius: 20px;
 }
 

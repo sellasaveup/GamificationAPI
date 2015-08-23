@@ -6,8 +6,9 @@ public class Notification {
 	private String target;
 	private String message;
 	private String imageUrl;
-	private int custId;
-	private String subjectType;
+	private String userCode;
+	private String userType;
+	private String goalCode;
 	
 	
 	public int getNotificationId() {
@@ -40,18 +41,25 @@ public class Notification {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	public int getCustId() {
-		return custId;
+	public String getUserCode() {
+		return userCode;
 	}
-	public void setCustId(int custId) {
-		this.custId = custId;
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
-	public String getSubjectType() {
-		return subjectType;
+	public String getUserType() {
+		return userType;
 	}
-	public void setSubjectType(String subjectType) {
-		this.subjectType = subjectType;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
+	public String getGoalCode() {
+		return goalCode;
+	}
+	public void setGoalCode(String goalCode) {
+		this.goalCode = goalCode;
+	}
+	
 	
 	
 }

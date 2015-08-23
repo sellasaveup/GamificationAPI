@@ -98,6 +98,34 @@ public class RequestValidatorDAO {
 	
 	}
 	
+	public String getGoalCode(String goalCode) {
+
+		logger.debug("getGoalCode()");
+		String query = "SELECT GOAL_CODE FROM SS_MA_GOAL WHERE GOAL_CODE = ? AND STATUS='ACTIVE' AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String dbGoalCode = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, goalCode);
+			rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				dbGoalCode = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("dbGoalCode-->"+dbGoalCode);
+		return dbGoalCode;
+	
+	}
+	
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();
 	}

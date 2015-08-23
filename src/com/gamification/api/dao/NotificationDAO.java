@@ -7,15 +7,47 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.gamification.api.view.CustomerMaster;
 import com.gamification.api.view.Notification;
 import com.gamification.common.ConnectionUtility;
 
 public class NotificationDAO {
+	final static Logger logger = Logger.getLogger(NotificationDAO.class);
+	
+	public List<String> getUserCodeList(String goalCode) {
+		List<String> userCodeList = null; 
+		logger.debug("NotificationDAO getSubjectBasedCustomerList()");
+		String query = "select USER_CODE from ss_ma_user where user_type in (select user_type from ss_ma_goal where goal_code=?)";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
 
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, goalCode);
+			userCodeList = new ArrayList<String>();
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				userCodeList.add(rs.getString("USER_CODE"));
+				logger.debug("Got Record");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("userCodeList-->"+userCodeList);
+		return userCodeList;
+	
+	}
 	public String putNotificationHeader(Notification notification) {
 
-		System.out.println("NotificationDAO putNotificationHeader()");
+		logger.debug("NotificationDAO putNotificationHeader()");
 		String query = "INSERT INTO ss_tr_notification_header ( notify_type, target, message, image) VALUES ( ?, ?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -41,7 +73,7 @@ public class NotificationDAO {
 	
 	private int getNotificationId() {
 		 
-		System.out.println("NotificationDAO getNotificationId()");
+		logger.debug("NotificationDAO getNotificationId()");
 		String query = "SELECT MAX(notify_id) FROM ss_tr_notification_header";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -61,15 +93,15 @@ public class NotificationDAO {
 		} finally {
 			connectionUtility.closeConnection(connection, preparedStatement, rs);
 		}
-		System.out.println("notificationId-->"+notificationId);
+		logger.debug("notificationId-->"+notificationId);
 		return notificationId;
 	
 	}
 	
-	public String putNotificationTransaction(int notificationHeaderId, int custId, String transactionStatus) {
+	public String putNotificationTransaction(int notificationHeaderId, String userCode, String transactionStatus) {
 
-		System.out.println("NotificationDAO putNotificationTransaction()");
-		String query = "INSERT INTO ss_tr_notification ( notify_header_id, cust_id, status) VALUES ( ?, ?, ?)";
+		logger.debug("NotificationDAO putNotificationTransaction()");
+		String query = "INSERT INTO ss_tr_notification ( notify_header_id, user_code, status) VALUES ( ?, ?, ?)";
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		String returnValue = "0";
@@ -78,7 +110,7 @@ public class NotificationDAO {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, notificationHeaderId);
-			preparedStatement.setInt(2, custId);
+			preparedStatement.setString(2, userCode);
 			preparedStatement.setString(3, transactionStatus);
 			preparedStatement.executeUpdate();
 			returnValue = "1";
@@ -90,10 +122,10 @@ public class NotificationDAO {
 		return returnValue;
 	}
 	
-	public List<CustomerMaster> getSubjectBasedCustomerList(String subjectType) {
-		List<CustomerMaster> customerList = null; 
-		System.out.println("NotificationDAO getSubjectBasedCustomerList()");
-		String query = "SELECT * FROM ss_ma_customer where subject_type = ?";
+	public List<String> getUserTypeBasedCustomerList(String userType) {
+		List<String> userCodeList = null; 
+		logger.debug("NotificationDAO getUserTypeBasedCustomerList()");
+		String query = "SELECT user_code FROM ss_ma_user where user_type = ?";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
@@ -102,18 +134,12 @@ public class NotificationDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, subjectType);
-			customerList = new ArrayList<CustomerMaster>();
+			preparedStatement.setString(1, userType);
+			userCodeList = new ArrayList<String>();
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				CustomerMaster customerMaster = new CustomerMaster();
-				customerMaster.setCustId(rs.getInt("CUST_ID"));
-				customerMaster.setCustomerName(rs.getString("CUST_NAME"));
-				customerMaster.setCustomerAvatar(rs.getString("CUST_AVATAR"));
-				customerMaster.setPoints(rs.getInt("TOTAL_POINTS"));
-				customerMaster.setSubjectType(rs.getString("SUBJECT_TYPE"));
-				customerList.add(customerMaster);
-				System.out.println("Got Record");
+				userCodeList.add(rs.getString("USER_CODE"));
+				logger.debug("Got Record");
 			}
 			
 		} catch (SQLException e) {
@@ -121,8 +147,8 @@ public class NotificationDAO {
 		} finally {
 			connectionUtility.closeConnection(connection, preparedStatement, rs);
 		}
-		
-		return customerList;
+		logger.debug("userCodeList-->"+userCodeList);
+		return userCodeList;
 	
 	}
 	

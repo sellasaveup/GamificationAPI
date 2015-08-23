@@ -3,6 +3,7 @@ package com.gamification.api.controller;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -87,58 +88,25 @@ public class APIController {
 	
 	
 	@GET
-	@Path("/GET_POINT")
+	@Path("/GET_ALL_POINTS")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPoint(@QueryParam("custId") String custId, @QueryParam("requestType") String requestType) {
-		if (custId != null && !custId.equals("") && requestType != null) {
-			String point = null;//getAPIManager().getPoint(custId,requestType);
-			 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-			if(point != null) {
-				jsonRoot.put("status", "1");
-				jsonRoot.put("point", point);
-				jsonRoot.put("custId", custId);
-			} else {
-				jsonRoot.put("status", "0");
-				jsonRoot.put("custId", custId);
-			}
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-
+	public Response getAllTimePoints(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("Inside GET_POINTS Service");
+		Map<String, Object> jsonRoot = getAPIManager().getAllTimePoints(userCode, goalCode);
+		logger.debug("jsonRoot2-->"+jsonRoot);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
-
+	
 	@GET
-	@Path("/PUT_POINT")
+	@Path("/GET_MONTH_POINTS")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response putPoint(@QueryParam("custId") String custId, @QueryParam("point") String point,
-			@QueryParam("activity") String activity) {
-		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("") && point != null && !point.equals("")) {
-			String status = null;//getAPIManager().putPoint(custId, point, activity);
-			jsonRoot.put("status", status);
-			jsonRoot.put("custId", custId);
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
+	public Response getCurrentMonthPoints(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("Inside GET_MONTH_POINTS Service");
+		Map<String, Object> jsonRoot = getAPIManager().getAllTimePoints(userCode, goalCode);
+		logger.debug("jsonRoot2-->"+jsonRoot);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 
-	@GET
-	@Path("/REDUCE_POINT")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response reducePoint(@QueryParam("custId") String custId, @QueryParam("point") String point,
-			@QueryParam("activity") String activity) {
-		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("") && point != null && !point.equals("")) {
-			String status = null;//getAPIManager().reducePoint(custId, point);
-			jsonRoot.put("status", status);
-			jsonRoot.put("custId", custId);
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
 
 	@GET
 	@Path("/REDUCE_USER_POINT")
@@ -318,27 +286,23 @@ public class APIController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response pushNotification(@QueryParam("notificationType") String notificationType, @QueryParam("target") String target,
 									 @QueryParam("message") String message, @QueryParam("imageUrl") String imageUrl,
-									 @QueryParam("custId") String custId, @QueryParam("subjectType") String subjectType) {
+									 @QueryParam("userCode") String userCode, @QueryParam("userType") String userType,
+									 @QueryParam("goalCode") String goalCode) {
+		logger.debug("Inside PUSH_NOTIFICATION Service");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
 		
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (notificationType != null && target != null && message != null) {
 			Notification notification = new Notification();
 			notification.setNotificationType(notificationType);
 			notification.setTarget(target);
 			notification.setMessage(message);
 			notification.setImageUrl(imageUrl);
-			if(custId != null && !custId.equals("")) {
-				notification.setCustId(Integer.parseInt(custId));
-			} else {
-				notification.setCustId(-1);
-			}
-			notification.setSubjectType(subjectType);
-			Result result = new NotificationManager().pushNotification(notification);
-			jsonRoot.put("Result", result);
-		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
+			notification.setUserType(userType);
+			notification.setUserCode(userCode);
+			notification.setGoalCode(goalCode);
+			RequestStatus requestStatus = new NotificationManager().pushNotification(notification);
+			jsonRoot.put("Response", requestStatus);
+			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+		
 	}
 	
 

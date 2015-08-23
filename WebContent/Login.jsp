@@ -127,14 +127,37 @@ body {background: #336699;}
     </section>
     </div>
     </div>&nbsp;&nbsp;
-    <div class="col-sm-6 pull-right"><img src="./img/banners/activitylog.png">
+    <div class="col-sm-6 pull-right">
+    <div class="col-sm-6 pull-right"><table width="400px">
+   <tr > <td><font size="3"><b>410,230,680</b></font></td><td><font size="3"><b>210,230,680</b></font></td><td><font size="3"><b>510,230,680</b></font></td></tr>
+   <tr><td><b>Activities Performed</b></td><td><b>Badges Unlocked</b></td><td><b>Users Engaged</b></td></tr>
+    <tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td>Steffy unlocked a badge SUPER SAVER on Hype Goal</td><td></td></tr>
+    <tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td>Steffy redeemed on Hype Goal..250 points for Amazon Gift Voucher</td><td></td></tr>
+	<tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td>Steffy rewarded on Hype goal with 200 points..</td><td></td></tr>
+	<tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td>Steffy reached BRONZE level	</td><td></td></tr>
+	<tr class="roundedbox"> <td>
+    <div class="profile-userpic">
+		<center><img src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
+	</div></td><td>Steffy joined customer community to score on a goal</td><td></td></tr>
     
-    <div class="row"></div>
-
     
    
+    </table>
     
 
+<span><b></b></span></div>
 <span><b></b></span></div>
 		</div>
 

@@ -6,6 +6,10 @@
 <link href="./css/imageflip.css" rel="stylesheet">
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/masterpage.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/thermometer.css"></link>
+<script type="text/javascript" src="./js/termometer.js"></script>
+<script src="./js/jquery.min.js"></script>
+	
 
 <style type="text/css">
 br {
@@ -74,7 +78,6 @@ body {
 			</div>
 			</div>
     </div>
-    
     
   </div>
   <br>
@@ -223,16 +226,16 @@ body {
 <br>
 <br>
 <br>
-
-
-
- 
-   
-   
-
 </div>
 
 
 </body>
+<script>
+
+//This function will animate the termometer. First one is total value of termometer, second one is ending value  
+termometer(1000,500,function(){
+	$(".donation-meter").show();
+});
+</script>
 
 </html>

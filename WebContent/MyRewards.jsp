@@ -22,15 +22,16 @@
 				<div class="panel-body"
 					style="max-height: 1200px; overflow-y: auto;">
 					<div class="row">
-						<div>
+						<div class="col-sm-12">
 							<div id="rewards">
-								<div class="well well-lg">
+								<div class="well">
 									<div class="row">
-										<div>
+										<div class="col-sm-12">
 											<center>
 												<img src="./img/rewards/reward1.JPG" />
 											</center>
 										</div>
+										
 									</div>
 									<br>
 									<div class="row">

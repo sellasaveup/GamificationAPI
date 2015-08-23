@@ -67,8 +67,6 @@
              	
                 
                 <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
-                
-            
             </ul>
         </div>
     </div>
@@ -87,12 +85,12 @@
         
         		<div class="well">
 				<div class="profile-userpic">
-					<img src="./img/profile/albert-einstein.jpg" class="img-responsive" alt="">
+					<img src="./img/profile/sheryl.jpg" class="img-responsive" alt="">
 				</div>
 				
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						Ciao,Federico!
+						Ciao,Steffy!
 					</div>
 					<div class="btn btn-warning glyphicon glyphicon-king">
 						<font><b>Gold</b></font>
@@ -115,15 +113,7 @@
 	     <br>
         <div class="col-sm-8" id="content">
 
-            <hr>
-
-            <div class="row">
-                
-                <div class="col-md-12">
-
-                </div>
-
-            </div>
+           
 
      </div>
     </div>
@@ -135,25 +125,8 @@
 <footer class="text-center">Banca sella, 2015.</footer>
 </div>
 
-<div class="modal" id="addWidgetModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Add Widget</h4>
-            </div>
-            <div class="modal-body">
-                <p></p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" data-dismiss="modal" class="btn">Close</a>
-                <a href="#" class="btn btn-primary">Save changes</a>
-            </div>
-        </div>
-    </div>
-</div>
 	<!-- script references -->
 	<script src="./js/bootstrap.min.js"></script>
-		
+	     
 	</body>
 </html>

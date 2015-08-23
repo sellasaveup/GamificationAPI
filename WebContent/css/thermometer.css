@@ -1,0 +1,92 @@
+.donation-meter {
+  margin-left: 30px;
+  width: 100px;
+}
+.donation-meter .glass {
+  border-radius: 100px 100px 0 0;
+  display: block;
+  height: 300px;
+  margin: 0 34px 10px;
+  padding: 5px;
+  position: relative;
+  width: 20px;
+    background: rgb(255,255,255);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(0,0,0)), color-stop(1%,rgb(255,255,255)));
+    background: -webkit-linear-gradient(top, rgb(0,0,0) 0%,rgb(255,255,255) 5%);
+    background: -o-linear-gradient(top, rgb(0,0,0) 0%,rgb(255,255,255) 5%);
+    background: -ms-linear-gradient(top, rgb(0,0,0) 0%,rgb(255,255,255) 5%);
+    background: -moz-linear-gradient(top, rgb(0,0,0) 0%,rgb(255,255,255) 5%);
+    background: linear-gradient(to bottom, rgb(0,0,0) 0%,rgb(255,255,255) 5%);
+    background-position: 0 -1px;
+    background-size: 100% 5%;
+    border: 1px solid #e5e5e5;
+}
+.donation-meter .amount {
+	background-image: -ms-linear-gradient(bottom, #FF0000 0%, #FFFF00 30%, #FFFF00 60%, #00FF00 90%);
+	background-image: -moz-linear-gradient(bottom, #FF0000 0%, #FFFF00 30%, #FFFF00 60%, #00FF00 90%);
+	background-image: -o-linear-gradient(bottom, #FF0000 0%, #FFFF00 30%, #FFFF00 60%, #00FF00 90%);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #FF0000), color-stop(30, #FFFF00), color-stop(60, #FFFF00), color-stop(90, #00FF00));
+	background-image: -webkit-linear-gradient(bottom, #FF0000 0%, #FFFF00 30%, #FFFF00 60%, #00FF00 90%);
+	background-image: linear-gradient(to top, #FF0000 0%, #FFFF00 30%, #FFFF00 60%, #00FF00 90%);
+  border-radius: 100px;
+  display: block;
+  width: 20px;
+  position: absolute;
+  bottom: 0px;
+}
+.donation-meter strong {
+  display: block;
+  text-align: center;
+}
+.donation-meter .goal {
+  font-size: 30px;
+}
+.donation-meter .total {
+  position: absolute;
+  bottom:0px;
+}
+
+.bulb {
+  background: #e5e5e5;
+  border-radius: 100px;
+  display: block;
+  height: 50px;
+  margin: 0 35px 10px;
+  padding: 5px;
+  position: relative;
+  top: -20px;
+  right: 15px;
+  width: 50px;
+}
+.bulb .red-circle {
+  background: rgba(255, 0, 0, 1);
+  border-radius: 100px;
+  display: block;
+  height: 50px;
+  width: 50px;
+}
+.bulb .filler {
+  background: rgba(255, 0, 0, 1);
+  border-radius: 100px 100px 0 0;
+  display: block;
+  height: 30px;
+  width: 20px;
+  position: relative;
+  top: -65px;
+  right: -15px;
+  z-index: 30;
+}
+
+.arrow{
+	background: url("./img/arrow.png") no-repeat;
+	height:25px;
+	width:100px;
+	    margin-left: 30px;
+    padding-left: 25px;
+    line-height: 25px;
+}
+.hide{display: none;}
+
+.termometer{
+	margin-top:10px;
+}

@@ -86,12 +86,12 @@ body {background: #336699;}
 	 getUnlockedBadgeCount(unlockedBadgeUrl);
 	 getEngagedUserCount(engagedUserCountUrl);
 	 
-	 setInterval(function () {updateLatestActivity()}, getRandomRange(3000,5000));
-	 setInterval(function () {updateLatestBadgeActivity()}, getRandomRange(3000,5000));
-	 setInterval(function () {updateLatestRedeemActivity()}, getRandomRange(3000,5000));
-	 setInterval(function () {updateLatestRewardActivity()}, getRandomRange(3000,5000));
-	 setInterval(function () {updateLatestLevelActivity()}, getRandomRange(3000,5000));
-	 setInterval(function () {updateLatestUserActivity()}, getRandomRange(3000,5000));
+	 setInterval(function () {updateLatestActivity()}, getRandomRange(5000,7000));
+	 setInterval(function () {updateLatestBadgeActivity()}, getRandomRange(5000,7000));
+	 setInterval(function () {updateLatestRedeemActivity()}, getRandomRange(5000,7000));
+	 setInterval(function () {updateLatestRewardActivity()}, getRandomRange(5000,7000));
+	 setInterval(function () {updateLatestLevelActivity()}, getRandomRange(5000,7000));
+	 setInterval(function () {updateLatestUserActivity()}, getRandomRange(5000,7000));
 	 
  });
  

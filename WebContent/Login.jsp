@@ -69,8 +69,10 @@ body {background: #336699;}
 }
     </style>
  <script type="text/javascript">
- 
  var commonUrl = "http://localhost:8080/GamificationAPI/sella/api/";
+ localStorage.setItem("sessionUrl", commonUrl);
+ 
+ 
  
  $( document ).ready(function() {
 		    $('#registerform').popup({
@@ -287,6 +289,10 @@ body {background: #336699;}
  function getProfileImagePath() {
 	 return "./img/profile/";
  }
+ 
+ function setSessionValue() {
+	 localStorage.setItem("sessionUserCode", $("#loginUserCode").val());
+ }
  </script>  
 </head>
 <body>
@@ -314,12 +320,12 @@ body {background: #336699;}
 			
 					<div class="row">
 						<div class="col-sm-12">
-							<input type="text" placeholder="UserCode">
+							<input type="text" placeholder="User Code" id="loginUserCode">
 						</div>
 					</div><br>
 					<div class="row">
 						<div class="col-sm-12">
-							<button type="submit"><span>Submit</span></button>
+							<button type="submit" onclick="setSessionValue()"><span>Submit</span></button>
 						</div>
 					</div>
 					<br>

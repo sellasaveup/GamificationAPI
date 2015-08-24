@@ -276,18 +276,11 @@ public class APIController {
 	@GET
 	@Path("/AWARD_BADGE")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response awardBadge(@QueryParam("custId") String custId, @QueryParam("badgeId") String badgeId,
-			@QueryParam("activity") String activity) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("") && badgeId != null && !badgeId.equals("")) {
-			String status = null;//getAPIManager().awardBadge(custId, badgeId, activity);
-			jsonRoot.put("status", status);
-			jsonRoot.put("custId", custId);
+	public Response awardBadge(@QueryParam("userCode") String userCode, @QueryParam("badgeCode") String badgeCode,
+			@QueryParam("goalCode") String goalCode) {
+			HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+			//RequestStatus requestStatus = getAPIManager().awardBadge(userCode, badgeCode, goalCode);
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			jsonRoot.put("status", "0");
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		}
 	}
 
 	@GET

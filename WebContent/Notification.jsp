@@ -61,14 +61,17 @@
 			var target = $( "#target" ).val();
 			var message = $( "#message" ).val();
 			var image = $( "#image" ).val();
-			var notificationCustomerId = $( "#notificationCustomerId" ).val();
-			var subjectType = $( "#subjectType" ).val();
+			var notificationUserCode = $( "#notificationUserCode" ).val();
+			var userType = $( "#userType" ).val();
+			var goalCode = $( "#goalCode" ).val();
+			
 			pushNotificationUrl = pushNotificationUrl+"notificationType="+notificationType;
 			pushNotificationUrl = pushNotificationUrl+"&target="+target;
 			pushNotificationUrl = pushNotificationUrl+"&message="+message;
 			pushNotificationUrl = pushNotificationUrl+"&imageUrl="+image;
-			pushNotificationUrl = pushNotificationUrl+"&custId="+notificationCustomerId;
-			pushNotificationUrl = pushNotificationUrl+"&subjectType="+subjectType;
+			pushNotificationUrl = pushNotificationUrl+"&userCode="+notificationUserCode;
+			pushNotificationUrl = pushNotificationUrl+"&userType="+userType
+			pushNotificationUrl = pushNotificationUrl+"&goalCode="+goalCode;
 			
 			$.ajax({
 	            type: "GET",
@@ -92,10 +95,10 @@
 			
 			var awardPointsUrl = 'http://localhost:8080/GamificationAPI/sella/api/POST_ACTIONE?';
 			
-			var pointCustomerId = $( "#pointCustomerId" ).val();
+			var pointUserCode = $( "#pointUserCode" ).val();
 			var pointAction = $("#pointAction").val();
-			awardPointsUrl = awardPointsUrl+"custId="+pointCustomerId;
-			awardPointsUrl = awardPointsUrl+"&action="+pointAction;
+			awardPointsUrl = awardPointsUrl+"userCode="+pointUserCode;
+			awardPointsUrl = awardPointsUrl+"&actionCode="+pointAction;
 			
 			
 			$.ajax({
@@ -120,12 +123,12 @@
 			
 			var awardBadgeUrl = 'http://localhost:8080/GamificationAPI/sella/api/AWARD_BADGE?';
 			
-			var badgeCustomerId = $( "#badgeCustomerId" ).val();
+			var badgeUserCode = $( "#badgeUserCode" ).val();
 			var badgeId = $("#badgeId").val();
 			var activity = $("#activity").val();
 			
-			awardBadgeUrl = awardBadgeUrl+"custId="+badgeCustomerId;
-			awardBadgeUrl = awardBadgeUrl+"&badgeId="+badgeId;
+			awardBadgeUrl = awardBadgeUrl+"userCode="+badgeUserCode;
+			awardBadgeUrl = awardBadgeUrl+"&badgeCode="+badgeId;
 			awardBadgeUrl = awardBadgeUrl+"&activity="+activity;
 			
 			$.ajax({
@@ -170,6 +173,13 @@
 					<div class="panel-heading">Push Notification</div>
 					<div class="panel-body">
 					<div class="form-group">
+					<label for="goal">Goal</label>
+					<select class="form-control" name="goalCode" id="goalCode">
+						<option value="HYPE_GOAL">Hype Goal</option>
+					</select>
+					</div>
+					
+					<div class="form-group">
 					<label for="notificationType">Notification Type</label>
 					<select class="form-control" name="notificationType" id="notificationType">
 						<option value="">Choose Notification Type</option>
@@ -184,8 +194,8 @@
 					<select class="form-control" name="target" id="target">
 						<option value="">Choose Target</option>
 						<option value="ALL">All</option>
-						<option value="SUBJECT">Subject</option>
-						<option value="CUST">Customer</option>
+						<option value="USER_TYPE">User Type</option>
+						<option value="USER">User</option>
 					</select>
 					</div>
 					<div class="form-group">
@@ -197,20 +207,19 @@
 					<input type="text" class="form-control" id="image" placeholder="image">
 					</div>
 					<div class="form-group">
-					<label for="notificationCustomerId">Customer Id</label>
-					<select class="form-control" name="notificationCustomerId" id="notificationCustomerId">
-						<option value="">Choose Customer</option>
-						<option value="4">AbdhulKalam</option>
-						<option value="5">Fernandous</option>
-						<option value="6">Mussauri</option>
+					<label for="notificationUserCode">User</label>
+					<select class="form-control" name="notificationUserCode" id="notificationUserCode">
+						<option value="">Choose User</option>
+						<option value="GBS03146">Sujatha</option>
+						<option value="GBS03630">Boobathi</option>
 					</select>
 					</div>
 					<div class="form-group">
-					<label for="subjectType">Subject Type</label>
-					<select class="form-control" name="subjectType" id="subjectType">
-						<option value="">Choose Subject Type</option>
-						<option value="EMP">Employee</option>
-						<option value="Customer">Customer</option>
+					<label for="userType">User Type</label>
+					<select class="form-control" name="userType" id="userType">
+						<option value="">Choose User Type</option>
+						<option value="EMPLOYEE">EMPLOYEE OF GBS</option>
+						<option value="CUSTOMER">CUSTOMER OF GBS</option>
 					</select>
 					</div>
 					
@@ -239,12 +248,11 @@
 					<div class="panel-body">
 					
 					<div class="form-group">
-					<label for="pointCustomerId">Customer Id</label>
-					<select class="form-control" name="pointCustomerId" id="pointCustomerId">
-						<option value="">Choose Customer</option>
-						<option value="4">Boobathi</option>
-						<option value="5">Ajay</option>
-						<option value="6">Kumar</option>
+					<label for="pointUserCode">User</label>
+					<select class="form-control" name="pointUserCode" id="pointUserCode">
+						<option value="">Choose User</option>
+						<option value="GBS03146">Sujatha</option>
+						<option value="GBS03630">Boobathi</option>
 					</select>
 					</div>
 					<div class="form-group">
@@ -272,26 +280,21 @@
 					<div class="panel-body">
 					
 					<div class="form-group">
-					<label for="badgeCustomerId">Customer Id</label>
-					<select class="form-control" name="badgeCustomerId" id="badgeCustomerId">
-						<option value="">Choose Customer</option>
-						<option value="4">Boobathi</option>
-						<option value="5">Ajay</option>
-						<option value="6">Kumar</option>
+					<label for="badgeUserCode">User</label>
+					<select class="form-control" name="badgeUserCode" id="badgeUserCode">
+						<option value="">Choose User</option>
+						<option value="GBS03146">Sujatha</option>
+						<option value="GBS03630">Boobathi</option>
 					</select>
 					</div>
 					
 					<div class="form-group">
 					<label for="point">Badge</label>
-					<select class="form-control" name="badgeId" id="badgeId">
+					<select class="form-control" name="badgeCode" id="badgeCode">
 						<option value="">Choose Badge</option>
-						<option value="1">Well Done</option>
-						<option value="2">Payment Guru</option>
+						<option value="HYPE_NEW_BIE">New Bie</option>
+						<option value="HYPE_SAVER">You Have Saved Money</option>
 					</select>
-					</div>
-					<div class="form-group">
-					<label for="activity">Activity</label>
-					<input type="text" class="form-control" id="activity" placeholder="Action">
 					</div>
 					</div>
 			</div>

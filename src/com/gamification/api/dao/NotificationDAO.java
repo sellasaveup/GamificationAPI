@@ -18,7 +18,8 @@ public class NotificationDAO {
 	
 	public List<String> getUserCodeList(String goalCode) {
 		List<String> userCodeList = null; 
-		logger.debug("NotificationDAO getSubjectBasedCustomerList()");
+		logger.debug("getUserCodeList()");
+		logger.debug("goalCode-->"+goalCode);
 		String query = "select USER_CODE from ss_ma_user where user_type in (select user_type from ss_ma_goal where goal_code=?)";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;

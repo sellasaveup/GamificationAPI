@@ -11,11 +11,19 @@
 		
 		<link href="./css/masterpage.css" rel="stylesheet">
 		<link href="./css/glphycons.css" rel="stylesheet">
-			<script src="./js/jquery.min.js"></script>
+		<script src="./js/jquery.min.js"></script>
+		<script src="./js/session.js"></script>
 		
 		
 <script>
+alert(getSessionUrl());
+alert(getSessonUserCode());
+alert(getSessionGoalCode());
 
+      var commonUrl = getSessionUrl();
+      var userCode = getSessonUserCode();
+      var goalCode = getSessionGoalCode();
+      
       function loadMyPoints() {
     	  $("#content").load("MyPoints.jsp");
       }

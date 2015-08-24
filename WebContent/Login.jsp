@@ -165,7 +165,7 @@ body {background: #336699;}
 				var finaDate = data.latestAction.split("#");
 				var text = finaDate[0];
 				var image = getProfileImagePath()+finaDate[1];
-				var randomPosition = getRandomRange(1,6);
+				var randomPosition = getRandomRange(1,3);
 				$('#textPanel'+randomPosition).html(text);
 				$('#imagePanel'+randomPosition).attr('src', image);
 			},
@@ -186,7 +186,7 @@ body {background: #336699;}
 				var finaData = data.latestBadgeAction.split("#");
 				var text = finaData[0];
 				var image = getProfileImagePath()+finaData[1];
-				var randomPosition = getRandomRange(1,6);
+				var randomPosition = getRandomRange(1,3);
 				$('#textPanel'+randomPosition).html(text);
 				$('#imagePanel'+randomPosition).attr('src', image);
 			},
@@ -207,7 +207,7 @@ body {background: #336699;}
 				var finaData = data.latestRedeemAction.split("#");
 				var text = finaData[0];
 				var image = getProfileImagePath()+finaData[1];
-				var randomPosition = getRandomRange(1,6);
+				var randomPosition = getRandomRange(1,3);
 				$('#textPanel'+randomPosition).html(text);
 				$('#imagePanel'+randomPosition).attr('src', image);
 			},
@@ -228,7 +228,7 @@ body {background: #336699;}
 				var finaData = data.latestRewardAction.split("#");
 				var text = finaData[0];
 				var image = getProfileImagePath()+finaData[1];
-				var randomPosition = getRandomRange(1,6);
+				var randomPosition = getRandomRange(1,3);
 				$('#textPanel'+randomPosition).html(text);
 				$('#imagePanel'+randomPosition).attr('src', image);
 			},
@@ -249,7 +249,7 @@ body {background: #336699;}
 				var finaData = data.latestlevelAction.split("#");
 				var text = finaData[0];
 				var image = getProfileImagePath()+finaData[1];
-				var randomPosition = getRandomRange(1,6);
+				var randomPosition = getRandomRange(1,3);
 				$('#textPanel'+randomPosition).html(text);
 				$('#imagePanel'+randomPosition).attr('src', image);
 			},
@@ -270,7 +270,7 @@ body {background: #336699;}
 				var finaData = data.latestUserAction.split("#");
 				var text = finaData[0];
 				var image = getProfileImagePath()+finaData[1];
-				var randomPosition = getRandomRange(1,6);
+				var randomPosition = getRandomRange(1,3);
 				$('#textPanel'+randomPosition).html(text);
 				$('#imagePanel'+randomPosition).attr('src', image);
 			},

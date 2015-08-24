@@ -117,7 +117,6 @@ public class APIController {
 		if(performedActivitiesCount == null) {
 			performedActivitiesCount = "0";
 		}
-		performedActivitiesCount = "500";
 		jsonRoot.put("performedActivitiesCount", performedActivitiesCount);
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
@@ -132,7 +131,6 @@ public class APIController {
 		if(unlockedBadgeCount == null) {
 			unlockedBadgeCount = "0";
 		}
-		unlockedBadgeCount = "50";
 		jsonRoot.put("unlockedBadgeCount", unlockedBadgeCount);
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
@@ -147,7 +145,6 @@ public class APIController {
 		if(engagedUserCount == null) {
 			engagedUserCount = "0";
 		}
-		engagedUserCount = "200";
 		jsonRoot.put("engagedUserCount", engagedUserCount);
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}

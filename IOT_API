@@ -1,0 +1,47 @@
+Step 1 – OnBoard User for First Time	http:// 192.168.0.8:8080/GamificationAPI/sella/api/ONBOARD_USER?userCode=GBS03630&name=Boobathi Ayyasamy&nickName=Boobathi&image=profilepic.jpg&userType=EMPLOYEE
+
+{
+  "Response": {
+    "isSuccess": "1",
+    "code": "GBS03630",
+    "message": "Onboarded Successfully"
+  }
+}
+
+Step 2 – post Action to award Points or Badge or Reward	http://localhost:8080/GamificationAPI/sella/api/POST_ACTION?userCode=GBS03630&actionCode=IOT_HANDSHAKE
+
+{
+  "Response": {
+    "isSuccess": "1",
+    "code": "GBS03630",
+    "message": "Post Action Transaction Succesful"
+  }
+}
+
+Step3 – get Points status	http://localhost:8080/GamificationAPI/sella/api/GET_PROFILE?userCode=GBS03630&goalCode=IOT_GOAL
+{
+  "Response": {
+    "userCode": "GBS03630",
+    "name": "Boobathi Ayyasamy",
+    "nickName": "Boobathi",
+    "image": "profilepic.jpg",
+    "userType": "EMPLOYEE",
+    "status": "ACTIVE",
+    "totalPoints": "10",
+    "reedemedPoints": "0",
+    "redeemablePoints": "10",
+    "globalBadgeCode": "IOT_BRONZE",
+    "badgeView": {
+      "badgeCode": "IOT_BRONZE",
+      "goalCode": "IOT_GOAL",
+      "name": "Bronze status",
+      "image": "bronze.jpg",
+      "story": "You have reached Bronze status"
+    }
+  }
+}
+
+Step 4 – get All My Points Detail	http://localhost:8080/GamificationAPI/sella/api/GET_ALL_MY_POINTS_DETAIL?userCode=GBS03630&goalCode=IOT_GOAL
+
+
+

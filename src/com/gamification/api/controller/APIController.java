@@ -16,11 +16,15 @@ import org.apache.log4j.Logger;
 
 import com.gamification.api.manager.APIManager;
 import com.gamification.api.manager.NotificationManager;
+import com.gamification.api.view.BadgeView;
 import com.gamification.api.view.ChallengeView;
-import com.gamification.api.view.CustomerMaster;
+import com.gamification.api.view.GoalView;
+import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
 import com.gamification.api.view.Notification;
 import com.gamification.api.view.User;
+import com.gamification.api.view.UserBadge;
+import com.gamification.api.view.UserPointsPageView;
 import com.gamification.api.view.UserProfile;
 import com.gamification.common.JsonGenerator;
 import com.gamification.common.RequestStatus;
@@ -325,17 +329,17 @@ public class APIController {
 	@GET
 	@Path("/GET_LEADERBOARD")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getLeaderBoard(@QueryParam("custId") String custId, @QueryParam("requestType") String requestType) {
+	public Response getLeaderBoard(@QueryParam("goalCode") String userCode, @QueryParam("requestType") String requestType) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("") && requestType != null) {
-			List<CustomerMaster> customerMasterList = null;// getAPIManager().getLeaderBoard(custId, requestType);
+		if (userCode != null && !userCode.equals("") && requestType != null) {
+			List<LeaderBoardPageView> customerMasterList = getAPIManager().getLeaderBoard(userCode, requestType);
 			
 			if(!customerMasterList.isEmpty()) {
 				jsonRoot.put("Result", customerMasterList);
 			}
 			else {
 				
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(custId), "Leader Board Not Available"));
+				jsonRoot.put("Result", new Result(0, Integer.parseInt(userCode), "Leader Board Not Available"));
 			}
 			
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
@@ -445,11 +449,15 @@ public class APIController {
 	    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 	    ChallengeView challengeView = new ChallengeView();
 	    challengeView.setGoalCode(goalCode);
+	    RequestStatus requestStatus = new RequestStatus();
 	    Collection<ChallengeView> challengeViewColl = getAPIManager().retrieveChallengesByGoalCode(challengeView);
 		if(challengeViewColl != null) {
 			jsonRoot.put("Response", challengeViewColl);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(goalCode);
+			requestStatus.setMessage("Successfully");
 		} else {
-			RequestStatus requestStatus = new RequestStatus();
+			
 			requestStatus.setIsSuccess("0");
 			requestStatus.setCode(goalCode);
 			requestStatus.setMessage("No Challenges Found");
@@ -468,17 +476,146 @@ public class APIController {
 	    HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 	    LevelView levelView = new LevelView();
 	    levelView.setGoalCode(goalCode);
+	    RequestStatus requestStatus = new RequestStatus();
 	    Collection<LevelView> levelViewColl = getAPIManager().retrieveLevelsByGoalCode(levelView);
 		if(levelViewColl != null) {
 			jsonRoot.put("Response", levelViewColl);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(goalCode);
+			requestStatus.setMessage("Onboarded Successfully");
 		} else {
-			RequestStatus requestStatus = new RequestStatus();
+			
 			requestStatus.setIsSuccess("0");
 			requestStatus.setCode(goalCode);
 			requestStatus.setMessage("No Levels found");
 			jsonRoot.put("Response", requestStatus);
 		}
 		
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+		
+	}
+	
+	@GET
+	@Path("/GET_MY_BADGE")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getMyBadge(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("getMyBadge");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<BadgeView> badgeViewList = getAPIManager().getMyBadgeList(userCode, goalCode);
+		 RequestStatus requestStatus = new RequestStatus();
+	   
+		  
+		    if(badgeViewList != null && !badgeViewList.isEmpty()) {
+		    	jsonRoot.put("Response", badgeViewList);
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Success");
+			} else {
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Failure");
+				jsonRoot.put("Response", requestStatus);
+			}
+		    
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_MY_LOCKED_BADGE")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getMyLockedBadge(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("getMyLockedBadge");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<BadgeView> badgeViewList = getAPIManager().getMyLockedBadgeList(userCode, goalCode);
+		 RequestStatus requestStatus = new RequestStatus();
+	   
+		  
+		    if(badgeViewList != null && !badgeViewList.isEmpty()) {
+		    	jsonRoot.put("Response", badgeViewList);
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Success");
+			} else {
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Failure");
+				jsonRoot.put("Response", requestStatus);
+			}
+		    
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_ALL_MY_BADGES")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllMyBadges(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("getAllMyBadges");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<UserBadge> badgeViewList = getAPIManager().getAllMyBadgeList(userCode, goalCode);
+		 RequestStatus requestStatus = new RequestStatus();
+	   
+		  
+		    if(badgeViewList != null && !badgeViewList.isEmpty()) {
+		    	jsonRoot.put("Response", badgeViewList);
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Success");
+			} else {
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Failure");
+				jsonRoot.put("Response", requestStatus);
+			}
+		    
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_ALL_MY_GOALS")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllMyGoals(@QueryParam("userCode") String userCode) {
+		logger.debug("getAllMyGoals");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<GoalView> goalViewList = getAPIManager().getAllMyGoalList(userCode);
+		 RequestStatus requestStatus = new RequestStatus();
+	   
+		  
+		    if(goalViewList != null && !goalViewList.isEmpty()) {
+		    	jsonRoot.put("Response", goalViewList);
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Success");
+			} else {
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Failure");
+				jsonRoot.put("Response", requestStatus);
+			}
+		    
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	
+	@GET
+	@Path("/GET_ALL_MY_POINTS_DETAIL")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllMyPointsDetail(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("getAllMyPointsDetail");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<UserPointsPageView> userPointsView = getAPIManager().getAllPointsDetails(userCode, goalCode);
+		   RequestStatus requestStatus = new RequestStatus();
+	    
+	    if(userPointsView != null && !userPointsView.isEmpty()) {
+	    	jsonRoot.put("Response", userPointsView);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Success");
+		} else {
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Failure");
+			jsonRoot.put("Response", requestStatus);
+		}
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 	

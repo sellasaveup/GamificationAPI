@@ -1,18 +1,9 @@
 package com.gamification.api.persistence.challenge;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import com.gamification.api.interfaces.persistence.challenge.Challenge;
 import com.gamification.api.interfaces.persistence.challenge.IChallengeDao;
 import com.gamification.api.persistence.AdminPersistence;
-import com.gamification.api.persistence.config.AdminPersistenceFactory;
 import com.gamification.api.persistence.config.ClassInstantiator;
-import com.gamification.api.view.ChallengeView;
 
 public class ChallengeDao extends AdminPersistence<Challenge> implements IChallengeDao {
 
@@ -29,26 +20,38 @@ public class ChallengeDao extends AdminPersistence<Challenge> implements IChalle
 		return "from Challenge";
 	}
 	
-	public Collection<ChallengeView> getChallengesByGoal(final ChallengeView challengeView)  {
+	/*public Collection<ChallengeView> getChallengesByGoal(final ChallengeView challengeView)  {
 		
 		Collection<Challenge> challengeEntityList = new ArrayList<Challenge>(); 
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		List<Object>	list =	new ArrayList<Object>();
 		try {
 			//final Query query = em.createQuery("select c from Challenge c where c.goal.goalCode = ?1");
 			//query.setParameter(1, challengeView.getGoalCode());
-			final Query query = em.createNativeQuery("select * from SS_MA_CHALLENGE c where c.GOAL_CODE = ?1 and order by expiryDate desc ");
+			final Query query = em.createNativeQuery("select * from SS_MA_CHALLENGE c where c.GOAL_CODE = ?1 order by expiry_Date desc ", Challenge.class);
 			query.setParameter(1, challengeView.getGoalCode());
-			challengeEntityList = (Collection<Challenge>)query.getResultList();
+			//challengeEntityList = 
+			List<Challenge> list1 =	query.getResultList();
+			List<ChallengeView> challengeViewList = new ArrayList<ChallengeView> ();
+			for(Object entity1 : list1) {
+				
+				if(entity1 instanceof Challenge) {
+				Challenge entity2 = (Challenge)entity1;
+				System.out.println("--------"+entity1);
+				}
+			}
 		} finally {
 			close(em);
 		}
-		return getTransformEntityObjToViewObj(challengeEntityList);
+		return getTransformEntityObjToViewObj(list);
 	}
 	
-	private List<ChallengeView> getTransformEntityObjToViewObj(Collection<Challenge> challengeEntity) {
+	private List<ChallengeView> getTransformEntityObjToViewObj(List<Object> challengeEntity) {
 		
 		List<ChallengeView> challengeViewList = new ArrayList<ChallengeView> ();
-		for(Challenge entity : challengeEntity) {
+		for(Object entity1 : challengeEntity) {
+			Challenge entity = (Challenge)entity1;
+			System.out.println("-------"+entity);
 			ChallengeView view = new ChallengeView();
 			view.setActionCode(entity.getActionCode());
 			view.setBadgeCode(entity.getBadge().getBadgeCode());
@@ -62,7 +65,7 @@ public class ChallengeDao extends AdminPersistence<Challenge> implements IChalle
 			challengeViewList.add(view);
 		}
 		return challengeViewList;
-	}
+	}*/
 	
 	
 }

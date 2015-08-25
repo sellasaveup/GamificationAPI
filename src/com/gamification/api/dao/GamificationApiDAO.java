@@ -4,22 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.gamification.api.persistence.challenge.ChallengeDao;
-import com.gamification.api.persistence.level.LevelDao;
 import com.gamification.api.view.BadgeView;
 import com.gamification.api.view.ChallengeView;
+import com.gamification.api.view.GoalView;
+import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserAction;
 import com.gamification.api.view.UserBadge;
 import com.gamification.api.view.UserGoalPoints;
 import com.gamification.api.view.UserLevel;
+import com.gamification.api.view.UserPointsPageView;
 import com.gamification.api.view.UserProfile;
 import com.gamification.api.view.UserReward;
 import com.gamification.common.ConnectionUtility;
@@ -445,12 +448,355 @@ public class GamificationApiDAO {
 	
 	
 	public Collection<ChallengeView> getChalByGoal(ChallengeView challengeView) {
-		return new ChallengeDao().getChallengesByGoal(challengeView);
+		return getChallengesByGoal(challengeView);
 	}
 	
 	public Collection<LevelView> getLevelsByGoal(LevelView levelView) {
-		return new LevelDao().getLevelsByGoal(levelView);
+		return getLevelsByGoalList(levelView);
 	}
 	
+	public Collection<LevelView> getLevelsByGoalList(final LevelView levelView)  {
+		
+		List<LevelView> levelList = new ArrayList<LevelView>();
+		logger.debug("getLevel()");
+		String query = "  select l.image as levelImage, l.story as levelstory, r.story as rewardstory, b.image as badgeImage from ss_ma_level l , ss_ma_reward r , ss_ma_badge b where l.REWARD_CODE = r.REWARD_CODE and b.BADGE_CODE = l.BADGE_CODE and l.GOAL_CODE=? order by l.priority desc";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, levelView.getGoalCode());
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				logger.debug("Got Challenge");
+				LevelView level = new LevelView();
+				level.setStory(rs.getString("levelstory"));
+				level.setImage(rs.getString("levelImage"));
+				level.setBadgeCode(rs.getString("badgeImage"));
+				level.setRewardCode(rs.getString("rewardstory"));
+				levelList.add(level);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug(levelList.size());
+		return levelList;
+		
+	}
+	
+	public Collection<ChallengeView> getChallengesByGoal(final ChallengeView challengeView)  {
+		
+		List<ChallengeView> challengeList = new ArrayList<ChallengeView>();
+		logger.debug("getChallenge()");
+		String query = "SELECT * FROM SS_MA_CHALLENGE WHERE GOAL_CODE=? AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d') order by expiry_date desc";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, challengeView.getGoalCode());
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				logger.debug("Got Challenge");
+				ChallengeView challenge = new ChallengeView();
+				challenge.setActionCode(rs.getString("ACTION_CODE"));
+				challenge.setGoalCode(rs.getString("GOAL_CODE"));
+				challenge.setStory(rs.getString("STORY"));
+				challenge.setImage(rs.getString("IMAGE"));
+				challenge.setPoints(rs.getInt("POINTS"));
+				challenge.setOccurrence(rs.getInt("OCCURRENCE"));
+				challenge.setExpiryDate(rs.getString("EXPIRY_DATE"));
+				challenge.setBadgeCode(rs.getString("BADGE_CODE"));
+				challenge.setRewardCode(rs.getString("REWARD_CODE"));
+				challengeList.add(challenge);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug(challengeList.size());
+		return challengeList;
+		
+	}
+	
+	public List<LeaderBoardPageView> getOverAllLeaderBoard(String goalCode) {
+
+		List<LeaderBoardPageView> customerList = null;
+		System.out.println("GamificationDAO getOverAllLeaderBoard()");
+		String query = "select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.POINTS) as totalPoints, ua.USER_CODE, u.NAME, u.IMAGE  FROM ss_tr_user_action ua,ss_ma_user u group by ua.USER_CODE order by totalPoints desc limit 10) as inQuery, (SELECT @curRank := 0) r";
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			customerList = new ArrayList<LeaderBoardPageView>();
+			preparedStatement = connection.prepareStatement(query);
+			//preparedStatement.setInt(1, goalCode); TODO to be asked for goalCode required or not
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				LeaderBoardPageView leaderBoardPageView = new LeaderBoardPageView();
+				leaderBoardPageView.setUserCode(rs.getString("USER_CODE"));
+				leaderBoardPageView.setUserAvatar(rs.getString("IMAGE"));
+				leaderBoardPageView.setName(rs.getString("NAME"));
+				leaderBoardPageView.setPoints(rs.getLong("TOTALPOINTS"));
+				customerList.add(leaderBoardPageView);
+				System.out.println("Got Record");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+
+		return customerList;
+
+	}
+
+	public List<LeaderBoardPageView> getCurrentMonthLeaderBoard(String goalCode) {
+
+		List<LeaderBoardPageView> leaderBoardList = new ArrayList<LeaderBoardPageView>();
+		System.out.println("GamificationDAO getCurrentMonthLeaderBoard()");
+		String query = "select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.POINTS) as totalpoints, month(ua.DATE), ua.USER_CODE, u.image, u.name FROM ss_tr_user_action ua, ss_ma_user u where u.user_code = ua.user_code and extract(year_month from ua.DATE)= ? group by ua.USER_CODE, month(ua.DATE)  order by totalpoints desc limit 10) as inQuery, (SELECT @curRank := 0) r";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			String currentMonthYear = getCurrentMonthYear();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, currentMonthYear);
+			//preparedStatement.setInt(1, goalCode); TODO to be asked for goalCode required or not
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				LeaderBoardPageView leaderBoardPageView = new LeaderBoardPageView();
+				leaderBoardPageView.setUserCode(rs.getString("USER_CODE"));
+				leaderBoardPageView.setUserAvatar(rs.getString("IMAGE"));
+				leaderBoardPageView.setPoints(rs.getLong("TOTALPOINTS"));
+				leaderBoardPageView.setName(rs.getString("NAME"));
+				leaderBoardList.add(leaderBoardPageView);
+				System.out.println("Got Record");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+
+		return leaderBoardList;
+
+	}
+	
+	private String getCurrentMonthYear() {
+		Calendar now = Calendar.getInstance();
+		int year = now.get(Calendar.YEAR);
+		int month = now.get(Calendar.MONTH)+1;
+		DecimalFormat mFormat= new DecimalFormat("00");
+		String monthStr = mFormat.format(Double.valueOf(month));
+		return String.valueOf(year)+monthStr;
+	}
+	
+	public List<UserPointsPageView> getAllPointsInfo(String userCode, String goalCode) {
+
+		List<UserPointsPageView> userPointsList = new ArrayList<UserPointsPageView>();
+		System.out.println("GamificationDAO getAllPointsInfo()" + userCode + "iiiiii:" + goalCode);
+		String query = "select ua.ACTION_CODE, ch.STORY, ua.POINTS, ua.DATE from ss_tr_user_action ua, ss_ma_challenge ch where ch.ACTION_CODE=ua.ACTION_CODE and ua.USER_CODE=? and ua.GOAL_CODE=? and ua.STATUS='Active' order by ua.date desc";
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
+			
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				UserPointsPageView userPointsView = new UserPointsPageView();
+				userPointsView.setStory(rs.getString("STORY"));
+				userPointsView.setPoints(rs.getString("POINTS"));
+				userPointsView.setReceivedDate(rs.getString("DATE"));
+				userPointsList.add(userPointsView);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+
+		return userPointsList;
+
+	}
+	
+	
+	public List<BadgeView> getMyBadgeList(String userCode, String goalCode) {
+
+		List<BadgeView> userBadgeList = null;
+		System.out.println("GamificationDAO getMyBadgeList()");
+		String query = "select b.NAME, b.IMAGE, b.STORY from ss_ma_badge b where b.BADGE_CODE in (SELECT ub.BADGE_CODE FROM ss_tr_user_badge ub WHERE ub.USER_CODE=? AND ub.GOAL_CODE=?) and b.GOAL_CODE=? and b.EXPIRY_DATE>sysdate()";
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			userBadgeList = new ArrayList<BadgeView>();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
+			preparedStatement.setString(3, goalCode);
+			
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				BadgeView badge = new BadgeView();
+				badge.setStory(rs.getString("STORY"));
+				badge.setImage(rs.getString("IMAGE"));
+				badge.setName(rs.getString("NAME"));
+				userBadgeList.add(badge);
+				System.out.println("Got Record");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+
+		return userBadgeList;
+
+	}
+	
+	
+	public List<BadgeView> getMyLockedBadgeList(String userCode, String goalCode) {
+
+		List<BadgeView> userBadgeList = null;
+		System.out.println("GamificationDAO getMyLockedBadgeList()");
+		String query = " select b.NAME, b.IMAGE, b.STORY from ss_ma_badge b where b.BADGE_CODE not in (SELECT ub.BADGE_CODE FROM ss_tr_user_badge ub WHERE ub.USER_CODE=? AND ub.GOAL_CODE=?) and b.GOAL_CODE=? and b.EXPIRY_DATE>sysdate()";
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			userBadgeList = new ArrayList<BadgeView>();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
+			preparedStatement.setString(3, goalCode);
+			
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				BadgeView badge = new BadgeView();
+				badge.setStory(rs.getString("STORY"));
+				badge.setImage(rs.getString("IMAGE"));
+				badge.setName(rs.getString("NAME"));
+				userBadgeList.add(badge);
+				System.out.println("Got Record");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+
+		return userBadgeList;
+
+	}
+	
+	
+	public List<UserBadge> getAllMyBadgeList(String userCode, String goalCode) {
+
+		List<UserBadge> userBadgeList = null;
+		System.out.println("GamificationDAO getAllMyBadgeList()");
+		String query = " SELECT ub.BADGE_CODE FROM ss_tr_user_badge ub WHERE ub.USER_CODE=? AND ub.GOAL_CODE=?";
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			userBadgeList = new ArrayList<UserBadge>();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
+			
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				UserBadge badge = new UserBadge();
+				badge.setBadgeCode(rs.getString("BADGE_CODE"));
+				userBadgeList.add(badge);
+				System.out.println("Got Record");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		return userBadgeList;
+	}
+	
+	public List<GoalView> getAllMyGoalList(String userCode) {
+
+		List<GoalView>  goalViewList = new ArrayList<GoalView>();
+		System.out.println("GamificationDAO getAllMyBadgeList()");
+		String query = " select * from ss_ma_goal where status ='ACTIVE' and USER_TYPE IN (select user_type from ss_ma_user where user_code = ?' ) and EXPIRY_DATE>sysdate()";
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				GoalView goalView = new GoalView();
+				goalView.setGoalName(rs.getString("NAME"));
+				goalView.setGoalStory(rs.getString("STORY"));
+				goalView.setGoalImage(rs.getString("IMAGE"));
+				goalViewList.add(goalView);
+				System.out.println("Got Record");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		return goalViewList;
+	}
 	
 }

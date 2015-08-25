@@ -46,7 +46,7 @@ public class Challenge implements Serializable {
 	@Column(name="POINTS")
 	private Long points;
 	
-	@Column(name="OCCURANCE")
+	@Column(name="OCCURRENCE")
 	private Long occurance;
 	
 	@Column(name="EXPIRY_DATE")

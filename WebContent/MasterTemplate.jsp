@@ -11,19 +11,27 @@
 		
 		<link href="./css/masterpage.css" rel="stylesheet">
 		<link href="./css/glphycons.css" rel="stylesheet">
-		<script src="./js/jquery.min.js"></script>
-		<script src="./js/session.js"></script>
+			<script src="./js/jquery.min.js"></script>
+			<script src="./js/session.js"></script>
+			
 		
 		
 <script>
-alert(getSessionUrl());
-alert(getSessonUserCode());
-alert(getSessionGoalCode());
 
-      var commonUrl = getSessionUrl();
+
+alert(getSessionUrl());
++alert(getSessonUserCode());
++alert(getSessionGoalCode());
+ 		 
+var commonUrl = getSessionUrl();
       var userCode = getSessonUserCode();
       var goalCode = getSessionGoalCode();
-      
+
+
+		function loadMyGoals() {
+			  $("#content").load("MyGoals.jsp");
+		}
+
       function loadMyPoints() {
     	  $("#content").load("MyPoints.jsp");
       }
@@ -66,7 +74,8 @@ alert(getSessionGoalCode());
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-             	 <li class="active"> <a href="#" onclick="loadMyPoints();"><i class="glyphicon glyphicon-piggy-bank"></i><b> My Points</b></a></li>
+            	 <li class="active"><a href="#" onclick="loadMyGoals();"><i class="glyphicon glyphicon-piggy-bank"></i><b> My Goals</b></a></li>
+             	 <li> <a href="#" onclick="loadMyPoints();"><i class="glyphicon glyphicon-piggy-bank"></i><b> My Points</b></a></li>
                  <li><a href="#" onclick="loadMyBadges();"><i class="glyphicon glyphicon-star-empty"></i><b> My Badges</b></a></li>
                  <li><a href="#" onclick="loadChallenges();"><i class="glyphicon glyphicon-thumbs-up"></i><b>Challenges</b></a></li>
                  <li><a href="#" onclick="loadMyRewards();"><i class="glyphicon glyphicon-gift"></i><b>My Rewards</b></a></li>
@@ -78,63 +87,38 @@ alert(getSessionGoalCode());
             </ul>
         </div>
     </div>
-    <!-- /container -->
 </div>
-<!-- /Header -->
 
-<!-- Main -->
 <div class="container-fluid">
 
-<div class="row">
-
-</div>
     <div class="row">
         <div class="col-sm-2 profile-sidebar" style="width:280px">
-        
-        		<div class="well">
-				<div class="profile-userpic">
-					<img src="./img/profile/sheryl.jpg" class="img-responsive" alt="">
-				</div>
-				
-				<div class="profile-usertitle">
-					<div class="profile-usertitle-name">
-						Ciao,Steffy!
-					</div>
-					<div class="btn btn-warning glyphicon glyphicon-king">
-						<font><b>Gold</b></font>
-					</div>
-				</div>
-				<br>
-				<div align="center">
-					<article style="align:center" class = "btn-sm profile-usertitle-job"><img src="./img/banners/coins.png" width="12px" height="12px"><font size="3"><b>Total Points</b></font> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="6">1500</font></article>
-					
-					<article style="align:center" class = "btn-sm profile-usertitle-job"><img src="./img/banners/coins.png" width="12px" height="12px"><font size="3"><b>Redeemed Points</b></font><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="6">400</font></article>
-					
-					<article style="align:center" class = "btn-sm profile-usertitle-job"><img src="./img/banners/coins.png" width="12px" height="12px"><font size="3"><b>Redeemable Points</b></font><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="6">1100</font></article>
-					
-			 </div>
-      			 <hr>
-			
+        	<div id="userProfileTemplate">
              </div>
           </div>
-<!--           Loading page dynamically -->
-	     <br>
         <div class="col-sm-8" id="content">
-
-           
-
      </div>
     </div>
     
 </div>
 
-<!-- /Main -->
+<div class="row">
 <div class="footer navbar-fixed-bottom">
+</div>
 <footer class="text-center">Banca sella, 2015.</footer>
 </div>
 
 	<!-- script references -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			//getProfile('profile', $('#custId').val());
+			getUserProfile('userProfileTemplate', 'GBS03146', 'HYPE_GOAL'); //TO DO take userCode and goalCode from session
+			//$('goalsPage').load
+		});
+		</script>
 	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/profilewidget.js" type="text/javascript"></script> 
 	     
 	</body>
 </html>

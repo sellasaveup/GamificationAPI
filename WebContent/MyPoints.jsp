@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<%@ page language="java" contentType="text/html;charset=UTF-8"%>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>My Points</title>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/leaderboard.css">
-<link rel="stylesheet" href="./css/leaderboardalltime.css">
-
 <link rel="stylesheet" href="./css/style.css"></link>
 
 <script type="text/javascript" src="./js/termometer.js"></script>
@@ -19,8 +19,9 @@
 
 <link href="./css/masterpage.css" rel="stylesheet">
 
-<style type="text/css">
 
+
+<style type="text/css">
 </style>
 
 <script type="text/javascript">
@@ -35,50 +36,47 @@ termometer(1000,500,function(){
 </script>
 </head>
 <body>
-	
-<div class="container">
 
-	<div  class="row">
-	<div class="col-sm-5">
-	<div class="termometer">
-	<div class="donation-meter hide">
-	  <strong class="goal"></strong>
-	  <span class="glass">
-	  		<div class="currentPosition arrow total"></div>
-	      <span class="amount"></span>
-	  </span>
-	  <div class="bulb">
-	      <span class="red-circle"></span>
-	      <span class="filler">
-	          <span></span>
-	      </span>
-	  </div>
-	</div>
-</div>
-	</div>
-	<div class="col-sm-7">
-	<div class="pull-right" style="margin-right:350px;">
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-sm-4 well">
 				<ul id="myTab" class="nav nav-tabs">
-					<li class="active"><a href="#pointsmonth" data-toggle="tab">This Month </a></li>
+					<li class="active"><a href="#pointsmonth" data-toggle="tab">This
+							Month </a></li>
 					<li><a href="#pointswhole" data-toggle="tab">All Time</a></li>
 				</ul>
-				
+
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade in active" id="pointsmonth">
-								<b>&nbsp;&nbsp;Points &nbsp;&nbsp;<label id="CurrentMonthPoint">100</label></b>
-							
+						<b>&nbsp;&nbsp;Points &nbsp;&nbsp;<label
+							id="CurrentMonthPoint"></label></b>
+
 					</div>
 
 					<div class="tab-pane fade" id="pointswhole">
-								<b>&nbsp;&nbsp;Points&nbsp;&nbsp;<label id="AllTimePoint">1000</label></b>
-								
+						<b>&nbsp;&nbsp;Points&nbsp;&nbsp;<label id="AllTimePoint"></label></b>
+
 					</div>
 				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="termometer">
+					<div class="donation-meter hide">
+						<strong class="goal"></strong> <span class="glass">
+							<div class="currentPosition arrow total"></div> <span
+							class="amount"></span>
+						</span>
+						<div class="bulb">
+							<span class="red-circle"></span> <span class="filler"> <span></span>
+							</span>
+						</div>
+					</div>
 				</div>
-				<br>
-				<br>
-				<div>
-<div class='leaderboardthisMonth'>
+			</div>
+			<div class="col-sm-4">
+				<div class='leaderboardthisMonth'>
     <h1><span>Leader Board</span></h1>
     
     <ul id="myTab" class="nav nav-tabs">
@@ -95,56 +93,18 @@ termometer(1000,500,function(){
     
     </div>
 </div>
- </div>
-	   
-		
-				<div>
-
-			
-			
-	</div>
-	
-	      
+			</div>
 		</div>
-		
-	
-	<div class="row">
-	
-	<table class="table">
-    <thead>
-      <tr>
-        <th>Challenges</th>
-        <th>Points</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="success">
-        <td>Download Hype App</td>
-        <td>10</td>
-        <td>12/09/2015</td>
-      </tr>
-      <tr class="danger">
-         <td>Create a Goal</td>
-        <td>10</td>
-        <td>10/09/2015</td>
-      </tr>
-      <tr class="info">
-         <td>Create first Milestone for a Goal</td>
-        <td>5</td>
-        <td>15/09/2015</td>
-      </tr>
-      <tr class="success">
-        <td>Unlock a Goal</td>
-        <td>2</td>
-        <td>12/09/2015</td>
-      </tr>
-     
-    </tbody>
-  </table>
-</div>
-</div>
-</div>
-
+		<div class="row" id="ChallengeList"></div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//getChallengesByGoal('ChallengesByGoal', $('#custId').val());
+			getMyAllTimePoints('AllTimePoint', 'GBS03146', 'HYPE_GOAL');
+			getMyCurrentMonthPoints('CurrentMonthPoint',  'GBS03146','HYPE_GOAL');
+			getMyChallengesList('ChallengeList','gbs03146',  'HYPE_GOAL'); //TODO dynamic goalcode
+		});
+		</script>
+	<script src="./js/pointswidget.js" type="text/javascript"></script>
 </body>
 </html>

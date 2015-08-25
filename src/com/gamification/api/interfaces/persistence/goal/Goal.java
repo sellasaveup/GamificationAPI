@@ -64,7 +64,7 @@ public class Goal implements Serializable {
 	private Set<Challenge> challenges;
 	
 	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<Level> levels;
+	private Set<Level> level;
 	
 	@OneToOne(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Badge badge;
@@ -152,12 +152,12 @@ public class Goal implements Serializable {
 		this.challenges = challenges;
 	}
 
-	public List<Level> getLevels() {
-		return levels;
+	public Set<Level> getLevel() {
+		return level;
 	}
 
-	public void setLevels(List<Level> levels) {
-		this.levels = levels;
+	public void setLevel(Set<Level> level) {
+		this.level = level;
 	}
 
 	public Badge getBadge() {

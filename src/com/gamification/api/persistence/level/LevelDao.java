@@ -30,7 +30,7 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 	}
 	
 	
-	public Collection<LevelView> getLevelsByGoal(final LevelView levelView)  {
+	/*public Collection<LevelView> getLevelsByGoal(final LevelView levelView)  {
 		
 		Collection<Level> levelEntityList = new ArrayList<Level>(); 
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
@@ -62,5 +62,5 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 			levelViewList.add(view);
 		}
 		return levelViewList;
-	}
+	}*/
 }

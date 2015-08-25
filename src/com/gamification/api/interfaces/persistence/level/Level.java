@@ -49,9 +49,12 @@ public class Level implements Serializable {
 	@Column(name="STORY")
 	private String story;
 	
-	@Column(name="POINTS")
-	private Long points;
+	@Column(name="START_POINT")
+	private Long startPoints;
 
+	@Column(name="END_POINT")
+	private Long endPoints;
+	
 	@Column(name="PRIORITY")
 	private Integer priority;
 	
@@ -117,12 +120,20 @@ public class Level implements Serializable {
 		this.story = story;
 	}
 
-	public Long getPoints() {
-		return points;
+	public Long getStartPoints() {
+		return startPoints;
 	}
 
-	public void setPoints(Long points) {
-		this.points = points;
+	public void setStartPoints(Long startPoints) {
+		this.startPoints = startPoints;
+	}
+
+	public Long getEndPoints() {
+		return endPoints;
+	}
+
+	public void setEndPoints(Long endPoints) {
+		this.endPoints = endPoints;
 	}
 
 	public Integer getPriority() {

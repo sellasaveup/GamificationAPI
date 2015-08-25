@@ -2,6 +2,7 @@ package com.gamification.api.manager;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -11,8 +12,12 @@ import com.gamification.api.dao.RequestValidatorDAO;
 import com.gamification.api.dao.ServiceApiDAO;
 import com.gamification.api.view.BadgeView;
 import com.gamification.api.view.ChallengeView;
+import com.gamification.api.view.GoalView;
+import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
 import com.gamification.api.view.User;
+import com.gamification.api.view.UserBadge;
+import com.gamification.api.view.UserPointsPageView;
 import com.gamification.api.view.UserProfile;
 import com.gamification.common.RequestStatus;
 
@@ -125,7 +130,7 @@ public class APIManager {
 			pointsRequestMap.put("Response", requestStatus);
 			return pointsRequestMap;
 		}
-		
+			
 	public String getPerformedActivities() {
 		logger.debug("getPerformedActivities()");
 			return getServiceApiDAO().getPerformedActivities();
@@ -145,7 +150,6 @@ public class APIManager {
 		logger.debug("getLatestAction()");
 			return getServiceApiDAO().getLatestAction();
 	}
-	
 	public String getLatestBadgeActivity() {
 		logger.debug("getLatestBadgeActivity()");
 			return getServiceApiDAO().getLatestBadgeActivity();
@@ -188,6 +192,63 @@ public class APIManager {
 	public Collection<LevelView> retrieveLevelsByGoalCode(LevelView levelView) {
 		logger.debug("retrieveLevelsByGoalCode level"+ levelView);
 		return getGamificationDAO().getLevelsByGoal(levelView);
+	}
+	
+	public List<LeaderBoardPageView> getLeaderBoard(String goalCode, String requestType) {
+		List<LeaderBoardPageView> customerMasterList = null;
+		GamificationApiDAO gamificationApiDAO = getGamificationDAO();
+		if(requestType.equals("A")) {
+			customerMasterList = gamificationApiDAO.getOverAllLeaderBoard( goalCode);
+		} else if(requestType.equals("M")) {
+			customerMasterList = gamificationApiDAO.getCurrentMonthLeaderBoard(goalCode);
+		}
+		System.out.println("customerMasterList-->"+customerMasterList);
+		return customerMasterList;
+	}
+	
+	
+	public List<BadgeView> getMyBadgeList( String userCode, String goalCode) {
+		logger.debug(" getMyBadgeList list userCode--->"+userCode);
+		logger.debug("actionCode--->"+goalCode);
+			
+		List<BadgeView> list = getGamificationDAO().getMyBadgeList(userCode, goalCode);
+		
+		return list;
+	}
+	
+	public List<BadgeView> getMyLockedBadgeList( String userCode, String goalCode) {
+		logger.debug(" getMyLockedBadgeList list userCode--->"+userCode);
+		logger.debug("actionCode--->"+goalCode);
+			
+		List<BadgeView> list = getGamificationDAO().getMyLockedBadgeList(userCode, goalCode);
+		
+		return list;
+	}
+	
+	
+	public List<UserBadge> getAllMyBadgeList( String userCode, String goalCode) {
+		logger.debug(" badge list userCode--->"+userCode);
+		logger.debug("actionCode--->"+goalCode);
+			
+		List<UserBadge> list = getGamificationDAO().getAllMyBadgeList(userCode, goalCode);
+		
+		return list;
+	}
+	
+	public List<GoalView> getAllMyGoalList( String userCode) {
+		logger.debug(" getAllMyGoalList list userCode--->"+userCode);
+			
+		List<GoalView> list = getGamificationDAO().getAllMyGoalList(userCode);
+		
+		return list;
+	}
+	
+	public List<UserPointsPageView> getAllPointsDetails( String userCode, String goalCode) {
+		logger.debug("points detail poiuserCode--->"+userCode);
+		logger.debug("actionCode--->"+goalCode);
+			
+		List<UserPointsPageView> list = getGamificationDAO().getAllPointsInfo(userCode, goalCode);
+		return list;
 	}
 
 }

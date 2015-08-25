@@ -3,7 +3,6 @@ function termometer(totalvalue,currentvalue,cb){
     var $progress = $(".amount", $thermo);
 
 	if(isNaN(totalvalue) || isNaN(currentvalue) ){
-    	alert("Only numbers allowed");
     }
 	
 	termoPogress = Math.ceil((parseFloat(currentvalue)/parseFloat(totalvalue))*100);

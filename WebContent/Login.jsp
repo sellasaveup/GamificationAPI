@@ -56,17 +56,8 @@ body {background: #336699;}
     height: 80px;
 }
 
-.textinbox{
-    text-align: right;
-    margin-top: -10px;
-    height: 20px;
-    line-height: 20px;
-    font-size: 15px;
-}
 
-.divbackground{
-    background-color: white;
-}
+
     </style>
  <script type="text/javascript">
  var commonUrl = "http://localhost:8080/GamificationAPI/sella/api/";
@@ -344,7 +335,7 @@ body {background: #336699;}
 
         <span class="lineheight">
             
-            <a class="initialism registerform_open" href="#registerform" style="color:white;font-size: 15px;"><b>Register in GF</b></a>
+            <a class="initialism registerform_open" href="#registerform" style="color:white;font-size: 18px;"><b>Register in GF</b></a>
             
         </span>
 
@@ -356,7 +347,7 @@ body {background: #336699;}
     <div class="col-sm-6 pull-right">
     
     <table width="400px">
-   <tr > <td><font size="5"><b><span id="performedActivitiesCount"></span></b></font></td><td><font size="5"><b><span id="unlockedBadgeCount"></span></b></font></td><td><font size="5"><b><span id="engagedUserCount"></span></b></font></td></font></tr>
+   <tr> <td><font size="6"><b><span id="performedActivitiesCount"></span></b></font></td><td><font size="6"><b><span id="unlockedBadgeCount"></span></b></font></td><td><font size="6"><b><span id="engagedUserCount"></span></b></font></td></font></tr>
    <tr><td><font size="3"><b>Activities Performed</b></font></td><td><font size="3"><b>Badges Unlocked</b></font></td><td><font size="3"><b>Users Engaged</b></font></td></tr>
   
     
@@ -381,26 +372,6 @@ body {background: #336699;}
 	</div></td><td><div id="textPanel3">Steffy rewarded on Hype goal with 200 points..</div></td><td>
 	</td></tr>
 	
-	<tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img id="imagePanel4" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td><div id="textPanel4">Steffy reached BRONZE level	</div></td><td>
-	</td></tr>
-	
-	<tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img id="imagePanel5" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td><div id="textPanel5">Steffy joined customer community to score on a goal</div></td><td>
-	</td></tr>
-	
-	<tr class="roundedbox"> <td>
-    <div class="profile-userpic">
-		<center><img id="imagePanel6" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td><div id="textPanel6">Steffy joined customer community to score on a goal</div></td><td>
-	</td></tr>
-	
-	
-    
     </table>
     
 
@@ -441,13 +412,21 @@ body {background: #336699;}
     
     <tr>
     <td style="color:black">Who am I ? </td>
-     <td><select>
-  <option value="select" class="selectpicker show-menu-arrow">--Select User type--</option>
-  <option value="employee">Employee</option>
-  <option value="customer">Customer</option>
-  <option value="trainee">Trainee</option>
-  <option value="branchUser">Branch user</option>
-</select><br><br></td>
+     <td>
+     
+      <div class="form-group">
+      <div>
+        <select id="userType" class="form-control">
+          <option value="employee">Employee</option>
+  		  <option value="customer">Customer</option>
+  		  <option value="trainee">Trainee</option>
+   		  <option value="branchUser">Branch user</option>
+        </select> 
+      </div>
+    </div>
+     
+     
+    </td>
     </tr>
     <tr>
     <td style="color:black">Nick Name  </td>

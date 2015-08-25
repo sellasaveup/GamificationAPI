@@ -99,6 +99,8 @@ alert(getSessionGoalCode());
         	<div id="userProfileTemplate">
              </div>
           </div>
+<!--           Loading page dynamically -->
+	     <br>
         <div class="col-sm-8" id="content">
 
            
@@ -110,11 +112,10 @@ alert(getSessionGoalCode());
 
 <div class="row">
 <div class="footer navbar-fixed-bottom">
-</div>
 <footer class="text-center">Banca sella, 2015.</footer>
 </div>
 
-	<!-- script references -->
+		<!-- script references -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 
@@ -124,8 +125,7 @@ alert(getSessionGoalCode());
 		});
 		</script>
 	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/profilewidget.js" type="text/javascript"></script> 
-	
+	<script src="./js/profilewidget.js" type="text/javascript"></script>
 	     
 	</body>
 </html>

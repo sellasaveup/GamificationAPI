@@ -17,7 +17,6 @@ body {
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
-  color: white;
   font-weight: 300;
 }
 
@@ -60,7 +59,7 @@ body :-ms-input-placeholder {
   top: 40%;
   left: 0;
   width: 100%;
-  height: 580px;
+  height: 640px;
   margin-top: -200px;
   overflow: hidden;
 }
@@ -119,7 +118,6 @@ form input:hover {
 }
 
 form input:focus {
-  background-color: white;
   width: 300px;
   color: black;
 }
@@ -268,79 +266,4 @@ form button:hover {
     -webkit-transform: translateY(-700px) rotate(600deg);
             transform: translateY(-700px) rotate(600deg);
   }
-}
-
-
-@font-face {
-	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?u9qxwp');
-	src:url('../fonts/icomoon.eot?#iefixu9qxwp') format('embedded-opentype'),
-		url('../fonts/icomoon.ttf?u9qxwp') format('truetype'),
-		url('../fonts/icomoon.woff?u9qxwp') format('woff'),
-		url('../fonts/icomoon.svg?u9qxwp#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-[class^="icon-"], [class*=" icon-"] {
-	font-family: 'icomoon';
-	speak: none;
-	font-style: big;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 3;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-.icon-cogs:before {
-	content: "\e600";
-}
-.icon-stats-dots:before {
-	content: "\e601";
-}
-.icon-stats-bars:before {
-	content: "\e602";
-}
-.icon-stats-bars2:before {
-	content: "\e603";
-}
-.icon-gift:before {
-	content: "\e604";
-}
-.icon-bookmarks:before {
-	content: "\e605";
-}
-.icon-star-empty:before {
-	content: "\e606";
-}
-.icon-star-full:before {
-	content: "\e607";
-}
-.icon-happy:before {
-	content: "\e608";
-}
-.icon-tongue:before {
-	content: "\e609";
-}
-.icon-wink:before {
-	content: "\e60a";
-}
-.icon-grin:before {
-	content: "\e60b";
-}
-.icon-cool:before {
-	content: "\e60c";
-}
-.icon-evil:before {
-	content: "\e60d";
-}
-.icon-reddit:before {
-	content: "\e60e";
-}
-.icon-like:before {
-	content: "\e60f";
 }

@@ -364,7 +364,7 @@ body {background: #336699;}
      <tr class="roundedbox"> <td>
     <div class="profile-userpic">
 		<center><img id="imagePanel1" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td><div id="textPanel1">Boobathi unlocked a badge SUPER SAVER on Hype Goal</div></td><td>
+	</div></td><td><div id="textPanel1">Steffy unlocked a badge SUPER SAVER on Hype Goal</div></td><td>
 	</td></tr>
 	
     <tr class="roundedbox"> <td>

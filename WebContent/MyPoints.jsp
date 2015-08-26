@@ -16,7 +16,7 @@
 <script type="text/javascript" src="./js/jquery.canvasjs.min.js"></script>
 <script type="text/javascript" src="./js/leaderboard.js"></script>
 <script type="text/javascript" src="./js/leaderboardalltime.js"></script>
-
+<script src="./js/session.js"></script>
 <link href="./css/masterpage.css" rel="stylesheet">
 
 <link href="./css/thermometer.css" rel="stylesheet">
@@ -34,6 +34,10 @@
 termometer(1000,500,function(){
 	$(".donation-meter").removeClass("hide");
 });
+
+var commonUrl = getSessionUrl();
+var userCode = getSessonUserCode();
+var goalCode = getSessionGoalCode();
 </script>
 </head>
 <body>
@@ -100,13 +104,12 @@ termometer(1000,500,function(){
 
 		</div>
 		<div class="row" id="ChallengeList"></div>
-</div>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
-			//getChallengesByGoal('ChallengesByGoal', $('#custId').val());
-			getMyAllTimePoints('AllTimePoint', 'GBS03146', 'HYPE_GOAL');
-			getMyCurrentMonthPoints('CurrentMonthPoint',  'GBS03146','HYPE_GOAL');
-			getMyChallengesList('ChallengeList','gbs03146',  'HYPE_GOAL'); //TODO dynamic goalcode
+			getMyAllTimePoints('AllTimePoint', userCode, goalCode);
+			getMyCurrentMonthPoints('CurrentMonthPoint',  userCode, goalCode);
+			getMyChallengesList('ChallengeList', userCode, goalCode); 
 		});
 		</script>
 	<script src="./js/pointswidget.js" type="text/javascript"></script>

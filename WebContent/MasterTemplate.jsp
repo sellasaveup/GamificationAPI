@@ -114,14 +114,12 @@ alert(getSessionGoalCode());
 <div class="footer navbar-fixed-bottom">
 <footer class="text-center">Banca sella, 2015.</footer>
 </div>
+</div>
 
 		<!-- script references -->
 	<script type="text/javascript">
 		$(document).ready(function() {
-
-			//getProfile('profile', $('#custId').val());
-			getUserProfile('userProfileTemplate', 'GBS03146', 'HYPE_GOAL'); //TO DO take userCode and goalCode from session
-			//$('goalsPage').load
+			getUserProfile('userProfileTemplate', userCode, goalCode);
 		});
 		</script>
 	<script src="./js/bootstrap.min.js"></script>

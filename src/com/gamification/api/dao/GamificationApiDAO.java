@@ -768,7 +768,7 @@ public class GamificationApiDAO {
 
 		List<GoalView>  goalViewList = new ArrayList<GoalView>();
 		System.out.println("GamificationDAO getAllMyBadgeList()");
-		String query = " select * from ss_ma_goal where status ='ACTIVE' and USER_TYPE IN (select user_type from ss_ma_user where user_code = ?' ) and EXPIRY_DATE>sysdate()";
+		String query = " select * from ss_ma_goal where status ='ACTIVE' and USER_TYPE IN (select user_type from ss_ma_user where user_code = ? ) and EXPIRY_DATE>sysdate()";
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -787,6 +787,7 @@ public class GamificationApiDAO {
 				goalView.setGoalName(rs.getString("NAME"));
 				goalView.setGoalStory(rs.getString("STORY"));
 				goalView.setGoalImage(rs.getString("IMAGE"));
+				goalView.setGoalCode(rs.getString("GOAL_CODE"));
 				goalViewList.add(goalView);
 				System.out.println("Got Record");
 			}

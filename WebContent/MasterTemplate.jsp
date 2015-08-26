@@ -13,15 +13,16 @@
 		<link href="./css/glphycons.css" rel="stylesheet">
 		<script src="./js/jquery.min.js"></script>
 		<script src="./js/session.js"></script>
-		
+		<script src="./js/profilewidget.js" type="text/javascript"></script>
+		<script src="./js/bootstrap.min.js"></script>
 		
 <script>
 
-      var commonUrl = getSessionUrl();
-      var userCode = getSessionUserCode();
-      var goalCode = getSessionGoalCode();		
-		
+     
       $(document).ready(function() {
+    	  var commonUrl = getSessionUrl();
+          var userCode = getSessionUserCode();
+          var goalCode = getSessionGoalCode();		
 			getUserProfile('userProfileTemplate', userCode, goalCode);
 		});
       
@@ -110,8 +111,8 @@
 <footer class="text-center">Banca sella, 2015.</footer>
 </div>
 </div>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/profilewidget.js" type="text/javascript"></script>
+	
+	
 	     
 	</body>
 </html>

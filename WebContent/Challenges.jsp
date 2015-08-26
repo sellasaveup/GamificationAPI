@@ -19,9 +19,8 @@ var userCode = getSessionUserCode();
 var goalCode = getSessionGoalCode();
 
 		$(document).ready(function() {
-			//getChallengesByGoal('ChallengesByGoal', $('#custId').val(), commonUrl);
 			getChallengesByGoal('ChallengesByGoal', goalCode, commonUrl);
-			getLevelByGoal('LevelByGoal', goalCode, commonUrl); //TODO dynamic goalcode
+			getLevelByGoal('LevelByGoal', goalCode, commonUrl); 
 		});
 		</script>
 		

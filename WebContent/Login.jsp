@@ -297,7 +297,7 @@ body {background: #336699;}
 			<p class="headstyle"> Framework<img src="img/logo/logo.gif" width="250"></p>
 	</div>
 <div>
-<form id="myForm"  action="MasterTemplate.jsp" method="post" >
+<form id="myForm"  action="MyGoals.jsp" method="post" >
     <div class="row">
     <div class="col-sm-6 pull-left">
 			

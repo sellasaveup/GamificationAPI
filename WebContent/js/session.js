@@ -2,7 +2,7 @@ function getSessionUrl() {
 	return localStorage.getItem("sessionUrl");
 }
 
-function getSessonUserCode() {
+function getSessionUserCode() {
 	return localStorage.getItem("sessionUserCode");
 } 
 

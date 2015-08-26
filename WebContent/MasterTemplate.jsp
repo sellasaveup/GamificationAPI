@@ -16,19 +16,15 @@
 		
 		
 <script>
-alert(getSessionUrl());
-alert(getSessonUserCode());
-alert(getSessionGoalCode());
 
       var commonUrl = getSessionUrl();
-      var userCode = getSessonUserCode();
-      var goalCode = getSessionGoalCode();
+      var userCode = getSessionUserCode();
+      var goalCode = getSessionGoalCode();		
+		
+      $(document).ready(function() {
+			getUserProfile('userProfileTemplate', userCode, goalCode);
+		});
       
-
-		function loadMyGoals() {
-			  $("#content").load("MyGoals.jsp");
-		}
-
       function loadMyPoints() {
     	  $("#content").load("MyPoints.jsp");
       }
@@ -50,7 +46,7 @@ alert(getSessionGoalCode());
       }
       
       function loadAwardNotify() {
-    	  $("#content").load("notification.jsp");
+    	  $("#content").load("Notification.jsp");
       }
       
 </script>
@@ -71,7 +67,6 @@ alert(getSessionGoalCode());
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                 <li><a href="#" onclick="loadMyGoals();"><i class="glyphicon glyphicon-piggy-bank"></i><b> My Goals</b></a></li>
              	 <li class="active"> <a href="#" onclick="loadMyPoints();"><i class="glyphicon glyphicon-piggy-bank"></i><b> My Points</b></a></li>
                  <li><a href="#" onclick="loadMyBadges();"><i class="glyphicon glyphicon-star-empty"></i><b> My Badges</b></a></li>
                  <li><a href="#" onclick="loadChallenges();"><i class="glyphicon glyphicon-thumbs-up"></i><b>Challenges</b></a></li>
@@ -115,13 +110,6 @@ alert(getSessionGoalCode());
 <footer class="text-center">Banca sella, 2015.</footer>
 </div>
 </div>
-
-		<!-- script references -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			getUserProfile('userProfileTemplate', userCode, goalCode);
-		});
-		</script>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/profilewidget.js" type="text/javascript"></script>
 	     

@@ -17,27 +17,27 @@
 <script type="text/javascript" src="./js/leaderboard.js"></script>
 <script type="text/javascript" src="./js/leaderboardalltime.js"></script>
 <script src="./js/session.js"></script>
+<script src="./js/pointswidget.js" type="text/javascript"></script>
 <link href="./css/masterpage.css" rel="stylesheet">
-
 <link href="./css/thermometer.css" rel="stylesheet">
-
-<style type="text/css">
-
-</style>
-
 <script type="text/javascript">
 
-</script>
-<script type="text/javascript">
+var commonUrl = getSessionUrl();
+var userCode = getSessionUserCode();
+var goalCode = getSessionGoalCode();
+
+$(document).ready(function() {
+	getMyAllTimePoints('AllTimePoint', userCode, goalCode, commonUrl);
+	getMyCurrentMonthPoints('CurrentMonthPoint',  userCode, goalCode, commonUrl);
+	getMyChallengesList('ChallengeList', userCode, goalCode, commonUrl); 
+});
 
 //This function will animate the termometer. First one is total value of termometer, second one is ending value  
 termometer(1000,500,function(){
 	$(".donation-meter").removeClass("hide");
 });
 
-var commonUrl = getSessionUrl();
-var userCode = getSessonUserCode();
-var goalCode = getSessionGoalCode();
+
 </script>
 </head>
 <body>
@@ -105,13 +105,6 @@ var goalCode = getSessionGoalCode();
 		</div>
 		<div class="row" id="ChallengeList"></div>
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			getMyAllTimePoints('AllTimePoint', userCode, goalCode);
-			getMyCurrentMonthPoints('CurrentMonthPoint',  userCode, goalCode);
-			getMyChallengesList('ChallengeList', userCode, goalCode); 
-		});
-		</script>
-	<script src="./js/pointswidget.js" type="text/javascript"></script>
+	
 </body>
 </html>

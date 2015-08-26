@@ -30,9 +30,9 @@ function getChallenges(divId, customerID) {
 	});
 }
 
-function getChallengesByGoal(divId, goalCode) {
+function getChallengesByGoal(divId, goalCode, commonUrl) {
 
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GETCHALLENGESBYGOAL?goalCode='
+	var buildUrl = commonUrl+'GETCHALLENGESBYGOAL?goalCode=';
 	buildUrl = buildUrl + goalCode;
 	
 	$.ajax({
@@ -64,9 +64,9 @@ function getChallengesByGoal(divId, goalCode) {
 
   
 
-function getLevelByGoal(divId, goalCode) {
+function getLevelByGoal(divId, goalCode, commonUrl) {
 
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GETLEVELBYGOAL?goalCode='
+	var buildUrl = commonUrl+'GETLEVELBYGOAL?goalCode=';
 	buildUrl = buildUrl + goalCode;
 	
 	$.ajax({

@@ -126,6 +126,35 @@ public class RequestValidatorDAO {
 	
 	}
 	
+	public String getBadgeCode(String badgeCode, String goalCode) {
+
+		logger.debug("getBadgeCode()");
+		String query = "select badge_code from ss_ma_badge where badge_code=? and goal_Code = ?";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String dbBadgeCode = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, badgeCode);
+			preparedStatement.setString(2, goalCode);
+			rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				dbBadgeCode = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("dbBadgeCode-->"+dbBadgeCode);
+		return dbBadgeCode;
+	
+	}
+	
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();
 	}

@@ -70,7 +70,7 @@ public class APIRequestValidator {
 		return requestStatus;
 	}
 	
-public RequestStatus doGetPointsRequest(String userCode, String goalCode) {
+	public RequestStatus doGetPointsRequest(String userCode, String goalCode) {
 		
 		RequestValidatorDAO requestValidatorDAO = getRequestValidatorDAO();
 		
@@ -98,6 +98,39 @@ public RequestStatus doGetPointsRequest(String userCode, String goalCode) {
 		return requestStatus;
 	}
 	
+	public RequestStatus doValidateAwardBadge(String userCode, String badgeCode, String goalCode) {
+		RequestValidatorDAO requestValidatorDAO = getRequestValidatorDAO();
+		
+		RequestStatus requestStatus = null;
+		if(userCode == null || userCode.equals("")) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setMessage("User Code cannot be Empty");
+		} else if(goalCode == null || goalCode.equals("")) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Goal Code cannot be Empty");
+		} else if(badgeCode == null || badgeCode.equals("")) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Badge Code cannot be Empty");
+		}
+		else if(requestValidatorDAO.getUserCode(userCode) == null) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("User Not Onboarded");
+		} else if(requestValidatorDAO.getBadgeCode(badgeCode,goalCode) == null) {
+			requestStatus = getRequestStatus();
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Badge does not Exists for selected goal");
+		}
+		return requestStatus;
+		
+	}
 	
 	private RequestStatus getRequestStatus() {
 		return new RequestStatus();

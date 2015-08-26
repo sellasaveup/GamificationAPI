@@ -12,8 +12,14 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="./js/application.js" type="text/javascript"></script>
+<script src="./js/session.js"></script>
+
 <script>
 	
+var commonUrl = getSessionUrl();
+var sessionUserCode = getSessionUserCode();
+var sessionGoalCode = getSessionGoalCode();
+
 	$( document ).ready(function() {
 		pushNotificationOnChange();
 		awardPointsOnChange();
@@ -54,16 +60,18 @@
 	 }
 
 	function onSubmit() {
+		var goalCode = $( "#goalCode" ).val();
+		goalCode = 'HYPE_GOAL';
 		if ($("#checkPushNotify").is(':checked')) {
 			
-			var pushNotificationUrl = 'http://localhost:8080/GamificationAPI/sella/api/PUSH_NOTIFICATION?';
+			var pushNotificationUrl = commonUrl+'PUSH_NOTIFICATION?';
 			var notificationType = $( "#notificationType" ).val();
 			var target = $( "#target" ).val();
 			var message = $( "#message" ).val();
 			var image = $( "#image" ).val();
 			var notificationUserCode = $( "#notificationUserCode" ).val();
 			var userType = $( "#userType" ).val();
-			var goalCode = $( "#goalCode" ).val();
+			
 			
 			pushNotificationUrl = pushNotificationUrl+"notificationType="+notificationType;
 			pushNotificationUrl = pushNotificationUrl+"&target="+target;
@@ -93,7 +101,7 @@
 		
 		if ($("#checkAwardPoints").is(':checked')) {
 			
-			var awardPointsUrl = 'http://localhost:8080/GamificationAPI/sella/api/POST_ACTIONE?';
+			var awardPointsUrl = commonUrl+'POST_ACTIONE?';
 			
 			var pointUserCode = $( "#pointUserCode" ).val();
 			var pointAction = $("#pointAction").val();
@@ -121,15 +129,14 @@
 		
 		if ($("#checkAwardBadge").is(':checked')) {
 			
-			var awardBadgeUrl = 'http://localhost:8080/GamificationAPI/sella/api/AWARD_BADGE?';
+			var awardBadgeUrl = commonUrl+'AWARD_BADGE?';
 			
 			var badgeUserCode = $( "#badgeUserCode" ).val();
-			var badgeId = $("#badgeId").val();
-			var activity = $("#activity").val();
+			var badgeCode = $("#badgeCode").val();
 			
 			awardBadgeUrl = awardBadgeUrl+"userCode="+badgeUserCode;
-			awardBadgeUrl = awardBadgeUrl+"&badgeCode="+badgeId;
-			awardBadgeUrl = awardBadgeUrl+"&activity="+activity;
+			awardBadgeUrl = awardBadgeUrl+"&badgeCode="+badgeCode;
+			awardBadgeUrl = awardBadgeUrl+"&goalCode="+goalCode;
 			
 			$.ajax({
 	            type: "GET",
@@ -153,7 +160,7 @@
 </script>
 </head>
 <body>
-	<form id="notificationForm" action="notification.jsp" method="post">
+	<form id="notificationForm" action="Notification.jsp" method="post">
 		<div class="container">
 
 			<div class="row">

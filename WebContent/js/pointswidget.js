@@ -1,6 +1,6 @@
-function getPoints(divId, customerID, requestType) {
+function getPoints(divId, customerID, requestType, commonUrl) {
 
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GET_POINT?custId='
+	var buildUrl = commonUrl+'GET_POINT?custId=';
 	buildUrl = buildUrl + customerID + '&requestType=' + requestType;
 	$.ajax({
 		type : "GET",
@@ -20,9 +20,9 @@ function getPoints(divId, customerID, requestType) {
 }
 
 
-function getMyAllTimePoints(divId, userCode, goalCode) {
+function getMyAllTimePoints(divId, userCode, goalCode, commonUrl) {
 
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GET_ALL_POINTS?userCode='
+	var buildUrl = commonUrl+'GET_ALL_POINTS?userCode=';
 		buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
 	
 	$.ajax({
@@ -41,10 +41,11 @@ function getMyAllTimePoints(divId, userCode, goalCode) {
 	
 }
 
-function getMyCurrentMonthPoints(divId, userCode, goalCode) {
+function getMyCurrentMonthPoints(divId, userCode, goalCode, commonUrl) {
 
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GET_MONTH_POINTS?userCode='
+	var buildUrl = commonUrl+'GET_MONTH_POINTS?userCode=';
 		buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
+		
 	$.ajax({
 		type : "GET",
 		url : buildUrl,
@@ -60,9 +61,9 @@ function getMyCurrentMonthPoints(divId, userCode, goalCode) {
 	});
 }
 
-function getMyChallengesList(divId, userCode, goalCode) {
+function getMyChallengesList(divId, userCode, goalCode, commonUrl) {
 
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GETALLMYPOINTSDETAIL?userCode='
+	var buildUrl = commonUrl+'GET_ALL_MY_POINTS_DETAIL?userCode=';
 	buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
 	
 	$.ajax({

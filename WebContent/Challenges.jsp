@@ -10,7 +10,22 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
+<script src="./js/challengeswidget.js" type="text/javascript"></script>
+<script src="./js/session.js"></script>
 <title>challenges</title>
+<script type="text/javascript">
+var commonUrl = getSessionUrl();
+var userCode = getSessionUserCode();
+var goalCode = getSessionGoalCode();
+
+		$(document).ready(function() {
+			//getChallengesByGoal('ChallengesByGoal', $('#custId').val(), commonUrl);
+			getChallengesByGoal('ChallengesByGoal', goalCode, commonUrl);
+			getLevelByGoal('LevelByGoal', goalCode, commonUrl); //TODO dynamic goalcode
+		});
+		</script>
+		
+		
 </head>
 <body>
 	<div class="row">
@@ -31,13 +46,6 @@
 	<div class="row" id="LevelByGoal">
 	
 </div>
-<script type="text/javascript">
-		$(document).ready(function() {
-			//getChallengesByGoal('ChallengesByGoal', $('#custId').val());
-			getChallengesByGoal('ChallengesByGoal', 'HYPE_GOAL');
-			getLevelByGoal('LevelByGoal', 'HYPE_GOAL'); //TODO dynamic goalcode
-		});
-		</script>
-		<script src="./js/challengeswidget.js" type="text/javascript"></script>
+
 </body>
 </html>

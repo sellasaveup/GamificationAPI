@@ -318,7 +318,32 @@ public class ServiceApiDAO {
 	
 	}
 	
+	public String postUserBadge(String userCode, String badgeCode, String goalCode) {
+		
+		logger.debug("postUserBadge()");
+		String query = "INSERT INTO ss_tr_user_badge (BADGE_CODE, GOAL_CODE, USER_CODE, STATUS) VALUES (?, ?, ?, 'ACTIVE');";
+		String postStatus = "0";
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, badgeCode);
+			preparedStatement.setString(2, goalCode);
+			preparedStatement.setString(3, userCode);
+			preparedStatement.executeUpdate();
+			postStatus = "1";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(e);
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, null);
+		}
+		logger.debug("postStatus-->"+postStatus);
+		return postStatus;
 	
+	}
 	
 	
 	private ConnectionUtility getConnectionUtility() {

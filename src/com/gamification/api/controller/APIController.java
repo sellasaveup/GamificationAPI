@@ -283,7 +283,7 @@ public class APIController {
 	public Response awardBadge(@QueryParam("userCode") String userCode, @QueryParam("badgeCode") String badgeCode,
 			@QueryParam("goalCode") String goalCode) {
 			HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-			//RequestStatus requestStatus = getAPIManager().awardBadge(userCode, badgeCode, goalCode);
+			RequestStatus requestStatus = getAPIManager().awardBadge(userCode, badgeCode, goalCode);
 			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 

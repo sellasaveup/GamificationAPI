@@ -175,16 +175,31 @@ public class APIManager {
 			return getServiceApiDAO().getLatestUserActivity();
 	}
 	
-	
-	
-	
-	private GamificationApiDAO getGamificationDAO() {
-		return new GamificationApiDAO();
+	public RequestStatus awardBadge(String userCode, String badgeCode, String goalCode) {
+		logger.debug("getLatestLevelActivity()");
+		logger.debug("userCode-->"+userCode);
+		logger.debug("badgeCode-->"+badgeCode);
+		logger.debug("goalCode-->"+goalCode);
+		
+		RequestStatus requestStatus = new APIRequestValidator().doGetPointsRequest(userCode, goalCode);
+		if(requestStatus == null) {
+			String postStatus = getServiceApiDAO().postUserBadge(userCode, badgeCode, goalCode);
+			if(postStatus.equals("1")) {
+				requestStatus = new RequestStatus();
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Badge Awarded Succesfully");
+			} else {
+				requestStatus = new RequestStatus();
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Badge Award Failed");
+			}
+		}
+		
+		return requestStatus;
 	}
 	
-	private ServiceApiDAO getServiceApiDAO() {
-		return new ServiceApiDAO();
-	}
 	public Collection<ChallengeView> retrieveChallengesByGoalCode(ChallengeView challengeView) {
 		logger.debug("retrieveChallengesByGoalCode challenge"+ challengeView);
 		return getGamificationDAO().getChalByGoal(challengeView);
@@ -249,6 +264,14 @@ public class APIManager {
 			
 		List<UserPointsPageView> list = getGamificationDAO().getAllPointsInfo(userCode, goalCode);
 		return list;
+	}
+	
+	private GamificationApiDAO getGamificationDAO() {
+		return new GamificationApiDAO();
+	}
+	
+	private ServiceApiDAO getServiceApiDAO() {
+		return new ServiceApiDAO();
 	}
 
 }

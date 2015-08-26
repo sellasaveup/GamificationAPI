@@ -9,6 +9,14 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
+<script src="./js/session.js"></script>
+<script type="text/javascript">
+
+var commonUrl = getSessionUrl();
+var userCode = getSessionUserCode();
+var goalCode = getSessionGoalCode();
+
+</script>
 <title>Rewards</title>
 </head>
 <body>

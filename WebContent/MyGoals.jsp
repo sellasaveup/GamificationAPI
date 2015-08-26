@@ -10,10 +10,13 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
+<script src="./js/session.js"></script>
 <title>challenges</title>
 <script type="text/javascript">
+
+ 
 	$(document).ready(function() {
-		$("#hypeStory").hide();
+		
 		$('[data-toggle="tooltip"]').tooltip({
 			position : {
 				my : "center bottom-50",
@@ -25,18 +28,12 @@
 			}
 
 		});
+		
 	});
 
-	function funcOnChange() {
-		$("#hype").click(function() {
-			$("#hypeStory").show();
-		});
-		$("#TownHallMeet").click(function() {
-			$("#hypeStory").hide();
-		});
-		$("#pdu").click(function() {
-			$("#hypeStory").hide();
-		});
+	function funcOnChange(selectedGoal) {
+		localStorage.setItem("sessionGoalCode", selectedGoal);
+		$("#myGoalFormId").submit();
 	}
 </script>
 
@@ -57,6 +54,13 @@
 
 </style>
 <body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<form action="MasterTemplate.jsp" method="post" id="myGoalFormId">
 	<div class="container">
 		<div class="row well">
 			<div class="col-sm-12">
@@ -68,15 +72,15 @@
 		<div class="row well">
 			<div class="col-sm-4">
 				<label class="radio-inline"><input type="radio"
-					id="hype" name="goalType" onchange="funcOnChange()">Hype</label>
+					id="hype" name="goalType" value="HYPE_GOAL" onchange="funcOnChange(this.value)">Hype</label>
 			</div>
 			<div class="col-sm-4">
 				<label class="radio-inline"><input type="radio"
-					id="TownHallMeet" name="goalType" onchange="funcOnChange()">Town Hall Event</label>
+					id="townHallMeet" value="INTRANET_GOAL" name="goalType" onchange="funcOnChange(this.value)">Intranet</label>
 			</div>
 			<div class="col-sm-4">
 				<label class="radio-inline"><input type="radio"
-					id="pdu" name="goalType" onchange="funcOnChange()">PDU</label>
+					id="pdu" value="PDU_GOAL" name="goalType" onchange="funcOnChange(this.value)">PDU</label>
 			</div>
 		</div>
 		<br>
@@ -141,5 +145,6 @@
 			</div>
 		</div>
 	</div>
+	</form>
 </body>
 </html>

@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="./css/bootstrap.min.css">
-<script src="./js/jquery.min.js" type="text/javascript"></script>
+<script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
+<script src="./js/jquery.blockUI.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
 <script src="./js/session.js"></script>
 <title>challenges</title>
@@ -16,18 +17,6 @@
 
  
 	$(document).ready(function() {
-		
-		$('[data-toggle="tooltip"]').tooltip({
-			position : {
-				my : "center bottom-50",
-				at : "center top",
-				using : function(position, feedback) {
-					$(this).css(position);
-					$("<div>").addClass("tool").appendTo(this);
-				}
-			}
-
-		});
 		
 	});
 
@@ -65,7 +54,7 @@
 		<div class="row well">
 			<div class="col-sm-12">
 				<center>
-					<h2>Select a Mission</h2>
+					<h2>Select a Goal</h2>
 				</center>
 			</div>
 		</div>
@@ -85,66 +74,34 @@
 		</div>
 		<br>
 		<hr>
-		<br>
-		<div id="hypeStory">
-
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="row">
-						<h1>
-							<center>HOW IT WORKS</center>
-						</h1>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<a href="#" data-toggle="tooltip"
-								data-original-title="Connect to Sella SaveUp Network"> <img
-								src="./img/profile/user.jpg">
-							</a>
-						</div>
-						<div class="col-sm-3">
-							<a href="#" data-toggle="tooltip"
-								data-original-title="Create Hype Goals, Share Goal with your Buddy, Accomplish
-									your Goal">
-								<img src="./img/profile/system.jpg">
-							</a>
-						</div>
-						<div class="col-sm-3">
-							<a href="#" data-toggle="tooltip"
-								data-original-title="Every activities you perform, you earn reward points and unlock badges">
-								<img src="./img/profile/saving.jpg">
-							</a>
-						</div>
-						<div class="col-sm-3">
-							<a href="#" data-toggle="tooltip"
-								data-original-title="Use Points to earn Gifts from our Redemption Catalogue">
-								<img src="./img/profile/support.jpg">
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="row well">
-					<div class="col-sm-12">
-						<div class="row">
-							<div class="col-sm-3">
-								<p>On Board</p>
-							</div>
-							<div class="col-sm-3">
-								<p>Perform Activities on our digital channel goal (eg: IB, Mobile, Hype)
-								</p>
-							</div>
-							<div class="col-sm-3">
-								<p>Earn Points and Unlock Badges</p>
-							</div>
-							<div class="col-sm-3">
-								<p>Redeem Points for Free Gifts</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	</form>
+	<script>
+	$(document).ready(function() {
+		 $('#myGoalFormId').click(function() { 
+		        $.blockUI({ 
+		            message: $('div.growlUI'), 
+		            fadeIn: 700, 
+		            fadeOut: 700, 
+		            timeout: 2000, 
+		            showOverlay: false, 
+		            centerY: false, 
+		            css: { 
+		                width: '350px', 
+		                top: '10px', 
+		                left: '', 
+		                right: '10px', 
+		                border: 'none', 
+		                padding: '5px', 
+		                backgroundColor: '#000', 
+		                '-webkit-border-radius': '10px', 
+		                '-moz-border-radius': '10px', 
+		                opacity: .6, 
+		                color: '#fff' 
+		            } 
+		        }); 
+		    }); 
+	});
+	</script>
 </body>
 </html>

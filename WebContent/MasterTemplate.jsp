@@ -43,7 +43,7 @@
       }
       
       function loadAdminMaster() {
-    	  $("#content").load("index.jsp");
+    	  $("#content").load("Admin.jsp");
       }
       
       function loadAwardNotify() {
@@ -52,11 +52,9 @@
       
 </script>
 	</head>
-	<body onload=loadMyPoints()>
+	<body onload="loadMyPoints()">
 <!-- header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
-        <input type="hidden" name="custId" id="custId" value="<%=request.getParameter("custId") %>"   />
-
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -64,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Gamification Framework</a>
+            <a class="navbar-brand" href="http://localhost:8080/GamificationAPI/Login.jsp">Gamification Framework</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -73,7 +71,7 @@
                  <li><a href="#" onclick="loadChallenges();"><i class="glyphicon glyphicon-thumbs-up"></i><b>Challenges</b></a></li>
                  <li><a href="#" onclick="loadMyRewards();"><i class="glyphicon glyphicon-gift"></i><b>My Rewards</b></a></li>
                  <li><a href="#" onclick="loadAdminMaster();"><i class="glyphicon glyphicon-folder-open"></i><b> Admin Master</b></a></li>
-                 <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b><span class="count">3</span></a></li>
+                 <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b></a></li>
              	
                 
                 <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>

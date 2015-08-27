@@ -41,12 +41,12 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	
 <div class="container">
-
-	<div  class="row">
-
-			<div class="col-sm-4 well">
+<div class="row">
+</div>
+	<div class="row">
+			<div class="col-sm-4">
+			 <h4><span>Points</span></h4>
 				<ul id="myTab" class="nav nav-tabs">
 					<li class="active"><a href="#pointsmonth" data-toggle="tab">This Month </a></li>
 					<li><a href="#pointswhole" data-toggle="tab">All Time</a></li>
@@ -83,8 +83,8 @@ $(document).ready(function() {
 	</div>
 			</div>-->
 			<div class="col-sm-4">
-<div class='leaderboardthisMonth'>
-    <h1><span>Leader Board</span></h1>
+<div class="leaderboardthisMonth">
+    <h4><span>Leader Board</span></h4>
     
     <ul id="myTab" class="nav nav-tabs">
     
@@ -105,6 +105,6 @@ $(document).ready(function() {
 		</div>
 		<div class="row" id="ChallengeList"></div>
 
-	
+	</div>
 </body>
 </html>

@@ -37,15 +37,14 @@ body {
         </div>
     </div>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
     
     <div class="flip-container vertical" >
 		<div class="flipper">
 		
 			<div class="front" style="background:white;">
-			<div class="back-title glyphicon glyphicon-thumbs-up">&nbsp;Newbie</div>
 			<br>
-			<div class="front_text">Welcome!Entered Hype Community,Experencing money as a tool</div>
+			<div class="front_text"><img src="./img/badges/Newbie.png"></div>
 			<i  class="glyphicon glyphicon-star front_image"></i>
 			</div>
 			<div class="back" style="background:#f8f8f8;">
@@ -59,14 +58,13 @@ body {
       
       
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
      <div class="flip-container vertical" >
     <div class="flipper">
 		
 			<div class="front" style="background:white;">
-				<div class="back-title glyphicon glyphicon-thumbs-up">&nbsp;Super Saver</div>
 			<br>
-			<div class="front_text">Good save for future.Congrats!</div>
+			<div class="front_text"><img src="./img/badges/SuperSaver.png"></div>
 			<i  class="glyphicon glyphicon-star front_image"></i>
 			</div>
 			<div class="back" style="background:#f8f8f8;">
@@ -104,7 +102,7 @@ body {
            </div>
     </div>
      <div class="row">
-   <div class="col-sm-4">
+   <div class="col-sm-3">
      <div class="flip-container vertical" >
      <div class="flipper">
 		
@@ -123,7 +121,7 @@ body {
 			</div>
 			</div>
     </div>
-     <div class="col-sm-4">
+     <div class="col-sm-3">
        <div class="flip-container vertical" >
       <div class="flipper">
 		
@@ -143,7 +141,7 @@ body {
 			</div>
       
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
      <div class="flip-container vertical" >
      <div class="flipper">
 		
@@ -162,6 +160,25 @@ body {
 			</div>
 			</div>
     </div>
+    
+    <div class="col-sm-3">
+     <div class="flip-container vertical" >
+    <div class="flipper">
+		
+			<div class="front" style="background:white;">
+				<div class="back-title glyphicon glyphicon-thumbs-up">&nbsp;Hype Guru</div>
+			<br>
+			<div class="front_text">Expert Hyper.Well done!</div>
+			<i  class="glyphicon glyphicon-star front_image"></i>			</div>
+			<div class="back" style="background:#f8f8f8;">
+				<div class="back-logo"></div>
+				<div class="back-title">Hype Guru</div>
+                <img src="./img/banners/trophy.jpg" class="circleimage" width="225" height="220" border="2px">
+				<p><b>Points 500</b></p>
+			</div>
+			</div>
+			</div>
+    </div>
     </div>
           <div class="row">
             <div class="clearfix"></div>
@@ -173,7 +190,7 @@ body {
             <br>
 
   
-    <div class="col-sm-4">
+    <div class="col-sm-3">
      <div class="flip-container vertical" >
     <div class="flipper">
 		

@@ -33,9 +33,9 @@ $(document).ready(function() {
 });
 
 //This function will animate the termometer. First one is total value of termometer, second one is ending value  
-termometer(1000,500,function(){
+/*termometer(1000,500,function(){
 	$(".donation-meter").removeClass("hide");
-});
+});*/
 
 
 </script>
@@ -64,7 +64,7 @@ termometer(1000,500,function(){
 					</div>
 				</div>
 				</div>
-			<div class="col-sm-4">
+			<!-- <div class="col-sm-4">
 	<div class="termometer">
 	<div class="donation-meter hide">
 	  <strong class="goal"></strong>
@@ -79,9 +79,9 @@ termometer(1000,500,function(){
 	      </span>
 	  </div>
 	</div>
-</div>
+</div> 
 	</div>
-			</div>
+			</div>-->
 			<div class="col-sm-4">
 <div class='leaderboardthisMonth'>
     <h1><span>Leader Board</span></h1>

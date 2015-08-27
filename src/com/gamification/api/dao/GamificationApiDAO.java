@@ -734,7 +734,7 @@ public class GamificationApiDAO {
 
 		List<UserBadge> userBadgeList = null;
 		System.out.println("GamificationDAO getAllMyBadgeList()");
-		String query = " SELECT ub.BADGE_CODE FROM ss_tr_user_badge ub WHERE ub.USER_CODE=? AND ub.GOAL_CODE=?";
+		String query = " SELECT * FROM ss_tr_user_badge ub WHERE ub.USER_CODE=? AND ub.GOAL_CODE=?";
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;

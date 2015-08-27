@@ -66,6 +66,13 @@ body {background: #336699;}
  
  
  $( document ).ready(function() {
+	 updateLatestActivity();
+	 updateLatestBadgeActivity();
+	 updateLatestRedeemActivity();
+	 updateLatestRewardActivity();
+	 updateLatestLevelActivity();
+	 updateLatestUserActivity();
+	 
 		    $('#registerform').popup({
 		        pagecontainer: '.container',
 		        transition: 'all 0.3s'
@@ -79,12 +86,12 @@ body {background: #336699;}
 	 getUnlockedBadgeCount(unlockedBadgeUrl);
 	 getEngagedUserCount(engagedUserCountUrl);
 	 
-	 setInterval(function () {updateLatestActivity()}, getRandomRange(5000,7000));
-	 setInterval(function () {updateLatestBadgeActivity()}, getRandomRange(5000,7000));
-	 setInterval(function () {updateLatestRedeemActivity()}, getRandomRange(5000,7000));
-	 setInterval(function () {updateLatestRewardActivity()}, getRandomRange(5000,7000));
-	 setInterval(function () {updateLatestLevelActivity()}, getRandomRange(5000,7000));
-	 setInterval(function () {updateLatestUserActivity()}, getRandomRange(5000,7000));
+	 setInterval(function () {updateLatestActivity()}, getRandomRange(9000,10000));
+	 setInterval(function () {updateLatestBadgeActivity()}, getRandomRange(9000,10000));
+	 setInterval(function () {updateLatestRedeemActivity()}, getRandomRange(9000,10000));
+	 setInterval(function () {updateLatestRewardActivity()}, getRandomRange(9000,10000));
+	 setInterval(function () {updateLatestLevelActivity()}, getRandomRange(9000,10000));
+	 setInterval(function () {updateLatestUserActivity()}, getRandomRange(9000,10000));
 	 
  });
  
@@ -97,7 +104,7 @@ body {background: #336699;}
 				dataType : "json",
 				contentType : "application/json; charset=UTF-8",
 				success : function(data) {
-					getDelayedIncrement(data.performedActivitiesCount,"performedActivitiesCount",30);
+					getDelayedIncrement(data.performedActivitiesCount,"performedActivitiesCount",100);
 				},
 				error : function(e) {
 					console.log('getPerformedActivitiesCount failure : ' + e);
@@ -129,7 +136,7 @@ body {background: #336699;}
 				dataType : "json",
 				contentType : "application/json; charset=UTF-8",
 				success : function(data) {
-					getDelayedIncrement(data.engagedUserCount,"engagedUserCount", 40);
+					getDelayedIncrement(data.engagedUserCount,"engagedUserCount", 100);
 				},
 				error : function(e) {
 					console.log('getEngagedUserCount failure : ' + e);
@@ -354,22 +361,23 @@ body {background: #336699;}
     
      <tr class="roundedbox"> <td>
     <div class="profile-userpic">
-		<center><img id="imagePanel1" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td><div id="textPanel1">Steffy unlocked a badge SUPER SAVER on Hype Goal</div></td><td>
+		<center><img id="imagePanel1" src="./img/profile/sheryl.jpg"  class="img-circle" alt="" width="80px" height="80px"></center>
+	</div></td><td><div id="textPanel1" width=100>Steffy unlocked a badge SUPER SAVER on Hype Goal</div></td><td>
 	</td></tr>
 	
     <tr class="roundedbox"> <td>
     <div class="profile-userpic">
-		<center><img id="imagePanel2" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td><div id="textPanel2">Steffy redeemed on Hype Goal..250 points for Amazon Gift Voucher</div></td><td>
+		<center><img id="imagePanel2" src="./img/profile/sheryl.jpg"  class="img-circle" alt="" width="80px" height="80px"></center>
+	</div></td><td><div id="textPanel2" width=100>Steffy redeemed on Hype Goal..250 points for Amazon Gift Voucher</div></td><td>
 	
 	</td></tr>
 	
 	
 	<tr class="roundedbox"> <td>
     <div class="profile-userpic">
-		<center><img id="imagePanel3" src="./img/profile/sheryl.jpg" class="img-responsive" alt="" width="120px"></center>
-	</div></td><td><div id="textPanel3">Steffy rewarded on Hype goal with 200 points..</div></td><td>
+		<center><img id="imagePanel3" src="./img/profile/sheryl.jpg" class="img-circle" alt="" width="80px" height="80px"></center>
+	</div></td>
+	<td><div id="textPanel3" width=100>Steffy rewarded on Hype goal with 200 points..</div></td><td>
 	</td></tr>
 	
     </table>

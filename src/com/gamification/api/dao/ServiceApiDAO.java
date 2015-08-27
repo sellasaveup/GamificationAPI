@@ -118,7 +118,7 @@ public class ServiceApiDAO {
 				goal = rs.getString("GOAL");
 				image = rs.getString("IMAGE");
 				finalActivityString.append(name).append(" earned on ").append(goal).append("...").append(points).
-				append(" Points(s)").append(" for ").append(action).append("#").append(image);
+				append(" Points(s)\n").append(" for, ").append(action).append("#").append(image);
 				
 			}
 
@@ -134,7 +134,7 @@ public class ServiceApiDAO {
 	
 	public String getLatestBadgeActivity() {
 		logger.debug("getLatestBadgeActivity()");
-		String query = "select um.name,bm.name badge, gm.story goal, um.image from ss_ma_user um,ss_ma_badge bm, ss_ma_goal gm, ss_tr_user_badge ub where ub.badge_code = bm.badge_code and ub.goal_code = gm.goal_code and ub.user_code=um.user_code and ub.status='ACTIVE' order by ub.date desc limit 1";
+		String query = "select um.name,bm.name badge, gm.name goal, um.image from ss_ma_user um,ss_ma_badge bm, ss_ma_goal gm, ss_tr_user_badge ub where ub.badge_code = bm.badge_code and ub.goal_code = gm.goal_code and ub.user_code=um.user_code and ub.status='ACTIVE' order by ub.date desc limit 1";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		String name = "";
@@ -170,7 +170,7 @@ public class ServiceApiDAO {
 	
 	public String getLatestReedemActivity() {
 		logger.debug("getLatestReedemActivity()");
-		String query = "select um.name,gm.story goal,rm.name,ur.REDEEM_POINTS reward,um.image from ss_ma_user um, ss_ma_goal gm, ss_ma_reward rm, ss_tr_user_reward ur where ur.user_code = um.user_code and ur.goal_code = gm.goal_code and ur.reward_code = rm.reward_code and ur.redeem_status='YES' order by ur.date desc limit 1";
+		String query = "select um.name,gm.name GOAL,rm.name,ur.REDEEM_POINTS reward,um.image from ss_ma_user um, ss_ma_goal gm, ss_ma_reward rm, ss_tr_user_reward ur where ur.user_code = um.user_code and ur.goal_code = gm.goal_code and ur.reward_code = rm.reward_code and ur.redeem_status='YES' order by ur.date desc limit 1";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		String name = "";
@@ -206,7 +206,7 @@ public class ServiceApiDAO {
 	
 	public String getLatestRewardActivity() {
 		logger.debug("getLatestRewardActivity()");
-		String query = "select um.name,gm.story goal,rm.name,ur.REDEEM_POINTS reward,um.image from ss_ma_user um, ss_ma_goal gm, ss_ma_reward rm, ss_tr_user_reward ur where ur.user_code = um.user_code and ur.goal_code = gm.goal_code and ur.reward_code = rm.reward_code and ur.redeem_status='NO' order by ur.date desc limit 1";
+		String query = "select um.name,gm.name goal,rm.name rewardName,ur.REDEEM_POINTS reward,um.image from ss_ma_user um, ss_ma_goal gm, ss_ma_reward rm, ss_tr_user_reward ur where ur.user_code = um.user_code and ur.goal_code = gm.goal_code and ur.reward_code = rm.reward_code and ur.redeem_status='NO' order by ur.date desc limit 1";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		String name = "";
@@ -223,10 +223,10 @@ public class ServiceApiDAO {
 			if(rs.next()) {
 				logger.debug("Got getLatestRewardActivity");
 				name = rs.getString("NAME");
-				reward = rs.getString("REWARD");
+				reward = rs.getString("rewardName");
 				goal = rs.getString("GOAL");
 				image = rs.getString("IMAGE");
-				finalRewardActivityString.append(name).append(" Redeemed on ").append(goal).append("...").append(reward).append(" points(s)#").append(image);
+				finalRewardActivityString.append(name).append(" received a reward on ").append(goal).append("...").append(reward).append(" #").append(image);
 				
 			}
 
@@ -242,10 +242,11 @@ public class ServiceApiDAO {
 	
 	public String getLatestLevelActivity() {
 		logger.debug("getLatestLevelActivity()");
-		String query = "select um.name,lm.name level,lm.end_point point,gm.story goal, um.image from ss_ma_user um, ss_ma_level lm, ss_ma_goal gm, ss_tr_user_level ul where um.user_code = ul.user_code and lm.level_code = ul.level_code and gm.goal_code = ul.goal_code order by ul.date desc limit 1";
+		String query = "select um.name,lm.level_code level,lm.end_point point,gm.name goal, um.image, b.name badgeName from ss_ma_user um, ss_ma_level lm, ss_ma_goal gm, ss_tr_user_level ul, ss_ma_badge b where um.user_code = ul.user_code and lm.level_code = ul.level_code and gm.goal_code = ul.goal_code and b.BADGE_CODE = ul.BADGE_CODE and b.GOAL_CODE= ul.GOAL_CODE order by ul.date desc limit 1";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		String name = "";
+		String badgeName = "";
 		String level = "";
 		String point = "";
 		String goal = "";
@@ -260,12 +261,13 @@ public class ServiceApiDAO {
 			if(rs.next()) {
 				logger.debug("Got finallevelActivityString");
 				name = rs.getString("NAME");
+				badgeName = rs.getString("badgeName");
 				level = rs.getString("LEVEL");
 				point = rs.getString("POINT");
 				goal = rs.getString("GOAL");
 				image = rs.getString("IMAGE");
-				finallevelActivityString.append(name).append(" Reached ").append(level).append("...")
-				.append(point).append(" points(s) on ").append(goal).append("#").append(image);
+				finallevelActivityString.append(name).append(" reached ").append(badgeName).append("...")
+				.append(" on ").append(goal).append("#").append(image);
 				
 			}
 
@@ -303,8 +305,8 @@ public class ServiceApiDAO {
 				type = rs.getString("TYPE");
 				status = rs.getString("STATUS");
 				image = rs.getString("IMAGE");
-				finalUserActivityString.append(name).append("/").append(nickName).append(" joined ")
-				.append(type).append(" community to score on a goal…").append(status).append("#").append(image);
+				finalUserActivityString.append(name).append(" joined ")
+				.append(type).append(" community to score on a goal ").append("#").append(image);
 				
 			}
 

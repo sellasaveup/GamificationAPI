@@ -21,14 +21,16 @@ var sessionUserCode = getSessionUserCode();
 var sessionGoalCode = getSessionGoalCode();
 
 	$( document ).ready(function() {
+		
 		pushNotificationOnChange();
 		awardPointsOnChange();
 		awardBadgeOnChange();
 	});
 	
+	
 	function pushNotificationOnChange() {
 		if ($("#checkPushNotify").is(':checked')) {
-			
+			getGoalList(document.getElementById("goalCode"));
 			$("#pushNotificationPanel").show();
 			
 		} else {
@@ -50,7 +52,7 @@ var sessionGoalCode = getSessionGoalCode();
 	
 	function awardBadgeOnChange() {
 		if ($("#checkAwardBadge").is(':checked')) {
-			
+			getGoalList(document.getElementById("badgeGoalCode"));
 			$("#awardBadgePanel").show();
 			
 		} else {
@@ -58,12 +60,126 @@ var sessionGoalCode = getSessionGoalCode();
 			$("#awardBadgePanel").hide();
 		}
 	 }
-
-	function onSubmit() {
-		var goalCode = $( "#goalCode" ).val();
-		goalCode = 'HYPE_GOAL';
-		if ($("#checkPushNotify").is(':checked')) {
+	
+	function getGoalList(loadingGoalObject) {
+		$.ajax({
+		    url: 'RetrieveGoal',
+		    dataType: 'json',
+		    type: 'post',
+		    contentType: 'application/json',
+		    data: JSON.stringify( { "first-name": "Boobathi", "last-name": "Ayyasamy" } ),
+		    processData: false,
+		    success: function( data, textStatus, jQxhr ){
+		        if(data.Result == "OK") {
+		        	doParseGoalResponse(data, loadingGoalObject);
+		        }
+		    },
+		    error: function( jqXhr, textStatus, errorThrown ){
+		        console.log( errorThrown );
+		    }
+		});
+	}
+	
+	function doParseGoalResponse(data, loadingGoalObject) { 
+		var goalArray = data.Records;
+		var goalvalueArray = new Array(goalArray.length);
+		var goalNameArray = new Array(goalArray.length);
+		for(var i=0; i<goalArray.length; i++) {
 			
+			goalvalueArray[i] = goalArray[i].goalCode;
+			goalNameArray[i] = goalArray[i].name;
+		}
+		
+		loadComboBox(loadingGoalObject,goalvalueArray, goalNameArray);
+		
+	}
+	
+	function notificationGoalOnChange(goalObject) {
+		//alert(goalObject.value);
+	}
+	
+	function badgeGoalOnChange(goalObject) {
+		//alert(goalObject.value);
+	}
+	
+	
+	
+	
+	
+	function loadComboBox(loadingObject,valueArray, textArray) {
+		loadingObject.innerHTML = "";
+		for(var i=0;i<valueArray.length;i++) {
+			var option = document.createElement('option');
+	        option.text = textArray[i];
+	        option.value = valueArray[i];
+	        loadingObject.add(option, i);
+		}
+	}
+	
+	function targetOnChange(targetObject) {
+
+		if(targetObject.value == "USER_TYPE") {
+			getUserType(document.getElementById("userType"));
+		} else if(targetObject.value == "USER_TYPE") {
+			getUserType(document.getElementById("userType"));	
+		}
+	}
+	
+	function getUserType(userTypeObject) {
+		var channel = "";
+		$.ajax({
+		    url: 'RetrieveUserChannel?channel=channel',
+		    dataType: 'json',
+		    type: 'post',
+		    contentType: 'application/json',
+		    data: channel,
+		    processData: false,
+		    success: function( data, textStatus, jQxhr ){
+		        	doParseuserTypeResponse(data, userTypeObject);
+		    },
+		    error: function( jqXhr, textStatus, errorThrown ){
+		        console.log( errorThrown );
+		    }
+		});
+	}
+	
+	function doParseuserTypeResponse(data, userTypeObject) { 
+		var userTypeArray = data.Options;
+		var userTypeNameArray = new Array(userTypeArray.length);
+		
+		for(var i=0; i<userTypeArray.length; i++) {
+
+			userTypeNameArray[i] = userTypeArray[i];
+		}
+		 
+		loadComboBoxValue(userTypeObject, userTypeNameArray);
+		
+	}
+	
+	function loadComboBoxValue(loadingObject,valueArray) {
+		loadingObject.innerHTML = "";
+		
+        
+		for(var i=0;i<valueArray.length;i++) {
+			var option = document.createElement('option');
+	        option.text = valueArray[i];
+	        option.value = valueArray[i];
+	        loadingObject.add(option, i);
+		}
+	}
+	
+	function userTypeOnChange(userTypeObject) {
+		
+	}
+	
+	function getUser(userObject) {
+		
+	}
+	
+	function onSubmit() {
+		
+		if ($("#checkPushNotify").is(':checked')) {
+			var goalCode = $( "#goalCode" ).val();
 			var pushNotificationUrl = commonUrl+'PUSH_NOTIFICATION?';
 			var notificationType = $( "#notificationType" ).val();
 			var target = $( "#target" ).val();
@@ -133,10 +249,10 @@ var sessionGoalCode = getSessionGoalCode();
 			
 			var badgeUserCode = $( "#badgeUserCode" ).val();
 			var badgeCode = $("#badgeCode").val();
-			
+			var badgeGoalCode = $("#badgeGoalCode").val();
 			awardBadgeUrl = awardBadgeUrl+"userCode="+badgeUserCode;
 			awardBadgeUrl = awardBadgeUrl+"&badgeCode="+badgeCode;
-			awardBadgeUrl = awardBadgeUrl+"&goalCode="+goalCode;
+			awardBadgeUrl = awardBadgeUrl+"&goalCode="+badgeGoalCode;
 			
 			$.ajax({
 	            type: "GET",
@@ -181,8 +297,7 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="panel-body">
 					<div class="form-group">
 					<label for="goal">Goal</label>
-					<select class="form-control" name="goalCode" id="goalCode">
-						<option value="HYPE_GOAL">Hype Goal</option>
+					<select class="form-control" name="goalCode" id="goalCode" onchange="notificationGoalOnChange(this)">
 					</select>
 					</div>
 					
@@ -198,7 +313,7 @@ var sessionGoalCode = getSessionGoalCode();
 					
 					<div class="form-group">
 					<label for="target">Target</label>
-					<select class="form-control" name="target" id="target">
+					<select class="form-control" name="target" id="target" onchange="targetOnChange(this)">
 						<option value="">Choose Target</option>
 						<option value="ALL">All</option>
 						<option value="USER_TYPE">User Type</option>
@@ -213,6 +328,14 @@ var sessionGoalCode = getSessionGoalCode();
 					<label for="image">Image</label>
 					<input type="text" class="form-control" id="image" placeholder="image">
 					</div>
+					
+					<div class="form-group">
+					<label for="userType">User Type</label>
+					<select class="form-control" name="userType" id="userType" onchange="userTypeOnChange(this)">
+						
+					</select>
+					</div>
+					
 					<div class="form-group">
 					<label for="notificationUserCode">User</label>
 					<select class="form-control" name="notificationUserCode" id="notificationUserCode">
@@ -221,14 +344,7 @@ var sessionGoalCode = getSessionGoalCode();
 						<option value="GBS03630">Boobathi</option>
 					</select>
 					</div>
-					<div class="form-group">
-					<label for="userType">User Type</label>
-					<select class="form-control" name="userType" id="userType">
-						<option value="">Choose User Type</option>
-						<option value="EMPLOYEE">EMPLOYEE OF GBS</option>
-						<option value="CUSTOMER">CUSTOMER OF GBS</option>
-					</select>
-					</div>
+					
 					
 					</div>
 			</div>
@@ -285,6 +401,13 @@ var sessionGoalCode = getSessionGoalCode();
 			<div class="panel panel-blue panel-primary" id="awardBadgePanel">
 					<div class="panel-heading">Award Badge</div>
 					<div class="panel-body">
+					
+					<div class="form-group">
+					<label for="badgeGoalCode">Goal</label>
+					<select class="form-control" name="badgeGoalCode" id="badgeGoalCode" onchange="badgeGoalOnChange(this)">
+						
+					</select>
+					</div>
 					
 					<div class="form-group">
 					<label for="badgeUserCode">User</label>

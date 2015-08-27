@@ -127,11 +127,11 @@
 					<div class="col-sm-12">
 						<div class="row">
 							<div class="col-sm-3">
-								<p>Register on Sella Save Up</p>
-								<p>Sign Up on Hype</p>
+								<p>On Board</p>
 							</div>
 							<div class="col-sm-3">
-								<p>Perform Activities on Hype</p>
+								<p>Perform Activities on our digital channel goal (eg: IB, Mobile, Hype)
+								</p>
 							</div>
 							<div class="col-sm-3">
 								<p>Earn Points and Unlock Badges</p>

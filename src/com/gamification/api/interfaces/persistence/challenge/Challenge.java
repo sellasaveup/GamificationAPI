@@ -3,21 +3,12 @@ package com.gamification.api.interfaces.persistence.challenge;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.gamification.api.interfaces.persistence.badge.Badge;
-import com.gamification.api.interfaces.persistence.goal.Goal;
-import com.gamification.api.interfaces.persistence.reward.Reward;
 
 
 @SuppressWarnings("serial")
@@ -33,9 +24,13 @@ public class Challenge implements Serializable {
 	@Column(name="ACTION_CODE")
 	private String actionCode;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
-	private Goal goal;
+//	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
+//	private Goal goal;
+	
+	@Column(name="GOAL_CODE")
+	private String goalCode;
+	
 	
 	@Column(name="STORY")
 	private String story;
@@ -47,19 +42,24 @@ public class Challenge implements Serializable {
 	private Long points;
 	
 	@Column(name="OCCURRENCE")
-	private Long occurance;
+	private Integer occurrence;
 	
 	@Column(name="EXPIRY_DATE")
 	private Date expiryDate;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="BADGE_CODE", referencedColumnName="BADGE_CODE")
-	private Badge badge;
+//	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinColumn(name="BADGE_CODE", referencedColumnName="BADGE_CODE")
+//	private Badge badge;
+//	
+//	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinColumn(name="REWARD_CODE", referencedColumnName="REWARD_CODE")
+//	private Reward reward;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="REWARD_CODE", referencedColumnName="REWARD_CODE")
-	private Reward reward;
+	@Column(name="BADGE_CODE")
+	private String badgeCode;
 	
+	@Column(name="REWARD_CODE")
+	private String rewardCode;
 	
 	@Column(name="DATE")
 	private Date date;
@@ -80,13 +80,13 @@ public class Challenge implements Serializable {
 		this.actionCode = actionCode;
 	}
 
-	public Goal getGoal() {
-		return goal;
-	}
-
-	public void setGoal(Goal goal) {
-		this.goal = goal;
-	}
+//	public Goal getGoal() {
+//		return goal;
+//	}
+//
+//	public void setGoal(Goal goal) {
+//		this.goal = goal;
+//	}
 
 	public String getStory() {
 		return story;
@@ -112,12 +112,14 @@ public class Challenge implements Serializable {
 		this.points = points;
 	}
 
-	public Long getOccurance() {
-		return occurance;
+	
+
+	public Integer getOccurrence() {
+		return occurrence;
 	}
 
-	public void setOccurance(Long occurance) {
-		this.occurance = occurance;
+	public void setOccurrence(Integer occurrence) {
+		this.occurrence = occurrence;
 	}
 
 	public Date getExpiryDate() {
@@ -128,21 +130,21 @@ public class Challenge implements Serializable {
 		this.expiryDate = expiryDate;
 	}
 
-	public Badge getBadge() {
-		return badge;
-	}
-
-	public void setBadge(Badge badge) {
-		this.badge = badge;
-	}
-
-	public Reward getReward() {
-		return reward;
-	}
-
-	public void setReward(Reward reward) {
-		this.reward = reward;
-	}
+//	public Badge getBadge() {
+//		return badge;
+//	}
+//
+//	public void setBadge(Badge badge) {
+//		this.badge = badge;
+//	}
+//
+//	public Reward getReward() {
+//		return reward;
+//	}
+//
+//	public void setReward(Reward reward) {
+//		this.reward = reward;
+//	}
 
 	public Date getDate() {
 		return date;
@@ -152,12 +154,27 @@ public class Challenge implements Serializable {
 		this.date = date;
 	}
 
-	@Override
-	public String toString() {
-		return "Challenge [challengeId=" + challengeId + ", actionCode=" + actionCode + ", goal=" + goal + ", story="
-				+ story + ", image=" + image + ", points=" + points + ", occurance=" + occurance + ", expiryDate="
-				+ expiryDate + ", badge=" + badge + ", reward=" + reward + ", date=" + date + "]";
+	public String getGoalCode() {
+		return goalCode;
 	}
-	
-	
+
+	public void setGoalCode(String goalCode) {
+		this.goalCode = goalCode;
+	}
+
+	public String getBadgeCode() {
+		return badgeCode;
+	}
+
+	public void setBadgeCode(String badgeCode) {
+		this.badgeCode = badgeCode;
+	}
+
+	public String getRewardCode() {
+		return rewardCode;
+	}
+
+	public void setRewardCode(String rewardCode) {
+		this.rewardCode = rewardCode;
+	}
 }

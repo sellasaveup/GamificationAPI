@@ -3,20 +3,12 @@ package com.gamification.api.interfaces.persistence.level;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.gamification.api.interfaces.persistence.badge.Badge;
-import com.gamification.api.interfaces.persistence.goal.Goal;
-import com.gamification.api.interfaces.persistence.reward.Reward;
 
 @SuppressWarnings("serial")
 @Entity
@@ -31,17 +23,27 @@ public class Level implements Serializable {
 	@Column(name="LEVEL_CODE")
 	private String levelCode;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
-	private Goal goal;
+	@Column(name="GOAL_CODE")
+	private String goalCode;
 	
-	@OneToOne
-	@JoinColumn(name="BADGE_CODE", referencedColumnName="BADGE_CODE")
-	private Badge badge;
 	
-	@OneToOne
-	@JoinColumn(name="REWARD_CODE", referencedColumnName="REWARD_CODE")
-	private Reward reward;
+	@Column(name="BADGE_CODE")
+	private String badgeCode;
+	
+	@Column(name="REWARD_CODE")
+	private String rewardCode;
+	
+//	@ManyToOne
+//	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
+//	private Goal goal;
+//	
+//	@OneToOne
+//	@JoinColumn(name="BADGE_CODE", referencedColumnName="BADGE_CODE")
+//	private Badge badge;
+//	
+//	@OneToOne
+//	@JoinColumn(name="REWARD_CODE", referencedColumnName="REWARD_CODE")
+//	private Reward reward;
 	
 	@Column(name="NAME")
 	private String name;
@@ -50,11 +52,11 @@ public class Level implements Serializable {
 	private String story;
 	
 	@Column(name="START_POINT")
-	private Long startPoints;
-
-	@Column(name="END_POINT")
-	private Long endPoints;
+	private Long startPoint;
 	
+	@Column(name="END_POINT")
+	private Long endPoint;
+
 	@Column(name="PRIORITY")
 	private Integer priority;
 	
@@ -80,29 +82,29 @@ public class Level implements Serializable {
 		this.levelCode = levelCode;
 	}
 
-	public Goal getGoal() {
-		return goal;
-	}
-
-	public void setGoal(Goal goal) {
-		this.goal = goal;
-	}
-
-	public Badge getBadge() {
-		return badge;
-	}
-
-	public void setBadge(Badge badge) {
-		this.badge = badge;
-	}
-
-	public Reward getReward() {
-		return reward;
-	}
-
-	public void setReward(Reward reward) {
-		this.reward = reward;
-	}
+//	public Goal getGoal() {
+//		return goal;
+//	}
+//
+//	public void setGoal(Goal goal) {
+//		this.goal = goal;
+//	}
+//
+//	public Badge getBadge() {
+//		return badge;
+//	}
+//
+//	public void setBadge(Badge badge) {
+//		this.badge = badge;
+//	}
+//
+//	public Reward getReward() {
+//		return reward;
+//	}
+//
+//	public void setReward(Reward reward) {
+//		this.reward = reward;
+//	}
 
 	public String getName() {
 		return name;
@@ -120,20 +122,20 @@ public class Level implements Serializable {
 		this.story = story;
 	}
 
-	public Long getStartPoints() {
-		return startPoints;
+	public Long getStartPoint() {
+		return startPoint;
 	}
 
-	public void setStartPoints(Long startPoints) {
-		this.startPoints = startPoints;
+	public void setStartPoint(Long startPoint) {
+		this.startPoint = startPoint;
 	}
 
-	public Long getEndPoints() {
-		return endPoints;
+	public Long getEndPoint() {
+		return endPoint;
 	}
 
-	public void setEndPoints(Long endPoints) {
-		this.endPoints = endPoints;
+	public void setEndPoint(Long endPoint) {
+		this.endPoint = endPoint;
 	}
 
 	public Integer getPriority() {
@@ -159,6 +161,30 @@ public class Level implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
 
+	public String getGoalCode() {
+		return goalCode;
+	}
+
+	public void setGoalCode(String goalCode) {
+		this.goalCode = goalCode;
+	}
+
+	public String getBadgeCode() {
+		return badgeCode;
+	}
+
+	public void setBadgeCode(String badgeCode) {
+		this.badgeCode = badgeCode;
+	}
+
+	public String getRewardCode() {
+		return rewardCode;
+	}
+
+	public void setRewardCode(String rewardCode) {
+		this.rewardCode = rewardCode;
+	}
+	
+	
 }

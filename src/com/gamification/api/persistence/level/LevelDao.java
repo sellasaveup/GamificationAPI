@@ -30,7 +30,7 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 	}
 	
 	
-	/*public Collection<LevelView> getLevelsByGoal(final LevelView levelView)  {
+	public Collection<LevelView> getLevelsByGoal(final LevelView levelView)  {
 		
 		Collection<Level> levelEntityList = new ArrayList<Level>(); 
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
@@ -50,17 +50,31 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 		
 		List<LevelView> levelViewList = new ArrayList<LevelView> ();
 		for(Level entity : levelEntityList) {
-			LevelView view = new LevelView();
-			view.setBadgeCode(entity.getBadge().getBadgeCode());
-			view.setGoalCode(entity.getGoal().getGoalCode());
+			final LevelView view = new LevelView();
+			view.setLevelId(entity.getLevelId());
+			view.setBadgeCode(entity.getBadgeCode());
+			view.setGoalCode(entity.getGoalCode());
 			view.setLevelCode(entity.getLevelCode());
-			//view.setPoints(entity.getPoints().intValue());
-			view.setRewardCode(entity.getReward().getRewardCode());
+			view.setRewardCode(entity.getRewardCode());
 			view.setStory(entity.getStory());
 			view.setImage(entity.getImage());
 			view.setPriority(entity.getPriority());
+			view.setStartPoint(entity.getStartPoint().intValue());
+			view.setEndPoint(entity.getEndPoint().intValue());
+			view.setDate(getFormattedDate(entity.getDate()));
 			levelViewList.add(view);
 		}
 		return levelViewList;
-	}*/
+	}
+	
+	public List<Level> getLevelByGoalCode(final String goalCode) {
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Query query = em.createQuery("from Level l where l.goalCode = ?1");
+			query.setParameter(1, goalCode);
+			return query.getResultList();
+		} finally {
+			close(em);
+		}
+	}
 }

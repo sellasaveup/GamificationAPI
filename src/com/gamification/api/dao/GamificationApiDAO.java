@@ -784,9 +784,9 @@ public class GamificationApiDAO {
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				GoalView goalView = new GoalView();
-				goalView.setGoalName(rs.getString("NAME"));
-				goalView.setGoalStory(rs.getString("STORY"));
-				goalView.setGoalImage(rs.getString("IMAGE"));
+				goalView.setName(rs.getString("NAME"));
+				goalView.setStory(rs.getString("STORY"));
+				goalView.setImage(rs.getString("IMAGE"));
 				goalView.setGoalCode(rs.getString("GOAL_CODE"));
 				goalViewList.add(goalView);
 				System.out.println("Got Record");

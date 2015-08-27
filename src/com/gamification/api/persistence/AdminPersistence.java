@@ -1,6 +1,8 @@
 package com.gamification.api.persistence;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -39,8 +41,9 @@ public abstract class AdminPersistence<ENTITY>  implements IPersistence<ENTITY>{
 		
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
 		try {
+			ENTITY entity = em.find(getEntityClass(), id);
 			em.getTransaction().begin();
-			em.remove(id);
+			em.remove(entity);
 			em.getTransaction().commit();
 		} finally {
 			close(em);
@@ -60,7 +63,7 @@ public abstract class AdminPersistence<ENTITY>  implements IPersistence<ENTITY>{
 	public List<ENTITY> retrieveAll() {
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
 		try {
-			final Query query = em.createQuery(getRetrieveAllEntitiesQuery());
+			final Query query = em.createQuery(getRetrieveAllEntitiesQuery(), getEntityClass());
 			return query.getResultList();
 		} finally {
 			close(em);
@@ -72,5 +75,9 @@ public abstract class AdminPersistence<ENTITY>  implements IPersistence<ENTITY>{
 	
 	protected void close(final EntityManager entityManager) {
 		AdminPersistenceFactory.close(entityManager);
+	}
+	
+	protected String getFormattedDate(Date date) {
+		return new SimpleDateFormat("yyyy-MM-dd").format(date);
 	}
 }

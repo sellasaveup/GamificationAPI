@@ -8,11 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.gamification.api.interfaces.persistence.goal.Goal;
 
 @SuppressWarnings("serial")
 @Entity
@@ -27,9 +23,13 @@ public class Reward implements Serializable {
 	@Column(name="REWARD_CODE")
 	private String rewardCode;
 	
-	@OneToOne
-	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
-	private Goal goal;
+//	@ManyToOne
+//	@JoinColumn(name="GOAL_CODE", referencedColumnName="GOAL_CODE")
+//	private Goal goal;
+	
+	
+	@Column(name="GOAL_CODE")
+	private String goalCode;
 	
 	@Column(name="NAME")
 	private String name;
@@ -59,13 +59,13 @@ public class Reward implements Serializable {
 		this.rewardCode = rewardCode;
 	}
 
-	public Goal getGoal() {
-		return goal;
-	}
-
-	public void setGoal(Goal goal) {
-		this.goal = goal;
-	}
+//	public Goal getGoal() {
+//		return goal;
+//	}
+//
+//	public void setGoal(Goal goal) {
+//		this.goal = goal;
+//	}
 
 	public String getName() {
 		return name;
@@ -98,4 +98,14 @@ public class Reward implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public String getGoalCode() {
+		return goalCode;
+	}
+
+	public void setGoalCode(String goalCode) {
+		this.goalCode = goalCode;
+	}
+	
+	
 }

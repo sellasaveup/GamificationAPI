@@ -2,16 +2,12 @@ package com.gamification.api.interfaces.persistence.user;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -39,8 +35,8 @@ public class UserChannel implements Serializable {
 	@Column(name="DATE")
 	private Date date;
 	
-	@OneToMany(mappedBy="userChannel", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<User> users;
+//	@OneToMany(mappedBy="userChannel", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	private Set<User> users;
 
 	public Long getUserTypeId() {
 		return userTypeId;
@@ -90,11 +86,11 @@ public class UserChannel implements Serializable {
 		this.date = date;
 	}
 
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
+//	public Set<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(Set<User> users) {
+//		this.users = users;
+//	}
 }

@@ -1,16 +1,26 @@
 package com.gamification.api.view;
 
 public class ChallengeView {
+	
+	private Long challengeId;
 	private String actionCode;
 	private String goalCode;
 	private String story;
 	private String image;
 	private int points;
-	private int occurrence;
+	private Integer occurrence;
 	private String expiryDate;
 	private String badgeCode;
 	private String rewardCode;
+	private String date;
 	
+	
+	public Long getChallengeId() {
+		return challengeId;
+	}
+	public void setChallengeId(Long challengeId) {
+		this.challengeId = challengeId;
+	}
 	public String getActionCode() {
 		return actionCode;
 	}
@@ -42,10 +52,10 @@ public class ChallengeView {
 		this.points = points;
 	}
 	
-	public int getOccurrence() {
+	public Integer getOccurrence() {
 		return occurrence;
 	}
-	public void setOccurrence(int occurrence) {
+	public void setOccurrence(Integer occurrence) {
 		this.occurrence = occurrence;
 	}
 	public String getExpiryDate() {
@@ -66,8 +76,12 @@ public class ChallengeView {
 	public void setRewardCode(String rewardCode) {
 		this.rewardCode = rewardCode;
 	}
-	
-	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public String toString() {
 		return new StringBuilder("Challenge-->[").append("actionCode=").append(actionCode).append(",goalCode=").append(goalCode)
 					.append(",story=").append(story).append(",image=").append(image).append(",points=").append(points)

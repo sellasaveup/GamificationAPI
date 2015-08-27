@@ -1,72 +1,256 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>GamificationAPI</display-name>
-  <welcome-file-list>
-    <welcome-file>Login.jsp</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>GAMIFICATION WEB API</servlet-name>
-    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GAMIFICATION WEB API</servlet-name>
-    <url-pattern>/sella/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>RewardController</display-name>
-    <servlet-name>RewardController</servlet-name>
-    <servlet-class>com.gamification.web.controller.RewardController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RewardController</servlet-name>
-    <url-pattern>/RewardController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ChallengeController</display-name>
-    <servlet-name>ChallengeController</servlet-name>
-    <servlet-class>com.gamification.web.controller.ChallengeController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChallengeController</servlet-name>
-    <url-pattern>/ChallengeController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CustomerMasterController</display-name>
-    <servlet-name>CustomerMasterController</servlet-name>
-    <servlet-class>com.gamification.web.controller.CustomerMasterController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CustomerMasterController</servlet-name>
-    <url-pattern>/CustomerMasterController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BadgeMasterController</display-name>
-    <servlet-name>BadgeMasterController</servlet-name>
-    <servlet-class>com.gamification.web.controller.BadgeMasterController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BadgeMasterController</servlet-name>
-    <url-pattern>/BadgeMasterController</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <description></description>
-    <display-name>LevelController</display-name>
-    <servlet-name>LevelController</servlet-name>
-    <servlet-class>com.gamification.web.controller.LevelController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LevelController</servlet-name>
-    <url-pattern>/LevelController</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>GamificationAPI</display-name>
+	<welcome-file-list>
+		<welcome-file>Login.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>GAMIFICATION WEB API</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GAMIFICATION WEB API</servlet-name>
+		<url-pattern>/sella/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>CreateGoal</display-name>
+		<servlet-name>CreateGoal</servlet-name>
+		<servlet-class>com.gamification.api.controller.goal.CreateGoal</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateGoal</servlet-name>
+		<url-pattern>/CreateGoal</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>UpdateGoal</display-name>
+		<servlet-name>UpdateGoal</servlet-name>
+		<servlet-class>com.gamification.api.controller.goal.UpdateGoal</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateGoal</servlet-name>
+		<url-pattern>/UpdateGoal</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>RetrieveGoal</display-name>
+		<servlet-name>RetrieveGoal</servlet-name>
+		<servlet-class>com.gamification.api.controller.goal.RetrieveGoal</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveGoal</servlet-name>
+		<url-pattern>/RetrieveGoal</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>DeleteGoal</display-name>
+		<servlet-name>DeleteGoal</servlet-name>
+		<servlet-class>com.gamification.api.controller.goal.DeleteGoal</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteGoal</servlet-name>
+		<url-pattern>/DeleteGoal</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>CreateChallenge</display-name>
+		<servlet-name>CreateChallenge</servlet-name>
+		<servlet-class>com.gamification.api.controller.challenge.CreateChallenge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateChallenge</servlet-name>
+		<url-pattern>/CreateChallenge</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>UpdateChallenge</display-name>
+		<servlet-name>UpdateChallenge</servlet-name>
+		<servlet-class>com.gamification.api.controller.challenge.UpdateChallenge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateChallenge</servlet-name>
+		<url-pattern>/UpdateChallenge</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>RetrieveChallenge</display-name>
+		<servlet-name>RetrieveChallenge</servlet-name>
+		<servlet-class>com.gamification.api.controller.challenge.RetrieveChallenge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveChallenge</servlet-name>
+		<url-pattern>/RetrieveChallenge</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>DeleteChallenge</display-name>
+		<servlet-name>DeleteChallenge</servlet-name>
+		<servlet-class>com.gamification.api.controller.challenge.DeleteChallenge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteChallenge</servlet-name>
+		<url-pattern>/DeleteChallenge</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>DeleteLevel</display-name>
+		<servlet-name>DeleteLevel</servlet-name>
+		<servlet-class>com.gamification.api.controller.level.DeleteLevel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteLevel</servlet-name>
+		<url-pattern>/DeleteLevel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>RetrieveLevel</display-name>
+		<servlet-name>RetrieveLevel</servlet-name>
+		<servlet-class>com.gamification.api.controller.level.RetrieveLevel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveLevel</servlet-name>
+		<url-pattern>/RetrieveLevel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>UpdateLevel</display-name>
+		<servlet-name>UpdateLevel</servlet-name>
+		<servlet-class>com.gamification.api.controller.level.UpdateLevel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateLevel</servlet-name>
+		<url-pattern>/UpdateLevel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>CreateLevel</display-name>
+		<servlet-name>CreateLevel</servlet-name>
+		<servlet-class>com.gamification.api.controller.level.CreateLevel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateLevel</servlet-name>
+		<url-pattern>/CreateLevel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>CreateBadge</display-name>
+		<servlet-name>CreateBadge</servlet-name>
+		<servlet-class>com.gamification.api.controller.badge.CreateBadge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateBadge</servlet-name>
+		<url-pattern>/CreateBadge</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<description></description>
+		<display-name>UpdateBadge</display-name>
+		<servlet-name>UpdateBadge</servlet-name>
+		<servlet-class>com.gamification.api.controller.badge.CreateBadge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateBadge</servlet-name>
+		<url-pattern>/UpdateBadge</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>RetrieveBadge</display-name>
+		<servlet-name>RetrieveBadge</servlet-name>
+		<servlet-class>com.gamification.api.controller.badge.RetrieveBadge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveBadge</servlet-name>
+		<url-pattern>/RetrieveBadge</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>DeleteBadge</display-name>
+		<servlet-name>DeleteBadge</servlet-name>
+		<servlet-class>com.gamification.api.controller.badge.DeleteBadge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteBadge</servlet-name>
+		<url-pattern>/DeleteBadge</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>RetrieveReward</display-name>
+		<servlet-name>RetrieveReward</servlet-name>
+		<servlet-class>com.gamification.api.controller.reward.RetrieveReward</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveReward</servlet-name>
+		<url-pattern>/RetrieveReward</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>UpdateReward</display-name>
+		<servlet-name>UpdateReward</servlet-name>
+		<servlet-class>com.gamification.api.controller.reward.UpdateReward</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateReward</servlet-name>
+		<url-pattern>/UpdateReward</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>CreateReward</display-name>
+		<servlet-name>CreateReward</servlet-name>
+		<servlet-class>com.gamification.api.controller.reward.CreateReward</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateReward</servlet-name>
+		<url-pattern>/CreateReward</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>DeleteReward</display-name>
+		<servlet-name>DeleteReward</servlet-name>
+		<servlet-class>com.gamification.api.controller.reward.DeleteReward</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteReward</servlet-name>
+		<url-pattern>/DeleteReward</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>RetrieveUserChannel</display-name>
+		<servlet-name>RetrieveUserChannel</servlet-name>
+		<servlet-class>com.gamification.api.controller.user.RetrieveUserChannel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveUserChannel</servlet-name>
+		<url-pattern>/RetrieveUserChannel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
     <description></description>
     <display-name>LogoutController</display-name>
     <servlet-name>LogoutController</servlet-name>
@@ -76,6 +260,5 @@
     <servlet-name>LogoutController</servlet-name>
     <url-pattern>/LogoutController</url-pattern>
   </servlet-mapping>
-  
-  
+	
 </web-app>

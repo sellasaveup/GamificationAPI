@@ -2,7 +2,6 @@ package com.gamification.api.interfaces.persistence.goal;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gamification.api.interfaces.persistence.badge.Badge;
@@ -50,9 +48,12 @@ public class Goal implements Serializable {
 	@Column(name="IMAGE")
 	private String image;
 	
-	@ManyToOne
-	@JoinColumn(name="USER_TYPE",referencedColumnName="USER_TYPE_CODE")
-	private UserChannel userChannel;
+//	@ManyToOne
+//	@JoinColumn(name="USER_TYPE",referencedColumnName="USER_TYPE_CODE")
+//	private UserChannel userChannel;
+	
+	@Column(name="USER_TYPE")
+	private String userType;
 
 	@Column(name="STATUS")
 	private String status;
@@ -60,17 +61,17 @@ public class Goal implements Serializable {
 	@Column(name="DATE")
 	private Date date;
 	
-	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<Challenge> challenges;
-	
-	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<Level> level;
-	
-	@OneToOne(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private Badge badge;
-	
-	@OneToOne(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private Reward reward;
+//	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	private Set<Challenge> challenges;
+//	
+//	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	private Set<Level> levels;
+//	
+//	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	private Set<Badge> badges;
+//	
+//	@OneToMany(mappedBy="goal", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	private Set<Reward> rewards;
 	
 	public Long getGoalId() {
 		return goalId;
@@ -136,43 +137,53 @@ public class Goal implements Serializable {
 		this.date = date;
 	}
 
-	public UserChannel getUserChannel() {
-		return userChannel;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setUserChannel(UserChannel userChannel) {
-		this.userChannel = userChannel;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
-	public Set<Challenge> getChallenges() {
-		return challenges;
-	}
+//	public UserChannel getUserChannel() {
+//		return userChannel;
+//	}
+//
+//	public void setUserChannel(UserChannel userChannel) {
+//		this.userChannel = userChannel;
+//	}
 
-	public void setChallenges(Set<Challenge> challenges) {
-		this.challenges = challenges;
-	}
-
-	public Set<Level> getLevel() {
-		return level;
-	}
-
-	public void setLevel(Set<Level> level) {
-		this.level = level;
-	}
-
-	public Badge getBadge() {
-		return badge;
-	}
-
-	public void setBadge(Badge badge) {
-		this.badge = badge;
-	}
-
-	public Reward getReward() {
-		return reward;
-	}
-
-	public void setReward(Reward reward) {
-		this.reward = reward;
-	}
+//	public Set<Challenge> getChallenges() {
+//		return challenges;
+//	}
+//
+//	public void setChallenges(Set<Challenge> challenges) {
+//		this.challenges = challenges;
+//	}
+//
+//	public Set<Level> getLevels() {
+//		return levels;
+//	}
+//
+//	public void setLevels(Set<Level> levels) {
+//		this.levels = levels;
+//	}
+//
+//	public Set<Badge> getBadges() {
+//		return badges;
+//	}
+//
+//	public void setBadges(Set<Badge> badges) {
+//		this.badges = badges;
+//	}
+//
+//	public Set<Reward> getRewards() {
+//		return rewards;
+//	}
+//
+//	public void setRewards(Set<Reward> rewards) {
+//		this.rewards = rewards;
+//	}
+	
+	
 }

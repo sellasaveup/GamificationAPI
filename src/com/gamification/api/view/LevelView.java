@@ -1,6 +1,8 @@
 package com.gamification.api.view;
 
 public class LevelView {
+	
+	private Long levelId;
 	private String levelCode;
 	private String goalCode;
 	private String rewardCode;
@@ -11,8 +13,15 @@ public class LevelView {
 	private int startPoint;
 	private int endPoint;
 	private int priority;
-	private String expiryDate;
+	private String date;
 	
+	
+	public Long getLevelId() {
+		return levelId;
+	}
+	public void setLevelId(Long levelId) {
+		this.levelId = levelId;
+	}
 	public String getLevelCode() {
 		return levelCode;
 	}
@@ -74,19 +83,10 @@ public class LevelView {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	public String getExpiryDate() {
-		return expiryDate;
+	public String getDate() {
+		return date;
 	}
-	public void setExpiryDate(String expiryDate) {
-		this.expiryDate = expiryDate;
+	public void setDate(String date) {
+		this.date = date;
 	}
-	
-	public String toString() {
-		return new StringBuilder("Level-->[").append("levelCode=").append(levelCode).append(",goalCode=").append(goalCode)
-				.append(",rewardCode=").append(rewardCode).append(",badgeCode=").append(badgeCode).append(",name").append(name)
-				.append(",image=").append(image).append(",story=").append(story).append(",startpoint=").append(startPoint).append(",endPoint=").append(endPoint)
-				.append(",priority=").append(priority).append(",expiryDate=").append(expiryDate).append("]").toString();
-			
-	}
-	
 }

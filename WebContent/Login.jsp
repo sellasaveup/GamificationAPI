@@ -29,10 +29,12 @@ jQuery.browser = {};
 	letter-spacing: 1px;
 	font-size: 12px;
 }
-
 body {
+	margin-bottom: 80px;
 	background: #336699;
+	
 }
+
 
 .headstyle {
 	background: #F2F2F2;

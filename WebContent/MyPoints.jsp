@@ -90,7 +90,7 @@ $(document).ready(function() {
     
      <div class="row">
      <div class="col-sm-12">
-     <h4 style="padding-left:20px;">My points journey...</h4>
+     <h4 style="padding-left:20px;" class="element">My points journey...</h4>
      <img src="./img/banners/pointChart.jpeg" width="550px" height="300px">
      </div>
      </div>

@@ -38,7 +38,7 @@ body {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-				<h3 class="element" style="background-color:lightgreen">You have earned below Rewards, you can reedem them..</h3>
+				<h3 class="element">You have earned below Rewards, you can redeem them..</h3>
 				<hr>
 			</div>
 		</div>

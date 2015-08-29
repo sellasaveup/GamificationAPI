@@ -8,23 +8,14 @@ body,html {
     min-height:100%;
 }
 
-
-
 .leaderboardthisMonth {
-    position:relative;
-    width:70%;
-    height:70%;
-    max-width:960px;
-    min-width:400px;
-    min-height:600px;
-    margin: 30px auto 0 auto;
     padding:3%;
 }
 
 .leaderboardthisMonth h1{
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
-    margin:30px;
+    margin:1px;
     padding:0;
     color: #cc7713;
 }

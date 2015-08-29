@@ -6,7 +6,19 @@
 <script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="./js/jquery.popupoverlay.js"></script>
 <link href="./css/loginprofile.css" rel="stylesheet">
-<script type="text/javascript" src="./js/jquery.blockUI.js"></script>
+
+<script>
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+
+</script>
 <style>
 .lineheight {
 	line-height: 3em;
@@ -109,7 +121,7 @@ p::before {
 					pagecontainer : '.container',
 					transition : 'all 0.3s'
 				});
-
+				
 				var performedActivitiesUrl = commonUrl
 						+ "GET_PERFORMED_ACTIVITIES_COUNT";
 				var unlockedBadgeUrl = commonUrl + "GET_UNLOCKED_BADGE_COUNT";
@@ -149,7 +161,7 @@ p::before {
 					}
 
 				});
-
+/*
 				$('#myForm').click(function() {
 					$.blockUI({
 						message : $('div.growlUI'),
@@ -172,7 +184,7 @@ p::before {
 							color : '#fff'
 						}
 					});
-				});
+				});*/
 
 			});
 
@@ -373,6 +385,12 @@ p::before {
 
 	function setSessionValue() {
 		localStorage.setItem("sessionUserCode", $("#loginUserCode").val());
+       // $('#pageDemo2').click(function() { 
+           // $.blockUI({ message: '<h1><img src="busy.gif" /> Just a moment...</h1>' }); 
+    		//setTimeout($.unblockUI, 1000);
+
+       // }); 
+
 	}
 </script>
 </head>
@@ -389,7 +407,8 @@ p::before {
 					</div>
 				</div>
 			</div>
-			<form id="myForm" action="MyGoals.jsp" method="post">
+			<form id = "blockMyform" action="MasterTemplate.jsp"></form>
+			<form id="myForm" method="post"  action="MyGoals.jsp">
 				<div class="row">
 					<div class="col-sm-6 pull-left">
 						<div class="form-group">
@@ -409,7 +428,7 @@ p::before {
 							<br>
 							<div class="row">
 								<div class="col-sm-12">
-									<button type="submit" onclick="setSessionValue()">
+									<button type="submit" id = "pageDemo2" onclick="setSessionValue()">
 										<span>Submit</span>
 									</button>
 								</div>
@@ -578,7 +597,7 @@ p::before {
 
 
 
-	<div id="registerform" class="well">
+	<div id="registerform" class="well" style="display:none">
 		<h4 style="color: black">Register in GF</h4>
 
 		<table>

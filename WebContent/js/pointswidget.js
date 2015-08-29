@@ -75,7 +75,7 @@ function getMyChallengesList(divId, userCode, goalCode, commonUrl) {
 			var challengeList = data.Response;
 			var challengeHtml = "";
 			var tableBody = "";
-			var tableHeader =  '<table class="table"><thead><tr class="danger"> <th>Challenges</th><th>Points</th> <th>Date</th></tr></thead><tbody>';
+			var tableHeader =  '<h4>Achieved Challenges...</h4><table class="table"><thead><tr class="danger"> <th>Challenges</th><th>Points</th> <th>Date</th></tr></thead><tbody>';
 			 $.each( challengeList, function( index, obj ) {
 				 
 				 challengesHtml =  tableBody + '<tr class="success">'+

@@ -30,6 +30,8 @@ $(document).ready(function() {
 	getMyAllTimePoints('AllTimePoint', userCode, goalCode, commonUrl);
 	getMyCurrentMonthPoints('CurrentMonthPoint',  userCode, goalCode, commonUrl);
 	getMyChallengesList('ChallengeList', userCode, goalCode, commonUrl); 
+	getAllTimeLeaderBoard(userCode, commonUrl);
+	getThisMonthLeaderBoard(userCode, commonUrl)
 });
 
 //This function will animate the termometer. First one is total value of termometer, second one is ending value  
@@ -45,7 +47,7 @@ $(document).ready(function() {
 <div class="row">
 </div>
 	<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-4 well">
 			 <h4><span>Points</span></h4>
 				<ul id="myTab" class="nav nav-tabs">
 					<li class="active"><a href="#pointsmonth" data-toggle="tab">This Month </a></li>
@@ -64,26 +66,9 @@ $(document).ready(function() {
 					</div>
 				</div>
 				</div>
-			<!-- <div class="col-sm-4">
-	<div class="termometer">
-	<div class="donation-meter hide">
-	  <strong class="goal"></strong>
-	  <span class="glass">
-	  		<div class="currentPosition arrow total"></div>
-	      <span class="amount"></span>
-	  </span>
-	  <div class="bulb">
-	      <span class="red-circle"></span>
-	      <span class="filler">
-	          <span></span>
-	      </span>
-	  </div>
-	</div>
-</div> 
-	</div>
-			</div>-->
+				<div class="col-sm-4">
+				</div>
 			<div class="col-sm-4">
-<div class="leaderboardthisMonth">
     <h4><span>Leader Board</span></h4>
     
     <ul id="myTab" class="nav nav-tabs">
@@ -92,17 +77,15 @@ $(document).ready(function() {
 		<li><a href="#alltimeleader" data-toggle="tab">All Time</a></li>
 		
 	</ul>
-	<br>
 	<div id="myTabContentleader" class="tab-content">
 	
     <div   id="thismonthleader" class="contentthistime tab-pane fade in active"></div>
     <div  id="alltimeleader"  class="contentalltime tab-pane fade"></div>
     
     </div>
-</div>
  </div>
-
 		</div>
+		<br/>
 		<div class="row" id="ChallengeList"></div>
 
 	</div>

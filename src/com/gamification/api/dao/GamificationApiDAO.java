@@ -553,6 +553,7 @@ public class GamificationApiDAO {
 				leaderBoardPageView.setUserAvatar(rs.getString("IMAGE"));
 				leaderBoardPageView.setName(rs.getString("NAME"));
 				leaderBoardPageView.setPoints(rs.getLong("TOTALPOINTS"));
+				leaderBoardPageView.setRank(rs.getLong("RANK"));
 				customerList.add(leaderBoardPageView);
 				System.out.println("Got Record");
 			}
@@ -590,6 +591,7 @@ public class GamificationApiDAO {
 				leaderBoardPageView.setUserAvatar(rs.getString("IMAGE"));
 				leaderBoardPageView.setPoints(rs.getLong("TOTALPOINTS"));
 				leaderBoardPageView.setName(rs.getString("NAME"));
+				leaderBoardPageView.setRank(rs.getLong("RANK"));
 				leaderBoardList.add(leaderBoardPageView);
 				System.out.println("Got Record");
 			}

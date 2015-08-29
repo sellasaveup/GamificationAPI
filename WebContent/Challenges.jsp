@@ -23,19 +23,19 @@ var goalCode = getSessionGoalCode();
 			getLevelByGoal('LevelByGoal', goalCode, commonUrl); 
 		});
 		</script>
-		<style>
+	<style>
 		body {
-	margin-bottom: 80px;
-}
-		</style>
+		margin-bottom: 80px;
+        }
+	</style>
 		
 		
 </head>
 <body>
-	<div class="row">
+	<div class="row" style="width:100%">
 		<div class="col-sm-12">
-			<div class="panel panel-success panel-heading">
-				<div class="panel-heading"><h4><b>Challenges</b></h4></div>
+			<div class=" panel-success panel-heading">
+				<div class="panel-heading"><h4 class="element"><b>Challenges on your way..</b></h4></div>
 				<div class="panel-body" style="max-height: 450px;overflow-y: auto;">
 					<div class="row">
 						<div class="col-sm-12">

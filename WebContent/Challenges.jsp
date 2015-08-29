@@ -23,6 +23,11 @@ var goalCode = getSessionGoalCode();
 			getLevelByGoal('LevelByGoal', goalCode, commonUrl); 
 		});
 		</script>
+		<style>
+		body {
+	margin-bottom: 80px;
+}
+		</style>
 		
 		
 </head>

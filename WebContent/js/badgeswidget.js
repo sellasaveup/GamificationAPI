@@ -55,10 +55,10 @@ function getAllMyLockedBadges(divId, userCode, goalCode, commonUrl) {
 				
 				badgesHtml =  badgesHtml + '<div class="col-sm-2"><div class="flip-container vertical"><div class="flipper">' +
 				'<div class="back" style="background:white;">'+
-				'<div class="back_text">' + badgesList[index].name+ '<br>' + badgesList[index].story+ '</div>'+
+				'<div class="front_text">' + badgesList[index].name+ '<br>' + badgesList[index].story+ '</div>'+
 				'</div>'+
 				'<div class="front" style="background:white">'+
-				'<center><img src="./img/badges/'+ badgesList[index].image + '" class="img-thumbnail" width="100" height="80"><center>' + 
+				'<img src="./img/badges/'+ badgesList[index].image + '" class="img-thumbnail" width="100" height="80">' + 
 				'</div></div>' + '</div></div>';
 				
 				

@@ -44,7 +44,7 @@ body {
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<h3 class="element">Badges you bagged..</h3>
+				<h3 class="element" style="background-color:lightgreen">Badges you bagged..</h3>
 				<hr>
 			</div>
 		</div>
@@ -53,14 +53,13 @@ body {
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<h3 class="element">Yet to unlock..</h3>
+				<h3 class="element" style="background-color:orange">Yet to unlock..</h3>
 				<hr>
 			</div>
 		</div>
 		<div class="row"><div id='MyLockedBadges'></div></div>
 
-	<div class="row" id="AllMyBadges">
-</div>
+		<div class="row" id="AllMyBadges"></div>
 
 		<br> <br> <br>
 	</div>

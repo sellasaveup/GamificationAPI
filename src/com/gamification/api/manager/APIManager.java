@@ -15,6 +15,7 @@ import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.GoalView;
 import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
+import com.gamification.api.view.RewardView;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserBadge;
 import com.gamification.api.view.UserPointsPageView;
@@ -266,6 +267,14 @@ public class APIManager {
 		return list;
 	}
 	
+	public List<RewardView> getMyRewardList( String userCode, String goalCode) {
+		logger.debug(" badge list userCode--->"+userCode);
+		logger.debug("actionCode--->"+goalCode);
+			
+		List<RewardView> list = getGamificationDAO().getMyRewardList(userCode, goalCode);
+		
+		return list;
+	}	
 	private GamificationApiDAO getGamificationDAO() {
 		return new GamificationApiDAO();
 	}

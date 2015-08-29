@@ -22,6 +22,7 @@ import com.gamification.api.view.GoalView;
 import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
 import com.gamification.api.view.Notification;
+import com.gamification.api.view.RewardView;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserBadge;
 import com.gamification.api.view.UserPointsPageView;
@@ -618,5 +619,31 @@ public class APIController {
 		}
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
+
+	@GET
+	@Path("/GET_MY_REWARD")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getMyReward(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("getMyBadge");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<RewardView> rewardViewList = getAPIManager().getMyRewardList(userCode, goalCode);
+		 RequestStatus requestStatus = new RequestStatus();
+	   
+		  
+		    if(rewardViewList != null && !rewardViewList.isEmpty()) {
+		    	jsonRoot.put("Response", rewardViewList);
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Success");
+			} else {
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Failure");
+				jsonRoot.put("Response", requestStatus);
+			}
+		    
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 	
 }

@@ -17,6 +17,7 @@ import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.GoalView;
 import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
+import com.gamification.api.view.RewardView;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserAction;
 import com.gamification.api.view.UserBadge;
@@ -799,5 +800,42 @@ public class GamificationApiDAO {
 		}
 		return goalViewList;
 	}
-	
+	public List<RewardView> getMyRewardList(String userCode, String goalCode) {
+
+		List<RewardView> userRewardList = null;
+		System.out.println("GamificationDAO getMyRewardList() : user:" + userCode + "Goal" + goalCode);
+		String query = "SELECT ur.REWARD_CODE, r.NAME, r.IMAGE, r.STORY, ur.DATE, ur.REDEEM_POINTS FROM ss_tr_user_reward ur, ss_ma_reward r WHERE ur.USER_CODE=? AND ur.GOAL_CODE=? and ur.GOAL_CODE= r.GOAL_CODE and r.REWARD_CODE=ur.REWARD_CODE order by ur.DATE desc";
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			userRewardList = new ArrayList<RewardView>();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
+			
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				RewardView reward = new RewardView();
+				reward.setStory(rs.getString("STORY"));
+				reward.setImage(rs.getString("IMAGE"));
+				reward.setName(rs.getString("NAME"));
+				reward.setReedemPoints(rs.getInt("REDEEM_POINTS"));
+				userRewardList.add(reward);
+				System.out.println("Got reward" + reward.getStory() + " name " + reward.getName() + " image " + reward.getImage());
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+
+		return userRewardList;
+
+	}	
 }

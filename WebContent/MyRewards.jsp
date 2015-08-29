@@ -1,120 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<%@ page language="java" contentType="text/html;charset=UTF-8"%>
-
+<html>
 <head>
-<title>My Rewards</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-<script src="./js/jquery.min.js" type="text/javascript"></script>
-<script src="./js/bootstrap.min.js" type="text/javascript"></script>
+<meta charset="UTF-8">
+<title>Badge Listing</title>
+<link href="./css/imageflip.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/masterpage.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/thermometer.css"></link>
+<script type="text/javascript" src="./js/termometer.js"></script>
+<script src="./js/jquery.min.js"></script>
 <script src="./js/session.js"></script>
+<script src="./js/rewardswidget.js" type="text/javascript"></script>
 <script type="text/javascript">
-
 var commonUrl = getSessionUrl();
 var userCode = getSessionUserCode();
 var goalCode = getSessionGoalCode();
 
+$(document).ready(function() {
+	getMyRewards('MyRewards', userCode, goalCode, commonUrl);
+	getAllMyLockedRewards('MyLockedRewards', userCode, goalCode, commonUrl); 
+});
 </script>
-<title>Rewards</title>
+<style type="text/css">
+br {
+	padding-top: 88px;
+}
+
+body {
+	margin-bottom: 80px;
+}
+</style>
+
 </head>
-<body>
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="panel panel-success panel-heading">
-				<div class="panel-heading">
-					<h4>
-						<b>My Rewards</b>
-					</h4>
-				</div>
-				<div class="panel-body"
-					style="max-height: 1200px; overflow-y: auto;">
-					<div class="row">
-						<div class="col-sm-12">
-							<div id="rewards">
-								<div class="well">
-									<div class="row">
-										<div class="col-sm-12">
-											<center>
-												<img src="./img/rewards/reward1.JPG" />
-											</center>
-										</div>
-										
-									</div>
-									<br>
-									<div class="row">
-										<div>
-											<center>
-												<img src="./img/rewards/reward2.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div>
-											<center>
-												<img src="./img/rewards/reward3.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div>
-											<center>
-												<img src="./img/rewards/reward4.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div>
-											<center>
-												<img src="./img/rewards/reward5.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div>
-											<center>
-												<img src="./img/rewards/reward6.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div>
-											<center>
-												<img src="./img/rewards/reward7.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div>
-											<center>
-												<img src="./img/rewards/reward8.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-									<div>
-											<center>
-												<img src="./img/rewards/reward2.JPG" />
-											</center>
-										</div>
-									</div>
-									<br>
-									<br> <br>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+<body bgcolor="#FFDD6E">
+
+<div class="well">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="element" style="background-color:lightgreen">You have earned below Rewards, you can reedem them..</h3>
+				<hr>
 			</div>
 		</div>
+		<div class="row">
+		
+		<div class="col-sm-12">
+			<div id='MyRewards'></div>
+		</div>
+		</div>		
+		<br> <br> <br>
 	</div>
+	</div>	
 </body>
 </html>

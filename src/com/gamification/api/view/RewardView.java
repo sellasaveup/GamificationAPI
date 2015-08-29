@@ -16,6 +16,10 @@ public class RewardView {
 	
 	private String date;
 
+	private String story;
+	
+	private int reedemPoints;
+	
 	public Long getRewardId() {
 		return rewardId;
 	}
@@ -70,5 +74,21 @@ public class RewardView {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getStory() {
+		return story;
+	}
+
+	public void setStory(String story) {
+		this.story = story;
+	}
+
+	public int getReedemPoints() {
+		return reedemPoints;
+	}
+
+	public void setReedemPoints(int reedemPoints) {
+		this.reedemPoints = reedemPoints;
 	}
 }

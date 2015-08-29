@@ -10,7 +10,8 @@ function getMyBadges(divId, userCode, goalCode, commonUrl) {
 		success : function(data) {
 			var badgesHtml = '<div class="row">';
 			var items = [];
-			var badgesList = data.Response;			
+			var badgesList = data.Response;	
+			if (!badgesList.isSuccess){
 			$.each( badgesList, function( index, obj ) {
 				
 				badgesHtml =  badgesHtml + '<div class="col-sm-2"><div class="flip-container vertical"><div class="flipper">' +
@@ -24,6 +25,10 @@ function getMyBadges(divId, userCode, goalCode, commonUrl) {
 			 });
 			
 			 $("#"+divId).append(badgesHtml);
+		}else{
+			rewardsHtml = '<div>' + 'You have not yet earned any badges' + '</div>';
+			$("#"+divId).append(rewardsHtml);
+		}
 		},
 		error : function(e) {
 			console.log('badges call failure : ' + e);

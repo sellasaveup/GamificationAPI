@@ -34,3 +34,12 @@ select @curRank := @curRank + 1 AS rank, inQuery.*  from
 -- MyPointsGraph
 SELECT sum(ua.POINTS) as totalpoints, monthname(ua.DATE) FROM ss_tr_user_action ua where ua.STATUS='Active'
  group by ua.USER_CODE, month(ua.DATE)
+
+ 
+ -- This month My Rank
+ select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from 
+(SELECT sum(pointS) as points, month(date), user_code FROM ss_tr_user_action where extract(year_month from date)= 201507 and  GOAL_CODE='HYPE_GOAL'  group by user_code, month(date)  order by points desc limit 10) as inQuery, (SELECT @curRank := 0) r ) outerQry where user_code='GBS03146';
+
+--All Time My Rank
+select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from 
+(SELECT sum(pointS) as points,  USER_CODE FROM ss_tr_user_action   group by USER_CODE order by points desc limit 10) as inQuery, (SELECT @curRank := 0) r ) outerQry where USER_CODE='GBS03146';

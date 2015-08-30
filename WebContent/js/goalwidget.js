@@ -26,15 +26,3 @@ function getAllGoalList(divId, userCode, commonUrl) {
 	});
 	
 }
-
-/*<table>
-<tr>
-	<td><input type="radio" name="goalType" value="HYPE_GOAL"
-		id="radio1">Hype</td>
-	<td><input type="radio" value="INTRANET_GOAL"
-		name="goalType" id="radio2">Intranet</td>
-	<td><input type="radio" value="PDU_GOAL" name="goalType"
-		id="radio3">PDU</td>
-
-</tr>
-</table>*/

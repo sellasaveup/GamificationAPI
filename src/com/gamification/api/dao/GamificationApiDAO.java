@@ -846,7 +846,7 @@ public class GamificationApiDAO {
 	public String getAllTimeRank(String userCode, String goalCode) {
 
 		logger.debug("getAllTimeRank()");
-		String query = "select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.points) as totalPoints,  u.user_code FROM ss_tr_user_action ua,ss_ma_user u group by ua.USER_CODE order by totalPoints desc) as inQuery, (SELECT @curRank := 0) r ) outerQry where outerQry.user_code=?";
+		String query = "select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(pointS) as points,  USER_CODE FROM ss_tr_user_action   group by USER_CODE order by points desc) as inQuery, (SELECT @curRank := 0) r ) outerQry where USER_CODE=?";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		String allTimeRank = null;
@@ -856,7 +856,7 @@ public class GamificationApiDAO {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userCode);
-			preparedStatement.setString(2, goalCode);
+			//preparedStatement.setString(2, goalCode); // TODO decide goalcode needed or not
 			rs = preparedStatement.executeQuery();
 			if(rs.next()) {
 				logger.debug("Got getAllTimeRank");
@@ -875,7 +875,7 @@ public class GamificationApiDAO {
 	public String getCurrentMonthRank(String userCode, String goalCode) {
 
 		logger.debug("getCurrentMonthRank()");
-		String query = "select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.points) as totalPoints, month(ua.date), u.user_code FROM ss_tr_user_action ua,ss_ma_user u where extract(year_month from ua.date)= ?  group by ua.USER_CODE, month(ua.date)  order by totalPoints desc) as inQuery, (SELECT @curRank := 0) r ) outerQry where outerQry.user_code=?";
+		String query = "select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(pointS) as points, month(date), user_code FROM ss_tr_user_action where extract(year_month from date)= ? and  GOAL_CODE=?  group by user_code, month(date)  order by points desc ) as inQuery, (SELECT @curRank := 0) r ) outerQry where user_code=?";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		String currentMonthRank = null;
@@ -886,8 +886,8 @@ public class GamificationApiDAO {
 			preparedStatement = connection.prepareStatement(query);
 			String currentMonthYear = getCurrentMonthYear();
 			preparedStatement.setString(1, currentMonthYear);
-			preparedStatement.setString(2, userCode);
-			preparedStatement.setString(3, goalCode);
+			preparedStatement.setString(2, goalCode);
+			preparedStatement.setString(3, userCode);
 			
 			rs = preparedStatement.executeQuery();
 			if(rs.next()) {

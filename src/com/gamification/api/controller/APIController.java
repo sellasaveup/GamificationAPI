@@ -579,8 +579,8 @@ public class APIController {
 		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		 List<GoalView> goalViewList = getAPIManager().getAllMyGoalList(userCode);
 		 RequestStatus requestStatus = new RequestStatus();
-	   
 		  
+		 
 		    if(goalViewList != null && !goalViewList.isEmpty()) {
 		    	jsonRoot.put("Response", goalViewList);
 				requestStatus.setIsSuccess("1");
@@ -651,7 +651,20 @@ public class APIController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCurrentMonthRank(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
 		logger.debug("Inside GET_MONTH_RANK Service");
-		Map<String, Object> jsonRoot = getAPIManager().getCurrentMonthPoints(userCode, goalCode);
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 String rank = getAPIManager().getCurrentMonthRank(userCode, goalCode);
+		   RequestStatus requestStatus = new RequestStatus();
+	    if(rank != null) {
+	    	jsonRoot.put("Rank", rank);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Success");
+		} else {
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Failure");
+			jsonRoot.put("Response", requestStatus);
+		}
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 	
@@ -660,8 +673,20 @@ public class APIController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllTimeRank(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
 		logger.debug("Inside GET_ALL_TIME_RANK Service");
-		Map<String, Object> jsonRoot = getAPIManager().getAllTimePoints(userCode, goalCode);
-		logger.debug("jsonRoot2-->"+jsonRoot);
+		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 String rank = getAPIManager().getAllTimeRank(userCode, goalCode);
+		   RequestStatus requestStatus = new RequestStatus();
+	    if(rank != null) {
+	    	jsonRoot.put("Rank", rank);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Success");
+		} else {
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Failure");
+			jsonRoot.put("Response", requestStatus);
+		}
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 }

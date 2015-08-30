@@ -90,7 +90,7 @@ function getMyChallengesList(divId, userCode, goalCode, commonUrl) {
 			 $("#"+divId).append(buildTable);
 		},
 		error : function(e) {
-			console.log('points call failure : ' + e);
+			console.log('getMyChallengesList call failure : ' + e);
 		}
 	});
 }

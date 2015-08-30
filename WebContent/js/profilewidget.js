@@ -25,11 +25,9 @@ function getProfile(divId, customerID) {
 	});
 }
 
-//<div class="well"><div class="profile-userpic"><img src="./img/profile/sujatha.jpg" class="img-circle" width="100" height="80">NaNNaN
+function getUserProfile(divId, userCode, goalCode, commonUrl) {
 
-function getUserProfile(divId, userCode, goalCode) {
-
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GET_PROFILE?userCode='
+	var buildUrl = commonUrl + 'GET_PROFILE?userCode='
 	buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
 	$.ajax({
 		type : "GET",
@@ -43,7 +41,7 @@ function getUserProfile(divId, userCode, goalCode) {
 			
 			
 			var imgg = data.Response.image;
-			var profileHtml = '<div class="well"><div class="profile-userpic"><center><img src="./img/profile/'+ data.Response.image + 
+			var profileHtml = '<div class="profile-userpic"><center><img src="./img/profile/'+ data.Response.image + 
 			'" class="img-rounded width="100" height="80"></center></div>'+
 			'<div class="profile-usertitle">' + 
 				'<div class="profile-usertitle-name">' + 
@@ -60,7 +58,7 @@ function getUserProfile(divId, userCode, goalCode) {
 			'<article style="align:center" class = "btn-sm profile-usertitle-job"><font size="3"><b>Redeemable Points</b></font> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="6">' +
 				data.Response.redeemablePoints + 
 				'</font></article>' +
-			 '</div><hr></div>' ;
+			 '</div>' ;
 					
 				
 			$("#" + divId).append(profileHtml);

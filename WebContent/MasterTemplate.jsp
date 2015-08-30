@@ -23,7 +23,7 @@
     	  var commonUrl = getSessionUrl();
           var userCode = getSessionUserCode();
           var goalCode = getSessionGoalCode();		
-			getUserProfile('userProfileTemplate', userCode, goalCode);
+			getUserProfile('userProfileTemplate', userCode, goalCode, commonUrl);
 		});
       
       function loadMyPoints() {
@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:8080/GamificationAPI/Login.jsp">Gamification Framework</a>
+            <a class="navbar-brand" href="Login.jsp">Gamification Framework</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">

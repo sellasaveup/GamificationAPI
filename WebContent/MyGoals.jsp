@@ -15,8 +15,13 @@
 <script src="./js/goalwidget.js" type="text/javascript"></script>
 <style>
 body {
-	margin-bottom: 80px;
-	background: #336699;
+	  background: #663366;
+	  position: absolute;
+	  top: 100%;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  overflow: hidden;
 }
 </style>
 <script type="text/javascript">
@@ -32,11 +37,12 @@ var commonUrl = getSessionUrl();
 			autoopen: true,
 			background: true,
 			backgroundactive: true,
-			opacity: '0.5',
+			opacity: '0.1',
 			horizontal: 'center',
 			vertical: 'middle',
 			blur: false,
-			keepfocus: true
+			keepfocus: true,
+			scrolllock: false
 		});
 		
 		$("#ButtonSubmit").click(function() {
@@ -74,6 +80,7 @@ var commonUrl = getSessionUrl();
 		</div>
 	</div>
 	<style>
+	
 #registerform {
 	-webkit-transform: scale(0.8);
 	-moz-transform: scale(0.8);

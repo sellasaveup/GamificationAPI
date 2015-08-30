@@ -178,7 +178,7 @@ function getAllTimeLeaderBoard(userGode, commonUrl) {
 			for (i = 0; i < data.Result.length; i++) {
 				usercodeObj[i] = data.Result[i].name;
 				useravatarObj[i] = data.Result[i].userAvatar;
-				userrankObj[i] =  data.Result[i].rank;
+				userRankObj[i] =  data.Result[i].rank;
 				pointsObj[i] = data.Result[i].points;
 			}
 		},

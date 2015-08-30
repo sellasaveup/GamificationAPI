@@ -30,11 +30,11 @@ function getMyCurrentMonthRank(divId, userCode, goalCode, commonUrl) {
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
-			console.log('points call success: ' + data);
-				document.getElementById(divId).innerHTML = data.Points;
+			console.log('rank call success month: ' + data);
+				document.getElementById(divId).innerHTML = data.Rank;
 		},
 		error : function(e) {
-			console.log('points call failure : ' + e);
+			console.log('rank call failure : ' + e);
 		}
 	});
 }
@@ -51,11 +51,11 @@ function getMyAllTimeRank(divId, userCode, goalCode, commonUrl) {
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
-			console.log('points call success: ' + data.Points);
-				document.getElementById(divId).innerHTML = data.Points;
+			console.log('rank call success all time: ' + data.Rank);
+				document.getElementById(divId).innerHTML = data.Rank;
 		},
 		error : function(e) {
-			console.log('points call failure : ' + e);
+			console.log('rank call failure : ' + e);
 		}
 	});
 	

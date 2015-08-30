@@ -298,5 +298,26 @@ public class APIManager {
 	
 		return getGamificationDAO().getCurrentMonthRank(userCode, goalCode);
 	}
+	
+	public List<User> getUser( String code, String requestType) {
+		logger.debug("code--->"+code);
+		logger.debug("requestType--->"+requestType);
+			
+		List<User> userList = null;
+		String query = null;
+		
+		if(requestType != null && requestType.equals("GOAL")) {
+			logger.debug("Hype goal");
+			query = "select * from ss_ma_user where user_type in (select user_type  from ss_ma_goal where  goal_code =?)";
+		} else {
+			query = "select * from ss_ma_user where user_type in (select user_type_code  from ss_ma_user_type where  user_type_code =?)";
+		}
+		logger.debug("code--->"+code);
+		logger.debug("query--->"+query);
+		
+		userList = getServiceApiDAO().getUser(code, query);		
+				
+		return userList;
+	}
 
 }

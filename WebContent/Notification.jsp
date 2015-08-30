@@ -96,32 +96,31 @@ var sessionGoalCode = getSessionGoalCode();
 	
 	function notificationGoalOnChange(goalObject) {
 		//alert(goalObject.value);
+		
+		
+		$( "#target" ).prop('selectedIndex', 0);
+		doClearComboBox(document.getElementById("notificationUserCode"));
+		doClearComboBox(document.getElementById("userType"));
 	}
 	
 	function badgeGoalOnChange(goalObject) {
 		//alert(goalObject.value);
 	}
+
 	
-	
-	
-	
-	
-	function loadComboBox(loadingObject,valueArray, textArray) {
-		loadingObject.innerHTML = "";
-		for(var i=0;i<valueArray.length;i++) {
-			var option = document.createElement('option');
-	        option.text = textArray[i];
-	        option.value = valueArray[i];
-	        loadingObject.add(option, i);
-		}
-	}
 	
 	function targetOnChange(targetObject) {
 
 		if(targetObject.value == "USER_TYPE") {
+			doClearComboBox(document.getElementById("notificationUserCode"));
 			getUserType(document.getElementById("userType"));
-		} else if(targetObject.value == "USER_TYPE") {
-			getUserType(document.getElementById("userType"));	
+		} else if(targetObject.value == "USER") {
+			doClearComboBox(document.getElementById("userType"));
+			var goalCode = $( "#goalCode" ).val();
+			getUser(document.getElementById("notificationUserCode"),goalCode, "GOAL");	
+		} else if(targetObject.value == "ALL") {
+			doClearComboBox(document.getElementById("userType"));
+			doClearComboBox(document.getElementById("notificationUserCode"));
 		}
 	}
 	
@@ -168,13 +167,53 @@ var sessionGoalCode = getSessionGoalCode();
 		}
 	}
 	
+	function getUser(userObject, code, requestType) {
+		
+		$.ajax({
+            type: "GET",
+            data: "",
+            url: commonUrl+"GET_USER?code="+code+"&requestType="+requestType,
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+
+            success: function (data) {
+            	parseUserResponse(data, userObject);
+            },
+
+            error: function (e) {
+            }
+         });
+	}
+	
+	function parseUserResponse(data, userObject) {
+		var userArray = data.Response;
+		
+		var userCodeArray = new Array(userArray.length);
+		var userNameArray = new Array(userArray.length);
+		for(var i=0; i<userArray.length; i++) {
+			
+			userCodeArray[i] = userArray[i].userCode;
+			userNameArray[i] = userArray[i].name;
+		}
+		
+		loadComboBox(userObject, userCodeArray, userNameArray);
+	}
+	
+	function loadComboBox(loadingObject,valueArray, textArray) {
+		loadingObject.innerHTML = "";
+		for(var i=0;i<valueArray.length;i++) {
+			var option = document.createElement('option');
+	        option.text = textArray[i];
+	        option.value = valueArray[i];
+	        loadingObject.add(option, i);
+		}
+	}
+	
 	function userTypeOnChange(userTypeObject) {
 		
 	}
 	
-	function getUser(userObject) {
-		
-	}
 	
 	function onSubmit() {
 		
@@ -273,6 +312,10 @@ var sessionGoalCode = getSessionGoalCode();
 		}
 	}
 	
+	function doClearComboBox(clearingObject) {
+		clearingObject.innerHTML = "";
+	}
+	
 </script>
 </head>
 <body>
@@ -339,9 +382,7 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="form-group">
 					<label for="notificationUserCode">User</label>
 					<select class="form-control" name="notificationUserCode" id="notificationUserCode">
-						<option value="">Choose User</option>
-						<option value="GBS03146">Sujatha</option>
-						<option value="GBS03630">Boobathi</option>
+						
 					</select>
 					</div>
 					
@@ -373,9 +414,7 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="form-group">
 					<label for="pointUserCode">User</label>
 					<select class="form-control" name="pointUserCode" id="pointUserCode">
-						<option value="">Choose User</option>
-						<option value="GBS03146">Sujatha</option>
-						<option value="GBS03630">Boobathi</option>
+						
 					</select>
 					</div>
 					<div class="form-group">
@@ -412,18 +451,14 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="form-group">
 					<label for="badgeUserCode">User</label>
 					<select class="form-control" name="badgeUserCode" id="badgeUserCode">
-						<option value="">Choose User</option>
-						<option value="GBS03146">Sujatha</option>
-						<option value="GBS03630">Boobathi</option>
+						
 					</select>
 					</div>
 					
 					<div class="form-group">
 					<label for="point">Badge</label>
 					<select class="form-control" name="badgeCode" id="badgeCode">
-						<option value="">Choose Badge</option>
-						<option value="HYPE_NEW_BIE">New Bie</option>
-						<option value="HYPE_SAVER">You Have Saved Money</option>
+						
 					</select>
 					</div>
 					</div>

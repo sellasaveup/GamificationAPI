@@ -689,4 +689,28 @@ public class APIController {
 		}
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
+	
+	@GET
+	@Path("/GET_USER")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUser(@QueryParam("code") String code, @QueryParam("requestType") String requestType) {
+		logger.debug("getUser");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<User> userList = getAPIManager().getUser(code, requestType);
+		   RequestStatus requestStatus = new RequestStatus();
+	    
+	    if(userList != null && !userList.isEmpty()) {
+	    	jsonRoot.put("Response", userList);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(code);
+			requestStatus.setMessage("Success");
+		} else {
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(code);
+			requestStatus.setMessage("Failure");
+			jsonRoot.put("Result", requestStatus);
+		}
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 }

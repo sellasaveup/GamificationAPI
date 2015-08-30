@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.gamification.api.view.User;
 import com.gamification.common.ConnectionUtility;
 
 public class ServiceApiDAO {
@@ -347,6 +350,35 @@ public class ServiceApiDAO {
 	
 	}
 	
+	public List<User> getUser(String code, String query) {
+
+		logger.debug("getUser()");
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		List<User> userList = new ArrayList<User>();
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, code);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserCode(rs.getString("USER_CODE"));
+				user.setName(rs.getString("NAME"));
+				userList.add(user);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("userList-->"+userList);
+		return userList;
+	
+	}
 	
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();

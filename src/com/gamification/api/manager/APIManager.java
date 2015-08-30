@@ -282,5 +282,46 @@ public class APIManager {
 	private ServiceApiDAO getServiceApiDAO() {
 		return new ServiceApiDAO();
 	}
+	
+	public Map<String, Object> getAllTimeRank( String userCode, String goalCode)  {
+		logger.debug("Inside getAllTimeRank()");
+		logger.debug("userCode--->"+userCode);
+		logger.debug("goalCode--->"+goalCode);
+		
+			Map<String, Object> pointsRequestMap = new HashMap<String, Object>();
+			String points = null;
+			RequestStatus requestStatus = new APIRequestValidator().doGetPointsRequest(userCode, goalCode);
+			if(requestStatus == null) {
+				requestStatus = new RequestStatus();
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Rank Available for All Time");
+				points = getGamificationDAO().getAllTimeRank(userCode, goalCode);
+				pointsRequestMap.put("Rank", points);
+			}
+			pointsRequestMap.put("Response", requestStatus);
+			return pointsRequestMap;
+		}
+
+
+		public Map<String, Object> getCurrentMonthRank( String userCode, String goalCode)  {
+		logger.debug("Inside getCurrentMonthRank()");
+		logger.debug("userCode--->"+userCode);
+		logger.debug("goalCode--->"+goalCode);
+		
+			Map<String, Object> pointsRequestMap = new HashMap<String, Object>();
+			String points = null;
+			RequestStatus requestStatus = new APIRequestValidator().doGetPointsRequest(userCode, goalCode);
+			if(requestStatus == null) {
+				requestStatus = new RequestStatus();
+				requestStatus.setIsSuccess("1");
+				requestStatus.setCode(userCode);
+				requestStatus.setMessage("Rank Available for Current Month");
+				points = getGamificationDAO().getCurrentMonthRank(userCode, goalCode);
+				pointsRequestMap.put("Rank", points);
+			}
+			pointsRequestMap.put("Response", requestStatus);
+			return pointsRequestMap;
+		}
 
 }

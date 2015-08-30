@@ -6,7 +6,7 @@
 <script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="./js/jquery.popupoverlay.js"></script>
 <link href="./css/loginprofile.css" rel="stylesheet">
-<script src="./js/bootstrap.min.js"></script>
+
 <style>
 .lineheight {
 	line-height: 3em;

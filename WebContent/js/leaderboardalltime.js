@@ -7,13 +7,11 @@
 		this.callback = callback;
 		this.config = $.extend(defaults, options);
 		var list = [];
-		this.listPoints = [];
-		this.userCodeList = [];
 		
 		this.userCodeList = usercodeObj;
 		this.userPoints = pointsObj;
 		this.userAvatar = useravatarObj;
-
+		this.userRanks = userRankObj;
 	}
 
 	FakePoller.prototype.getData = function() {
@@ -23,7 +21,8 @@
 			results.push({
 				userName : this.userCodeList[i],
 				userPoint : this.userPoints[i],
-				userImage : this.userAvatar[i]
+				userImage : this.userAvatar[i],
+				userRank : this.userRanks[i]
 			});
 		}
 		return results;
@@ -101,6 +100,8 @@
 						.appendTo(item),
 				$userName : $('<span class="userName">Loading...</span>')
 						.appendTo(item),
+				$userRank : $('<span class="userRank">Loading...</span>')
+						.appendTo(item),
 				$userPoint : $('<span class="userPoint">Loading...</span>')
 						.appendTo(item)
 				
@@ -110,10 +111,18 @@
 		function eventAnimationEnd(evt) {
 			this.list[this.currentItem].$userName
 					.html(_this.data[this.currentItem].userName + " ");
+			this.list[this.currentItem].$userRank
+					.html("&nbsp;&nbsp;&nbsp;&nbsp;#" + _this.data[this.currentItem].userRank);
 			this.list[this.currentItem].$userPoint
-					.html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + _this.data[this.currentItem].userPoint + "&nbsp" +"points");
+					.html("&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ _this.data[this.currentItem].userPoint
+					+ "&nbsp"
+					+ "points");
 			this.list[this.currentItem].$userImage
-					.html('<img src="./img/profile/' + _this.data[this.currentItem].userImage + '" class="img-circle" width="20" height="20">' + ' ');
+					.html('<img src="./img/profile/'
+					+ _this.data[this.currentItem].userImage
+					+ '" class="img-circle" width="20" height="20">'
+					+ ' ');
 			this.list[this.currentItem].$item.removeClass('animate');
 			this.currentItem = this.currentItem >= this.currentCount - 1 ? 0
 					: this.currentItem + 1;
@@ -152,12 +161,13 @@
 var usercodeObj = [];
 var pointsObj = []
 var useravatarObj = [];
+var userRankObj = [];
 
 function getAllTimeLeaderBoard(userGode, commonUrl) {
 
 	var buildUrl = commonUrl + 'GET_LEADERBOARD?goalCode=';
 	buildUrl = buildUrl + userCode + '&requestType=' + 'A';
-
+	
 	$.ajax({
 		type : "GET",
 		url : buildUrl,
@@ -168,6 +178,7 @@ function getAllTimeLeaderBoard(userGode, commonUrl) {
 			for (i = 0; i < data.Result.length; i++) {
 				usercodeObj[i] = data.Result[i].name;
 				useravatarObj[i] = data.Result[i].userAvatar;
+				userrankObj[i] =  data.Result[i].rank;
 				pointsObj[i] = data.Result[i].points;
 			}
 		},

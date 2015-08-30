@@ -18,6 +18,7 @@
 <script type="text/javascript" src="./js/leaderboardalltime.js"></script>
 <script src="./js/session.js"></script>
 <script src="./js/pointswidget.js" type="text/javascript"></script>
+<script src="./js/rankwidget.js" type="text/javascript"></script>
 <link href="./css/masterpage.css" rel="stylesheet">
 <script type="text/javascript">
 
@@ -28,16 +29,12 @@ var goalCode = getSessionGoalCode();
 $(document).ready(function() {
 	getMyAllTimePoints('AllTimePoint', userCode, goalCode, commonUrl);
 	getMyCurrentMonthPoints('CurrentMonthPoint',  userCode, goalCode, commonUrl);
+	getMyCurrentMonthRank('CurrentMonthRank',  userCode, goalCode, commonUrl);
+	getMyAllTimeRank('AllTimeRank', userCode, goalCode, commonUrl);
 	getMyChallengesList('ChallengeList', userCode, goalCode, commonUrl); 
 	getAllTimeLeaderBoard(userCode, commonUrl);
 	getThisMonthLeaderBoard(userCode, commonUrl)
 });
-
-//This function will animate the termometer. First one is total value of termometer, second one is ending value  
-/*termometer(1000,500,function(){
-	$(".donation-meter").removeClass("hide");
-});*/
-
 
 </script>
 </head>
@@ -76,12 +73,12 @@ $(document).ready(function() {
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade in active" id="rankmonth">
 					<br>
-							<font size="4">	<b>&nbsp;&nbsp;My Rank &nbsp;&nbsp;&nbsp;<label id="CurrentMonthPoint"></label></b></font>
+							<font size="4">	<b>&nbsp;&nbsp;My Rank&nbsp;&nbsp;&nbsp;<label id="CurrentMonthRank"></label></b></font>
 							
 					</div>
 
-					<div class="tab-pane fade" id="CurrentMonthRank"><br>
-								<font size="4"><b>&nbsp;&nbsp;My Rank&nbsp;&nbsp;&nbsp;<label id="AllTimePoint"></label></b></font>
+					<div class="tab-pane fade" id="rankwhole"><br>
+								<font size="4"><b>&nbsp;&nbsp;My Rank&nbsp;&nbsp;&nbsp;<label id="AllTimeRank"></label></b></font>
 								
 					</div>
 					</div></div>

@@ -18,3 +18,45 @@ function getRank(divId, customerID, requestType) {
 		}
 	});
 }
+
+function getMyCurrentMonthRank(divId, userCode, goalCode, commonUrl) {
+
+	var buildUrl = commonUrl+'GET_MONTH_RANK?userCode=';
+		buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
+		
+	$.ajax({
+		type : "GET",
+		url : buildUrl,
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(data) {
+			console.log('points call success: ' + data);
+				document.getElementById(divId).innerHTML = data.Points;
+		},
+		error : function(e) {
+			console.log('points call failure : ' + e);
+		}
+	});
+}
+
+
+function getMyAllTimeRank(divId, userCode, goalCode, commonUrl) {
+
+	var buildUrl = commonUrl+'GET_ALL_TIME_RANK?userCode=';
+		buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
+	
+	$.ajax({
+		type : "GET",
+		url : buildUrl,
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(data) {
+			console.log('points call success: ' + data.Points);
+				document.getElementById(divId).innerHTML = data.Points;
+		},
+		error : function(e) {
+			console.log('points call failure : ' + e);
+		}
+	});
+	
+}

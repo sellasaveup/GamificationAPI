@@ -7,12 +7,11 @@
 		this.callback = callback;
 		this.config = $.extend(defaults, options);
 		var list = [];
-		this.listPoints = [];
-		this.userCodeList = [];
 
 		this.userCodeList = usercodeObjThisMonth;
 		this.userPoints = pointsObjThisMonth;
 		this.userAvatar = useravatarObjThisMonth;
+		this.userRanks = userRankObjThisMonth;
 	}
 
 	FakePoller.prototype.getData = function() {
@@ -21,7 +20,8 @@
 			results.push({
 				userName : this.userCodeList[i],
 				userPoint : this.userPoints[i],
-				userImage : this.userAvatar[i]
+				userImage : this.userAvatar[i],
+				userRank : this.userRanks[i]
 
 			});
 		}
@@ -100,6 +100,8 @@
 						.appendTo(item),
 				$userName : $('<span class="userName">Loading...</span>')
 						.appendTo(item),
+				$userRank : $('<span class="userRank">Loading...</span>')
+						.appendTo(item),
 				$userPoint : $('<span class="userPoint">Loading...</span>')
 						.appendTo(item)
 			});
@@ -108,8 +110,10 @@
 		function eventAnimationEnd(evt) {
 			this.list[this.currentItem].$userName
 					.html(_this.data[this.currentItem].userName + " ");
+			this.list[this.currentItem].$userRank
+			.html("&nbsp;&nbsp;&nbsp;&nbsp;#" + _this.data[this.currentItem].userRank);
 			this.list[this.currentItem].$userPoint
-					.html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					.html("&nbsp;&nbsp;&nbsp;&nbsp;"
 							+ _this.data[this.currentItem].userPoint
 							+ "&nbsp"
 							+ "points");
@@ -155,12 +159,12 @@
 var usercodeObjThisMonth = [];
 var pointsObjThisMonth = []
 var useravatarObjThisMonth = [];
+var userRankObjThisMonth = [];
 
 function getThisMonthLeaderBoard(userCode, commonUrl) {
 
 	var buildUrl = commonUrl + 'GET_LEADERBOARD?goalCode=';
 	buildUrl = buildUrl + userCode + '&requestType=' + 'M';
-
 	$.ajax({
 		type : "GET",
 		url : buildUrl,
@@ -171,6 +175,7 @@ function getThisMonthLeaderBoard(userCode, commonUrl) {
 			for (i = 0; i < data.Result.length; i++) {
 				usercodeObjThisMonth[i] = data.Result[i].name;
 				useravatarObjThisMonth[i] = data.Result[i].userAvatar;
+				userRankObjThisMonth[i] = data.Result[i].rank;
 				pointsObjThisMonth[i] = data.Result[i].points;
 			}
 		},

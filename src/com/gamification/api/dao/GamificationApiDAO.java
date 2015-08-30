@@ -417,7 +417,7 @@ public class GamificationApiDAO {
 	public String getCurrentMonthPoints(String userCode, String goalCode) {
 
 		logger.debug("getCurrentMonthPoints()");
-		String query = "SELECT sum(ua.POINTS) as points, month(ua.date), ua.USER_CODE  FROM ss_tr_user_action ua  where extract(year_month from ua.date)= 201508 and ua.STATUS='ACTIVE' AND ua.USER_CODE= ? and ua.GOAL_CODE=?";
+		String query = "SELECT sum(ua.POINTS) as points, month(ua.date), ua.USER_CODE  FROM ss_tr_user_action ua  where extract(year_month from ua.date)= ? and ua.STATUS='ACTIVE' AND ua.USER_CODE= ? and ua.GOAL_CODE=?";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		String currentMonthPoints = null;
@@ -426,8 +426,10 @@ public class GamificationApiDAO {
 		try {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, userCode);
-			preparedStatement.setString(2, goalCode);
+			String currentMonthYear = getCurrentMonthYear();
+			preparedStatement.setString(1, currentMonthYear);
+			preparedStatement.setString(2, userCode);
+			preparedStatement.setString(3, goalCode);
 			rs = preparedStatement.executeQuery();
 			if(rs.next()) {
 				logger.debug("Got getCurrentMonthPoints");
@@ -619,7 +621,7 @@ public class GamificationApiDAO {
 	public List<UserPointsPageView> getAllPointsInfo(String userCode, String goalCode) {
 
 		List<UserPointsPageView> userPointsList = new ArrayList<UserPointsPageView>();
-		System.out.println("GamificationDAO getAllPointsInfo()" + userCode + "iiiiii:" + goalCode);
+		System.out.println("GamificationDAO getAllPointsInfo userCode:" + userCode + "goalCode:" + goalCode);
 		String query = "select ua.ACTION_CODE, ch.STORY, ua.POINTS, ua.DATE from ss_tr_user_action ua, ss_ma_challenge ch where ch.ACTION_CODE=ua.ACTION_CODE and ua.USER_CODE=? and ua.GOAL_CODE=? and ua.STATUS='Active' order by ua.date desc";
 
 		PreparedStatement preparedStatement = null;
@@ -840,4 +842,66 @@ public class GamificationApiDAO {
 		return userRewardList;
 
 	}	
+	
+	public String getAllTimeRank(String userCode, String goalCode) {
+
+		logger.debug("getAllTimeRank()");
+		String query = "select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.points) as totalPoints,  u.user_code FROM ss_tr_user_action ua,ss_ma_user u group by ua.USER_CODE order by totalPoints desc) as inQuery, (SELECT @curRank := 0) r ) outerQry where outerQry.user_code=?";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String allTimeRank = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.setString(2, goalCode);
+			rs = preparedStatement.executeQuery();
+			if(rs.next()) {
+				logger.debug("Got getAllTimeRank");
+				allTimeRank = rs.getString("rank");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("getAllTimeRank-->"+allTimeRank);
+		return allTimeRank;
+	}
+	
+	public String getCurrentMonthRank(String userCode, String goalCode) {
+
+		logger.debug("getCurrentMonthRank()");
+		String query = "select * from (select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.points) as totalPoints, month(ua.date), u.user_code FROM ss_tr_user_action ua,ss_ma_user u where extract(year_month from ua.date)= ?  group by ua.USER_CODE, month(ua.date)  order by totalPoints desc) as inQuery, (SELECT @curRank := 0) r ) outerQry where outerQry.user_code=?";
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String currentMonthRank = null;
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			String currentMonthYear = getCurrentMonthYear();
+			preparedStatement.setString(1, currentMonthYear);
+			preparedStatement.setString(2, userCode);
+			preparedStatement.setString(3, goalCode);
+			
+			rs = preparedStatement.executeQuery();
+			if(rs.next()) {
+				logger.debug("Got getCurrentMonthRank");
+				currentMonthRank = rs.getString("rank");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("getCurrentMonthRank-->"+currentMonthRank);
+		return currentMonthRank;
+	}
+	
 }

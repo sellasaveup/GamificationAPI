@@ -107,7 +107,7 @@ public class APIController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCurrentMonthPoints(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
 		logger.debug("Inside GET_MONTH_POINTS Service");
-		Map<String, Object> jsonRoot = getAPIManager().getAllTimePoints(userCode, goalCode);
+		Map<String, Object> jsonRoot = getAPIManager().getCurrentMonthPoints(userCode, goalCode);
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 	
@@ -646,4 +646,22 @@ public class APIController {
 	}
 	
 	
+	@GET
+	@Path("/GET_MONTH_RANK")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCurrentMonthRank(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("Inside GET_MONTH_RANK Service");
+		Map<String, Object> jsonRoot = getAPIManager().getCurrentMonthPoints(userCode, goalCode);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_ALL_TIME_RANK")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllTimeRank(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
+		logger.debug("Inside GET_ALL_TIME_RANK Service");
+		Map<String, Object> jsonRoot = getAPIManager().getAllTimePoints(userCode, goalCode);
+		logger.debug("jsonRoot2-->"+jsonRoot);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
 }

@@ -166,7 +166,7 @@
 		<description></description>
 		<display-name>UpdateBadge</display-name>
 		<servlet-name>UpdateBadge</servlet-name>
-		<servlet-class>com.gamification.api.controller.badge.CreateBadge</servlet-class>
+		<servlet-class>com.gamification.api.controller.badge.UpdateBadge</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>UpdateBadge</servlet-name>
@@ -248,6 +248,50 @@
 	<servlet-mapping>
 		<servlet-name>RetrieveUserChannel</servlet-name>
 		<url-pattern>/RetrieveUserChannel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>RetrieveUser</display-name>
+		<servlet-name>RetrieveUser</servlet-name>
+		<servlet-class>com.gamification.api.controller.user.RetrieveUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveUser</servlet-name>
+		<url-pattern>/RetrieveUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>DeleteUser</display-name>
+		<servlet-name>DeleteUser</servlet-name>
+		<servlet-class>com.gamification.api.controller.user.DeleteUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteUser</servlet-name>
+		<url-pattern>/DeleteUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>CreateUser</display-name>
+		<servlet-name>CreateUser</servlet-name>
+		<servlet-class>com.gamification.api.controller.user.CreateUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateUser</servlet-name>
+		<url-pattern>/CreateUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>UpdateUser</display-name>
+		<servlet-name>UpdateUser</servlet-name>
+		<servlet-class>com.gamification.api.controller.user.UpdateUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateUser</servlet-name>
+		<url-pattern>/UpdateUser</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

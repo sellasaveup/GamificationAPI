@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -34,9 +32,8 @@ public class User implements Serializable {
 	@Column(name="IMAGE")
 	private String image;
 	
-	@ManyToOne
-	@JoinColumn(name="USER_TYPE",referencedColumnName="USER_TYPE_CODE")
-	private UserChannel userChannel;
+	@Column(name="USER_TYPE")
+	private String userType;
 	
 	@Column(name="STATUS")
 	private String status;
@@ -84,12 +81,12 @@ public class User implements Serializable {
 		this.image = image;
 	}
 
-	public UserChannel getUserChannel() {
-		return userChannel;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setUserChannel(UserChannel userChannel) {
-		this.userChannel = userChannel;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public String getStatus() {

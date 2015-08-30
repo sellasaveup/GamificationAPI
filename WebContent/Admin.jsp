@@ -40,7 +40,7 @@
                 	return $.Deferred(function($dfd) {
                    		var formData = new FormData(document.forms[0]);
                     	$.ajax({
-                        	url: 'CreateGoal',
+                        	url: 'UpdateGoal',
                         	type: 'POST',
                         	data: formData,
                         	processData: false,
@@ -417,7 +417,7 @@
                             $('#GoalTableContainer').jtable('openChildTable',
                                     $img.closest('tr'),
                                     {
-                                        title: goalData.record.goalCode + ' - Levels',
+                                        title: goalData.record.goalCode + ' - Badges',
                                         actions: {
                                         	listAction: 'RetrieveBadge?goalCode=' + goalData.record.goalCode,
                                         	createAction:function () {
@@ -532,7 +532,7 @@
                             $('#GoalTableContainer').jtable('openChildTable',
                                     $img.closest('tr'),
                                     {
-                                        title: goalData.record.goalCode + ' - Levels',
+                                        title: goalData.record.goalCode + ' - Rewards',
                                         actions: {
                                         	listAction: 'RetrieveReward?goalCode=' + goalData.record.goalCode,
                                         	createAction:function () {
@@ -635,7 +635,111 @@
 			}
 		});
 		
+		$('#UserTableContainer').jtable({
+			title : 'User',
+			openChildAsAccordion: true,
+			actions : {
+				listAction : 'RetrieveUser',
+				createAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'CreateUser',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+            	deleteAction: 'DeleteUser',
+            	updateAction:function () {
+                	return $.Deferred(function($dfd) {
+                   		var formData = new FormData(document.forms[0]);
+                    	$.ajax({
+                        	url: 'UpdateUser',
+                        	type: 'POST',
+                        	data: formData,
+                        	processData: false,
+                        	contentType: false,
+                        	dataType: 'json',
+                        	success: function(data) {
+                            	$dfd.resolve(data);
+                        	}
+                    	});
+                	});
+            	},
+			},
+			fields : {
+                userId : {
+					title : 'User Id',
+					width : '10%',
+					key : true,
+					list : true,
+					create : false
+				},
+				userCode : {
+					title : 'Goal Code',
+					width : '10%',
+					edit : true
+				},
+				name : {
+					title : 'Name',
+					width : '20%',
+					edit : true
+				},
+				nickName : {
+					title : 'Nick Name',
+					width : '20%',
+					edit : true
+				},
+				userType : {
+					title: 'U-channel',
+                    width: '10%',
+                    edit: true,
+                    options : 'RetrieveUserChannel?channel=channel',
+                    display: function (data) {
+                        return data.record.userType;
+                    }
+				},
+				image : {
+					title : 'Image',
+					width : '20%',
+					edit : true,
+					input: function (data) {
+						return '<input type="file" name="image" id="image" />';
+					}
+				},
+				status : {
+					title: 'Status',
+                    width: '10%',
+                    type: 'checkbox',
+                    values: { 'false': 'Passive', 'true': 'Active' },
+                    defaultValue: 'true',
+                    display: function (data) {
+                        return data.record.status;
+                    }
+				},
+				date : {
+					title : 'Date',
+					width : '10%',
+					edit : true,
+					type : 'date',
+					displayFormat : 'yy-mm-dd',
+					display: function (data) {
+                        return data.record.date;
+                    }
+				},	
+			}
+		});
+		
+		
 		$('#GoalTableContainer').jtable('load');
+		$('#UserTableContainer').jtable('load');
 	});
 </script>
 
@@ -645,6 +749,14 @@
 		style="width: 80%; margin-right: 10%; margin-left: 10%; text-align: center;">
 		<h4>Goal </h4>
 		<div id="GoalTableContainer"></div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div
+		style="width: 80%; margin-right: 10%; margin-left: 10%; text-align: center;">
+		<h4>User </h4>
+		<div id="UserTableContainer"></div>
 	</div>
 </body>
 </html>

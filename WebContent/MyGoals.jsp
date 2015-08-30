@@ -6,102 +6,83 @@
 <title>My Goals</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.popupoverlay.js"></script>
 
 <link rel="stylesheet" href="./css/bootstrap.min.css">
-<script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
-<script src="./js/jquery.blockUI.js" type="text/javascript"></script>
-<script src="./js/bootstrap.min.js" type="text/javascript"></script>
 <script src="./js/session.js"></script>
-<title>challenges</title>
-<script type="text/javascript">
-
- 
-	$(document).ready(function() {
-		
-	});
-
-	function funcOnChange(selectedGoal) {
-		localStorage.setItem("sessionGoalCode", selectedGoal);
-		$("#myGoalFormId").submit();
-	}
-</script>
-
-</head>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/goalwidget.js" type="text/javascript"></script>
 <style>
-.tool {
-	width: 70px;
-	height: 16px;
-	overflow: hidden;
-	position: absolute;
-	left: 50%;
-	margin-left: -35px;
-	background-color: #c6e5f6;
-	background: #CABA75;
-	color: black;
-	font-size: 11px;
+body {
+	margin-bottom: 80px;
+	background: #336699;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+				var userCode = getSessionUserCode();
+				getAllGoalList('goalTemplate', userCode);
+				$('#registerform').popup('show');
+				$("#ButtonSubmit").click(function() {
+					
+					if($('input:radio:checked').length > 0){
+						var selectedGoalCode = $('.list input[type="radio"]:checked:first').val();
+						localStorage.setItem("sessionGoalCode", selectedGoalCode);
+						window.location.replace("MasterTemplate.jsp");
+					}else{
+						    alert("Please Select a Goal");
+						    window.location.replace("MyGoals.jsp");
+
+					}
+
+
+					
+				});
+
+				$("#BackSubmit").click(function() {
+					window.location.replace("Login.jsp");
+				});
+
+			});
+</script>
+</head>
+<body>
+	<form id="myForm">
+		<div id="registerform" class="well">
+			<h4 style="color: black">Select a Goal</h4>
+			<div class="list">
+				<div id="goalTemplate">
+					
+				</div>
+				<table>
+					<tr>
+						<td colspan=2><input id="ButtonSubmit" type="button"
+							class="registerform_close btn btn-default" Value="Submit">
+							<input id="BackSubmit" type="button"
+							class="registerform_close btn btn-default" Value="Back">
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</form>
+	<style>
+#registerform {
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	-ms-transform: scale(0.8);
+	transform: scale(0.8);
 }
 
+.popup_visible #registerform {
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+}
 </style>
-<body>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<form action="MasterTemplate.jsp" method="post" id="myGoalFormId">
-	<div class="container">
-		<div class="row well">
-			<div class="col-sm-12">
-				<center>
-					<h2>Select a Goal</h2>
-				</center>
-			</div>
-		</div>
-		<div class="row well">
-			<div class="col-sm-4">
-				<label class="radio-inline"><input type="radio"
-					id="hype" name="goalType" value="HYPE_GOAL" onchange="funcOnChange(this.value)">Hype</label>
-			</div>
-			<div class="col-sm-4">
-				<label class="radio-inline"><input type="radio"
-					id="townHallMeet" value="INTRANET_GOAL" name="goalType" onchange="funcOnChange(this.value)">Intranet</label>
-			</div>
-			<div class="col-sm-4">
-				<label class="radio-inline"><input type="radio"
-					id="pdu" value="PDU_GOAL" name="goalType" onchange="funcOnChange(this.value)">PDU</label>
-			</div>
-		</div>
-		<br>
-		<hr>
-	</div>
-	</form>
-	<script>
-	$(document).ready(function() {
-		 $('#myGoalFormId').click(function() { 
-		        $.blockUI({ 
-		            message: $('div.growlUI'), 
-		            fadeIn: 700, 
-		            fadeOut: 700, 
-		            timeout: 2000, 
-		            showOverlay: false, 
-		            centerY: false, 
-		            css: { 
-		                width: '350px', 
-		                top: '10px', 
-		                left: '', 
-		                right: '10px', 
-		                border: 'none', 
-		                padding: '5px', 
-		                backgroundColor: '#000', 
-		                '-webkit-border-radius': '10px', 
-		                '-moz-border-radius': '10px', 
-		                opacity: .6, 
-		                color: '#fff' 
-		            } 
-		        }); 
-		    }); 
-	});
-	</script>
 </body>
 </html>

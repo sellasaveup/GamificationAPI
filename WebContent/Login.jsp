@@ -6,19 +6,7 @@
 <script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="./js/jquery.popupoverlay.js"></script>
 <link href="./css/loginprofile.css" rel="stylesheet">
-
-<script>
-jQuery.browser = {};
-(function () {
-    jQuery.browser.msie = false;
-    jQuery.browser.version = 0;
-    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-        jQuery.browser.msie = true;
-        jQuery.browser.version = RegExp.$1;
-    }
-})();
-
-</script>
+<script src="./js/bootstrap.min.js"></script>
 <style>
 .lineheight {
 	line-height: 3em;
@@ -409,7 +397,6 @@ p::before {
 					</div>
 				</div>
 			</div>
-			<form id = "blockMyform" action="MasterTemplate.jsp"></form>
 			<form id="myForm" method="post"  action="MyGoals.jsp">
 				<div class="row">
 					<div class="col-sm-6 pull-left">

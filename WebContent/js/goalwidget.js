@@ -1,6 +1,6 @@
-function getAllGoalList(divId, userCode) {
+function getAllGoalList(divId, userCode, commonUrl) {
 
-	var buildUrl = 'http://localhost:8080/GamificationAPI/sella/api/GET_ALL_MY_GOALS?userCode='
+	var buildUrl = commonUrl + 'GET_ALL_MY_GOALS?userCode='
 		buildUrl = buildUrl + userCode;
 	
 	$.ajax({

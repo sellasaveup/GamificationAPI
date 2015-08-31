@@ -16,7 +16,7 @@
 
 	FakePoller.prototype.getData = function() {
 		var results = [];
-		for (var i = 0, len = 10; i < len; i++) {
+		for (var i = 0, len = this.userCodeList.length; i < len; i++) {
 			
 			
 			results.push({

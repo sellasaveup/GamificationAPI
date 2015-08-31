@@ -53,6 +53,7 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 			final LevelView view = new LevelView();
 			view.setLevelId(entity.getLevelId());
 			view.setBadgeCode(entity.getBadgeCode());
+			view.setName(entity.getName());
 			view.setGoalCode(entity.getGoalCode());
 			view.setLevelCode(entity.getLevelCode());
 			view.setRewardCode(entity.getRewardCode());
@@ -67,12 +68,12 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 		return levelViewList;
 	}
 	
-	public List<Level> getLevelByGoalCode(final String goalCode) {
+	public List<LevelView> getLevelByGoalCode(final String goalCode) {
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
 		try{
 			final Query query = em.createQuery("from Level l where l.goalCode = ?1");
 			query.setParameter(1, goalCode);
-			return query.getResultList();
+			return getTransformEntityObjToViewObj(query.getResultList());
 		} finally {
 			close(em);
 		}

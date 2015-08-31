@@ -31,6 +31,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
+                            	window.location.reload();
                         	}
                     	});
                 	});
@@ -48,6 +49,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
+                            	window.location.reload();
                         	}
                     	});
                 	});
@@ -107,8 +109,8 @@
 					title: 'Status',
                     width: '10%',
                     type: 'checkbox',
-                    values: { 'false': 'Passive', 'true': 'Active' },
-                    defaultValue: 'true',
+                    values: { 'Passive': 'Passive', 'Active': 'Active' },
+                    defaultValue: 'Active',
                     display: function (data) {
                         return data.record.status;
                     }
@@ -153,6 +155,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -169,6 +172,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -293,6 +297,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -309,6 +314,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -365,7 +371,7 @@
                             					edit : true
                             				},
                                             badgeCode: {
-                                            	title: 'Badge Code',
+                                            	title: 'Badge',
                                                 width: '30%',
                                                 edit: true,
                                                 options : 'RetrieveBadge?badge=badge',
@@ -379,7 +385,7 @@
                                                 edit: true,
                                                 options : 'RetrieveReward?reward=reward',
                                                 display: function (data) {
-                                                    return data.record.reward;
+                                                    return data.record.rewardCode;
                                                 }
                                             },
                                             date : {
@@ -432,6 +438,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -448,6 +455,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -547,6 +555,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -563,6 +572,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
+                                                        	window.location.reload();
                                                     	}
                                                 	});
                                             	});
@@ -652,6 +662,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
+                            	window.location.reload();
                         	}
                     	});
                 	});
@@ -669,6 +680,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
+                            	window.location.reload();
                         	}
                     	});
                 	});
@@ -683,7 +695,7 @@
 					create : false
 				},
 				userCode : {
-					title : 'Goal Code',
+					title : 'User Code',
 					width : '10%',
 					edit : true
 				},
@@ -718,8 +730,8 @@
 					title: 'Status',
                     width: '10%',
                     type: 'checkbox',
-                    values: { 'false': 'Passive', 'true': 'Active' },
-                    defaultValue: 'true',
+                    values: { 'Passive': 'Passive', 'Active': 'Active' },
+                    defaultValue: 'Active',
                     display: function (data) {
                         return data.record.status;
                     }

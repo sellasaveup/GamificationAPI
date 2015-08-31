@@ -34,8 +34,11 @@ public class Reward implements Serializable {
 	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="image")
+	@Column(name="IMAGE")
 	private String image;
+	
+	@Column(name="STORY")
+	private String story;
 	
 	@Column(name = "EXPIRY_DATE")
 	private Date expiryDate;
@@ -105,6 +108,14 @@ public class Reward implements Serializable {
 
 	public void setGoalCode(String goalCode) {
 		this.goalCode = goalCode;
+	}
+
+	public String getStory() {
+		return story;
+	}
+
+	public void setStory(String story) {
+		this.story = story;
 	}
 	
 	

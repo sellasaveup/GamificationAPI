@@ -50,6 +50,7 @@ public class RewardDao  extends AdminPersistence<Reward> implements IRewardDao {
 			rewardView.setGoalCode(reward.getGoalCode());
 			rewardView.setImage(reward.getImage());
 			rewardView.setName(reward.getName());
+			rewardView.setStory(reward.getStory());
 			rewardView.setExpiryDate(getFormattedDate(reward.getExpiryDate()));
 			rewardView.setDate(getFormattedDate(reward.getDate()));
 			rewardViews.add(rewardView);

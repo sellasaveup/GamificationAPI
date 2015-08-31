@@ -655,9 +655,10 @@ p::before {
 
 
 	<div id="goalsform" class="well">
-		<h4 style="color: black">Select a Goal</h4>
+		<h3 style="color: black">Select a Goal</h3>
 		<div class="list">
 			<div id="goalTemplate"></div>
+			<br>
 			<table>
 				<tr>
 					<td colspan=2><input id="ButtonSubmit" type="button"

@@ -13,7 +13,7 @@ function getAllGoalList(divId, userCode, commonUrl) {
 			var goalHtml = '<table><tr>';
 			 $.each( goalList, function( index, obj ) {
 				 var goalCode = goalList[index].goalCode;
-				 goalHtml = goalHtml + '<td><input type="radio" name="goalType" value="' + goalList[index].goalCode + '" >' + goalList[index].name + '</td>';
+				 goalHtml = goalHtml + '<td><input type="radio" name="goalType" value="' + goalList[index].goalCode + '" > &nbsp;&nbsp;' + goalList[index].name + '</td>';
 						 
 				 
 			 });

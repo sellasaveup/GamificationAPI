@@ -16,13 +16,13 @@
 
 	FakePoller.prototype.getData = function() {
 		var results = [];
-		for (var i = 0, len = this.userCodeList.length; i < len; i++) {
+		for (var i = 0, len = 10; i < len; i++) {
 			
 			
 			results.push({
 				
-				userName : this.userCodeList[i],
-				userPoint : this.userPoints[i],
+				userName : (this.userCodeList[i] ? this.userCodeList[i] : ""),
+				userPoint : (this.userPoints[i] ? this.userPoints[i] : ""),
 				userImage : ( this.userAvatar[i] ?  this.userAvatar[i] : ""),
 				userRank : (this.userRanks[i] ? this.userRanks[i] : "")
 
@@ -101,31 +101,30 @@
 			this.list.push({
 				$item : item,
 				$userImage : $('<span class="userImage">Loading...</span>')
-						.appendTo(item),
-				$userName : $('<span class="userName">Loading...</span>')
-						.appendTo(item),
-				$userRank : $('<span class="userRank">Loading...</span>')
-						.appendTo(item),
-				$userPoint : $('<span class="userPoint">Loading...</span>')
-						.appendTo(item)
+					.appendTo(item),
+				$userName : $('<span class="userName" style="font-size:14px;">Loading...</span>')
+					.appendTo(item),
+				$userRank : $('<span class="userRank" style="font-size:14px;">Loading...</span>')
+					.appendTo(item),
+				$userPoint : $('<span class="userPoint" style="font-size:15px;">Loading...</span>')
+					.appendTo(item)
 			});
 		}
 
 		function eventAnimationEnd(evt) {
 			this.list[this.currentItem].$userName
-					.html(_this.data[this.currentItem].userName + " ");
+			.html(_this.data[this.currentItem].userName ? "<b>" +_this.data[this.currentItem].userName + " " : "</b>&nbsp;&nbsp;&nbsp;&nbsp;");
+	
 			this.list[this.currentItem].$userRank
-			.html("&nbsp;&nbsp;&nbsp;&nbsp;#" + _this.data[this.currentItem].userRank);
+			.html(_this.data[this.currentItem].userRank ? "<b>&nbsp;&nbsp;#" + _this.data[this.currentItem].userRank : "</b>&nbsp;&nbsp;&nbsp;&nbsp;");
+	
 			this.list[this.currentItem].$userPoint
-					.html("&nbsp;&nbsp;&nbsp;&nbsp;"
-							+ _this.data[this.currentItem].userPoint
-							+ "&nbsp"
-							+ "points");
+			.html(_this.data[this.currentItem].userPoint ? "<b>&nbsp;&nbsp;&nbsp;&nbsp;" + _this.data[this.currentItem].userPoint + "&nbsp" + "points" : "</b>&nbsp;&nbsp;&nbsp;&nbsp;");
+	
 			this.list[this.currentItem].$userImage
-					.html('<img src="./img/profile/'
-							+ _this.data[this.currentItem].userImage
-							+ '" class="img-circle" width="20" height="20">'
-							+ ' ');
+			.html(_this.data[this.currentItem].userImage ? '<img src="./img/profile/' + _this.data[this.currentItem].userImage
+			+ '" class="img-circle" width="50" height="50">' + ' ' : "&nbsp;&nbsp;&nbsp;&nbsp;");
+	
 			this.list[this.currentItem].$item.removeClass('animate');
 			this.currentItem = this.currentItem >= this.currentCount - 1 ? 0
 					: this.currentItem + 1;

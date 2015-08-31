@@ -38,7 +38,7 @@ function getUserProfile(divId, userCode, goalCode, commonUrl) {
 		success : function(data) {
 			
 			var username = data.Response.name;
-			
+		
 			
 			var imgg = data.Response.image;
 			var profileHtml = '<div class="profile-userpic"><center><img src="./img/profile/'+ data.Response.image + 
@@ -46,7 +46,7 @@ function getUserProfile(divId, userCode, goalCode, commonUrl) {
 			'<div class="profile-usertitle">' + 
 				'<div class="profile-usertitle-name">' + 
 			'Hi ' + username +
-			'</div><div><img src="./img/profile/'+ data.Response.badgeView.image + '" class="img-rounded width="100" height="50" ></div></div>' +
+			'</div><div><img src="./img/badges/'+ data.Response.badgeView.image + '" class="img-rounded width="100" height="50" ></div></div>' +
 		'<br>'+
 		'<div align="center"><article style="align:center" class = "btn-sm profile-usertitle-job"><font size="3"><b>Total Points</b></font>'+
 		'<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="6">' +

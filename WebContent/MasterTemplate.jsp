@@ -92,7 +92,7 @@
 
 </div>
     <div class="row">
-        <div class="col-sm-2 profile-sidebar" style="width:280px">
+        <div class="col-sm-2 profile-sidebar" style="width:280px;height:1000px">
         	<div id="userProfileTemplate">
              </div>
           </div>

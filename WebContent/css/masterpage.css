@@ -36,7 +36,7 @@ footer {
 
 .element
 {
-	font-family: cursive;
+	 font-family: 'Segoe UI Semilight'';
 	<!--text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.75);-->
 	color: #072B4D;
 	font-size: 20px;
@@ -85,15 +85,15 @@ body {
 }
 
 .profile-usertitle-name {
-  color: #5a7391;
-  font-size: 16px;
+  color: #fff;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 7px;
 }
 
 .profile-usertitle-job {
   text-transform: uppercase;
-  color: #5b9bd1;
+  color: #fff;
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 15px;

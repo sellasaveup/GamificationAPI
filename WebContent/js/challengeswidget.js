@@ -45,11 +45,11 @@ function getChallengesByGoal(divId, goalCode, commonUrl) {
 			var challengeHtml = "";
 			 $.each( challengeList, function( index, obj ) {
 				 
-				 challengesHtml =  '<div class="paddme well well-lg mywell"><div class="row"><div class="col-sm-2"><center>'+
-						 '<img src="./img/challenges/'+ challengeList[index].image + '" class="img-rounded" width="100" height="80">' +
+				 challengesHtml =  '<div class="paddme"><div class="row"><div class="col-sm-2"><center>'+
+						 '<img src="./img/challenges/'+ challengeList[index].image + '" class="img-rounded" width="50" height="50">' +
 						 '</center></div><div class="col-sm-8">' + challengeList[index].story + '&nbsp;&nbsp;&nbsp;'+
-						 '<a href="#">Read More</a></div><div class="col-sm-2 points well well-sm"><center>' +
-						 '<h4>' + challengeList[index].points +" points"+'</h4></center></div></div>'
+						 '<a href="#">Read More</a></div><div class="col-sm-2"><center>' +
+						 '<h4>' + challengeList[index].points +" points"+'</h4></center></div></div><br/>'
 						 
 				 $("#"+divId).append(challengesHtml);
 				 
@@ -78,10 +78,10 @@ function getLevelByGoal(divId, goalCode, commonUrl) {
 			var challengeList = data.Response;
 			var challengeHtml = "";
 			var tableBody = "";
-			var tableHeader =  '<center><div class="col-sm-12"><table class="table"><thead><tr class="success"> <th>Level</th><th>Level Story</th><th>Rewards</th> <th>Status Badge</th></tr></thead><tbody>';
+			var tableHeader =  '<center><div class="col-sm-12"><table class="table table-striped table-hover"><thead><tr><th>Level</th><th>Level Story</th><th>Rewards</th> <th>Status Badge</th></tr></thead><tbody>';
 			 $.each( challengeList, function( index, obj ) {
 				 
-				 challengesHtml =  tableBody + '<tr class="danger"><td>'+'<img src="./img/challenges/'+ challengeList[index].image + '" class="img-rounded" width="100" height="80">' + '</td>' +
+				 challengesHtml =  tableBody + '<tr><td>'+'<img src="./img/challenges/'+ challengeList[index].image + '" class="img-rounded" width="100" height="80">' + '</td>' +
 						 '<td>' + challengeList[index].story + '</td>'+
 						 '<td>' + challengeList[index].rewardCode  + '</td>' +
 						 '<td>'+'<img src="./img/challenges/' + challengeList[index].badgeCode + '" class="img-rounded" width="100" height="80">' +'</td>'+ '</tr>';

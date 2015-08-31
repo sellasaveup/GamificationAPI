@@ -46,9 +46,9 @@ function getUserProfile(divId, userCode, goalCode, commonUrl) {
 			'<div class="profile-usertitle">' + 
 				'<div class="profile-usertitle-name">' + 
 			'Hi ' + username +
-			'</div><div><img src="./img/badges/'+ data.Response.badgeView.image + '" class="img-rounded width="100" height="50" ></div></div>' +
+			'</div><br><div><img src="./img/badges/'+ data.Response.badgeView.image + '" class="img-rounded width="100" height="100" ></div></div>' +
 		'<br>'+
-		'<div align="center"><article style="align:center" class = "btn-sm profile-usertitle-job"><font size="3"><b>Total Points</b></font>'+
+		'<br/><br/><div align="center"><article style="align:center" class = "btn-sm profile-usertitle-job"><font size="3"><b>Total Points</b></font>'+
 		'<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="6">' +
 		data.Response.totalPoints +
 		'</font></article>' +

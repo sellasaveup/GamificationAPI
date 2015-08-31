@@ -33,9 +33,7 @@ body {
 
 </head>
 <body bgcolor="#FFDD6E">
-
-<div class="well">
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
 				<h3 class="element">You have earned below Rewards, you can redeem them..</h3>
@@ -50,6 +48,5 @@ body {
 		</div>		
 		<br> <br> <br>
 	</div>
-	</div>	
 </body>
 </html>

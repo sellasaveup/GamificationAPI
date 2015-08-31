@@ -14,42 +14,68 @@
 <script src="./js/session.js"></script>
 <title>challenges</title>
 <script type="text/javascript">
-var commonUrl = getSessionUrl();
-var userCode = getSessionUserCode();
-var goalCode = getSessionGoalCode();
+	var commonUrl = getSessionUrl();
+	var userCode = getSessionUserCode();
+	var goalCode = getSessionGoalCode();
 
-		$(document).ready(function() {
-			getChallengesByGoal('ChallengesByGoal', goalCode, commonUrl);
-			getLevelByGoal('LevelByGoal', goalCode, commonUrl); 
-		});
-		</script>
-	<style>
-		body {
-		margin-bottom: 80px;
-        }
-	</style>
-		
-		
+	$(document).ready(function() {
+		getChallengesByGoal('ChallengesByGoal', goalCode, commonUrl);
+		getLevelByGoal('LevelByGoal', goalCode, commonUrl);
+	});
+</script>
+<style>
+.panel-body:hover {
+  background-color: #ffffff !important;
+}
+body {
+	margin-bottom: 80px;
+}
+</style>
+
+
 </head>
 <body>
-	<div class="row" style="width:100%">
+	<div class="row" style="width: 100%">
 		<div class="col-sm-12">
 			<div class=" panel-success panel-heading">
-				<div class="panel-heading"><h4 class="element"><b>Challenges on your way..</b></h4></div>
-				<div class="panel-body" style="max-height: 450px;overflow-y: auto;">
+				<div class="panel-heading">
+					<h4 class="element">
+						<b>Challenges on your way..</b>
+					</h4>
+				</div>
+				<div class="panel-body" style="max-height: 450px; overflow-y: auto;">
 					<div class="row">
 						<div class="col-sm-12">
-							<div id="ChallengesByGoal">
-							</div>
+							<div id="ChallengesByGoal"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row" id="LevelByGoal">
-	
-</div>
+
+	<br>
+	<br>
+	<div class="row" style="width: 100%">
+		<div class="col-sm-12">
+			<div class=" panel-danger panel-heading">
+				<div class="panel-heading">
+					<h4 class="element">
+						<b>Complete Levels..</b>
+					</h4>
+				</div>
+				<div class="panel-body" style="max-height: 450px; overflow-y: auto;">
+					<div class="row">
+						<div class="col-sm-12">
+							<div id="LevelByGoal"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
 
 </body>
 </html>

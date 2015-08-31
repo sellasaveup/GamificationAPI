@@ -31,7 +31,11 @@ function getMyCurrentMonthRank(divId, userCode, goalCode, commonUrl) {
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
 			console.log('rank call success month: ' + data);
+			if(data.Rank != undefined) {
 				document.getElementById(divId).innerHTML = data.Rank;
+			} else {
+				document.getElementById(divId).innerHTML = "Get Rank by completing the challenges";
+			}
 		},
 		error : function(e) {
 			console.log('rank call failure : ' + e);

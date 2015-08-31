@@ -331,17 +331,20 @@ public class APIController {
 	@GET
 	@Path("/GET_LEADERBOARD")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getLeaderBoard(@QueryParam("goalCode") String userCode, @QueryParam("requestType") String requestType) {
+	public Response getLeaderBoard(@QueryParam("goalCode") String goalCode, @QueryParam("requestType") String requestType) {
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (userCode != null && !userCode.equals("") && requestType != null) {
-			List<LeaderBoardPageView> customerMasterList = getAPIManager().getLeaderBoard(userCode, requestType);
+		if (goalCode != null && !goalCode.equals("") && requestType != null) {
+			List<LeaderBoardPageView> customerMasterList = getAPIManager().getLeaderBoard(goalCode, requestType);
 			
 			if(!customerMasterList.isEmpty()) {
 				jsonRoot.put("Result", customerMasterList);
 			}
 			else {
-				
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(userCode), "Leader Board Not Available"));
+				 RequestStatus requestStatus = new RequestStatus();
+				requestStatus.setIsSuccess("0");
+				requestStatus.setCode(goalCode);
+				requestStatus.setMessage("Leader Board Not Available");
+				jsonRoot.put("Result", requestStatus);
 			}
 			
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();

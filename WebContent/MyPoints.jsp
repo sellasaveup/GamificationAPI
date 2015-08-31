@@ -33,8 +33,8 @@ $(document).ready(function() {
 	getMyCurrentMonthRank('CurrentMonthRank',  userCode, goalCode, commonUrl);
 	getMyAllTimeRank('AllTimeRank', userCode, goalCode, commonUrl);
 	getMyChallengesList('ChallengeList', userCode, goalCode, commonUrl); 
-	getAllTimeLeaderBoard(userCode, commonUrl);
-	getThisMonthLeaderBoard(userCode, commonUrl);
+	getAllTimeLeaderBoard(goalCode, commonUrl);
+	getThisMonthLeaderBoard(goalCode, commonUrl);
 	drawlinechart('canvas', userCode, goalCode);
 });
 

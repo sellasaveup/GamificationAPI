@@ -45,7 +45,7 @@ function getMyCurrentMonthPoints(divId, userCode, goalCode, commonUrl) {
 
 	var buildUrl = commonUrl+'GET_MONTH_POINTS?userCode=';
 		buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
-		
+	
 	$.ajax({
 		type : "GET",
 		url : buildUrl,
@@ -53,7 +53,11 @@ function getMyCurrentMonthPoints(divId, userCode, goalCode, commonUrl) {
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
 			console.log('points call success: ' + data);
+			if(data.Points != undefined) {
 				document.getElementById(divId).innerHTML = data.Points;
+			} else {
+				document.getElementById(divId).innerHTML = "You have to earn Points"
+			}
 		},
 		error : function(e) {
 			console.log('points call failure : ' + e);

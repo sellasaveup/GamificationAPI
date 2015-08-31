@@ -6,6 +6,8 @@
 <script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="./js/jquery.popupoverlay.js"></script>
 <link href="./css/loginprofile.css" rel="stylesheet">
+<script src="./js/goalwidget.js" type="text/javascript"></script>
+
 
 <style>
 .lineheight {
@@ -100,6 +102,7 @@ p::before {
 
 	$(document).ready(
 			function() {
+				$("#goalsform").hide();
 				updateLatestActivity();
 				updateLatestBadgeActivity();
 				updateLatestRedeemActivity();
@@ -151,31 +154,6 @@ p::before {
 					}
 
 				});
-/*
-				$('#myForm').click(function() {
-					$.blockUI({
-						message : $('div.growlUI'),
-						fadeIn : 700,
-						fadeOut : 700,
-						timeout : 2000,
-						showOverlay : false,
-						centerY : false,
-						css : {
-							width : '350px',
-							top : '10px',
-							left : '',
-							right : '10px',
-							border : 'none',
-							padding : '5px',
-							backgroundColor : '#000',
-							'-webkit-border-radius' : '10px',
-							'-moz-border-radius' : '10px',
-							opacity : .6,
-							color : '#fff'
-						}
-					});
-				});*/
-
 			});
 
 	function getPerformedActivitiesCount(requestUrl) {
@@ -373,13 +351,44 @@ p::before {
 		return "./img/profile/";
 	}
 
+	
+
+			$("#BackSubmit").click(function() {
+				window.location.replace("Login.jsp");
+			});
+			
 	function setSessionValue() {
 		localStorage.setItem("sessionUserCode", $("#loginUserCode").val());
-       // $('#pageDemo2').click(function() { 
-           // $.blockUI({ message: '<h1><img src="busy.gif" /> Just a moment...</h1>' }); 
-    		//setTimeout($.unblockUI, 1000);
+      
+       var enteredUserName = $("#loginUserCode").val();
+       if(enteredUserName) {
+    	   var userCode = enteredUserName;
+    	   $("#goalTemplate").html("");	
+			getAllGoalList('goalTemplate', userCode, commonUrl);
+			
+			$('#goalsform').popup({
+				pagecontainer : '.container',
+				transition : 'all 0.3s'
+			});
+			
+			$("#ButtonSubmit").click(function() {
+				
+				if($('input:radio:checked').length > 0){
+					var selectedGoalCode = $('.list input[type="radio"]:checked:first').val();
+					localStorage.setItem("sessionGoalCode", selectedGoalCode);
+					localStorage.setItem("sessionUserCode", $("#loginUserCode").val());
+					window.location.replace("MasterTemplate.jsp");
+				}else{
+				    alert("Please Select a Goal");
+				}
+			});
+    	   
+       } else {
+    	   
+    	   alert('Please enter your user name');
 
-       // }); 
+    	   
+       }
 
 	}
 </script>
@@ -397,7 +406,7 @@ p::before {
 					</div>
 				</div>
 			</div>
-			<form id="myForm" method="post"  action="MyGoals.jsp">
+			<form id="myForm" method="post">
 				<div class="row">
 					<div class="col-sm-6 pull-left">
 						<div class="form-group">
@@ -417,7 +426,7 @@ p::before {
 							<br>
 							<div class="row">
 								<div class="col-sm-12">
-									<button type="submit" id = "pageDemo2" onclick="setSessionValue()">
+									<button class="initialism goalsform_open"  type="submit" id = "loginSubmit" onclick="setSessionValue()">
 										<span>Submit</span>
 									</button>
 								</div>
@@ -645,6 +654,21 @@ p::before {
 	</div>
 
 
+	<div id="goalsform" class="well">
+		<h4 style="color: black">Select a Goal</h4>
+		<div class="list">
+			<div id="goalTemplate"></div>
+			<table>
+				<tr>
+					<td colspan=2><input id="ButtonSubmit" type="button"
+						class="goalsform_close btn btn-default" Value="Submit">
+						<input id="BackSubmit" type="button"
+						class="goalsform_close btn btn-default" Value="Back"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
 	<style>
 #registerform {
 	-webkit-transform: scale(0.8);
@@ -654,6 +678,19 @@ p::before {
 }
 
 .popup_visible #registerform {
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+}
+#goalsform {
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	-ms-transform: scale(0.8);
+	transform: scale(0.8);
+}
+
+.popup_visible #goalsform {
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-ms-transform: scale(1);

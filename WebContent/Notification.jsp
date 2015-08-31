@@ -186,7 +186,7 @@ var sessionGoalCode = getSessionGoalCode();
 	}
 
 	function badgeUserOnChange(badgeUserCode) {
-		if(badgeUserCode != "") {
+		if(badgeUserCode == "") {
 			doClearComboBox(document.getElementById("badgeCode"));	
 		} else {
 			getBadge(badgeUserCode);	
@@ -315,7 +315,7 @@ var sessionGoalCode = getSessionGoalCode();
 		
 	}
 	
-	function getBadge(userCode) {
+	function getBadge(userCode) { 
 		$.ajax({
             type: "GET",
             data: "",

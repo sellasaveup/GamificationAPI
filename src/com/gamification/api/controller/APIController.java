@@ -737,5 +737,26 @@ public class APIController {
 		    
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
-	
+	@GET
+	@Path("/GET_GOAL_TREND")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getMyPointsLineChart() {
+		logger.debug("getGoalTrend");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List <PointsLineChart> pointsLineChart = getAPIManager().getGoalTrend();
+		 RequestStatus requestStatus = new RequestStatus();
+	   
+		  
+		    if(pointsLineChart != null) {
+		    	jsonRoot.put("Response", pointsLineChart);
+				requestStatus.setIsSuccess("1");				
+				requestStatus.setMessage("Success");
+			} else {
+				requestStatus.setIsSuccess("0");				
+				requestStatus.setMessage("Failure");
+				jsonRoot.put("Response", requestStatus);
+			}
+		    
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
 }

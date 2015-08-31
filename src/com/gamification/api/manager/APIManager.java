@@ -329,6 +329,10 @@ public class APIManager {
 		
 		return chart;
 	}	
+	public List<PointsLineChart> getGoalTrend() {
+		return getGraphDAO().getGoalTrend();
+	}	
+
 	private GraphDAO getGraphDAO() {
 		return new GraphDAO();
 	}

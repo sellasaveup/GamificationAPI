@@ -1,6 +1,7 @@
 package com.gamification.api.view;
 
 public class PointsLineChart {
+	private String dataSet;
 	private String xAxis[] = new String[] {"JAN","FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
 	private String yAxis[] = new String[]{"0","0","0","0","0","0","0","0","0","0","0","0"};
 	public String[] getxAxis() {
@@ -14,5 +15,11 @@ public class PointsLineChart {
 	}
 	public void setyAxis(String yAxis[]) {
 		this.yAxis = yAxis;
+	}
+	public String getDataSet() {
+		return dataSet;
+	}
+	public void setDataSet(String dataSet) {
+		this.dataSet = dataSet;
 	}
 }

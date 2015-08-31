@@ -31,7 +31,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
-                            	window.location.reload();
+                            	$('#GoalTableContainer').jtable('load');
                         	}
                     	});
                 	});
@@ -49,7 +49,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
-                            	window.location.reload();
+                            	$('#GoalTableContainer').jtable('load');
                         	}
                     	});
                 	});
@@ -155,7 +155,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -172,7 +172,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -297,7 +297,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -314,7 +314,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -438,7 +438,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -455,7 +455,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -555,7 +555,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -572,7 +572,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	window.location.reload();
+                                                        	data.childTable.jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -662,7 +662,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
-                            	window.location.reload();
+                            	$('#UserTableContainer').jtable('load');
                         	}
                     	});
                 	});
@@ -680,7 +680,7 @@
                         	dataType: 'json',
                         	success: function(data) {
                             	$dfd.resolve(data);
-                            	window.location.reload();
+                            	$('#UserTableContainer').jtable('load');
                         	}
                     	});
                 	});
@@ -748,7 +748,6 @@
 				},	
 			}
 		});
-		
 		
 		$('#GoalTableContainer').jtable('load');
 		$('#UserTableContainer').jtable('load');

@@ -336,5 +336,17 @@ public class APIManager {
 	private GraphDAO getGraphDAO() {
 		return new GraphDAO();
 	}
+	
+	public List<ChallengeView> getChallenge( String userCode) {
+		logger.debug("userCode--->"+userCode);
+		return getServiceApiDAO().getChallenge(userCode);		
+				
+	}
+	
+	public List<BadgeView> getBadge( String userCode) {
+		logger.debug("userCode--->"+userCode);
+		return getServiceApiDAO().getBadge(userCode);		
+				
+	}
 
 }

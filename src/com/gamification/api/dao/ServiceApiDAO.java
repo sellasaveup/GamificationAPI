@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.gamification.api.view.BadgeView;
+import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.User;
 import com.gamification.common.ConnectionUtility;
 
@@ -377,6 +379,68 @@ public class ServiceApiDAO {
 		}
 		logger.debug("userList-->"+userList);
 		return userList;
+	
+	}
+	
+	public List<ChallengeView> getChallenge(String userCode) {
+
+		logger.debug("getUser()");
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		List<ChallengeView> challengeList = new ArrayList<ChallengeView>();
+		String query = "select ACTION_CODE, STORY from ss_ma_challenge where goal_code in (select goal_code from ss_ma_goal where goal_code in (select goal_code from ss_ma_user_type where user_type_code in (select user_type from ss_ma_user where user_code = ?)))";
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				ChallengeView challenge = new ChallengeView();
+				challenge.setActionCode(rs.getString("ACTION_CODE"));
+				challenge.setStory(rs.getString("STORY"));
+				challengeList.add(challenge);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("challengeList-->"+challengeList);
+		return challengeList;
+	
+	}
+	
+	public List<BadgeView> getBadge(String userCode) {
+
+		logger.debug("getBadge()");
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		List<BadgeView> badgeList = new ArrayList<BadgeView>();
+		String query = "select BADGE_CODE, NAME from ss_ma_badge where goal_code in (select goal_code from ss_ma_goal where goal_code in (select goal_code from ss_ma_user_type where user_type_code in (select user_type from ss_ma_user where user_code = ?)))";
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				BadgeView badge = new BadgeView();
+				badge.setBadgeCode(rs.getString("BADGE_CODE"));
+				badge.setName(rs.getString("NAME"));
+				badgeList.add(badge);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("badgeList-->"+badgeList);
+		return badgeList;
 	
 	}
 	

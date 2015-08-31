@@ -21,7 +21,6 @@ var sessionUserCode = getSessionUserCode();
 var sessionGoalCode = getSessionGoalCode();
 
 	$( document ).ready(function() {
-		
 		pushNotificationOnChange();
 		awardPointsOnChange();
 		awardBadgeOnChange();
@@ -30,7 +29,7 @@ var sessionGoalCode = getSessionGoalCode();
 	
 	function pushNotificationOnChange() {
 		if ($("#checkPushNotify").is(':checked')) {
-			getGoalList(document.getElementById("goalCode"));
+			getGoalListNotification(document.getElementById("goalCode"));
 			$("#pushNotificationPanel").show();
 			
 		} else {
@@ -41,18 +40,18 @@ var sessionGoalCode = getSessionGoalCode();
 	
 	function awardPointsOnChange() {
 		if ($("#checkAwardPoints").is(':checked')) {
-			
+			getGoalListPoint(document.getElementById("pointGoalCode"));
 			$("#awardPointsPanel").show();
 			
 		} else {
-			
+
 			$("#awardPointsPanel").hide();
 		}
 	 }
 	
 	function awardBadgeOnChange() {
 		if ($("#checkAwardBadge").is(':checked')) {
-			getGoalList(document.getElementById("badgeGoalCode"));
+			getGoalListBadge(document.getElementById("badgeGoalCode"));
 			$("#awardBadgePanel").show();
 			
 		} else {
@@ -61,7 +60,7 @@ var sessionGoalCode = getSessionGoalCode();
 		}
 	 }
 	
-	function getGoalList(loadingGoalObject) {
+	function getGoalListNotification(loadingGoalObject) {
 		$.ajax({
 		    url: 'RetrieveGoal',
 		    dataType: 'json',
@@ -71,7 +70,7 @@ var sessionGoalCode = getSessionGoalCode();
 		    processData: false,
 		    success: function( data, textStatus, jQxhr ){
 		        if(data.Result == "OK") {
-		        	doParseGoalResponse(data, loadingGoalObject);
+		        	doParseNotificationGoalResponse(data, loadingGoalObject);
 		        }
 		    },
 		    error: function( jqXhr, textStatus, errorThrown ){
@@ -80,7 +79,73 @@ var sessionGoalCode = getSessionGoalCode();
 		});
 	}
 	
-	function doParseGoalResponse(data, loadingGoalObject) { 
+	function getGoalListPoint(loadingGoalObject) {
+		$.ajax({
+		    url: 'RetrieveGoal',
+		    dataType: 'json',
+		    type: 'post',
+		    contentType: 'application/json',
+		    data: JSON.stringify( { "first-name": "Boobathi", "last-name": "Ayyasamy" } ),
+		    processData: false,
+		    success: function( data, textStatus, jQxhr ){
+		        if(data.Result == "OK") {
+		        	doParsePointGoalResponse(data, loadingGoalObject);
+		        }
+		    },
+		    error: function( jqXhr, textStatus, errorThrown ){
+		        console.log( errorThrown );
+		    }
+		});
+	}
+	
+	function getGoalListBadge(loadingGoalObject) {
+		$.ajax({
+		    url: 'RetrieveGoal',
+		    dataType: 'json',
+		    type: 'post',
+		    contentType: 'application/json',
+		    data: JSON.stringify( { "first-name": "Boobathi", "last-name": "Ayyasamy" } ),
+		    processData: false,
+		    success: function( data, textStatus, jQxhr ){
+		        if(data.Result == "OK") {
+		        	doParseBadgeGoalResponse(data, loadingGoalObject);
+		        }
+		    },
+		    error: function( jqXhr, textStatus, errorThrown ){
+		        console.log( errorThrown );
+		    }
+		});
+	}
+	
+	function doParseNotificationGoalResponse(data, loadingGoalObject) { 
+		var goalArray = data.Records;
+		var goalvalueArray = new Array(goalArray.length);
+		var goalNameArray = new Array(goalArray.length);
+		for(var i=0; i<goalArray.length; i++) {
+			
+			goalvalueArray[i] = goalArray[i].goalCode;
+			goalNameArray[i] = goalArray[i].name;
+		}
+		
+		loadComboBox(loadingGoalObject,goalvalueArray, goalNameArray);
+		
+	}
+	
+	function doParsePointGoalResponse(data, loadingGoalObject) { 
+		var goalArray = data.Records;
+		var goalvalueArray = new Array(goalArray.length);
+		var goalNameArray = new Array(goalArray.length);
+		for(var i=0; i<goalArray.length; i++) {
+			
+			goalvalueArray[i] = goalArray[i].goalCode;
+			goalNameArray[i] = goalArray[i].name;
+		}
+		
+		loadComboBox(loadingGoalObject,goalvalueArray, goalNameArray);
+		
+	}
+	
+	function doParseBadgeGoalResponse(data, loadingGoalObject) { 
 		var goalArray = data.Records;
 		var goalvalueArray = new Array(goalArray.length);
 		var goalNameArray = new Array(goalArray.length);
@@ -95,8 +160,6 @@ var sessionGoalCode = getSessionGoalCode();
 	}
 	
 	function notificationGoalOnChange(goalObject) {
-		//alert(goalObject.value);
-		
 		
 		$( "#target" ).prop('selectedIndex', 0);
 		doClearComboBox(document.getElementById("notificationUserCode"));
@@ -104,10 +167,31 @@ var sessionGoalCode = getSessionGoalCode();
 	}
 	
 	function badgeGoalOnChange(goalObject) {
-		//alert(goalObject.value);
+		var goalCode = $( "#badgeGoalCode" ).val();
+		if(goalCode != "") {
+			getUser(document.getElementById("badgeUserCode"),goalCode, "GOAL", "BADGE");	
+		} else {
+			doClearComboBox(document.getElementById("badgeUserCode"));
+			doClearComboBox(document.getElementById("badgeCode"));
+		}
+		
+	}
+	
+	function pointGoalOnChange(goalObject) {
+		
+		doClearComboBox(document.getElementById("badgeCode"));
+		
+		var goalCode = $( "#pointGoalCode" ).val();
+		getUser(document.getElementById("pointUserCode"),goalCode, "GOAL", "POINT");
 	}
 
-	
+	function badgeUserOnChange(badgeUserCode) {
+		if(badgeUserCode != "") {
+			doClearComboBox(document.getElementById("badgeCode"));	
+		} else {
+			getBadge(badgeUserCode);	
+		}
+	}
 	
 	function targetOnChange(targetObject) {
 
@@ -117,7 +201,7 @@ var sessionGoalCode = getSessionGoalCode();
 		} else if(targetObject.value == "USER") {
 			doClearComboBox(document.getElementById("userType"));
 			var goalCode = $( "#goalCode" ).val();
-			getUser(document.getElementById("notificationUserCode"),goalCode, "GOAL");	
+			getUser(document.getElementById("notificationUserCode"),goalCode, "GOAL", "NOTIFICATION");	
 		} else if(targetObject.value == "ALL") {
 			doClearComboBox(document.getElementById("userType"));
 			doClearComboBox(document.getElementById("notificationUserCode"));
@@ -167,7 +251,7 @@ var sessionGoalCode = getSessionGoalCode();
 		}
 	}
 	
-	function getUser(userObject, code, requestType) {
+	function getUser(userObject, code, requestType, requestFrom) {
 		
 		$.ajax({
             type: "GET",
@@ -178,7 +262,7 @@ var sessionGoalCode = getSessionGoalCode();
             crossDomain: true,
 
             success: function (data) {
-            	parseUserResponse(data, userObject);
+            	parseUserResponse(data, userObject, requestFrom);
             },
 
             error: function (e) {
@@ -186,7 +270,7 @@ var sessionGoalCode = getSessionGoalCode();
          });
 	}
 	
-	function parseUserResponse(data, userObject) {
+	function parseUserResponse(data, userObject,requestFrom) {
 		var userArray = data.Response;
 		
 		var userCodeArray = new Array(userArray.length);
@@ -196,17 +280,86 @@ var sessionGoalCode = getSessionGoalCode();
 			userCodeArray[i] = userArray[i].userCode;
 			userNameArray[i] = userArray[i].name;
 		}
-		
 		loadComboBox(userObject, userCodeArray, userNameArray);
+	}
+	
+	function getChallenge(userCode) {
+		$.ajax({
+            type: "GET",
+            data: "",
+            url: commonUrl+"GET_CHALLENGE?userCode="+userCode,
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+
+            success: function (data) {
+            	parseChallengeResponse(data, document.getElementById("pointAction"));
+            },
+
+            error: function (e) {
+            }
+         });
+	}
+	
+	function parseChallengeResponse(data, actionObject) {
+		var challengeArray = data.Response;
+		
+		var actionCodeArray = new Array(challengeArray.length);
+		var actionNameArray = new Array(challengeArray.length);
+		for(var i=0; i<challengeArray.length; i++) {
+			
+			actionCodeArray[i] = challengeArray[i].actionCode;
+			actionNameArray[i] = challengeArray[i].story;
+		}
+		loadComboBox(actionObject, actionCodeArray, actionNameArray);
+		
+	}
+	
+	function getBadge(userCode) {
+		$.ajax({
+            type: "GET",
+            data: "",
+            url: commonUrl+"GET_USER_BADGE?userCode="+userCode,
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+
+            success: function (data) {
+            	parseBadgeResponse(data, document.getElementById("badgeCode"));
+            },
+
+            error: function (e) {
+            }
+         });
+	}
+	
+	function parseBadgeResponse(data, badgeObject) {
+		var badgeArray = data.Response;
+		
+		var badgeCodeArray = new Array(badgeArray.length);
+		var badgeNameArray = new Array(badgeArray.length);
+		for(var i=0; i<badgeArray.length; i++) {
+			
+			badgeCodeArray[i] = badgeArray[i].badgeCode;
+			badgeNameArray[i] = badgeArray[i].name;
+		}
+		loadComboBox(badgeObject, badgeCodeArray, badgeNameArray);
+		
 	}
 	
 	function loadComboBox(loadingObject,valueArray, textArray) {
 		loadingObject.innerHTML = "";
+		
+		var selectOption = document.createElement('option');
+		selectOption.text = "----Select----";
+		selectOption.value = "";
+        loadingObject.add(selectOption, 0);
+        
 		for(var i=0;i<valueArray.length;i++) {
 			var option = document.createElement('option');
 	        option.text = textArray[i];
 	        option.value = valueArray[i];
-	        loadingObject.add(option, i);
+	        loadingObject.add(option, i+1);
 		}
 	}
 	
@@ -214,10 +367,14 @@ var sessionGoalCode = getSessionGoalCode();
 		
 	}
 	
+	function pointUserCodeChange(pointUserCode) {
+		getChallenge(pointUserCode);
+	}
 	
 	function onSubmit() {
 		
 		if ($("#checkPushNotify").is(':checked')) {
+			
 			var goalCode = $( "#goalCode" ).val();
 			var pushNotificationUrl = commonUrl+'PUSH_NOTIFICATION?';
 			var notificationType = $( "#notificationType" ).val();
@@ -256,8 +413,7 @@ var sessionGoalCode = getSessionGoalCode();
 		
 		if ($("#checkAwardPoints").is(':checked')) {
 			
-			var awardPointsUrl = commonUrl+'POST_ACTIONE?';
-			
+			var awardPointsUrl = commonUrl+'POST_ACTION?';
 			var pointUserCode = $( "#pointUserCode" ).val();
 			var pointAction = $("#pointAction").val();
 			awardPointsUrl = awardPointsUrl+"userCode="+pointUserCode;
@@ -332,6 +488,7 @@ var sessionGoalCode = getSessionGoalCode();
 				</div>
 			</h3>
 			</div>
+			
 			<table width="35%">
 			<tr>
 			  <td>
@@ -347,7 +504,6 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="form-group">
 					<label for="notificationType">Notification Type</label>
 					<select class="form-control" name="notificationType" id="notificationType">
-						<option value="">Choose Notification Type</option>
 						<option value="Message">Message</option>
 						<option value="Warning">Warning</option>
 						<option value="Info">Info</option>
@@ -357,7 +513,6 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="form-group">
 					<label for="target">Target</label>
 					<select class="form-control" name="target" id="target" onchange="targetOnChange(this)">
-						<option value="">Choose Target</option>
 						<option value="ALL">All</option>
 						<option value="USER_TYPE">User Type</option>
 						<option value="USER">User</option>
@@ -385,13 +540,10 @@ var sessionGoalCode = getSessionGoalCode();
 						
 					</select>
 					</div>
-					
-					
 					</div>
 			</div>
 			  </td>
 			</tr>
-			
 			</table>
 			
 			<h3>		
@@ -412,14 +564,21 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="panel-body">
 					
 					<div class="form-group">
+					<label for="badgeGoalCode">Goal</label>
+					<select class="form-control" name="pointGoalCode" id="pointGoalCode" onchange="pointGoalOnChange(this)">
+					</select>
+					</div>
+					
+					<div class="form-group">
 					<label for="pointUserCode">User</label>
-					<select class="form-control" name="pointUserCode" id="pointUserCode">
+					<select class="form-control" name="pointUserCode" id="pointUserCode" onchange="pointUserCodeChange(this.value)">
 						
 					</select>
 					</div>
 					<div class="form-group">
 					<label for="pointAction">Action</label>
-					<input type="text" class="form-control" id="pointAction" placeholder="Action">
+					<select class="form-control" name="pointAction" id="pointAction">
+					</select>
 					</div>
 					</div>
 			</div>
@@ -444,13 +603,12 @@ var sessionGoalCode = getSessionGoalCode();
 					<div class="form-group">
 					<label for="badgeGoalCode">Goal</label>
 					<select class="form-control" name="badgeGoalCode" id="badgeGoalCode" onchange="badgeGoalOnChange(this)">
-						
 					</select>
 					</div>
 					
 					<div class="form-group">
 					<label for="badgeUserCode">User</label>
-					<select class="form-control" name="badgeUserCode" id="badgeUserCode">
+					<select class="form-control" name="badgeUserCode" id="badgeUserCode" onchange="badgeUserOnChange(this.value)">
 						
 					</select>
 					</div>
@@ -470,6 +628,14 @@ var sessionGoalCode = getSessionGoalCode();
 						<button type="button" class="btn btn-primary" onclick="onSubmit()">Submit</button>
 				</div>
 			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 			<div id="tablePoints"></div>
 			<div id="tableBadge"></div>
 		</div>

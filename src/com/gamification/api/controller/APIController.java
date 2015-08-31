@@ -759,4 +759,51 @@ public class APIController {
 		    
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
+	
+	@GET
+	@Path("/GET_CHALLENGE")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getChallenge(@QueryParam("userCode") String userCode) {
+		logger.debug("getChallenge()");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<ChallengeView> ChallengeList = getAPIManager().getChallenge(userCode);
+		   RequestStatus requestStatus = new RequestStatus();
+	    
+	    if(ChallengeList != null && !ChallengeList.isEmpty()) {
+	    	jsonRoot.put("Response", ChallengeList);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Success");
+		} else {
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Failure");
+			jsonRoot.put("Result", requestStatus);
+		}
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_USER_BADGE")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getBadgeForUse(@QueryParam("userCode") String userCode) {
+		logger.debug("getBadgeForUse()");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<BadgeView> badgeList = getAPIManager().getBadge(userCode);
+		   RequestStatus requestStatus = new RequestStatus();
+	    
+	    if(badgeList != null && !badgeList.isEmpty()) {
+	    	jsonRoot.put("Response", badgeList);
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Success");
+		} else {
+			requestStatus.setIsSuccess("0");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Failure");
+			jsonRoot.put("Result", requestStatus);
+		}
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 }

@@ -49,7 +49,9 @@
       function loadAwardNotify() {
     	  $("#content").load("Notification.jsp");
       }
-      
+      function loadGoalTrend() {
+    	  $("#content").load("MyTrend.html");
+      }
 </script>
 	</head>
 	<body onload="loadMyPoints()">
@@ -72,6 +74,7 @@
                  <li><a href="#" onclick="loadMyRewards();"><i class="glyphicon glyphicon-gift"></i><b>My Rewards</b></a></li>
                  <li><a href="#" onclick="loadAdminMaster();"><i class="glyphicon glyphicon-folder-open"></i><b> Admin Master</b></a></li>
                  <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b></a></li>
+                 <li><a href="#" onclick="loadGoalTrend();"><i class="glyphicon glyphicon-globe"></i> <b>Trend </b></a></li>
              	
                 
                 <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.gamification.api.dao.GamificationApiDAO;
+import com.gamification.api.dao.GraphDAO;
 import com.gamification.api.dao.RequestValidatorDAO;
 import com.gamification.api.dao.ServiceApiDAO;
 import com.gamification.api.view.BadgeView;
@@ -15,6 +16,7 @@ import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.GoalView;
 import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
+import com.gamification.api.view.PointsLineChart;
 import com.gamification.api.view.RewardView;
 import com.gamification.api.view.User;
 import com.gamification.api.view.UserBadge;
@@ -318,6 +320,17 @@ public class APIManager {
 		userList = getServiceApiDAO().getUser(code, query);		
 				
 		return userList;
+	}
+	public PointsLineChart getMyPointsLineChart( String userCode, String goalCode) {
+		logger.debug(" badge list userCode--->"+userCode);
+		logger.debug("actionCode--->"+goalCode);
+			
+		PointsLineChart chart = getGraphDAO().getMyPointsLineChart(userCode, goalCode);
+		
+		return chart;
+	}	
+	private GraphDAO getGraphDAO() {
+		return new GraphDAO();
 	}
 
 }

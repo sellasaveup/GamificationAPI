@@ -19,6 +19,7 @@
 <script src="./js/session.js"></script>
 <script src="./js/pointswidget.js" type="text/javascript"></script>
 <script src="./js/rankwidget.js" type="text/javascript"></script>
+<script src="./js/pointlinechart.js" type="text/javascript"></script>
 <link href="./css/masterpage.css" rel="stylesheet">
 <script type="text/javascript">
 
@@ -33,7 +34,8 @@ $(document).ready(function() {
 	getMyAllTimeRank('AllTimeRank', userCode, goalCode, commonUrl);
 	getMyChallengesList('ChallengeList', userCode, goalCode, commonUrl); 
 	getAllTimeLeaderBoard(userCode, commonUrl);
-	getThisMonthLeaderBoard(userCode, commonUrl)
+	getThisMonthLeaderBoard(userCode, commonUrl);
+	drawlinechart('canvas', userCode, goalCode);
 });
 
 </script>
@@ -88,8 +90,13 @@ $(document).ready(function() {
      <div class="row">
      <div class="col-sm-12">
      <h4 style="padding-left:20px;" class="element">My points journey...</h4>
-     <img src="./img/banners/pointChart.jpeg" width="550px" height="300px">
-     </div>
+
+     <div class="container-canvas">
+                <canvas id="canvas" width="600" height="200" onclick="drawlinechart('canvas');">
+                    This is my fallback content.
+                </canvas>
+            </div>
+    </div>
      </div>
    </article>
  

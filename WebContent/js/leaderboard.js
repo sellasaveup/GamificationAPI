@@ -17,13 +17,17 @@
 	FakePoller.prototype.getData = function() {
 		var results = [];
 		for (var i = 0, len = 10; i < len; i++) {
+			
+			
 			results.push({
+				
 				userName : this.userCodeList[i],
 				userPoint : this.userPoints[i],
-				userImage : this.userAvatar[i],
-				userRank : this.userRanks[i]
+				userImage : ( this.userAvatar[i] ?  this.userAvatar[i] : ""),
+				userRank : (this.userRanks[i] ? this.userRanks[i] : "")
 
 			});
+			
 		}
 		return results;
 	};

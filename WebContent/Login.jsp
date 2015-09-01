@@ -413,7 +413,7 @@ p::before {
 							<div class="row">
 								<div class="col-sm-12 border">
 									<center>
-										<h3 class="signstyle">Sign In</h3>
+										<h3 class="signstyle">On-Board</h3>
 									</center>
 								</div>
 							</div>
@@ -437,10 +437,10 @@ p::before {
 							<section class="col-md-10 col-md-offset-1">
 
 
-								<span class="lineheight"> <a
+								<span class="lineheight"> <!-- <a
 									class="initialism registerform_open" href="#registerform"
 									style="color: white; font-size: 18px;"><b>Register in
-											GF</b></a>
+											GF</b></a> -->
 
 								</span>
 
@@ -483,7 +483,7 @@ p::before {
 								<td></td>
 							</tr>
 
-							<tr class="roundedbox">
+							<tr class="roundedbox" >
 								<td>
 									<div class="profile-userpic">
 										<center>
@@ -569,7 +569,7 @@ p::before {
 					<div class="col-sm-12">
 						<div class="row">
 							<div class="col-sm-3">On Board</div>
-							<div class="col-sm-3">Perform Activities on our digital
+							<div class="col-sm-3">Perform activities on our digital
 								channel goal (eg: IB, Mobile, Hype)</div>
 							<div class="col-sm-3">Earn Points and Unlock Badges</div>
 							<div class="col-sm-3">Redeem Points for Free Gifts</div>
@@ -596,7 +596,7 @@ p::before {
 
 
 	<div id="registerform" class="well" style="display:none">
-		<h4 style="color: black">Register in GF</h4>
+		<!-- <h4 style="color: black">Register in GF</h4> -->
 
 		<table>
 			<tr>

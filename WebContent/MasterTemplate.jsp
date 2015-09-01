@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Master Template</title>
+		<title>Gamification Framework</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		
@@ -72,8 +72,8 @@
                  <li><a href="#" onclick="loadMyBadges();"><i class="glyphicon glyphicon-star-empty"></i><b> My Badges</b></a></li>
                  <li><a href="#" onclick="loadChallenges();"><i class="glyphicon glyphicon-thumbs-up"></i><b>Challenges</b></a></li>
                  <li><a href="#" onclick="loadMyRewards();"><i class="glyphicon glyphicon-gift"></i><b>My Rewards</b></a></li>
-                 <li><a href="#" onclick="loadAdminMaster();"><i class="glyphicon glyphicon-folder-open"></i><b> Admin Master</b></a></li>
-                 <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b></a></li>
+                 <!--<li><a href="#" onclick="loadAdminMaster();"><i class="glyphicon glyphicon-folder-open"></i><b> Admin Master</b></a></li>
+                  <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b></a></li> -->
                  <li><a href="#" onclick="loadGoalTrend();"><i class="glyphicon glyphicon-globe"></i> <b>Trend </b></a></li>
              	
                 
@@ -109,7 +109,7 @@
 
 <div class="row">
 <div class="footer navbar-fixed-bottom">
-<footer class="text-center">Banca sella, 2015.</footer>
+<footer class="text-center">Banca Sella, 2015</footer>
 </div>
 </div>
 	

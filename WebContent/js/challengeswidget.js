@@ -78,13 +78,13 @@ function getLevelByGoal(divId, goalCode, commonUrl) {
 			var challengeList = data.Response;
 			var challengeHtml = "";
 			var tableBody = "";
-			var tableHeader =  '<center><div class="col-sm-12"><table class="table table-striped table-hover"><thead><tr><th>Level</th><th>Level Story</th><th>Rewards</th> <th>Status Badge</th></tr></thead><tbody>';
+			var tableHeader =  '<center><div class="col-sm-12"><table class="table table-striped table-hover"><thead><tr><th>Level Story</th><th>Rewards</th> <th>Status Badge</th></tr></thead><tbody>';
 			 $.each( challengeList, function( index, obj ) {
 				 
-				 challengesHtml =  tableBody + '<tr><td>'+'<img src="./img/challenges/'+ challengeList[index].image + '" class="img-rounded" width="100" height="80">' + '</td>' +
+				 challengesHtml =  tableBody + '<tr>' +
 						 '<td>' + challengeList[index].story + '</td>'+
 						 '<td>' + challengeList[index].rewardCode  + '</td>' +
-						 '<td>'+'<img src="./img/challenges/' + challengeList[index].badgeCode + '" class="img-rounded" width="100" height="80">' +'</td>'+ '</tr>';
+						 '<td>'+'<img src="./img/badges/' + challengeList[index].badgeCode + '" class="img-rounded" width="100" height="80">' +'</td>'+ '</tr>';
 						 
 				 tableBody = challengesHtml;
 				 

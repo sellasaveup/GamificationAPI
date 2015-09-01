@@ -92,7 +92,7 @@ $(document).ready(function() {
      <h4 style="padding-left:20px;" class="element">My points journey...</h4>
 
      <div class="container-canvas">
-                <canvas id="canvas" width="600" height="200" onclick="drawlinechart('canvas');">
+                <canvas id="canvas" width="600" height="300" onclick="drawlinechart('canvas');">
                     This is my fallback content.
                 </canvas>
             </div>

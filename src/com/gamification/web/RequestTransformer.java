@@ -23,8 +23,10 @@ public final class RequestTransformer {
 					if (!path.exists()) {
 						path.mkdirs();
 					}
-					inputs.put(item.getFieldName(), item.getName());
-					item.write( new File(path + "/" + item.getName()) );
+					if(item.getName()!=null && !item.getName().isEmpty() && item.getSize() != 0) {
+						inputs.put(item.getFieldName(), item.getName());
+						item.write( new File(path + "/" + item.getName()) );
+					}
 				} else {
 					inputs.put(item.getFieldName(), item.getString());
 				}

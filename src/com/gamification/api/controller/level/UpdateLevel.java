@@ -17,10 +17,9 @@ public class UpdateLevel extends AdminController {
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
-		
+
 		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/levels");
-		final Level level = new Level();
-		level.setLevelId(Long.valueOf(inputs.get("levelId")));
+		final Level level = new LevelDao().retrieve(Long.valueOf(inputs.get("levelId")));
 		level.setName(inputs.get("name"));
 		level.setGoalCode(inputs.get("goalCode"));
 		level.setLevelCode(inputs.get("levelCode"));
@@ -30,9 +29,11 @@ public class UpdateLevel extends AdminController {
 		level.setStartPoint(Long.valueOf(inputs.get("startPoint")));
 		level.setEndPoint(Long.valueOf(inputs.get("endPoint")));
 		level.setPriority(Integer.valueOf(inputs.get("priority")));
-		level.setImage(inputs.get("image"));
+		if(inputs.get("image") != null) {
+			level.setImage(inputs.get("image"));
+		}
 		level.setDate(getParsedDate(inputs.get("date")));
 		new LevelDao().update(level);
-        JSONROOT.put("Record", level);
+		JSONROOT.put("Record", level);
 	}
 }

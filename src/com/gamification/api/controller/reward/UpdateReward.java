@@ -19,13 +19,14 @@ public class UpdateReward extends AdminController {
 		JSONROOT.put(RESULT, TRANSITION_OK);
 		
 		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/rewards");
-		final Reward reward = new Reward();
-		reward.setRewardId(Long.valueOf(inputs.get("rewardId")));
+		final Reward reward = new RewardDao().retrieve(Long.valueOf(inputs.get("rewardId")));
 		reward.setName(inputs.get("name"));
 		reward.setRewardCode(inputs.get("rewardCode"));
 		reward.setGoalCode(inputs.get("goalCode"));
 		reward.setExpiryDate(getParsedDate(inputs.get("expiryDate")));
-		reward.setImage(inputs.get("image"));
+		if(inputs.get("image") != null) {
+			reward.setImage(inputs.get("image"));
+		}
 		reward.setDate(getParsedDate(inputs.get("date")));
 		new RewardDao().update(reward);
         JSONROOT.put("Record", reward);

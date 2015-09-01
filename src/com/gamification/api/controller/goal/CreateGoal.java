@@ -31,7 +31,6 @@ public class CreateGoal extends AdminController {
 		goal.setUserType(inputs.get("userType"));
 		goal.setDate(Calendar.getInstance().getTime());
 		goal.setStatus(inputs.get("status"));
-		goal.setDate(getParsedDate(inputs.get("date")));
 		new GoalDao().create(goal);
         JSONROOT.put("Record", goal);
 	}

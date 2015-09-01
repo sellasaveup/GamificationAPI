@@ -16,23 +16,24 @@ public class UpdateGoal extends AdminController {
 
 	@Override
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
-		
+
 		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/goals");
-		final Goal goal = new Goal();
-		goal.setGoalId(Long.valueOf(inputs.get("goalId")));
+		final Goal goal = new GoalDao().retrieve(Long.valueOf(inputs.get("goalId")));
 		goal.setName(inputs.get("name"));
 		goal.setGoalCode(inputs.get("goalCode"));
 		goal.setExpiryDate(getParsedDate(inputs.get("expiryDate")));
 		goal.setStory(inputs.get("story"));
-		goal.setImage(inputs.get("image"));
+		if(inputs.get("image") != null) {
+			goal.setImage(inputs.get("image"));
+		}
 		goal.setUserType(inputs.get("userType"));
 		goal.setDate(Calendar.getInstance().getTime());
 		goal.setStatus(inputs.get("status"));
 		goal.setDate(getParsedDate(inputs.get("date")));
 		new GoalDao().update(goal);
-        JSONROOT.put("Record", goal);
+		JSONROOT.put("Record", goal);
 	}
 }

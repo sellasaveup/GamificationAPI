@@ -109,8 +109,8 @@
 					title: 'Status',
                     width: '10%',
                     type: 'checkbox',
-                    values: { 'Passive': 'Passive', 'Active': 'Active' },
-                    defaultValue: 'Active',
+                    values: { 'PASSIVE': 'PASSIVE', 'ACTIVE': 'ACTIVE' },
+                    defaultValue: 'ACTIVE',
                     display: function (data) {
                         return data.record.status;
                     }
@@ -118,7 +118,7 @@
 				date : {
 					title : 'Date',
 					width : '10%',
-					edit : true,
+					edit : false,
 					type : 'date',
 					displayFormat : 'yy-mm-dd',
 					display: function (data) {
@@ -233,7 +233,7 @@
                                             	title: 'Badge',
                                                 width: '20%',
                                                 edit: true,
-                                                options : 'RetrieveBadge?badge=badge',
+                                                options : 'RetrieveBadge?badge='+goalData.record.goalCode,
                                                 display: function (data) {
                                                     return data.record.badgeCode;
                                                 }
@@ -242,7 +242,7 @@
                                             	title: 'Reward',
                                                 width: '20%',
                                                 edit: true,
-                                                options : 'RetrieveReward?reward=reward',
+                                                options : 'RetrieveReward?reward='+goalData.record.goalCode,
                                                 display: function (data) {
                                                     return data.record.reward;
                                                 }
@@ -250,7 +250,7 @@
                                             date : {
                             					title : 'Date',
                             					width : '20%',
-                            					edit : true,
+                            					edit : false,
                             					type : 'date',
                             					displayFormat : 'yy-mm-dd',
                             					display: function (data) {
@@ -374,7 +374,7 @@
                                             	title: 'Badge',
                                                 width: '30%',
                                                 edit: true,
-                                                options : 'RetrieveBadge?badge=badge',
+                                                options : 'RetrieveBadge?badge='+goalData.record.goalCode,
                                                 display: function (data) {
                                                     return data.record.badgeCode;
                                                 }
@@ -383,7 +383,7 @@
                                             	title: 'Reward',
                                                 width: '30%',
                                                 edit: true,
-                                                options : 'RetrieveReward?reward=reward',
+                                                options : 'RetrieveReward?reward='+goalData.record.goalCode,
                                                 display: function (data) {
                                                     return data.record.rewardCode;
                                                 }
@@ -391,7 +391,7 @@
                                             date : {
                             					title : 'Date',
                             					width : '40%',
-                            					edit : true,
+                            					edit : false,
                             					type : 'date',
                             					displayFormat : 'yy-mm-dd',
                             					display: function (data) {
@@ -509,7 +509,7 @@
                             				date : {
                             					title : 'Date',
                             					width : '40%',
-                            					edit : true,
+                            					edit : false,
                             					type : 'date',
                             					displayFormat : 'yy-mm-dd',
                             					display: function (data) {
@@ -626,7 +626,7 @@
                             				date : {
                             					title : 'Date',
                             					width : '40%',
-                            					edit : true,
+                            					edit : false,
                             					type : 'date',
                             					displayFormat : 'yy-mm-dd',
                             					display: function (data) {
@@ -730,8 +730,8 @@
 					title: 'Status',
                     width: '10%',
                     type: 'checkbox',
-                    values: { 'Passive': 'Passive', 'Active': 'Active' },
-                    defaultValue: 'Active',
+                    values: { 'PASSIVE': 'PASSIVE', 'ACTIVE': 'ACTIVE' },
+                    defaultValue: 'ACTIVE',
                     display: function (data) {
                         return data.record.status;
                     }
@@ -739,7 +739,7 @@
 				date : {
 					title : 'Date',
 					width : '10%',
-					edit : true,
+					edit : false,
 					type : 'date',
 					displayFormat : 'yy-mm-dd',
 					display: function (data) {

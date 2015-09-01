@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gamification.api.controller.AdminController;
-import com.gamification.api.interfaces.persistence.reward.Reward;
 import com.gamification.api.persistence.reward.RewardDao;
+import com.gamification.api.view.RewardView;
 
 public class RetrieveReward extends AdminController {
 
@@ -24,7 +24,7 @@ public class RetrieveReward extends AdminController {
 		final String reward = request.getParameter("reward");
 		if(reward != null) {
 			List<String> rewards = new ArrayList<String>();
-			for(final Reward r : new RewardDao().retrieveAll()) {
+			for(final RewardView r : new RewardDao().getRewardByGoalCode(reward)) {
 				rewards.add(r.getRewardCode());
 			}
 			JSONROOT.put("Options", rewards);

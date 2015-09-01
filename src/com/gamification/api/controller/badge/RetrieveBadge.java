@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gamification.api.controller.AdminController;
-import com.gamification.api.interfaces.persistence.badge.Badge;
 import com.gamification.api.persistence.badge.BadgeDao;
+import com.gamification.api.view.BadgeView;
 
 @SuppressWarnings("serial")
 public class RetrieveBadge extends AdminController {
@@ -26,7 +26,7 @@ public class RetrieveBadge extends AdminController {
 		final String badge = request.getParameter("badge");
 		if(badge != null) {
 			List<String> badges = new ArrayList<String>();
-			for(final Badge b : new BadgeDao().retrieveAll()) {
+			for(final BadgeView b : new BadgeDao().getBadgeByGoalCode(badge)) {
 				badges.add(b.getBadgeCode());
 			}
 			JSONROOT.put("Options", badges);

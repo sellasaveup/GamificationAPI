@@ -18,12 +18,13 @@ public class UpdateUser extends AdminController {
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
-		
+
 		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/users");
-		final User user = new User();
-		user.setUserId(Long.valueOf(inputs.get("userId")));
+		final User user = new UserDao().retrieve(Long.valueOf(inputs.get("userId")));
 		user.setName(inputs.get("name"));
-		user.setImage(inputs.get("image"));
+		if(inputs.get("image") != null) {
+			user.setImage(inputs.get("image"));
+		}
 		user.setUserType(inputs.get("userType"));
 		user.setDate(Calendar.getInstance().getTime());
 		user.setStatus(inputs.get("status"));
@@ -31,6 +32,6 @@ public class UpdateUser extends AdminController {
 		user.setNickName(inputs.get("nickName"));
 		user.setUserCode(inputs.get("userCode"));
 		new UserDao().update(user);
-        JSONROOT.put("Record", user);
+		JSONROOT.put("Record", user);
 	}
 }

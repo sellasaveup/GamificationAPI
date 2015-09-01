@@ -1,5 +1,6 @@
 package com.gamification.api.controller.badge;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class CreateBadge extends AdminController {
 		badge.setExpiryDate(getParsedDate(inputs.get("expiryDate")));
 		badge.setStory(inputs.get("story"));
 		badge.setImage(inputs.get("image"));
-		badge.setDate(getParsedDate(inputs.get("date")));
+		badge.setDate(Calendar.getInstance().getTime());
 		new BadgeDao().create(badge);
         JSONROOT.put("Record", badge);
 	} 

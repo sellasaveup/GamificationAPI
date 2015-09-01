@@ -622,7 +622,7 @@ public class GamificationApiDAO {
 
 		List<UserPointsPageView> userPointsList = new ArrayList<UserPointsPageView>();
 		System.out.println("GamificationDAO getAllPointsInfo userCode:" + userCode + "goalCode:" + goalCode);
-		String query = "select ua.ACTION_CODE, ch.STORY, ua.POINTS, ua.DATE from ss_tr_user_action ua, ss_ma_challenge ch where ch.ACTION_CODE=ua.ACTION_CODE and ua.USER_CODE=? and ua.GOAL_CODE=? and ua.STATUS='Active' order by ua.date desc";
+		String query = "select ua.ACTION_CODE, ch.STORY, ua.POINTS, ua.DATE from ss_tr_user_action ua, ss_ma_challenge ch where ch.ACTION_CODE=ua.ACTION_CODE and ua.USER_CODE=? and ua.GOAL_CODE=? and ua.STATUS='ACTIVE' order by ua.date desc";
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;

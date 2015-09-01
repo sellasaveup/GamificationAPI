@@ -20,7 +20,7 @@ public class GraphDAO {
 	public PointsLineChart getMyPointsLineChart(String userCode, String goalCode) {
 
 		logger.debug("GraphDAO getMyPointsLineChart()");
-		String query = "SELECT sum(ua.POINTS) as totalpoints, monthname(ua.DATE) monthna FROM ss_tr_user_action ua where ua.STATUS='Active' and ua.USER_CODE=? and ua.GOAL_CODE = ? group by ua.USER_CODE, month(ua.DATE)";
+		String query = "SELECT sum(ua.POINTS) as totalpoints, monthname(ua.DATE) monthna FROM ss_tr_user_action ua where ua.STATUS='ACTIVE' and ua.USER_CODE=? and ua.GOAL_CODE = ? group by ua.USER_CODE, month(ua.DATE)";
 		
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -79,7 +79,7 @@ public class GraphDAO {
 	public List<PointsLineChart> getGoalTrend() {
 
 		logger.debug("GraphDAO getMyPointsLineChart()");
-		String query = "select ua.goal_code, sum(ua.POINTS) totalpoints, monthname(ua.date) monthna from ss_tr_user_action ua where ua.STATUS='Active' group by ua.GOAL_CODE, MONTH(ua.DATE) order by ua.GOAL_CODE";
+		String query = "select ua.goal_code, sum(ua.POINTS) totalpoints, monthname(ua.date) monthna from ss_tr_user_action ua where ua.STATUS='ACTIVE' group by ua.GOAL_CODE, MONTH(ua.DATE) order by ua.GOAL_CODE";
 		
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;

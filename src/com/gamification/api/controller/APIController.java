@@ -50,6 +50,7 @@ public class APIController {
 		user.setNickName(nickName);
 		user.setImage(image);
 		user.setUserType(userType);
+		user.setStatus("ACTIVE");
 		RequestStatus requestStatus = getAPIManager().onboardUser(user);
 		jsonRoot.put("Response", requestStatus);
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();

@@ -537,7 +537,7 @@ public class GamificationApiDAO {
 
 		List<LeaderBoardPageView> customerList = null;
 		System.out.println("GamificationDAO getOverAllLeaderBoard()");
-		String query = "select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.POINTS) as totalPoints, ua.USER_CODE, u.NAME, u.IMAGE  FROM ss_tr_user_action ua,ss_ma_user u group by ua.USER_CODE order by totalPoints desc limit 10) as inQuery, (SELECT @curRank := 0) r";
+		String query = "select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.POINTS) as totalPoints, ua.USER_CODE, u.NAME, u.IMAGE  FROM ss_tr_user_action ua,ss_ma_user u where u.user_code = ua.USER_CODE and ua.goal_code=? group by ua.USER_CODE order by totalPoints desc limit 10) as inQuery, (SELECT @curRank := 0) r";
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -548,7 +548,7 @@ public class GamificationApiDAO {
 			connection = connectionUtility.getConnection();
 			customerList = new ArrayList<LeaderBoardPageView>();
 			preparedStatement = connection.prepareStatement(query);
-			//preparedStatement.setInt(1, goalCode); TODO to be asked for goalCode required or not
+			preparedStatement.setString(1, goalCode);
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				LeaderBoardPageView leaderBoardPageView = new LeaderBoardPageView();
@@ -575,7 +575,7 @@ public class GamificationApiDAO {
 
 		List<LeaderBoardPageView> leaderBoardList = new ArrayList<LeaderBoardPageView>();
 		System.out.println("GamificationDAO getCurrentMonthLeaderBoard()");
-		String query = "select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.POINTS) as totalpoints, month(ua.DATE), ua.USER_CODE, u.image, u.name FROM ss_tr_user_action ua, ss_ma_user u where u.user_code = ua.user_code and extract(year_month from ua.DATE)= ? group by ua.USER_CODE, month(ua.DATE)  order by totalpoints desc limit 10) as inQuery, (SELECT @curRank := 0) r";
+		String query = "select @curRank := @curRank + 1 AS rank, inQuery.*  from (SELECT sum(ua.POINTS) as totalpoints, month(ua.DATE), ua.USER_CODE, u.image, u.name FROM ss_tr_user_action ua, ss_ma_user u where u.user_code = ua.user_code and extract(year_month from ua.DATE)= ? and ua.goal_code=? group by ua.USER_CODE, month(ua.DATE)  order by totalpoints desc limit 10) as inQuery, (SELECT @curRank := 0) r";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
@@ -586,7 +586,7 @@ public class GamificationApiDAO {
 			String currentMonthYear = getCurrentMonthYear();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, currentMonthYear);
-			//preparedStatement.setInt(1, goalCode); TODO to be asked for goalCode required or not
+			preparedStatement.setString(2, goalCode); //TODO to be asked for goalCode required or not
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				LeaderBoardPageView leaderBoardPageView = new LeaderBoardPageView();

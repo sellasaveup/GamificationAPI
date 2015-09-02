@@ -24,6 +24,7 @@ public class RetrieveReward extends AdminController {
 		final String reward = request.getParameter("reward");
 		if(reward != null) {
 			List<String> rewards = new ArrayList<String>();
+			rewards.add(" ");
 			for(final RewardView r : new RewardDao().getRewardByGoalCode(reward)) {
 				rewards.add(r.getRewardCode());
 			}

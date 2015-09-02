@@ -28,7 +28,7 @@ public class UpdateUser extends AdminController {
 		user.setUserType(inputs.get("userType"));
 		user.setDate(Calendar.getInstance().getTime());
 		user.setStatus(inputs.get("status"));
-		user.setDate(getParsedDate(inputs.get("date")));
+		user.setDate(Calendar.getInstance().getTime());
 		user.setNickName(inputs.get("nickName"));
 		user.setUserCode(inputs.get("userCode"));
 		new UserDao().update(user);

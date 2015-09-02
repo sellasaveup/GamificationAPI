@@ -119,6 +119,7 @@
 					title : 'Date',
 					width : '10%',
 					edit : false,
+					create : false,
 					type : 'date',
 					displayFormat : 'yy-mm-dd',
 					display: function (data) {
@@ -155,7 +156,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -172,7 +173,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -251,6 +252,7 @@
                             					title : 'Date',
                             					width : '20%',
                             					edit : false,
+                            					create : false,
                             					type : 'date',
                             					displayFormat : 'yy-mm-dd',
                             					display: function (data) {
@@ -297,7 +299,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -314,7 +316,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -392,6 +394,7 @@
                             					title : 'Date',
                             					width : '40%',
                             					edit : false,
+                            					create : false,
                             					type : 'date',
                             					displayFormat : 'yy-mm-dd',
                             					display: function (data) {
@@ -438,7 +441,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -455,7 +458,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -510,6 +513,7 @@
                             					title : 'Date',
                             					width : '40%',
                             					edit : false,
+                            					create : false,
                             					type : 'date',
                             					displayFormat : 'yy-mm-dd',
                             					display: function (data) {
@@ -555,7 +559,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -572,7 +576,7 @@
                                                     	dataType: 'json',
                                                     	success: function(data) {
                                                         	$dfd.resolve(data);
-                                                        	data.childTable.jtable('load');
+                                                        	$('#GoalTableContainer').jtable('load');
                                                     	}
                                                 	});
                                             	});
@@ -625,6 +629,7 @@
                             				},
                             				date : {
                             					title : 'Date',
+												create : false,
                             					width : '40%',
                             					edit : false,
                             					type : 'date',
@@ -740,6 +745,7 @@
 					title : 'Date',
 					width : '10%',
 					edit : false,
+					create : false,
 					type : 'date',
 					displayFormat : 'yy-mm-dd',
 					display: function (data) {

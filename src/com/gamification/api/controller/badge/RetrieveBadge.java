@@ -26,6 +26,7 @@ public class RetrieveBadge extends AdminController {
 		final String badge = request.getParameter("badge");
 		if(badge != null) {
 			List<String> badges = new ArrayList<String>();
+			badges.add(" ");
 			for(final BadgeView b : new BadgeDao().getBadgeByGoalCode(badge)) {
 				badges.add(b.getBadgeCode());
 			}

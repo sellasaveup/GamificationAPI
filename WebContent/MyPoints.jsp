@@ -105,7 +105,7 @@ $(document).ready(function() {
      <!--ROW RIGHT-->
      <div class="row">
       <div class="col-sm-6"><div class='pull-left'>
-   		 <img src="./img/banners/leaderboard.png">
+   		 <h4 class="well barwell">&nbsp;&nbsp;Leaderboard</h4>
     
     		<ul id="myTab" class="nav nav-tabs">
     

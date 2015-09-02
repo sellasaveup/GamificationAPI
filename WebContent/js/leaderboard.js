@@ -164,10 +164,10 @@ var pointsObjThisMonth = []
 var useravatarObjThisMonth = [];
 var userRankObjThisMonth = [];
 
-function getThisMonthLeaderBoard(userCode, commonUrl) {
+function getThisMonthLeaderBoard(goalCode, commonUrl) {
 
 	var buildUrl = commonUrl + 'GET_LEADERBOARD?goalCode=';
-	buildUrl = buildUrl + userCode + '&requestType=' + 'M';
+	buildUrl = buildUrl + goalCode + '&requestType=' + 'M';
 	$.ajax({
 		type : "GET",
 		url : buildUrl,

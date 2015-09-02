@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/common.css">
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
 <script src="./js/challengeswidget.js" type="text/javascript"></script>
@@ -37,11 +38,11 @@ body {
 <body>
 	<div class="row" style="width: 100%">
 		<div class="col-sm-12">
-			<div class=" panel-success panel-heading">
-				<div class="panel-heading">
-					<h4 class="element">
+			<div class=" panel panel-default">
+			   <div class="panel-heading panel-heading-custom">
+					<h3 class="panel-title">
 						<b>Challenges on your way..</b>
-					</h4>
+					</h3>
 				</div>
 				<div class="panel-body" style="max-height: 450px; overflow-y: auto;">
 					<div class="row">
@@ -58,11 +59,9 @@ body {
 	<br>
 	<div class="row" style="width: 100%">
 		<div class="col-sm-12">
-			<div class=" panel-danger panel-heading">
-				<div class="panel-heading">
-					<h4 class="element">
-						<b>Complete Levels..</b>
-					</h4>
+			<div class=" panel panel-default">
+			   <div class="panel-heading panel-heading-custom">
+						<h3 class="panel-title"><b>Complete Levels..</b></h3>
 				</div>
 				<div class="panel-body" style="max-height: 450px; overflow-y: auto;">
 					<div class="row">

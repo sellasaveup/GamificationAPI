@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/leaderboard.css">
 <link rel="stylesheet" href="./css/leaderboardalltime.css">
-
+<link rel="stylesheet" href="./css/common.css">
 <script type="text/javascript" src="./js/termometer.js"></script>
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
@@ -89,7 +89,7 @@ $(document).ready(function() {
     
      <div class="row">
      <div class="col-sm-12">
-     <h4 style="padding-left:20px;" class="element">My points journey...</h4>
+     <h4 class="well barwell">My points journey...</h4>
 
      <div class="container-canvas">
                 <canvas id="canvas" width="600" height="300" onclick="drawlinechart('canvas');">
@@ -124,8 +124,12 @@ $(document).ready(function() {
    		</article>
 
 	</section></div>
-
- <div id="ChallengeList" style="padding-left:30px;"></div>
+<div class="row">
+ <div class="col-sm-12">
+     <h4 class="well barwell">My Achievements...</h4>
+     <div id="ChallengeList" style="padding-left:30px;"></div>
+</div>
+ </div>
 	
 </body>
 </html>

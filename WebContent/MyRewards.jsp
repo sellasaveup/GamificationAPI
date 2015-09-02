@@ -8,6 +8,7 @@
 <link href="./css/masterpage.css" rel="stylesheet">
 <link rel="stylesheet" href="./css/thermometer.css"></link>
 <script type="text/javascript" src="./js/termometer.js"></script>
+<link rel="stylesheet" href="./css/common.css">
 <script src="./js/jquery.min.js"></script>
 <script src="./js/session.js"></script>
 <script src="./js/rewardswidget.js" type="text/javascript"></script>
@@ -36,7 +37,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h3 class="element">You have earned below Rewards, you can redeem them..</h3>
+				<h3 class="well barwell">You have earned below Rewards, you can redeem them..</h3>
 				<hr>
 			</div>
 		</div>

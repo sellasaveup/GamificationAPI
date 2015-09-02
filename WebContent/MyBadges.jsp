@@ -7,6 +7,7 @@
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/masterpage.css" rel="stylesheet">
 <link rel="stylesheet" href="./css/thermometer.css"></link>
+<link rel="stylesheet" href="./css/common.css">
 <script type="text/javascript" src="./js/termometer.js"></script>
 <script src="./js/jquery.min.js"></script>
 <script src="./js/session.js"></script>
@@ -38,26 +39,25 @@ body {
 
 	<div class="container">
 		<div class="row">
+			<div class="col-sm-12"><center>
+				<img src="./img/banners/BadgeFactory.gif" /></center>
+			</div>
+		</div>
+		<div class="row" >
 			<div class="col-sm-12">
-				<img src="./img/banners/BadgeFactory.gif" />
+				<h3 class="well barwell">&nbsp;Badges you bagged..</h3>
 			</div>
 		</div>
 		<div class="row">
+			<div id="MyBadges"></div>
+		</div>
+		<div class="row">
 			<div class="col-sm-12">
-				<h3 class="element"><p class="glyphicon glyphicon-star"></p>&nbsp;Badges you bagged..</h3>
+				<h4 class="well barwell">&nbsp;Yet to unlock..</h4>
 				<hr>
 			</div>
 		</div>
-		<div class="row">
-			<div id='MyBadges'></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<h3 class="element"><p class="glyphicon glyphicon-thumbs-up"></p>&nbsp;Yet to unlock..</h3>
-				<hr>
-			</div>
-		</div>
-		<div class="row"><div id='MyLockedBadges'></div></div>
+		<div class="row"><div id="MyLockedBadges"></div></div>
 
 		<div class="row" id="AllMyBadges"></div>
 

@@ -659,7 +659,7 @@ public class GamificationApiDAO {
 
 		List<BadgeView> userBadgeList = null;
 		System.out.println("GamificationDAO getMyBadgeList()");
-		String query = "select b.NAME, b.IMAGE, b.STORY from ss_ma_badge b where b.BADGE_CODE in (SELECT ub.BADGE_CODE FROM ss_tr_user_badge ub WHERE ub.USER_CODE=? AND ub.GOAL_CODE=?) and b.GOAL_CODE=? and b.EXPIRY_DATE>sysdate()";
+		String query = "select b.NAME, b.IMAGE, b.STORY, b.DATE from ss_ma_badge b, ss_tr_user_badge ub WHERE ub.USER_CODE=? AND ub.GOAL_CODE=? and ub.BADGE_CODE=b.BADGE_CODE and b.GOAL_CODE=? and b.EXPIRY_DATE>sysdate() order by ub.DATE desc";
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -680,6 +680,7 @@ public class GamificationApiDAO {
 				badge.setStory(rs.getString("STORY"));
 				badge.setImage(rs.getString("IMAGE"));
 				badge.setName(rs.getString("NAME"));
+				badge.setDate(rs.getString("DATE"));
 				userBadgeList.add(badge);
 				System.out.println("Got Record");
 			}

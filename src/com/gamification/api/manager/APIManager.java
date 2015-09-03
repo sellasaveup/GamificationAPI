@@ -66,6 +66,13 @@ public class APIManager {
 			logger.debug("userCode available in DB Going to Fetch Profile");
 			GamificationApiDAO gamificationDAO = getGamificationDAO();
 			userProfile = gamificationDAO.getUserProfile(userCode, goalCode);
+			
+			if(userProfile == null) {
+				String putUserGoalPointsSTatus = new ActionProcessor().putUserGoalPoints(userCode,0);
+				if(putUserGoalPointsSTatus.equals("1")) {
+					userProfile = gamificationDAO.getUserProfile(userCode, goalCode);
+				}
+			}
 			if(userProfile != null) {
 				String badgeCode = userProfile.getGlobalBadgeCode();
 				if(badgeCode != null) {

@@ -810,4 +810,22 @@ public class APIController {
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 	
+	@GET
+	@Path("/GET_USER_TYPE")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUserType(@QueryParam("userCode") String userCode) {
+		logger.debug("getUserType()");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 String userType = getAPIManager().getUserType(userCode);
+		 RequestStatus requestStatus = new RequestStatus();
+	    if(userType == null) {
+	    	userType = "";
+		} 
+	    requestStatus.setIsSuccess("1");
+		requestStatus.setCode(userType);
+		requestStatus.setMessage("Success");
+		jsonRoot.put("Response", requestStatus);
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 }

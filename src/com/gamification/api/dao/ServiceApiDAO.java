@@ -444,6 +444,34 @@ public class ServiceApiDAO {
 	
 	}
 	
+	public String getUserType(String userCode) {
+
+		logger.debug("getUserType()");
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String userType = null;
+		String query = "select user_type from ss_ma_user where user_code=?";
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			rs = preparedStatement.executeQuery();
+			if(rs.next()) {
+				userType = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("userType-->"+userType);
+		return userType;
+	
+	}
+	
 	private ConnectionUtility getConnectionUtility() {
 		return new ConnectionUtility();
 	}

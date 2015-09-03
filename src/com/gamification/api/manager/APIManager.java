@@ -348,5 +348,11 @@ public class APIManager {
 		return getServiceApiDAO().getBadge(userCode);		
 				
 	}
+	
+	public String getUserType( String userCode) {
+		logger.debug("userCode--->"+userCode);
+		return getServiceApiDAO().getUserType(userCode);		
+				
+	}
 
 }

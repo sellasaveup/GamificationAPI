@@ -19,7 +19,7 @@ public class UpdateUser extends AdminController {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
 
-		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/users");
+		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") , "/img/profile");
 		final User user = new UserDao().retrieve(Long.valueOf(inputs.get("userId")));
 		user.setName(inputs.get("name"));
 		if(inputs.get("image") != null) {

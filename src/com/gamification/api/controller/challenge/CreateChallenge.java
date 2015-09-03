@@ -21,7 +21,7 @@ public class CreateChallenge extends AdminController {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
 		
-		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/challenges");
+		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") , "/img/challenges");
 		final Challenge challenge = new Challenge();
 		challenge.setGoalCode(inputs.get("goalCode"));
 		challenge.setActionCode(inputs.get("actionCode"));

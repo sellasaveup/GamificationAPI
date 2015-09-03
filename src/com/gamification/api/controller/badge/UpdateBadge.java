@@ -19,7 +19,7 @@ public class UpdateBadge extends AdminController {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
 		
-		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/badges");
+		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") , "/img/badges");
 		final Badge badge = new BadgeDao().retrieve(Long.valueOf(inputs.get("badgeId")));
 		badge.setName(inputs.get("name"));
 		badge.setBadgeCode(inputs.get("badgeCode"));

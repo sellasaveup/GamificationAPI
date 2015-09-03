@@ -18,7 +18,7 @@ public class UpdateLevel extends AdminController {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
 
-		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/levels");
+		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") , "/img/levels");
 		final Level level = new LevelDao().retrieve(Long.valueOf(inputs.get("levelId")));
 		level.setName(inputs.get("name"));
 		level.setGoalCode(inputs.get("goalCode"));

@@ -20,7 +20,7 @@ public class CreateReward extends AdminController {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
 		
-		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/rewards");
+		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") , "/img/rewards");
 		final Reward reward = new Reward();
 		reward.setName(inputs.get("name"));
 		reward.setRewardCode(inputs.get("rewardCode"));

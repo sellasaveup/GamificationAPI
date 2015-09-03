@@ -21,7 +21,7 @@ public class CreateGoal extends AdminController {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
 		
-		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/goals");
+		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") , "/img/goals");
 		final Goal goal = new Goal();
 		goal.setName(inputs.get("name"));
 		goal.setGoalCode(inputs.get("goalCode"));

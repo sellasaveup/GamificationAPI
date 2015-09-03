@@ -20,7 +20,7 @@ public class CreateUser extends AdminController {
 		JSONROOT = new HashMap<String, Object>();
 		JSONROOT.put(RESULT, TRANSITION_OK);
 		
-		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") + "/uploads/users");
+		final Map<String,String> inputs = RequestTransformer.getInputsAndUploadFile(request, getServletContext().getRealPath("/") , "/img/profile");
 		final User user = new User();
 		user.setName(inputs.get("name"));
 		user.setImage(inputs.get("image"));

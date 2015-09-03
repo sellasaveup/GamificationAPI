@@ -48,6 +48,8 @@ http://localhost:8080/GamificationAPI/sella/api/REMOVE_BADGE?custId=1&badgeId=1&
 POST_ACTIONE
 http://localhost:8080/GamificationAPI/sella/api/POST_ACTIONE?custId=1&action=MOB_RE
 
+GET_MY_BADGE
+http://localhost:8080/GamificationAPI/sella/api/POST_ACTIONE?userCode=GBS03630&goalCode=HYPE_GOAL
 
 
 GET_PROFILE - Done

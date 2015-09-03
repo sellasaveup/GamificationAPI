@@ -15,15 +15,31 @@
 		<script src="./js/session.js"></script>
 		<script src="./js/profilewidget.js" type="text/javascript"></script>
 		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/notify.js"></script>
 		
 <script>
 
+     var notificationType;
+     var notificationMessage;
+     var notificationImage;
+     
+     var commonUrl = getSessionUrl();
+     var userCode = getSessionUserCode();
+     var goalCode = getSessionGoalCode();	
      
       $(document).ready(function() {
-    	  var commonUrl = getSessionUrl();
-          var userCode = getSessionUserCode();
-          var goalCode = getSessionGoalCode();		
-			getUserProfile('userProfileTemplate', userCode, goalCode, commonUrl);
+    	 	
+		 getUserProfile('userProfileTemplate', userCode, goalCode, commonUrl);
+		 
+		 $.notify.defaults({
+			 clickToHide: true,
+			 autoHide: false,
+			 autoHideDelay:null,
+			 elementPosition: 'top left',
+			 globalPosition: 'top right'
+			 });
+		 
+		 getNotification();
 		});
       
       function loadMyPoints() {
@@ -52,6 +68,75 @@
       function loadGoalTrend() {
     	  $("#content").load("MyTrend.html");
       }
+      
+      function getNotification() {
+    		 
+    	  var notificationUrl = commonUrl + "GET_NOTIFICATION?userCode="+userCode;
+    	$.ajax({
+    		type : "GET",
+    		url : notificationUrl,
+    		dataType : "json",
+    		contentType : "application/json; charset=UTF-8",
+    		success : function(data) {
+    			var count = data.Count;
+    			if(count>0) {
+    				 $("#notificationCount").html(count);
+    			} else {
+    				 $("#notificationCount").html("");
+    			}
+    			parseNotificationResponse(data);
+    		},
+    		error : function(e) {
+    			console.log('latestBadgeAction failure : ' + e);
+    		}
+    	});
+    	 
+    }
+
+    function parseNotificationResponse(data) {
+    	var notificationArray = data.Response;
+    	notificationType = new Array(notificationArray.length);
+    	notificationMessage = new Array(notificationArray.length);
+    	notificationImage = new Array(notificationArray.length);
+    	
+    	for(var i=0; i<notificationArray.length; i++) {
+    		
+    		notificationType[i] = notificationArray[i].notificationType;
+    		notificationMessage[i] = notificationArray[i].message;
+    		notificationImage[i] = notificationArray[i].imageUrl;
+    	}
+    }
+
+    function showNotification() {
+    	for(var i=0; i<notificationType.length; i++) {
+    		if(notificationType[i] == "Message") {
+    			notifyMessage(notificationMessage[i]);
+    		}
+    		
+    		if(notificationType[i] == "Warning") {
+    			notifyWarning(notificationMessage[i]);
+    		}
+    		
+    		if(notificationType[i] == "Info") {
+    			notifyInfo(notificationMessage[i]);
+    		}
+    	}
+    }
+
+
+    function notifyMessage(message) {
+    	  $.notify(message, "success");
+    }
+
+    function notifyInfo(info) {
+    	  $.notify(info, "info");
+    }
+
+    function notifyWarning(warning) {
+    	  $.notify("Warning:"+warning, "warn");
+    }
+
+      
 </script>
 	</head>
 	<body onload="loadMyPoints()">
@@ -75,8 +160,7 @@
                  <!--<li><a href="#" onclick="loadAdminMaster();"><i class="glyphicon glyphicon-folder-open"></i><b> Admin Master</b></a></li>
                   <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b></a></li> -->
                  <li><a href="#" onclick="loadGoalTrend();"><i class="glyphicon glyphicon-globe"></i> <b>Trend </b></a></li>
-             	
-                
+                 <li><a href="#"  title="Check statistics" class="tipN" onCLick="showNotification()"><div style="position:relative;" id="notificationIcon"><img src="img/logo/dialogs.png" alt="" /></div><div id="notificationCount"></div></a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
             </ul>
         </div>

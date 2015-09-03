@@ -16,6 +16,7 @@ import com.gamification.api.view.ChallengeView;
 import com.gamification.api.view.GoalView;
 import com.gamification.api.view.LeaderBoardPageView;
 import com.gamification.api.view.LevelView;
+import com.gamification.api.view.Notification;
 import com.gamification.api.view.PointsLineChart;
 import com.gamification.api.view.RewardView;
 import com.gamification.api.view.User;
@@ -354,5 +355,15 @@ public class APIManager {
 		return getServiceApiDAO().getUserType(userCode);		
 				
 	}
+	public List<Notification> getNotification( String userCode) {
+		logger.debug("userCode--->"+userCode);
+		List<Notification> notificationList =  getServiceApiDAO().getNotification(userCode);
+		if(notificationList != null && !notificationList.isEmpty()) {
+			//getServiceApiDAO().updateNotification(userCode);
+		}
+		return notificationList;
+				
+	}
+	
 
 }

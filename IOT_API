@@ -8,7 +8,7 @@ Step 1 – OnBoard User for First Time	http:// 192.168.0.8:8080/GamificationAPI/
   }
 }
 
-Step 2 – post Action to award Points or Badge or Reward	http://localhost:8080/GamificationAPI/sella/api/POST_ACTION?userCode=GBS03630&actionCode=IOT_HANDSHAKE
+Step 2 – post Action to award Points or Badge or Reward	http://localhost:8080/GamificationAPI/sella/api/POST_ACTION?userCode=GBSIOT&actionCode=IOT_HANDSHAKE
 
 {
   "Response": {
@@ -18,7 +18,7 @@ Step 2 – post Action to award Points or Badge or Reward	http://localhost:8080/
   }
 }
 
-Step3 – get Points status	http://localhost:8080/GamificationAPI/sella/api/GET_PROFILE?userCode=GBS03630&goalCode=IOT_GOAL
+Step3 – get Points status	http://localhost:8080/GamificationAPI/sella/api/GET_PROFILE?userCode=GBSIOT&goalCode=IOT_GOAL
 {
   "Response": {
     "userCode": "GBS03630",
@@ -43,5 +43,7 @@ Step3 – get Points status	http://localhost:8080/GamificationAPI/sella/api/GET_
 
 Step 4 – get All My Points Detail	http://localhost:8080/GamificationAPI/sella/api/GET_ALL_MY_POINTS_DETAIL?userCode=GBS03630&goalCode=IOT_GOAL
 
+Get Image
 
+http://localhost:8080/GamificationAPI/img/profile/profilepic.jpg
 

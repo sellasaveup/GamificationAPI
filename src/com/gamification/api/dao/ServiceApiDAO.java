@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.gamification.api.view.BadgeView;
 import com.gamification.api.view.ChallengeView;
+import com.gamification.api.view.Notification;
 import com.gamification.api.view.User;
 import com.gamification.common.ConnectionUtility;
 
@@ -470,6 +471,59 @@ public class ServiceApiDAO {
 		logger.debug("userType-->"+userType);
 		return userType;
 	
+	}
+	
+	public List<Notification> getNotification(String userCode) {
+
+		logger.debug("getNotification()");
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		List<Notification> notificationList = new ArrayList<Notification>();
+		String query = "select nt.user_code,nh.notify_type,nh.message,nh.image from ss_tr_notification_header nh, ss_tr_notification nt where nh.notify_id = nt.notify_header_id and user_code = ? and status='ACTIVE'";
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				Notification notification = new Notification();
+				notification.setUserCode(rs.getString("USER_CODE"));
+				notification.setNotificationType(rs.getString("NOTIFY_TYPE"));
+				notification.setMessage(rs.getString("MESSAGE"));
+				notification.setImageUrl(rs.getString("IMAGE"));
+				notificationList.add(notification);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, rs);
+		}
+		logger.debug("notificationList-->"+notificationList);
+		return notificationList;
+	
+	}
+	
+	public void updateNotification(String userCode) {
+		logger.debug("updateNotification()");
+		
+		PreparedStatement preparedStatement = null;
+		String query = "update ss_tr_notification set status='INACTIVE' where user_code=?";
+		Connection connection = null;
+		ConnectionUtility connectionUtility = getConnectionUtility();
+		try {
+			connection = connectionUtility.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userCode);
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionUtility.closeConnection(connection, preparedStatement, null);
+		}
 	}
 	
 	private ConnectionUtility getConnectionUtility() {

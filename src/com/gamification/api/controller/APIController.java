@@ -828,4 +828,18 @@ public class APIController {
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 	
+	@GET
+	@Path("/GET_NOTIFICATION")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNotification(@QueryParam("userCode") String userCode) {
+		logger.debug("getUserType()");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 List<Notification> notificationList = getAPIManager().getNotification(userCode);
+	    if(notificationList != null && !notificationList.isEmpty()) {
+	    	jsonRoot.put("Response", notificationList);
+	    	jsonRoot.put("Count", notificationList.size());
+		}
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 }

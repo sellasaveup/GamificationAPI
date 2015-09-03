@@ -82,10 +82,15 @@ function getMyChallengesList(divId, userCode, goalCode, commonUrl) {
 			var tableHeader =  '<table class="table table-striped"><thead><tr> <th>My Actions</th><th>Earned Points</th> <th>Date</th></tr></thead><tbody>';
 			 $.each( challengeList, function( index, obj ) {
 				 
+				 
+				 var myDate = new Date(challengeList[index].receivedDate);
+				 var formattedDate = myDate.getMonth() + 1 + "-" + myDate.getDate() + "-" + myDate.getFullYear();
+				 
+				 
 				 challengesHtml =  tableBody + '<tr>'+
 						 '<td>' + challengeList[index].story + '</td>'+
 						 '<td>' + challengeList[index].points  + '</td>' +
-						 '<td>' + challengeList[index].receivedDate +'</td>'+ '</tr>';
+						 '<td>' + formattedDate +'</td>'+ '</tr>';
 						 
 				 tableBody = challengesHtml;
 				 

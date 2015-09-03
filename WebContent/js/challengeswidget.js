@@ -45,11 +45,14 @@ function getChallengesByGoal(divId, goalCode, commonUrl) {
 			var challengeHtml = "";
 			 $.each( challengeList, function( index, obj ) {
 				 
-				 challengesHtml =  '<div class="paddme"><div class="row"><div class="col-sm-2"><center>'+
+				 var myDate = new Date(challengeList[index].expiryDate);
+				 var formattedDate = myDate.getMonth() + 1 + "-" + myDate.getDate() + "-" + myDate.getFullYear();
+				 
+				 challengesHtml =  '<div class="paddme"><div class="row well"><div class="col-sm-2"><center>'+
 						 '<img src="./img/challenges/'+ challengeList[index].image + '" class="img-rounded" width="50" height="50">' +
 						 '</center></div><div class="col-sm-6">' + challengeList[index].story + '&nbsp;&nbsp;&nbsp;'+
-						 '<a href="#">Read More</a></div><div class="col-sm-2"><center>' +
-						 '<h4>' + challengeList[index].points +" points"+'</h4></center></div><div class="col-sm-2"> <h4>' + challengeList[index].expiryDate + '</h4></div></div><br/>'
+						 '<a href="#">Read More</a></div><div class="col-sm-2 pointsChal well well-sm"><center>' +
+						 '<h4>' + challengeList[index].points +" points"+'</h4></center></div><div class="col-sm-2"> <h4>' + formattedDate + '</h4></div></div><br/>'
 						 
 				 $("#"+divId).append(challengesHtml);
 				 

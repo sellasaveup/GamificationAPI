@@ -89,12 +89,14 @@ function getAllMyBadges(divId, userCode, goalCode, commonUrl) {
 			
 			var tableHeader =  '<table class="table table-striped"><thead><tr> <th>Badge</th><th>Badge story</th> <th>Date</th></tr></thead><tbody>';
 			 $.each( badgeList, function( index, obj ) {
-				 
-				 
+				 var myDate = new Date(badgeList[index].date);
+				 var formattedDate = myDate.getMonth() + 1 + "-" + myDate.getDate() + "-" + myDate.getFullYear();
+
+
 				 badgeHtml =  tableBody + '<tr>'+
 				 '<td><img src="./img/badges/' + badgeList[index].image + '" class="img-rounded" width="80" height="80"></td>'+
 				 '<td>' + badgeList[index].story  + '</td>' +
-				 '<td>' + badgeList[index].date +'</td>'+ '</tr>';
+				 '<td>' + formattedDate +'</td>'+ '</tr>';
 				 
 				 tableBody = badgeHtml;
 				 

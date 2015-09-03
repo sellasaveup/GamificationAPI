@@ -5,6 +5,9 @@ public class UserBadge {
 	private String goalCode;
 	private String userCode;
 	private String status;
+	private String story;
+	private String date;
+	private String image;
 	
 	public String getBadgeCode() {
 		return badgeCode;
@@ -31,9 +34,27 @@ public class UserBadge {
 		this.status = status;
 	}
 	
-	public String toString() {
-		return new StringBuilder("UserBadge--->[").append("badgeCode=").append(badgeCode).append(",goalCode=").append(goalCode)
-				.append(",userCode=").append(userCode).append(",status=").append(status).append("]").toString();
+	public String getStory() {
+		return story;
 	}
-	
+	public void setStory(String story) {
+		this.story = story;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	@Override
+	public String toString() {
+		return "UserBadge [badgeCode=" + badgeCode + ", goalCode=" + goalCode + ", userCode=" + userCode + ", status="
+				+ status + ", story=" + story + ", date=" + date + ", image=" + image + "]";
+	}
 }

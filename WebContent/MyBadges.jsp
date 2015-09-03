@@ -13,15 +13,15 @@
 <script src="./js/session.js"></script>
 <script src="./js/badgeswidget.js" type="text/javascript"></script>
 <script type="text/javascript">
-var commonUrl = getSessionUrl();
-var userCode = getSessionUserCode();
-var goalCode = getSessionGoalCode();
+	var commonUrl = getSessionUrl();
+	var userCode = getSessionUserCode();
+	var goalCode = getSessionGoalCode();
 
-$(document).ready(function() {
-	getMyBadges('MyBadges', userCode, goalCode, commonUrl);
-	getAllMyLockedBadges('MyLockedBadges', userCode, goalCode, commonUrl); 
-	//getAllMyBadges('AllMyBadges', userCode, goalCode, commonUrl); 
-});
+	$(document).ready(function() {
+		getMyBadges('MyBadges', userCode, goalCode, commonUrl);
+		getAllMyLockedBadges('MyLockedBadges', userCode, goalCode, commonUrl);
+		getAllMyBadges('AllMyBadges', userCode, goalCode, commonUrl);
+	});
 </script>
 <style type="text/css">
 br {
@@ -39,11 +39,13 @@ body {
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12"><center>
-				<img src="./img/banners/BadgeFactory.gif" /></center>
+			<div class="col-sm-12">
+				<center>
+					<img src="./img/banners/BadgeFactory.gif" />
+				</center>
 			</div>
 		</div>
-		<div class="row" >
+		<div class="row">
 			<div class="col-sm-12">
 				<h3 class="well barwell">&nbsp;Badges you bagged..</h3>
 			</div>
@@ -57,11 +59,15 @@ body {
 				<hr>
 			</div>
 		</div>
-		<div class="row"><div id="MyLockedBadges"></div></div>
-
-		<div class="row" id="AllMyBadges"></div>
-
-		<br> <br> <br>
+		<div class="row">
+			<div id="MyLockedBadges"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<h4 class="well barwell">My Earned Badges List...</h4>
+				<div id="AllMyBadges" style="padding-left: 30px;"></div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

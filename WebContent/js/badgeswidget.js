@@ -72,3 +72,38 @@ function getAllMyLockedBadges(divId, userCode, goalCode, commonUrl) {
 	});
 }
 
+function getAllMyBadges(divId, userCode, goalCode, commonUrl) {
+
+
+	var buildUrl =  commonUrl + 'GET_ALL_MY_BADGES?userCode='
+		buildUrl = buildUrl + userCode + '&goalCode=' + goalCode;
+	$.ajax({
+		type : "GET",
+		url : buildUrl,
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(data) {
+			var badgeList = data.Response;
+			var badgeHtml = "";
+			var tableBody = "";
+			
+			var tableHeader =  '<table class="table table-striped"><thead><tr> <th>Badge</th><th>Badge story</th> <th>Date</th></tr></thead><tbody>';
+			 $.each( badgeList, function( index, obj ) {
+				 
+				 
+				 badgeHtml =  tableBody + '<tr>'+
+				 '<td><img src="./img/badges/' + badgeList[index].image + '" class="img-rounded" width="80" height="80"></td>'+
+				 '<td>' + badgeList[index].story  + '</td>' +
+				 '<td>' + badgeList[index].date +'</td>'+ '</tr>';
+				 
+				 tableBody = badgeHtml;
+				 
+			 });
+			 var buildTable = tableHeader + tableBody+ "</tbody></table>";
+			 $("#"+divId).append(buildTable);
+		},
+		error : function(e) {
+			console.log('badge call failure : ' + e);
+		}
+	});
+}

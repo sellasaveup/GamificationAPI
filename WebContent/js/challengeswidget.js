@@ -47,9 +47,9 @@ function getChallengesByGoal(divId, goalCode, commonUrl) {
 				 
 				 challengesHtml =  '<div class="paddme"><div class="row"><div class="col-sm-2"><center>'+
 						 '<img src="./img/challenges/'+ challengeList[index].image + '" class="img-rounded" width="50" height="50">' +
-						 '</center></div><div class="col-sm-8">' + challengeList[index].story + '&nbsp;&nbsp;&nbsp;'+
+						 '</center></div><div class="col-sm-6">' + challengeList[index].story + '&nbsp;&nbsp;&nbsp;'+
 						 '<a href="#">Read More</a></div><div class="col-sm-2"><center>' +
-						 '<h4>' + challengeList[index].points +" points"+'</h4></center></div></div><br/>'
+						 '<h4>' + challengeList[index].points +" points"+'</h4></center></div><div class="col-sm-2"> <h4>' + challengeList[index].expiryDate + '</h4></div></div><br/>'
 						 
 				 $("#"+divId).append(challengesHtml);
 				 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/common.css">
 <script src="./js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="./js/jquery.popupoverlay.js"></script>
 <link href="./css/loginprofile.css" rel="stylesheet">
@@ -229,8 +230,14 @@ p::before {
 				var text = finaDate[0];
 				var image = getProfileImagePath() + finaDate[1];
 				var randomPosition = getRandomRange(1, 3);
-				$('#textPanel' + randomPosition).html(text);
-				$('#imagePanel' + randomPosition).attr('src', image);
+				if(text && image) {
+					$('#textPanel' + randomPosition).html("<b>"+text+"</b>");
+					$('#imagePanel' + randomPosition).attr('src', image);
+				} else {
+					$('#textPanel' + randomPosition).html("<b>Onboard into Our System and get fun</b>");
+					$('#textPanel' + randomPosition).css({"color":"#fff","font-size": "20px", "font-family": "'Source Sans Pro'"});
+					$('#imagePanel' + randomPosition).attr('src', './img/profile/logo.jpg');
+			}
 			},
 			error : function(e) {
 				console.log('updateLatestActivity failure : ' + e);
@@ -247,11 +254,18 @@ p::before {
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
 				var finaData = data.latestBadgeAction.split("#");
+				
 				var text = finaData[0];
 				var image = getProfileImagePath() + finaData[1];
 				var randomPosition = getRandomRange(1, 3);
-				$('#textPanel' + randomPosition).html(text);
-				$('#imagePanel' + randomPosition).attr('src', image);
+				if(text && image) {
+					$('#textPanel' + randomPosition).html("<b>"+text+"</b>");
+					$('#imagePanel' + randomPosition).attr('src', image);
+				} else {
+					$('#textPanel' + randomPosition).html("<b>Get Rewards for your activities</b>");
+					$('#textPanel' + randomPosition).css({"color":"#fff","font-size": "20px", "font-family": "'Source Sans Pro'"});
+					$('#imagePanel' + randomPosition).attr('src', './img/profile/logo.jpg');
+				}
 			},
 			error : function(e) {
 				console.log('latestBadgeAction failure : ' + e);
@@ -271,8 +285,14 @@ p::before {
 				var text = finaData[0];
 				var image = getProfileImagePath() + finaData[1];
 				var randomPosition = getRandomRange(1, 3);
-				$('#textPanel' + randomPosition).html(text);
-				$('#imagePanel' + randomPosition).attr('src', image);
+				if(text && image) {
+					$('#textPanel' + randomPosition).html("<b>"+text+"</b>");
+					$('#imagePanel' + randomPosition).attr('src', image);
+				} else {
+					$('#textPanel' + randomPosition).html("<b>Share in Social Media</b>");
+					$('#textPanel' + randomPosition).css({"color":"#fff","font-size": "20px", "font-family": "'Source Sans Pro'"});
+					$('#imagePanel' + randomPosition).attr('src', './img/profile/logo.jpg');
+				}
 			},
 			error : function(e) {
 				console.log('updateLatestRedeemActivity failure : ' + e);
@@ -291,9 +311,15 @@ p::before {
 				var finaData = data.latestRewardAction.split("#");
 				var text = finaData[0];
 				var image = getProfileImagePath() + finaData[1];
-				var randomPosition = getRandomRange(1, 3);
-				$('#textPanel' + randomPosition).html(text);
-				$('#imagePanel' + randomPosition).attr('src', image);
+				var randomPosition = getRandomRange(4, 7);
+				if(text && image) {
+					$('#textPanel' + randomPosition).html("<b>"+text+"</b>");
+					$('#imagePanel' + randomPosition).attr('src', image);
+				} else {
+					$('#textPanel' + randomPosition).html("<b>Gamify your system with our framework</b>");
+					$('#textPanel' + randomPosition).css({"color":"#fff","font-size": "20px", "font-family": "'Source Sans Pro'"});
+					$('#imagePanel' + randomPosition).attr('src', './img/profile/logo.jpg');
+				}
 			},
 			error : function(e) {
 				console.log('latestRewardAction failure : ' + e);
@@ -313,8 +339,14 @@ p::before {
 				var text = finaData[0];
 				var image = getProfileImagePath() + finaData[1];
 				var randomPosition = getRandomRange(1, 3);
-				$('#textPanel' + randomPosition).html(text);
-				$('#imagePanel' + randomPosition).attr('src', image);
+				if(text && image) {
+					$('#textPanel' + randomPosition).html("<b>"+text+"</b>");
+					$('#imagePanel' + randomPosition).attr('src', image);
+				} else {
+					$('#textPanel' + randomPosition).html("<b>Get feedback for your progress</b>");
+					$('#textPanel' + randomPosition).css({"color":"#fff","font-size": "20px", "font-family": "'Source Sans Pro'"});
+					$('#imagePanel' + randomPosition).attr('src', './img/profile/logo.jpg');
+				}
 			},
 			error : function(e) {
 				console.log('latestRewardAction failure : ' + e);
@@ -334,8 +366,14 @@ p::before {
 				var text = finaData[0];
 				var image = getProfileImagePath() + finaData[1];
 				var randomPosition = getRandomRange(1, 3);
-				$('#textPanel' + randomPosition).html(text);
-				$('#imagePanel' + randomPosition).attr('src', image);
+				if(text && image) {
+					$('#textPanel' + randomPosition).html("<b>"+text+"</b>");
+					$('#imagePanel' + randomPosition).attr('src', image);
+				} else {
+					$('#textPanel' + randomPosition).html("<b>Unlock super badges and share your status</b>");
+					$('#textPanel' + randomPosition).css({"color":"#fff","font-size": "20px", "font-family": "'Source Sans Pro'"});
+					$('#imagePanel' + randomPosition).attr('src', './img/profile/logo.jpg');
+				}
 			},
 			error : function(e) {
 				console.log('latestRewardAction failure : ' + e);
@@ -451,7 +489,7 @@ p::before {
 					&nbsp;&nbsp;
 					<div class="col-sm-6 pull-right">
 
-						<table width="400px">
+						<table  style="width:400px">
 							<tr>
 								<td><font size="6"><b><span
 											id="performedActivitiesCount"></span></b></font></td>
@@ -459,56 +497,45 @@ p::before {
 											id="unlockedBadgeCount"></span></b></font></td>
 								<td><font size="6"><b><span
 											id="engagedUserCount"></span></b></font></td>
-								</font>
 							</tr>
 							<tr>
-								<td><font size="3"><b>Activities Performed</b></font></td>
-								<td><font size="3"><b>Badges Unlocked</b></font></td>
-								<td><font size="3"><b>Users Engaged</b></font></td>
+								<td class="loginupdateheading"><font size="3"><b>Activities Performed</b></font></td>
+								<td class="loginupdateheading"><font size="3"><b>Badges Unlocked</b></font></td>
+								<td class="loginupdateheading"><font size="3"><b>Users Engaged</b></font></td>
 							</tr>
 
 
 
 							<tr class="roundedbox">
 								<td>
-									<div class="profile-userpic">
-										<center>
-											<img id="imagePanel1" src="./img/profile/sheryl.jpg"
+									<div>
+										<img id="imagePanel1" src="./img/profile/logo.jpg"
 												class="img-circle" alt="" width="80px" height="80px">
-										</center>
+										
 									</div>
 								</td>
-								<td><div id="textPanel1" width=100>Steffy unlocked a
-										badge SUPER SAVER on Hype Goal</div></td>
+								<td><div id="textPanel1" class ="loginupdatext">Use our Framework and it will engage you</div></td>
 								<td></td>
 							</tr>
 
 							<tr class="roundedbox" >
 								<td>
-									<div class="profile-userpic">
-										<center>
-											<img id="imagePanel2" src="./img/profile/sheryl.jpg"
-												class="img-circle" alt="" width="80px" height="80px">
-										</center>
+									<div>
+											<img id="imagePanel2" src="./img/profile/logo.jpg" class="img-circle" alt="" width="80px" height="80px">
 									</div>
 								</td>
-								<td><div id="textPanel2" width=100>Steffy redeemed on
-										Hype Goal..250 points for Amazon Gift Voucher</div></td>
+								<td><div id="textPanel2" class ="loginupdatext">Come and try</div></td>
 								<td></td>
 							</tr>
 
 
 							<tr class="roundedbox">
 								<td>
-									<div class="profile-userpic">
-										<center>
-											<img id="imagePanel3" src="./img/profile/sheryl.jpg"
-												class="img-circle" alt="" width="80px" height="80px">
-										</center>
+									<div>
+											<img id="imagePanel3" src="./img/profile/logo.jpg" class="img-circle" alt="" width="80px" height="80px">
 									</div>
 								</td>
-								<td><div id="textPanel3" width=100>Steffy rewarded on
-										Hype goal with 200 points..</div></td>
+								<td><div id="textPanel3" class ="loginupdatext">Perform activities and Earn points</div></td>
 								<td></td>
 							</tr>
 

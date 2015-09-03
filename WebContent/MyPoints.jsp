@@ -21,6 +21,7 @@
 <script src="./js/rankwidget.js" type="text/javascript"></script>
 <script src="./js/pointlinechart.js" type="text/javascript"></script>
 <link href="./css/masterpage.css" rel="stylesheet">
+<script src="./js/Chart.js" type="text/javascript"></script>
 <script type="text/javascript">
 
 var commonUrl = getSessionUrl();

@@ -13,6 +13,7 @@
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
 <script src="./js/challengeswidget.js" type="text/javascript"></script>
 <script src="./js/session.js"></script>
+<script src="./js/notify.js"></script>
 <title>challenges</title>
 <script type="text/javascript">
 	var commonUrl = getSessionUrl();

@@ -365,5 +365,12 @@ public class APIManager {
 				
 	}
 	
+	public void updateNotification( String userCode) {
+		logger.debug("userCode--->"+userCode);
+		getServiceApiDAO().updateNotification(userCode);
+
+				
+	}
+	
 
 }

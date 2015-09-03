@@ -6,7 +6,7 @@
 <link href="./css/imageflip.css" rel="stylesheet">
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/masterpage.css" rel="stylesheet">
-
+<script src="./js/notify.js"></script>
 <style type="text/css">
 br {
   padding-top: 88px;

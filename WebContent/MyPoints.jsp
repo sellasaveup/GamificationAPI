@@ -22,6 +22,7 @@
 <script src="./js/pointlinechart.js" type="text/javascript"></script>
 <link href="./css/masterpage.css" rel="stylesheet">
 <script src="./js/Chart.js" type="text/javascript"></script>
+<script src="./js/notify.js"></script>
 <script type="text/javascript">
 
 var commonUrl = getSessionUrl();
@@ -29,6 +30,15 @@ var userCode = getSessionUserCode();
 var goalCode = getSessionGoalCode();
 
 $(document).ready(function() {
+	
+	 $.notify.defaults({
+		 clickToHide: true,
+		 autoHide: false,
+		 autoHideDelay:null,
+		 elementPosition: 'top left',
+		 globalPosition: 'top right'
+	});
+	 
 	getMyAllTimePoints('AllTimePoint', userCode, goalCode, commonUrl);
 	getMyCurrentMonthPoints('CurrentMonthPoint',  userCode, goalCode, commonUrl);
 	getMyCurrentMonthRank('CurrentMonthRank',  userCode, goalCode, commonUrl);

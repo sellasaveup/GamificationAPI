@@ -40,6 +40,7 @@
 			 });
 		 
 		 getNotification();
+		 setInterval(function() {getNotification()}, 9000);
 		});
       
       function loadMyPoints() {
@@ -81,10 +82,11 @@
     			var count = data.Count;
     			if(count>0) {
     				 $("#notificationCount").html(count);
+    				 parseNotificationResponse(data);
     			} else {
     				 $("#notificationCount").html("");
     			}
-    			parseNotificationResponse(data);
+    			
     		},
     		error : function(e) {
     			console.log('latestBadgeAction failure : ' + e);
@@ -108,21 +110,42 @@
     }
 
     function showNotification() {
-    	for(var i=0; i<notificationType.length; i++) {
-    		if(notificationType[i] == "Message") {
-    			notifyMessage(notificationMessage[i]);
-    		}
-    		
-    		if(notificationType[i] == "Warning") {
-    			notifyWarning(notificationMessage[i]);
-    		}
-    		
-    		if(notificationType[i] == "Info") {
-    			notifyInfo(notificationMessage[i]);
-    		}
+    	
+    	if($("#notificationCount").html() != "") {
+    		for(var i=0; i<notificationType.length; i++) {
+        		if(notificationType[i] == "Message") {
+        			notifyMessage(notificationMessage[i]);
+        		}
+        		
+        		if(notificationType[i] == "Warning") {
+        			notifyWarning(notificationMessage[i]);
+        		}
+        		
+        		if(notificationType[i] == "Info") {
+        			notifyInfo(notificationMessage[i]);
+        		}
+        		notificationType[i] = "";
+        	}
+        	updateNotification();
     	}
+    	
     }
-
+	
+    function updateNotification() {
+    	var updateNotificationUrl = commonUrl + "UPDATE_NOTIFICATION?userCode="+userCode;
+    	$.ajax({
+    		type : "GET",
+    		url : updateNotificationUrl,
+    		dataType : "json",
+    		contentType : "application/json; charset=UTF-8",
+    		success : function(data) {
+    			 $("#notificationCount").html("");
+    		},
+    		error : function(e) {
+    			console.log('latestBadgeAction failure : ' + e);
+    		}
+    	});
+    }
 
     function notifyMessage(message) {
     	  $.notify(message, "success");

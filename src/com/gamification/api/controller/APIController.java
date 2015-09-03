@@ -832,7 +832,7 @@ public class APIController {
 	@Path("/GET_NOTIFICATION")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getNotification(@QueryParam("userCode") String userCode) {
-		logger.debug("getUserType()");
+		logger.debug("getNotification()");
 		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		 List<Notification> notificationList = getAPIManager().getNotification(userCode);
 	    if(notificationList != null && !notificationList.isEmpty()) {
@@ -842,4 +842,14 @@ public class APIController {
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
 	
+	@GET
+	@Path("/UPDATE_NOTIFICATION")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateNotification(@QueryParam("userCode") String userCode) {
+		logger.debug("updateNotification()");
+		 HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
+		 getAPIManager().updateNotification(userCode);
+	    jsonRoot.put("Response", "1");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
 }

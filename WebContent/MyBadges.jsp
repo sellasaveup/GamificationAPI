@@ -12,6 +12,7 @@
 <script src="./js/jquery.min.js"></script>
 <script src="./js/session.js"></script>
 <script src="./js/badgeswidget.js" type="text/javascript"></script>
+<script src="./js/notify.js"></script>
 <script type="text/javascript">
 	var commonUrl = getSessionUrl();
 	var userCode = getSessionUserCode();

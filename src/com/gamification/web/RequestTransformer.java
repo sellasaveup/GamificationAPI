@@ -12,9 +12,11 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public final class RequestTransformer {
-
+	private static final String WORK_SPACE_PATH = "C:/Gamification/GamificationAPI/WebContent";
+	
 	public static Map<String, String> getInputsAndUploadFile(final HttpServletRequest request, final String serverPath, final String destPath) throws Exception  {
 		 
+		
 		final String uploadPath = serverPath.concat(destPath);
 		final Map<String,String> inputs = new HashMap<String,String>();
 		if(ServletFileUpload.isMultipartContent(request)) {
@@ -28,6 +30,8 @@ public final class RequestTransformer {
 					if(item.getName()!=null && !item.getName().isEmpty() && item.getSize() != 0) {
 						inputs.put(item.getFieldName(), item.getName());
 						item.write( new File(path + "/" + item.getName()) );
+						File localPath =  new File(WORK_SPACE_PATH+destPath);
+						item.write( new File(localPath + "/" + item.getName()) );
 					}
 				} else {
 					inputs.put(item.getFieldName(), item.getString());

@@ -162,10 +162,10 @@ var pointsObj = []
 var useravatarObj = [];
 var userRankObj = [];
 
-function getAllTimeLeaderBoard(userGode, commonUrl) {
+function getAllTimeLeaderBoard(goalGode, commonUrl) {
 
 	var buildUrl = commonUrl + 'GET_LEADERBOARD?goalCode=';
-	buildUrl = buildUrl + userCode + '&requestType=' + 'A';
+	buildUrl = buildUrl + goalGode + '&requestType=' + 'A';
 	
 	$.ajax({
 		type : "GET",

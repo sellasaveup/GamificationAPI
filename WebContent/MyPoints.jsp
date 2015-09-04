@@ -134,13 +134,13 @@ $(document).ready(function() {
      		</div>
    		</article>
 
-	</section></div>
+	</section>
 <div class="row">
  <div class="col-sm-12">
      <h4 class="well barwell">My Achievements...</h4>
      <div id="ChallengeList" style="padding-left:30px;"></div>
 </div>
  </div>
-	
+	</div>
 </body>
 </html>

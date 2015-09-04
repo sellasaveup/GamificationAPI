@@ -12,7 +12,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public final class RequestTransformer {
-	private static final String WORK_SPACE_PATH = "C:/Gamification/GamificationAPI/WebContent";
+	private static final String WORK_SPACE_PATH = "/Users/boobathiayyasamy/git/GamificationAPI/WebContent";
 	
 	public static Map<String, String> getInputsAndUploadFile(final HttpServletRequest request, final String serverPath, final String destPath) throws Exception  {
 		 

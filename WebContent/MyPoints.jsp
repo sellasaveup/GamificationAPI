@@ -23,6 +23,11 @@
 <link href="./css/masterpage.css" rel="stylesheet">
 <script src="./js/Chart.js" type="text/javascript"></script>
 <script src="./js/notify.js"></script>
+<style type="text/css">
+	.notifyjs-corner {
+    	top: 60px !important;
+		}
+</style>
 <script type="text/javascript">
 
 var commonUrl = getSessionUrl();
@@ -31,14 +36,7 @@ var goalCode = getSessionGoalCode();
 
 $(document).ready(function() {
 	
-	 $.notify.defaults({
-		 clickToHide: true,
-		 autoHide: false,
-		 autoHideDelay:null,
-		 elementPosition: 'top left',
-		 globalPosition: 'top right'
-	});
-	 
+	
 	getMyAllTimePoints('AllTimePoint', userCode, goalCode, commonUrl);
 	getMyCurrentMonthPoints('CurrentMonthPoint',  userCode, goalCode, commonUrl);
 	getMyCurrentMonthRank('CurrentMonthRank',  userCode, goalCode, commonUrl);

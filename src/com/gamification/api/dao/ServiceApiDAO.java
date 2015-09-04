@@ -517,7 +517,7 @@ public class ServiceApiDAO {
 			connection = connectionUtility.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, userCode);
-			preparedStatement.executeUpdate();
+			//preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

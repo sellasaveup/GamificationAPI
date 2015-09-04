@@ -13,12 +13,19 @@
 <script src="./js/session.js"></script>
 <script src="./js/rewardswidget.js" type="text/javascript"></script>
 <script src="./js/notify.js"></script>
+<style type="text/css">
+	.notifyjs-corner {
+    	top: 60px !important;
+		}
+</style>
 <script type="text/javascript">
 var commonUrl = getSessionUrl();
 var userCode = getSessionUserCode();
 var goalCode = getSessionGoalCode();
 
 $(document).ready(function() {
+	
+	 
 	getMyRewards('MyRewards', userCode, goalCode, commonUrl);
 	getAllMyLockedRewards('MyLockedRewards', userCode, goalCode, commonUrl); 
 });

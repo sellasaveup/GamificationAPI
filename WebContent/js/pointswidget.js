@@ -85,7 +85,7 @@ function getMyChallengesList(divId, userCode, goalCode, commonUrl) {
 				 if(challengeList[index].story){
 				 var myDate = new Date(challengeList[index].receivedDate);
 				 var formattedDate = myDate.getMonth() + 1 + "-" + myDate.getDate() + "-" + myDate.getFullYear();
-				
+				 var formattedDate = challengeList[index].receivedDate;
 				 challengesHtml =  tableBody + '<tr>'+
 						 '<td>' + challengeList[index].story + '</td>'+
 						 '<td>' + challengeList[index].points  + '</td>' +

@@ -154,7 +154,7 @@ find = function(elem, selector) {
 
 pluginOptions = {
   clickToHide: true,
-  autoHide: true,
+  autoHide: false,
   autoHideDelay: 5000,
   arrowShow: true,
   arrowSize: 5,

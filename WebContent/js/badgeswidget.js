@@ -91,7 +91,7 @@ function getAllMyBadges(divId, userCode, goalCode, commonUrl) {
 			 $.each( badgeList, function( index, obj ) {
 				 var myDate = new Date(badgeList[index].date);
 				 var formattedDate = myDate.getMonth() + 1 + "-" + myDate.getDate() + "-" + myDate.getFullYear();
-
+				 formattedDate = badgeList[index].date;
 
 				 badgeHtml =  tableBody + '<tr>'+
 				 '<td><img src="./img/badges/' + badgeList[index].image + '" class="img-rounded" width="80" height="80"></td>'+

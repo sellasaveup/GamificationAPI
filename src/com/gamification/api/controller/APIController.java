@@ -69,18 +69,21 @@ public class APIController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getProfile(@QueryParam("userCode") String userCode, @QueryParam("goalCode") String goalCode) {
 		logger.debug("*Inside GET_PROFILE Service");
-
+		RequestStatus requestStatus = new RequestStatus();
 		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
 		UserProfile userProfile = getAPIManager().getProfile(userCode, goalCode);
 		if(userProfile != null) {
+			requestStatus.setIsSuccess("1");
+			requestStatus.setCode(userCode);
+			requestStatus.setMessage("Profile Available");
 			jsonRoot.put("Response", userProfile);
+			jsonRoot.put("Status", requestStatus);
 		}
 		else {
-			RequestStatus requestStatus = new RequestStatus();
 			requestStatus.setIsSuccess("0");
 			requestStatus.setCode(userCode);
 			requestStatus.setMessage("Profile Not Available");
-			jsonRoot.put("Response", requestStatus);
+			jsonRoot.put("Status", requestStatus);
 		}
 
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();

@@ -571,11 +571,12 @@ public class APIController {
 			requestStatus.setIsSuccess("1");
 			requestStatus.setCode(userCode);
 			requestStatus.setMessage("Success");
+			jsonRoot.put("Status", requestStatus);
 		} else {
 			requestStatus.setIsSuccess("0");
 			requestStatus.setCode(userCode);
 			requestStatus.setMessage("Failure");
-			jsonRoot.put("Response", requestStatus);
+			jsonRoot.put("Status", requestStatus);
 		}
 
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();

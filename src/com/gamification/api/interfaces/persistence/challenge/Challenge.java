@@ -63,6 +63,9 @@ public class Challenge implements Serializable {
 	
 	@Column(name="DATE")
 	private Date date;
+	
+	@Column(name="STATUS")
+	private String status;
 
 	public Long getChallengeId() {
 		return challengeId;
@@ -177,4 +180,14 @@ public class Challenge implements Serializable {
 	public void setRewardCode(String rewardCode) {
 		this.rewardCode = rewardCode;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.gamification.api.controller.reward;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class UpdateReward extends AdminController {
 		if(inputs.get("image") != null) {
 			reward.setImage(inputs.get("image"));
 		}
-		reward.setDate(getParsedDate(inputs.get("date")));
+		reward.setDate(Calendar.getInstance().getTime());
 		new RewardDao().update(reward);
         JSONROOT.put("Record", reward);
 	}

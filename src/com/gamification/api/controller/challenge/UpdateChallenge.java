@@ -1,5 +1,6 @@
 package com.gamification.api.controller.challenge;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,8 @@ public class UpdateChallenge extends AdminController {
 		challenge.setExpiryDate(getParsedDate(inputs.get("expiryDate")));
 		challenge.setPoints(Long.valueOf(inputs.get("points")));
 		challenge.setOccurrence(Integer.valueOf(inputs.get("occurrence")));
-		challenge.setDate(getParsedDate(inputs.get("date")));
+		challenge.setDate(Calendar.getInstance().getTime());
+		challenge.setStatus(inputs.get("status"));
 		new ChallengeDao().update(challenge);
         JSONROOT.put("Record", challenge);
 	}

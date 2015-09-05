@@ -33,6 +33,7 @@ public class CreateChallenge extends AdminController {
 		challenge.setPoints(Long.valueOf(inputs.get("points")));
 		challenge.setOccurrence(Integer.valueOf(inputs.get("occurrence")));
 		challenge.setDate(Calendar.getInstance().getTime());
+		challenge.setStatus(inputs.get("status"));
 		new ChallengeDao().create(challenge);
         JSONROOT.put("Record", challenge);
 	}

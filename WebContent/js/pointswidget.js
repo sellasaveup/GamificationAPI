@@ -32,7 +32,11 @@ function getMyAllTimePoints(divId, userCode, goalCode, commonUrl) {
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
 			console.log('points call success: ' + data.Points);
+			if(data.Points != undefined) {
 				document.getElementById(divId).innerHTML = data.Points;
+			} else {
+				document.getElementById(divId).innerHTML = "0"
+			}
 		},
 		error : function(e) {
 			console.log('points call failure : ' + e);
@@ -56,7 +60,7 @@ function getMyCurrentMonthPoints(divId, userCode, goalCode, commonUrl) {
 			if(data.Points != undefined) {
 				document.getElementById(divId).innerHTML = data.Points;
 			} else {
-				document.getElementById(divId).innerHTML = "You have to earn Points"
+				document.getElementById(divId).innerHTML = "0"
 			}
 		},
 		error : function(e) {

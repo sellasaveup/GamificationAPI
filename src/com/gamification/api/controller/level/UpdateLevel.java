@@ -1,5 +1,6 @@
 package com.gamification.api.controller.level;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class UpdateLevel extends AdminController {
 		if(inputs.get("image") != null) {
 			level.setImage(inputs.get("image"));
 		}
-		level.setDate(getParsedDate(inputs.get("date")));
+		level.setDate(Calendar.getInstance().getTime());
 		new LevelDao().update(level);
 		JSONROOT.put("Record", level);
 	}

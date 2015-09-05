@@ -61,6 +61,7 @@ public class ChallengeDao extends AdminPersistence<Challenge> implements IChalle
 			view.setRewardCode(entity.getRewardCode());
 			view.setStory(entity.getStory());
 			view.setDate(getFormattedDate(entity.getDate()));
+			view.setStatus(entity.getStatus());
 			challengeViewList.add(view);
 		}
 		return challengeViewList;

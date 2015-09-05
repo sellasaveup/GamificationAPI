@@ -34,7 +34,7 @@ function getMyCurrentMonthRank(divId, userCode, goalCode, commonUrl) {
 			if(data.Rank != undefined) {
 				document.getElementById(divId).innerHTML = data.Rank;
 			} else {
-				document.getElementById(divId).innerHTML = "Get Rank by completing the challenges";
+				document.getElementById(divId).innerHTML = "0";
 			}
 		},
 		error : function(e) {
@@ -56,7 +56,11 @@ function getMyAllTimeRank(divId, userCode, goalCode, commonUrl) {
 		contentType : "application/json; charset=UTF-8",
 		success : function(data) {
 			console.log('rank call success all time: ' + data.Rank);
-				document.getElementById(divId).innerHTML = data.Rank;
+				if(data.Rank != undefined) {
+					document.getElementById(divId).innerHTML = data.Rank;
+				} else {
+					document.getElementById(divId).innerHTML = "0"
+				}
 		},
 		error : function(e) {
 			console.log('rank call failure : ' + e);

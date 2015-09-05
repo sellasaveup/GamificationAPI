@@ -245,9 +245,17 @@
                                                 edit: true,
                                                 options : 'RetrieveReward?reward='+goalData.record.goalCode,
                                                 display: function (data) {
-                                                    return data.record.reward;
+                                                    return data.record.rewardCode;
                                                 }
                                             },
+                                            status : {
+                            					title: 'Status',
+                                                width: '10%',
+                                                type: 'checkbox',
+                                                values: { 'PASSIVE': 'PASSIVE', 'ACTIVE': 'ACTIVE' },
+                                                defaultValue: 'ACTIVE'
+                                               
+                            				},
                                             date : {
                             					title : 'Date',
                             					width : '20%',

@@ -58,4 +58,16 @@ public class RewardDao  extends AdminPersistence<Reward> implements IRewardDao {
 		return rewardViews;
 	}
 	
+	public List<String> getRewardsReportForUser(final String userCode, final String goalCode) {
+
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Query query = em.createNativeQuery("SELECT  COALESCE(COUNT(ur.REWARD_CODE), 0) AS month FROM ( SELECT 1 AS Month UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 ) m LEFT JOIN ss_tr_user_reward ur ON month(ur.DATE) = m.Month and ur.USER_CODE=?1 and ur.GOAL_CODE =?2 GROUP BY m.Month ORDER BY m.Month");
+			query.setParameter(1, userCode);
+			query.setParameter(2, goalCode);
+			return query.getResultList();
+		} finally {
+			close(em);
+		}
+	}
 }

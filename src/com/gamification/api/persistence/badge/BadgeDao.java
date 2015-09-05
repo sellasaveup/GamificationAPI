@@ -57,4 +57,18 @@ public class BadgeDao extends AdminPersistence<Badge> implements IBadgeDao {
 			close(em);
 		}
 	}
+	
+	public List<String> getBadgesReportForUser(final String userCode, final String goalCode) {
+
+		//SELECT count(BADGE_CODE) as badges FROM ss_tr_user_badge where USER_CODE=?1 and GOAL_CODE =?2 group by month(DATE) order by month(DATE)
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Query query = em.createNativeQuery("SELECT COALESCE(COUNT(ub.BADGE_CODE), 0) AS month FROM ( SELECT 1 AS Month UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 ) m LEFT JOIN ss_tr_user_badge ub ON month(ub.DATE) = m.Month and ub.USER_CODE=?1 and ub.GOAL_CODE =?2 GROUP BY m.Month ORDER BY m.Month");
+			query.setParameter(1, userCode);
+			query.setParameter(2, goalCode);
+			return query.getResultList();
+		} finally {
+			close(em);
+		}
+	}
 }

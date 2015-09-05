@@ -78,4 +78,18 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 			close(em);
 		}
 	}
+	
+	
+	public List<String> getLevelsReportForUser(final String userCode, final String goalCode) {
+		
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Query query = em.createNativeQuery("SELECT  COALESCE(COUNT(ul.LEVEL_CODE), 0) AS month FROM ( SELECT 1 AS Month UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 ) m LEFT JOIN ss_tr_user_level ul ON month(ul.DATE) = m.Month and ul.USER_CODE=?1 and ul.GOAL_CODE =?2 GROUP BY m.Month ORDER BY m.Month");
+			query.setParameter(1, userCode);
+			query.setParameter(2, goalCode);
+			return query.getResultList();
+		} finally {
+			close(em);
+		}
+	}
 }

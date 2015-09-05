@@ -32,7 +32,6 @@ public class UpdateGoal extends AdminController {
 		goal.setUserType(inputs.get("userType"));
 		goal.setDate(Calendar.getInstance().getTime());
 		goal.setStatus(inputs.get("status"));
-		goal.setDate(getParsedDate(inputs.get("date")));
 		new GoalDao().update(goal);
 		JSONROOT.put("Record", goal);
 	}

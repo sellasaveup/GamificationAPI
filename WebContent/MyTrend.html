@@ -1,74 +1,69 @@
 <!DOCTYPE HTML>
 <HTML>
 <head>
-<title>Line Chart</title>
+<title>MyTrend</title>
 <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script src="./js/Chart.js" type="text/javascript"></script>
 <script src="./js/goaltrendlinechart.js" type="text/javascript"></script>
+<script src="./js/goaltrendlinechart.js" type="text/javascript"></script>
+<script src="./js/challengetrendchart.js" type="text/javascript"></script>
+<script src="./js/leveltrendchart.js" type="text/javascript"></script>
+<script src="./js/badgetrendchart.js" type="text/javascript"></script>
+<script src="./js/rewardtrendchart.js" type="text/javascript"></script>
 <script src="./js/session.js"></script>
 <script src="./js/notify.js"></script>
 
 <script type="text/javascript">
-	
-
 	var commonUrl = getSessionUrl();
+	var userCode = getSessionUserCode();
+	var goalCode = getSessionGoalCode();
 	$(document).ready(function() {
 		drawgoallinechart('goalTrend');
+		drawchallengechart('challengeTrend', userCode, goalCode);
+		drawlevelchart('levelTrend', userCode, goalCode);
+		drawbadgechart('badgeTrend', userCode, goalCode);
+		drawrewardchart('rewardTrend', userCode, goalCode);
 	});
 </script>
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="panel-body" style="width: 30%">
-			<div>
-				<canvas id="canvas" height="450" width="600"> Sorry!! not working</canvas>
-			</div>
-		</div>
-		<br><br><br><br>
 		<div class="panel-body" style="width: 70%">
+		<h4 class="well barwell">Goals journey...</h4>
 			<div>
-				<canvas id="goalTrend" height="450" width="600"	onclick="drawgoallinechart('goalTrend');"> Sorry!! not working</canvas>
+				<canvas id="goalTrend" height="450" width="600"
+					onclick="drawgoallinechart('goalTrend');"> Sorry!! not working</canvas>
 			</div>
 		</div>
+		<div class="panel-body" style="width: 70%">
+		<h4 class="well barwell">Challenges journey...</h4>
+			<div>
+				<canvas id="challengeTrend" height="450" width="600"
+					onclick="drawchallengechart('challengeTrend');"> Sorry!! not working</canvas>
+			</div>
+		</div>
+		<div class="panel-body" style="width: 70%">
+		<h4 class="well barwell">Levels  journey...</h4>
+			<div>
+				<canvas id="levelTrend" height="450" width="600"
+					onclick="drawlevelchart('levelTrend');"> Sorry!! not working</canvas>
+			</div>
+		</div>
+		<div class="panel-body" style="width: 70%">
+		<h4 class="well barwell">Badges journey...</h4>
+			<div>
+				<canvas id="badgeTrend" height="450" width="600"
+					onclick="drawbadgechart('badgeTrend');"> Sorry!! not working</canvas>
+			</div>
+		</div>
+		<div class="panel-body" style="width: 70%">
+		<h4 class="well barwell">Rewards journey...</h4>
+			<div>
+				<canvas id="rewardTrend" height="450" width="600"
+					onmouseenter="drawrewardchart('rewardTrend');"> Sorry!! not working</canvas>
+			</div>
+		</div>   
 	</div>
-	<script>
-		var randomScalingFactor = function() {
-			return Math.round(Math.random() * 100)
-		};
-		var lineChartData = {
-			labels : [ "January", "February", "March", "April", "May", "June",
-					"July" ],
-			datasets : [
-					{
-						label : "My First dataset",
-						fillColor : "rgba(220,220,220,0.2)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [ 10, 0, 20, 40, 50, 60, 70 ]
-					},
-					{
-						label : "My Second dataset",
-						fillColor : "rgba(151,187,205,0.2)",
-						strokeColor : "rgba(151,187,205,1)",
-						pointColor : "rgba(151,187,205,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(151,187,205,1)",
-						data : [ randomScalingFactor(), randomScalingFactor(),
-								randomScalingFactor(), randomScalingFactor(),
-								randomScalingFactor(), randomScalingFactor(),
-								randomScalingFactor() ]
-					} ]
-
-		}
-		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
-			maintainAspectRatio : false
-		});
-	</script>
 </body>
 </HTML>
 

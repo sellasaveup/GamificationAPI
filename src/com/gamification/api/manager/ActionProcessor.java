@@ -80,8 +80,14 @@ public class ActionProcessor {
 					requestStatus = performTransactions(challenge, userCode);
 				}
 			} else {
-				logger.debug("No Previous action available but occurrence is one SO perforing transaction");
-				requestStatus = performTransactions(challenge, userCode);
+				List<UserAction> userActionList = getUserAction(userCode,actionCode);
+				if(userActionList.isEmpty()) {
+					logger.debug("No Previous action available but occurrence is one SO perforing transaction");
+					requestStatus = performTransactions(challenge, userCode);
+				} else {
+					logger.debug("Occurance is one and Already Transaction is available No need of Transaction");
+				}
+				
 			}
 			
 			if(requestStatus.getIsSuccess().equals("1")) {

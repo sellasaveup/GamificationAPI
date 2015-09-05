@@ -50,13 +50,13 @@ body,html {
 .name{
     font-weight:bold;
 }
-.count{
+.countleader{
     display:inline-block;
     float:right;
     color:#FFBF00;
     font-weight:bold;
 }
-.count:after{
+.countleader:after{
     content:' Points';
     color:#CCC;
     font-size:80%;

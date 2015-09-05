@@ -18,7 +18,7 @@
 		<script src="./js/notify.js"></script>
 		<style type="text/css">
 		.notifyjs-corner {
-    			top: 60px !important;
+    			top: 20px !important;
 				}
 		</style>
 <script>
@@ -73,7 +73,7 @@
       }
       
       function loadLoginPage() {
-    	  window.location.href = commonUrl.substring(commonUrl.length, (commonUrl.length-11));
+    	  window.location.href = commonUrl.substring(0, (commonUrl.length-11));
       }
       function addAndRemoveActiveClass(addingObject) {
     	  
@@ -187,7 +187,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="Login.jsp">Gamification Framework</a>
+            <a class="navbar-brand" onclick="loadMyPoints()" href="#">Gamification Framework</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -198,7 +198,7 @@
                  <!--<li><a href="#" onclick="loadAdminMaster();"><i class="glyphicon glyphicon-folder-open"></i><b> Admin Master</b></a></li>
                  <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b></a></li> -->
                  <li id="trendLink"><a href="#" onclick="loadGoalTrend();"><i class="glyphicon glyphicon-globe"></i> <b>Trend </b></a></li>
-                 <li><a href="#"  title="Check statistics" class="tipN" onCLick="showNotification()"><div style="position:relative;" id="notificationIcon"><img src="img/logo/dialogs.png" alt="" /></div><div id="notificationCount"></div></a></li>
+                 <li><a href="#"  title="Notifications" onCLick="showNotification()">Notification:<div id="notificationCount" class="count"></div></a></li>
                 <li><a href="#" onclick="loadLoginPage()"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
             </ul>
         </div>

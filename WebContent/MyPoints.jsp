@@ -25,7 +25,7 @@
 <script src="./js/notify.js"></script>
 <style type="text/css">
 	.notifyjs-corner {
-    	top: 60px !important;
+    	top: 42px !important;
 		}
 </style>
 <script type="text/javascript">

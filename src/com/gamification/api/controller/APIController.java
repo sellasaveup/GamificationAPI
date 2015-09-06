@@ -19,6 +19,7 @@ import com.gamification.api.manager.APIManager;
 import com.gamification.api.manager.NotificationManager;
 import com.gamification.api.persistence.badge.BadgeDao;
 import com.gamification.api.persistence.challenge.ChallengeDao;
+import com.gamification.api.persistence.goal.GoalDao;
 import com.gamification.api.persistence.level.LevelDao;
 import com.gamification.api.persistence.reward.RewardDao;
 import com.gamification.api.view.BadgeView;
@@ -929,4 +930,134 @@ public class APIController {
 		requestStatus.setMessage("Success");
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
+	
+	@GET
+	@Path("/GET_LEVEL_JOURNEY_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLevelJourneyChart(@QueryParam("goalCode") String goalCode) {
+		logger.debug("getLevelJourneyChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("xAxis", DateFormatSymbols.getInstance().getMonths());
+		result.put("yAxis", new LevelDao().getLevelJourneyReport(goalCode));
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", result);
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_BADGE_JOURNEY_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getBadgeJourneyChart(@QueryParam("goalCode") String goalCode) {
+		logger.debug("getBadgeJourneyChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("xAxis", DateFormatSymbols.getInstance().getMonths());
+	 	result.put("yAxis", new BadgeDao().getBadgeJourneyReport(goalCode));
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", result);
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_CHALLENGE_JOURNEY_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getChallengeJourneyChart(@QueryParam("goalCode") String goalCode) {
+		logger.debug("getChallengeJourneyChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("xAxis", DateFormatSymbols.getInstance().getMonths());
+		result.put("yAxis", new ChallengeDao().getChallengeJourneyReport(goalCode));
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", result);
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_REWARD_JOURNEY_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getRewardJourneyChart(@QueryParam("goalCode") String goalCode) {
+		logger.debug("getRewardJourneyChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("xAxis", DateFormatSymbols.getInstance().getMonths());
+		result.put("yAxis", new RewardDao().getRewardJourneyReport(goalCode));
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", result);
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_GOAL_TRACKER_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getGoalTrackerChart() {
+		logger.debug("getGoalTrackerChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", new GoalDao().getGoalTrackingReport());
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_LEVEL_TRACKER_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLevelTrackerChart() {
+		logger.debug("getLevelTrackerChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", new LevelDao().getLevelTrackingReport());
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_BADGE_TRACKER_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getBadgeTrackerChart() {
+		logger.debug("getBadgeTrackerChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", new BadgeDao().getBadgeTrackingReport());
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_CHALLENGE_TRACKER_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getChallengeTrackerChart() {
+		logger.debug("getChallengeTrackerChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", new ChallengeDao().getChallengeTrackingReport());
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
+	@GET
+	@Path("/GET_REWARD_TRACKER_CHART")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getRewardTrackerChart() {
+		logger.debug("getRewardTrackerChart");
+		Map<String, Object> jsonRoot = new HashMap<String, Object>();
+		RequestStatus requestStatus = new RequestStatus();
+		jsonRoot.put("Response", new RewardDao().getRewardTrackingReport());
+		requestStatus.setIsSuccess("1");
+		requestStatus.setMessage("Success");
+		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
+	}
+	
 }

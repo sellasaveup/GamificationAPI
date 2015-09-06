@@ -1,7 +1,9 @@
 package com.gamification.api.persistence.reward;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -66,6 +68,39 @@ public class RewardDao  extends AdminPersistence<Reward> implements IRewardDao {
 			query.setParameter(1, userCode);
 			query.setParameter(2, goalCode);
 			return query.getResultList();
+		} finally {
+			close(em);
+		}
+	}
+	
+	public List<String> getRewardJourneyReport( final String goalCode) {
+
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Query query = em.createNativeQuery("SELECT  COALESCE(COUNT(ur.REWARD_CODE), 0) AS month FROM ( SELECT 1 AS Month UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 ) m LEFT JOIN ss_tr_user_reward ur ON month(ur.DATE) = m.Month and ur.GOAL_CODE =?1 GROUP BY m.Month ORDER BY m.Month");
+			query.setParameter(1, goalCode);
+			return query.getResultList();
+		} finally {
+			close(em);
+		}
+	}
+	
+	public Map<String, Object> getRewardTrackingReport() {
+
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Map<String, Object> result = new HashMap<String,Object>();
+			final Query query = em.createNativeQuery("select distinct reward_code as reward, COUNT(reward_code) as count from ss_tr_user_reward group by reward_code");
+			final List<Object[]> list = query.getResultList();
+			final List<String> xAxis = new ArrayList<String>();
+			final List<String> yAxis = new ArrayList<String>();
+			for(Object[] object : list) {
+				xAxis.add(String.valueOf(object[0]));
+				yAxis.add(String.valueOf(object[1]));
+			}
+			result.put("xAxis", xAxis);
+			result.put("yAxis", yAxis);
+			return result;
 		} finally {
 			close(em);
 		}

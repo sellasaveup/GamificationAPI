@@ -2,7 +2,9 @@ package com.gamification.api.persistence.level;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -17,7 +19,7 @@ import com.gamification.api.view.LevelView;
 public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 
 	private static final String ENTITY_PATH = "com.gamification.api.interfaces.persistence.level.Level";
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Class<Level> getEntityClass() {
@@ -28,10 +30,10 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 	protected String getRetrieveAllEntitiesQuery() {
 		return "from Level";
 	}
-	
-	
+
+
 	public Collection<LevelView> getLevelsByGoal(final LevelView levelView)  {
-		
+
 		Collection<Level> levelEntityList = new ArrayList<Level>(); 
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
 		try {
@@ -43,11 +45,11 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 		}
 		return getTransformEntityObjToViewObj(levelEntityList);
 	}
-	
+
 
 
 	private List<LevelView> getTransformEntityObjToViewObj(Collection<Level> levelEntityList) {
-		
+
 		List<LevelView> levelViewList = new ArrayList<LevelView> ();
 		for(Level entity : levelEntityList) {
 			final LevelView view = new LevelView();
@@ -67,7 +69,7 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 		}
 		return levelViewList;
 	}
-	
+
 	public List<LevelView> getLevelByGoalCode(final String goalCode) {
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
 		try{
@@ -78,10 +80,10 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 			close(em);
 		}
 	}
-	
-	
+
+
 	public List<String> getLevelsReportForUser(final String userCode, final String goalCode) {
-		
+
 		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
 		try{
 			final Query query = em.createNativeQuery("SELECT  COALESCE(COUNT(ul.LEVEL_CODE), 0) AS month FROM ( SELECT 1 AS Month UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 ) m LEFT JOIN ss_tr_user_level ul ON month(ul.DATE) = m.Month and ul.USER_CODE=?1 and ul.GOAL_CODE =?2 GROUP BY m.Month ORDER BY m.Month");
@@ -92,4 +94,39 @@ public class LevelDao  extends AdminPersistence<Level> implements ILevelDao {
 			close(em);
 		}
 	}
+
+	public List<String> getLevelJourneyReport(final String goalCode) {
+
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Query query = em.createNativeQuery("SELECT  COALESCE(COUNT(ul.LEVEL_CODE), 0) AS month FROM ( SELECT 1 AS Month UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 ) m LEFT JOIN ss_tr_user_level ul ON month(ul.DATE) = m.Month and ul.GOAL_CODE =?1 GROUP BY m.Month ORDER BY m.Month");
+			query.setParameter(1, goalCode);
+			return query.getResultList();
+		} finally {
+			close(em);
+		}
+	}
+
+	public Map<String, Object> getLevelTrackingReport() {
+
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Map<String, Object> result = new HashMap<String,Object>();
+			final Query query = em.createNativeQuery("select distinct level_code as level, COUNT(level_code) as count from ss_tr_user_level group by level_code");
+			final List<Object[]> list =query.getResultList();
+			final List<String> xAxis = new ArrayList<String>();
+			final List<String> yAxis = new ArrayList<String>();
+			for(Object[] object : list) {
+				xAxis.add(String.valueOf(object[0]));
+				yAxis.add(String.valueOf(object[1]));
+			}
+			result.put("xAxis", xAxis);
+			result.put("yAxis", yAxis);
+			return result;
+		} finally {
+			close(em);
+		}
+	}
+	
+	
 }

@@ -1,11 +1,17 @@
 package com.gamification.api.persistence.goal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.gamification.api.interfaces.persistence.goal.Goal;
 import com.gamification.api.interfaces.persistence.goal.IGoalDao;
 import com.gamification.api.persistence.AdminPersistence;
+import com.gamification.api.persistence.config.AdminPersistenceFactory;
 import com.gamification.api.persistence.config.ClassInstantiator;
 import com.gamification.api.view.GoalView;
 
@@ -40,5 +46,26 @@ public class GoalDao  extends AdminPersistence<Goal> implements IGoalDao{
 			goalViews.add(goalView);
 		}
 		return goalViews;
+	}
+	
+	public Map<String, Object> getGoalTrackingReport() {
+
+		final EntityManager em = AdminPersistenceFactory.getPersistenceManager();
+		try{
+			final Map<String, Object> result = new HashMap<String,Object>();
+			final Query query = em.createNativeQuery("select distinct goal_code as goal, COUNT(goal_code) as count from ss_tr_user_action group by goal_code");
+			final List<Object[]> list = query.getResultList();
+			final List<String> xAxis = new ArrayList<String>();
+			final List<String> yAxis = new ArrayList<String>();
+			for(Object[] object : list) {
+				xAxis.add(String.valueOf(object[0]));
+				yAxis.add(String.valueOf(object[1]));
+			}
+			result.put("xAxis", xAxis);
+			result.put("yAxis", yAxis);
+			return result;
+		} finally {
+			close(em);
+		}
 	}
 }

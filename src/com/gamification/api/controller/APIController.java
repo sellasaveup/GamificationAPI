@@ -251,45 +251,6 @@ public class APIController {
 
 
 	@GET
-	@Path("/REDUCE_USER_POINT")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response redeemPoint(@QueryParam("custId") String custId, @QueryParam("rewardId") String rewardId) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("") && rewardId != null && !rewardId.equals("")) {
-			String status = null;//getAPIManager().redeemPoint(custId, rewardId);
-			jsonRoot.put("status", status);
-			jsonRoot.put("custId", custId);
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
-
-
-
-	@GET
-	@Path("/GET_BADGE")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getBadge(@QueryParam("custId") String custId) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("")) {
-			//List<BadgeMaster> badgeMasterList = getAPIManager().getBadge(custId);
-
-			if(null != null) {
-				jsonRoot.put("Result", null);
-			}
-			else {
-
-				jsonRoot.put("Result", new Result(0, Integer.parseInt(custId), "Customer Not Available"));
-			}
-
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
-
-	@GET
 	@Path("/AWARD_BADGE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response awardBadge(@QueryParam("userCode") String userCode, @QueryParam("badgeCode") String badgeCode,
@@ -298,45 +259,6 @@ public class APIController {
 		RequestStatus requestStatus = getAPIManager().awardBadge(userCode, badgeCode, goalCode);
 		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
 	}
-
-	@GET
-	@Path("/REMOVE_BADGE")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response removeBadge(@QueryParam("custId") String custId, @QueryParam("badgeId") String badgeId) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("") && badgeId != null && !badgeId.equals("")) {
-			String status = null;//getAPIManager().removeBadge(custId, badgeId);
-			jsonRoot.put("status", status);
-			jsonRoot.put("custId", custId);
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
-
-	@GET
-	@Path("/GET_RANK")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getRank(@QueryParam("custId") String custId, @QueryParam("requestType") String requestType) {
-		System.out.println("Inside getRank");
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if(custId != null && !custId.equals("") && requestType != null) {
-			String rank = null;//getAPIManager().getRank(custId, requestType);
-			if(rank != null) {
-				jsonRoot.put("status", "1");
-				jsonRoot.put("rank", rank);
-				jsonRoot.put("custId", custId);
-			} else {
-				jsonRoot.put("status", "0");
-				jsonRoot.put("custId", custId);
-			}
-		} else {
-			jsonRoot.put("status", "0");
-		}
-
-		return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-	}
-
 
 	@GET
 	@Path("/GET_LEADERBOARD")
@@ -362,65 +284,7 @@ public class APIController {
 			return Response.status(503).entity("Invalid Request").build();
 		}
 	}
-
-	@GET
-	@Path("/GET_ALL_BADGE")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllBadge(@QueryParam("custId") String custId) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("")) {
-			//List<BadgeMaster> badgeMasterList = getAPIManager().getAllBadge(custId);
-
-
-
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
-
-	@GET
-	@Path("/GET_CHALLENGES")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getChallenges(@QueryParam("custId") String custId) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("")) {
-
-
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
-
-	@GET
-	@Path("/GET_ALL_REWARD")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllReward(@QueryParam("custId") String custId) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("")) {
-
-
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
-
-	@GET
-	@Path("/GET_REWARD")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getReward(@QueryParam("custId") String custId) {
-		HashMap<String, Object> jsonRoot = new HashMap<String, Object>();
-		if (custId != null && !custId.equals("")) {
-
-
-			return Response.status(200).entity(getJsonGenerator().getJson(jsonRoot)).build();
-		} else {
-			return Response.status(503).entity("Invalid Request").build();
-		}
-	}
-
+	
 	@GET
 	@Path("/PUSH_NOTIFICATION")
 	@Produces(MediaType.APPLICATION_JSON)

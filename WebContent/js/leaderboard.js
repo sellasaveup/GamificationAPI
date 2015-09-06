@@ -123,7 +123,7 @@
 	
 			this.list[this.currentItem].$userImage
 			.html(_this.data[this.currentItem].userImage ? '<img src="./img/profile/' + _this.data[this.currentItem].userImage
-			+ '" class="img-circle" width="50" height="50">' + ' ' : "&nbsp;&nbsp;&nbsp;&nbsp;");
+			+ '" class="img-circle" width="30" height="30">' + ' ' : "&nbsp;&nbsp;&nbsp;&nbsp;");
 	
 			this.list[this.currentItem].$item.removeClass('animate');
 			this.currentItem = this.currentItem >= this.currentCount - 1 ? 0

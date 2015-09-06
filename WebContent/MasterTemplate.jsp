@@ -97,9 +97,11 @@
     			var count = data.Count;
     			if(count>0) {
     				 $("#notificationCount").html(count);
+    				 $("#notificationCount").addClass("count");
     				 parseNotificationResponse(data);
     			} else {
     				 $("#notificationCount").html("");
+    				 $("#notificationCount").removeClass("count");
     			}
     			
     		},
@@ -143,6 +145,8 @@
         	}
         	updateNotification();
     	}
+    	
+    	$("#notificationCount").removeClass("count");
     	
     }
 	
@@ -198,7 +202,7 @@
                  <!--<li><a href="#" onclick="loadAdminMaster();"><i class="glyphicon glyphicon-folder-open"></i><b> Admin Master</b></a></li>
                  <li><a href="#" onclick="loadAwardNotify();"><i class="glyphicon glyphicon-globe"></i> <b>Award Notify </b></a></li> -->
                  <li id="trendLink"><a href="#" onclick="loadGoalTrend();"><i class="glyphicon glyphicon-globe"></i> <b>Trend </b></a></li>
-                 <li><a href="#"  title="Notifications" onCLick="showNotification()">Notification:<div id="notificationCount" class="count"></div></a></li>
+                 <li><a href="#"  title="Notifications" onCLick="showNotification()">Notification<div id="notificationCount"></div></a></li>
                 <li><a href="#" onclick="loadLoginPage()"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
             </ul>
         </div>

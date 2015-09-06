@@ -191,7 +191,7 @@ public class ActionProcessor {
 			String updateUserGoalPoints = updateUserGoalPoints(userGoalPoints);
 			if(updateUserGoalPoints.equals("1")) {
 				logger.debug("Update user Goal Points success, Going to check level promotion");
-				List<LevelView> levelList = getLevelList(goalCode, totalpoints);
+				List<LevelView> levelList = getLevelList(goalCode, totalpoints, userCode);
 				for(LevelView level : levelList) {
 					logger.debug("Putting level transaction for-->"+level.getLevelCode());
 					UserLevel userLevel = new UserLevel();
@@ -295,8 +295,8 @@ public class ActionProcessor {
 		return getGamificationApiDAO().updateUserGoalPoints(userGoalPoints);
 	}
 	
-	private List<LevelView> getLevelList(String goalCode, int points) {
-		return getActionProcessorDAO().getLevelList(goalCode, points);
+	private List<LevelView> getLevelList(String goalCode, int points, String userCode) {
+		return getActionProcessorDAO().getLevelList(goalCode, points, userCode);
 	}
 	
 	private String postUserLevel(UserLevel userLevel) {

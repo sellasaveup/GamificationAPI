@@ -79,14 +79,14 @@ public class ActionProcessorDAO {
 		
 	}
 	
-	public List<LevelView> getLevelList(String goalCode, int points) {
+	public List<LevelView> getLevelList(String goalCode, int points, String userCode) {
 		
 		logger.debug("getLevelList()");
 		logger.debug("goalCode-->"+goalCode);
 		logger.debug("points-->"+points);
 		
 		List<LevelView> levelList = new ArrayList<LevelView>();
-		String query = "SELECT * FROM SS_MA_LEVEL WHERE GOAL_CODE=? AND START_POINT <= ? and end_point>=? AND LEVEL_CODE NOT IN (SELECT LEVEL_CODE FROM SS_TR_USER_LEVEL) AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
+		String query = "SELECT * FROM SS_MA_LEVEL WHERE GOAL_CODE=? and ? between start_point and end_point AND LEVEL_CODE NOT IN (SELECT LEVEL_CODE FROM SS_TR_USER_LEVEL where user_code=?) AND EXPIRY_DATE >=  DATE_FORMAT(CURRENT_DATE , '%Y-%m-%d')";
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
@@ -97,7 +97,7 @@ public class ActionProcessorDAO {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, goalCode);
 			preparedStatement.setInt(2, points);
-			preparedStatement.setInt(3, points);
+			preparedStatement.setString(3, userCode);
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				LevelView level = new LevelView();

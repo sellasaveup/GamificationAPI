@@ -22,9 +22,9 @@ body,html {
 
 .contentthistime {
     position:relative;
-    width:70%;
+    width:400px;
     margin:3px auto 0 auto;
-    min-width:300px;
+    min-width:400px;
 
 }
 
